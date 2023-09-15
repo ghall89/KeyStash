@@ -7,21 +7,41 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		D39942B02AB5095A00B2DC39 /* ValetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942AF2AB5095A00B2DC39 /* ValetApp.swift */; };
-		D39942B22AB5095A00B2DC39 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942B12AB5095A00B2DC39 /* ContentView.swift */; };
-		D39942B42AB5095A00B2DC39 /* Item.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942B32AB5095A00B2DC39 /* Item.swift */; };
-		D39942B62AB5095B00B2DC39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D39942B52AB5095B00B2DC39 /* Assets.xcassets */; };
 		D39942B92AB5095B00B2DC39 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D39942B82AB5095B00B2DC39 /* Preview Assets.xcassets */; };
+		D39942D42AB509AF00B2DC39 /* ValetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942C02AB509AE00B2DC39 /* ValetApp.swift */; };
+		D39942D52AB509AF00B2DC39 /* ViewModes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942C22AB509AE00B2DC39 /* ViewModes.swift */; };
+		D39942D62AB509AF00B2DC39 /* FilePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942C42AB509AE00B2DC39 /* FilePicker.swift */; };
+		D39942D72AB509AF00B2DC39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D39942C52AB509AE00B2DC39 /* Assets.xcassets */; };
+		D39942D82AB509AF00B2DC39 /* LicenceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942C82AB509AE00B2DC39 /* LicenceInfo.swift */; };
+		D39942D92AB509AF00B2DC39 /* LicenseInfoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942C92AB509AE00B2DC39 /* LicenseInfoRow.swift */; };
+		D39942DA2AB509AF00B2DC39 /* AddLicense.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942CA2AB509AE00B2DC39 /* AddLicense.swift */; };
+		D39942DB2AB509AF00B2DC39 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942CB2AB509AE00B2DC39 /* Sidebar.swift */; };
+		D39942DC2AB509AF00B2DC39 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942CC2AB509AE00B2DC39 /* ContentView.swift */; };
+		D39942DD2AB509AF00B2DC39 /* InstalledApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942CE2AB509AE00B2DC39 /* InstalledApp.swift */; };
+		D39942DE2AB509AF00B2DC39 /* License.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942CF2AB509AE00B2DC39 /* License.swift */; };
+		D39942DF2AB509AF00B2DC39 /* getNSImageAsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942D12AB509AF00B2DC39 /* getNSImageAsData.swift */; };
+		D39942E02AB509AF00B2DC39 /* getInstalledApps.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942D22AB509AF00B2DC39 /* getInstalledApps.swift */; };
+		D39942E12AB509AF00B2DC39 /* getAppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942D32AB509AF00B2DC39 /* getAppIcon.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		D39942AC2AB5095A00B2DC39 /* Valet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Valet.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		D39942AF2AB5095A00B2DC39 /* ValetApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ValetApp.swift; sourceTree = "<group>"; };
-		D39942B12AB5095A00B2DC39 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		D39942B32AB5095A00B2DC39 /* Item.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Item.swift; sourceTree = "<group>"; };
-		D39942B52AB5095B00B2DC39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D39942B82AB5095B00B2DC39 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D39942BA2AB5095B00B2DC39 /* Valet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Valet.entitlements; sourceTree = "<group>"; };
+		D39942C02AB509AE00B2DC39 /* ValetApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValetApp.swift; sourceTree = "<group>"; };
+		D39942C22AB509AE00B2DC39 /* ViewModes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModes.swift; sourceTree = "<group>"; };
+		D39942C42AB509AE00B2DC39 /* FilePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilePicker.swift; sourceTree = "<group>"; };
+		D39942C52AB509AE00B2DC39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		D39942C82AB509AE00B2DC39 /* LicenceInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicenceInfo.swift; sourceTree = "<group>"; };
+		D39942C92AB509AE00B2DC39 /* LicenseInfoRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicenseInfoRow.swift; sourceTree = "<group>"; };
+		D39942CA2AB509AE00B2DC39 /* AddLicense.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLicense.swift; sourceTree = "<group>"; };
+		D39942CB2AB509AE00B2DC39 /* Sidebar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
+		D39942CC2AB509AE00B2DC39 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D39942CE2AB509AE00B2DC39 /* InstalledApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstalledApp.swift; sourceTree = "<group>"; };
+		D39942CF2AB509AE00B2DC39 /* License.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = License.swift; sourceTree = "<group>"; };
+		D39942D12AB509AF00B2DC39 /* getNSImageAsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getNSImageAsData.swift; sourceTree = "<group>"; };
+		D39942D22AB509AF00B2DC39 /* getInstalledApps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getInstalledApps.swift; sourceTree = "<group>"; };
+		D39942D32AB509AF00B2DC39 /* getAppIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getAppIcon.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,10 +74,13 @@
 		D39942AE2AB5095A00B2DC39 /* Valet */ = {
 			isa = PBXGroup;
 			children = (
-				D39942AF2AB5095A00B2DC39 /* ValetApp.swift */,
-				D39942B12AB5095A00B2DC39 /* ContentView.swift */,
-				D39942B32AB5095A00B2DC39 /* Item.swift */,
-				D39942B52AB5095B00B2DC39 /* Assets.xcassets */,
+				D39942C52AB509AE00B2DC39 /* Assets.xcassets */,
+				D39942C32AB509AE00B2DC39 /* Extensions */,
+				D39942D02AB509AF00B2DC39 /* Logic */,
+				D39942CD2AB509AE00B2DC39 /* Models */,
+				D39942C02AB509AE00B2DC39 /* ValetApp.swift */,
+				D39942C12AB509AE00B2DC39 /* ViewModels */,
+				D39942C62AB509AE00B2DC39 /* Views */,
 				D39942BA2AB5095B00B2DC39 /* Valet.entitlements */,
 				D39942B72AB5095B00B2DC39 /* Preview Content */,
 			);
@@ -70,6 +93,61 @@
 				D39942B82AB5095B00B2DC39 /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		D39942C12AB509AE00B2DC39 /* ViewModels */ = {
+			isa = PBXGroup;
+			children = (
+				D39942C22AB509AE00B2DC39 /* ViewModes.swift */,
+			);
+			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		D39942C32AB509AE00B2DC39 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				D39942C42AB509AE00B2DC39 /* FilePicker.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		D39942C62AB509AE00B2DC39 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D39942C72AB509AE00B2DC39 /* License */,
+				D39942CB2AB509AE00B2DC39 /* Sidebar.swift */,
+				D39942CC2AB509AE00B2DC39 /* ContentView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D39942C72AB509AE00B2DC39 /* License */ = {
+			isa = PBXGroup;
+			children = (
+				D39942C82AB509AE00B2DC39 /* LicenceInfo.swift */,
+				D39942C92AB509AE00B2DC39 /* LicenseInfoRow.swift */,
+				D39942CA2AB509AE00B2DC39 /* AddLicense.swift */,
+			);
+			path = License;
+			sourceTree = "<group>";
+		};
+		D39942CD2AB509AE00B2DC39 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D39942CE2AB509AE00B2DC39 /* InstalledApp.swift */,
+				D39942CF2AB509AE00B2DC39 /* License.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D39942D02AB509AF00B2DC39 /* Logic */ = {
+			isa = PBXGroup;
+			children = (
+				D39942D12AB509AF00B2DC39 /* getNSImageAsData.swift */,
+				D39942D22AB509AF00B2DC39 /* getInstalledApps.swift */,
+				D39942D32AB509AF00B2DC39 /* getAppIcon.swift */,
+			);
+			path = Logic;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -104,6 +182,7 @@
 				TargetAttributes = {
 					D39942AB2AB5095A00B2DC39 = {
 						CreatedOnToolsVersion = 15.0;
+						LastSwiftMigration = 1500;
 					};
 				};
 			};
@@ -130,8 +209,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D39942D72AB509AF00B2DC39 /* Assets.xcassets in Resources */,
 				D39942B92AB5095B00B2DC39 /* Preview Assets.xcassets in Resources */,
-				D39942B62AB5095B00B2DC39 /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -142,9 +221,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D39942B22AB5095A00B2DC39 /* ContentView.swift in Sources */,
-				D39942B42AB5095A00B2DC39 /* Item.swift in Sources */,
-				D39942B02AB5095A00B2DC39 /* ValetApp.swift in Sources */,
+				D39942D92AB509AF00B2DC39 /* LicenseInfoRow.swift in Sources */,
+				D39942DA2AB509AF00B2DC39 /* AddLicense.swift in Sources */,
+				D39942DD2AB509AF00B2DC39 /* InstalledApp.swift in Sources */,
+				D39942E12AB509AF00B2DC39 /* getAppIcon.swift in Sources */,
+				D39942DC2AB509AF00B2DC39 /* ContentView.swift in Sources */,
+				D39942D62AB509AF00B2DC39 /* FilePicker.swift in Sources */,
+				D39942D42AB509AF00B2DC39 /* ValetApp.swift in Sources */,
+				D39942DF2AB509AF00B2DC39 /* getNSImageAsData.swift in Sources */,
+				D39942D52AB509AF00B2DC39 /* ViewModes.swift in Sources */,
+				D39942DE2AB509AF00B2DC39 /* License.swift in Sources */,
+				D39942E02AB509AF00B2DC39 /* getInstalledApps.swift in Sources */,
+				D39942DB2AB509AF00B2DC39 /* Sidebar.swift in Sources */,
+				D39942D82AB509AF00B2DC39 /* LicenceInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -274,6 +363,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Valet/Valet.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -293,6 +383,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = com.ghalldev.Valet;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -302,6 +393,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Valet/Valet.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
