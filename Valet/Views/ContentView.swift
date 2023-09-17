@@ -12,8 +12,14 @@ struct ContentView: View {
 			Sidebar(newItemSheet: $showNewItemSheet)
 				.navigationSplitViewColumnWidth(min: 180, ideal: 200)
 		} detail: {
-			Text("Select an item")
-				.font(.title)
+			VStack(spacing: 10) {
+				Image(systemName: "app.dashed")
+					.font(.system(size: 80, weight: .thin))
+					.foregroundStyle(.secondary)
+				Text("Select an item")
+					.font(.title)
+					.foregroundStyle(.secondary)
+			}
 				.navigationSplitViewColumnWidth(min: 400, ideal: 700)
 		}
 		.sheet(isPresented: $showNewItemSheet, content: {

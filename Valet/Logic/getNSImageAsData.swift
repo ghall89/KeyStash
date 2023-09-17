@@ -2,21 +2,22 @@ import Foundation
 import AppKit
 
 func getNSImageAsData(image: NSImage) -> Data? {
-	guard let cgImage = image.cgImage(forProposedRect: nil, context: nil, hints: nil) else {
+	guard let tiffData = image.tiffRepresentation else {
 		return nil
 	}
 	
-	let imageSize = CGSize(width: cgImage.width, height: cgImage.height)
-	let imageRect = CGRect(origin: .zero, size: imageSize)
+	guard let bitmapImageRep = NSBitmapImageRep(data: tiffData) else {
+		return nil
+	}
 	
-	let bitmapRep = NSBitmapImageRep(cgImage: cgImage)
+	let properties: [NSBitmapImageRep.PropertyKey: Any] = [
+		.compressionFactor: 1.0
+	]
 	
-	bitmapRep.size = imageSize
-	bitmapRep.size = imageRect.size
-	
-	if let imageData = bitmapRep.representation(using: .png, properties: [:]) {
+	if let imageData = bitmapImageRep.representation(using: .png, properties: properties) {
 		return imageData
 	}
 	
 	return nil
 }
+

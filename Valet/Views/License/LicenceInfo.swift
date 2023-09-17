@@ -1,9 +1,12 @@
 import SwiftUI
 import Observation
 import AppKit
+import MarkdownUI
+import AlertToast
 
 struct LicenceInfo: View {
 	@State private var viewModes = ViewModes()
+	@State var showToast: Bool = false
 	@Bindable var license: License
 	
 	var body: some View {
@@ -15,15 +18,20 @@ struct LicenceInfo: View {
 					HStack {
 						Image(nsImage: license.iconNSImage)
 							.resizable()
-							.frame(width: 100, height: 100)
+							.aspectRatio(contentMode: .fit)
+							.frame(width: 75)
 						VStack {
 							Text(license.softwareName)
 								.font(.title)
+								.multilineTextAlignment(.leading)
 							if viewModes.editMode == true {
 								TextField("URL", text: $license.downloadUrlString)
 							} else {
 								if let url = license.downloadUrl {
-									Link("Download", destination: url)
+									Link(destination: url, label: {
+										Label("Download", systemImage: "arrow.down.circle")
+									})
+									.buttonStyle(.borderedProminent)
 								}
 							}
 						}
@@ -32,19 +40,27 @@ struct LicenceInfo: View {
 					.padding()
 				}
 				VStack(alignment: .leading, spacing: 12) {
-					LicenseInfoRow(canEdit: $viewModes.editMode, value: $license.registeredToName, label: "Registered Name")
-					LicenseInfoRow(canEdit: $viewModes.editMode, value: $license.registeredToEmail, label: "Registered Email")
-					LicenseInfoRow(canEdit: $viewModes.editMode, value: $license.licenseKey, label: "License Key")
+					LicenseInfoRow(canEdit: $viewModes.editMode, showToast: $showToast, value: $license.registeredToName, label: "Registered Name")
+					LicenseInfoRow(canEdit: $viewModes.editMode, showToast: $showToast, value: $license.registeredToEmail, label: "Registered Email")
+					LicenseInfoRow(canEdit: $viewModes.editMode, showToast: $showToast, value: $license.licenseKey, label: "License Key")
 					Divider()
 					Text("Notes")
 						.font(.caption)
-					Text(license.notes)
+					if viewModes.editMode == true {
+						TextEditor(text: $license.notes)
+							.frame(minHeight: 100)
+					} else {
+						Markdown(license.notes)
+					}
 				}
 				.frame(maxWidth: .infinity)
 				.padding()
 			}
 		}
 		.frame(maxWidth: .infinity)
+		.toast(isPresenting: $showToast) {
+			AlertToast(type: .complete(.accent), title: "Copied")
+		}
 		.toolbar {
 			ToolbarItem {
 				Button(action: {

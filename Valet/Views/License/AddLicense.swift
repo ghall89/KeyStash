@@ -10,8 +10,8 @@ struct AddLicense: View {
 	@State var selectedApp: UUID = UUID()
 	
 	var body: some View {
-		Form {
-			Picker("App Name:", selection: $selectedApp, content: {
+		VStack(spacing: 10) {
+			Picker("Select App: ", selection: $selectedApp, content: {
 				ForEach(installedApps) { app in
 					HStack {
 						ZStack {
@@ -28,13 +28,7 @@ struct AddLicense: View {
 					.tag(app.id)
 				}
 			})
-			TextField("Download Link:", text: $newItem.downloadUrlString)
-			TextField("Registered To:", text: $newItem.registeredToName)
-			TextField("Email:", text: $newItem.registeredToEmail)
-			TextField("License Key:", text: $newItem.licenseKey)
-				.lineLimit(4, reservesSpace: true)
-			TextEditor(text: $newItem.notes)
-				.frame(height: 100)
+			.padding(.top)
 			HStack {
 				Spacer()
 				Button("Cancel", action: {
@@ -43,6 +37,7 @@ struct AddLicense: View {
 				Button("Save", action: addItem)
 					.keyboardShortcut(.defaultAction)
 			}
+			.padding(.top)
 		}
 		.frame(width: 400)
 		.padding()

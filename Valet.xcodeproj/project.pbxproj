@@ -22,6 +22,8 @@
 		D39942DF2AB509AF00B2DC39 /* getNSImageAsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942D12AB509AF00B2DC39 /* getNSImageAsData.swift */; };
 		D39942E02AB509AF00B2DC39 /* getInstalledApps.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942D22AB509AF00B2DC39 /* getInstalledApps.swift */; };
 		D39942E12AB509AF00B2DC39 /* getAppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942D32AB509AF00B2DC39 /* getAppIcon.swift */; };
+		D3B08F832AB6A5FD004715F5 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = D3B08F822AB6A5FD004715F5 /* MarkdownUI */; };
+		D3B08F892AB6A8D4004715F5 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = D3B08F882AB6A8D4004715F5 /* AlertToast */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +51,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D3B08F832AB6A5FD004715F5 /* MarkdownUI in Frameworks */,
+				D3B08F892AB6A8D4004715F5 /* AlertToast in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -166,6 +170,10 @@
 			dependencies = (
 			);
 			name = Valet;
+			packageProductDependencies = (
+				D3B08F822AB6A5FD004715F5 /* MarkdownUI */,
+				D3B08F882AB6A8D4004715F5 /* AlertToast */,
+			);
 			productName = Valet;
 			productReference = D39942AC2AB5095A00B2DC39 /* Valet.app */;
 			productType = "com.apple.product-type.application";
@@ -195,6 +203,10 @@
 				Base,
 			);
 			mainGroup = D39942A32AB5095A00B2DC39;
+			packageReferences = (
+				D3B08F812AB6A5FD004715F5 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
+				D3B08F872AB6A8D4004715F5 /* XCRemoteSwiftPackageReference "AlertToast" */,
+			);
 			productRefGroup = D39942AD2AB5095A00B2DC39 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -439,6 +451,38 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D3B08F812AB6A5FD004715F5 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.2.0;
+			};
+		};
+		D3B08F872AB6A8D4004715F5 /* XCRemoteSwiftPackageReference "AlertToast" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/elai950/AlertToast?source=post_page-----7f5c32cebed6--------------------------------";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.3.9;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D3B08F822AB6A5FD004715F5 /* MarkdownUI */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D3B08F812AB6A5FD004715F5 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
+			productName = MarkdownUI;
+		};
+		D3B08F882AB6A8D4004715F5 /* AlertToast */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D3B08F872AB6A8D4004715F5 /* XCRemoteSwiftPackageReference "AlertToast" */;
+			productName = AlertToast;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = D39942A42AB5095A00B2DC39 /* Project object */;
 }

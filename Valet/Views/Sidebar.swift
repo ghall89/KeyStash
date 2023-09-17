@@ -19,7 +19,8 @@ struct Sidebar: View {
 				}, label: {
 					Image(nsImage: item.iconNSImage )
 						.resizable()
-						.frame(width: 24, height: 24)
+						.aspectRatio(contentMode: .fit)
+						.frame(width: 24)
 					Text("\(item.softwareName)")
 				})
 				.contextMenu {
