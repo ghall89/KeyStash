@@ -3,8 +3,8 @@ import SwiftData
 
 struct Sidebar: View {
 	@Environment(\.modelContext) private var modelContext
+	@EnvironmentObject var viewModes: ViewModes
 	@Query private var items: [License]
-	@Binding var newItemSheet: Bool
 	
 	@State var searchString: String = ""
 	
@@ -36,7 +36,7 @@ struct Sidebar: View {
 		.toolbar {
 			ToolbarItem {
 				Button(action: {
-					newItemSheet.toggle()
+					viewModes.showNewAppSheet.toggle()
 				}) {
 					Label("Add Item", systemImage: "plus")
 				}

@@ -5,7 +5,7 @@ import MarkdownUI
 import AlertToast
 
 struct LicenceInfo: View {
-	@State private var viewModes = ViewModes()
+	@EnvironmentObject var viewModes: ViewModes
 	@State var showToast: Bool = false
 	@Bindable var license: License
 	
@@ -44,9 +44,9 @@ struct LicenceInfo: View {
 					.padding()
 				}
 				VStack(alignment: .leading, spacing: 12) {
-					LicenseInfoRow(canEdit: $viewModes.editMode, showToast: $showToast, value: $license.registeredToName, label: "Registered Name")
-					LicenseInfoRow(canEdit: $viewModes.editMode, showToast: $showToast, value: $license.registeredToEmail, label: "Registered Email")
-					LicenseInfoRow(canEdit: $viewModes.editMode, showToast: $showToast, value: $license.licenseKey, label: "License Key")
+					LicenseInfoRow(showToast: $showToast, value: $license.registeredToName, label: "Registered Name")
+					LicenseInfoRow(showToast: $showToast, value: $license.registeredToEmail, label: "Registered Email")
+					LicenseInfoRow(showToast: $showToast, value: $license.licenseKey, label: "License Key")
 					Divider()
 					Text("Notes")
 						.font(.caption)

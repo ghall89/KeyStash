@@ -3,6 +3,8 @@ import SwiftData
 
 @main
 struct ValetApp: App {
+	@State var viewModes = ViewModes()
+	
 	var sharedModelContainer: ModelContainer = {
 		let schema = Schema([
 			License.self,
@@ -19,7 +21,11 @@ struct ValetApp: App {
 	var body: some Scene {
 		WindowGroup {
 			ContentView()
+				.environmentObject(viewModes)
 		}
 		.modelContainer(sharedModelContainer)
+		.commands(content: {
+			MenuBar(viewModes: $viewModes)
+		})
 	}
 }

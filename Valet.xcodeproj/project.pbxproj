@@ -24,6 +24,7 @@
 		D39942E12AB509AF00B2DC39 /* getAppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942D32AB509AF00B2DC39 /* getAppIcon.swift */; };
 		D3B08F832AB6A5FD004715F5 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = D3B08F822AB6A5FD004715F5 /* MarkdownUI */; };
 		D3B08F892AB6A8D4004715F5 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = D3B08F882AB6A8D4004715F5 /* AlertToast */; };
+		D3C6503B2AB74CF300E75461 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C6503A2AB74CF300E75461 /* MenuBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		D39942D12AB509AF00B2DC39 /* getNSImageAsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getNSImageAsData.swift; sourceTree = "<group>"; };
 		D39942D22AB509AF00B2DC39 /* getInstalledApps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getInstalledApps.swift; sourceTree = "<group>"; };
 		D39942D32AB509AF00B2DC39 /* getAppIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getAppIcon.swift; sourceTree = "<group>"; };
+		D3C6503A2AB74CF300E75461 /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,10 +81,11 @@
 			isa = PBXGroup;
 			children = (
 				D39942C52AB509AE00B2DC39 /* Assets.xcassets */,
+				D39942C02AB509AE00B2DC39 /* ValetApp.swift */,
+				D3C6503A2AB74CF300E75461 /* MenuBar.swift */,
 				D39942C32AB509AE00B2DC39 /* Extensions */,
 				D39942D02AB509AF00B2DC39 /* Logic */,
 				D39942CD2AB509AE00B2DC39 /* Models */,
-				D39942C02AB509AE00B2DC39 /* ValetApp.swift */,
 				D39942C12AB509AE00B2DC39 /* ViewModels */,
 				D39942C62AB509AE00B2DC39 /* Views */,
 				D39942BA2AB5095B00B2DC39 /* Valet.entitlements */,
@@ -245,6 +248,7 @@
 				D39942DE2AB509AF00B2DC39 /* License.swift in Sources */,
 				D39942E02AB509AF00B2DC39 /* getInstalledApps.swift in Sources */,
 				D39942DB2AB509AF00B2DC39 /* Sidebar.swift in Sources */,
+				D3C6503B2AB74CF300E75461 /* MenuBar.swift in Sources */,
 				D39942D82AB509AF00B2DC39 /* LicenceInfo.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

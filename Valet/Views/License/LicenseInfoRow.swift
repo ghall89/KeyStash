@@ -3,14 +3,14 @@ import AppKit
 import Observation
 
 struct LicenseInfoRow: View {
-	@Binding var canEdit: Bool
+	@EnvironmentObject var viewModes: ViewModes
 	@Binding var showToast: Bool
 	@Binding var value: String
 	var label: String
 	
 	var body: some View {
 		HStack(alignment: .top) {
-			if value.count > 0 || canEdit == true {
+			if value.count > 0 || viewModes.editMode == true {
 				Button(action: {
 					copyToClipboard(value: value)
 				}, label: {
@@ -18,11 +18,11 @@ struct LicenseInfoRow: View {
 						.foregroundStyle(.accent)
 				})
 				.buttonStyle(.plain)
-				.disabled(canEdit)
+				.disabled(viewModes.editMode)
 				VStack(alignment: .leading) {
 					Text(label)
 						.font(.caption)
-					if canEdit == true {
+					if viewModes.editMode == true {
 						TextField(getPlaceholderText(), text: $value)
 							.textFieldStyle(.plain)
 							.lineLimit(label == "License Key" ? 10 : 1)

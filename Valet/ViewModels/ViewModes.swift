@@ -1,6 +1,6 @@
-import Observation
+import Foundation
 
-@Observable
-final class ViewModes {
-	var editMode: Bool = false
+class ViewModes: ObservableObject {
+	@Published var editMode: Bool = false
+	@Published var showNewAppSheet: Bool = false
 }

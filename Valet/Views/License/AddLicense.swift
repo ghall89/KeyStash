@@ -2,7 +2,7 @@ import SwiftUI
 
 struct AddLicense: View {
 	@Environment(\.modelContext) private var modelContext
-	@Binding var newItemSheet: Bool
+	@Environment(\.dismiss) private var dismiss
 	
 	@State var newItem: License = License(softwareName: "", icon: nil, licenseKey: "", registeredToName: "", registeredToEmail: "", downloadUrlString: "", notes: "")
 	
@@ -32,7 +32,7 @@ struct AddLicense: View {
 			HStack {
 				Spacer()
 				Button("Cancel", action: {
-					newItemSheet.toggle()
+					dismiss()
 				})
 				Button("Save", action: addItem)
 					.keyboardShortcut(.defaultAction)
@@ -59,6 +59,6 @@ struct AddLicense: View {
 		withAnimation {
 			modelContext.insert(newItem)
 		}
-		newItemSheet.toggle()
+		dismiss()
 	}
 }
