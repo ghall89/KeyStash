@@ -29,7 +29,11 @@ struct LicenceInfo: View {
 							} else {
 								if let url = license.downloadUrl {
 									Link(destination: url, label: {
-										Label("Download", systemImage: "arrow.down.circle")
+										if isDownloadLink(url: url) {
+											Label("Download", systemImage: "arrow.down.circle")
+										} else {
+											Label("Website", systemImage: "safari")
+										}
 									})
 									.buttonStyle(.borderedProminent)
 								}
@@ -77,5 +81,12 @@ struct LicenceInfo: View {
 				.disabled(viewModes.editMode)
 			}
 		}
+	}
+	
+	private func isDownloadLink(url: URL) -> Bool {
+		let pathExtension = url.pathExtension.lowercased()
+		let downloadExtensions: [String] = ["zip", "dmg", "app"]
+		
+		return downloadExtensions.contains(pathExtension)
 	}
 }
