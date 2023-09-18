@@ -7,6 +7,7 @@ import AlertToast
 struct LicenceInfo: View {
 	@EnvironmentObject var viewModes: ViewModes
 	@State var showToast: Bool = false
+	@State var toastMessage: String = "Copied"
 	@Bindable var license: License
 	
 	var body: some View {
@@ -44,9 +45,9 @@ struct LicenceInfo: View {
 					.padding()
 				}
 				VStack(alignment: .leading, spacing: 12) {
-					LicenseInfoRow(showToast: $showToast, value: $license.registeredToName, label: "Registered Name")
-					LicenseInfoRow(showToast: $showToast, value: $license.registeredToEmail, label: "Registered Email")
-					LicenseInfoRow(showToast: $showToast, value: $license.licenseKey, label: "License Key")
+					LicenseInfoRow(showToast: $showToast, copiedMessage: $toastMessage, value: $license.registeredToName, label: "Registered To")
+					LicenseInfoRow(showToast: $showToast, copiedMessage: $toastMessage, value: $license.registeredToEmail, label: "Email")
+					LicenseInfoRow(showToast: $showToast, copiedMessage: $toastMessage, value: $license.licenseKey, label: "License Key")
 					Divider()
 					Text("Notes")
 						.font(.caption)
@@ -63,7 +64,7 @@ struct LicenceInfo: View {
 		}
 		.frame(maxWidth: .infinity)
 		.toast(isPresenting: $showToast) {
-			AlertToast(type: .complete(.accent), title: "Copied")
+			AlertToast(type: .complete(.accent), title: toastMessage)
 		}
 		.toolbar {
 			ToolbarItem {

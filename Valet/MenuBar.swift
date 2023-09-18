@@ -1,6 +1,8 @@
 import SwiftUI
+import SwiftData
 
 struct MenuBar: Commands {
+	@Query private var items: [License]
 	@Binding var viewModes: ViewModes
 	
 	var body: some Commands {
@@ -9,6 +11,17 @@ struct MenuBar: Commands {
 				viewModes.showNewAppSheet.toggle()
 			})
 			.keyboardShortcut(KeyboardShortcut(KeyEquivalent("N")))
+			Divider()
+			Button("Import", action: {})
+			Button("Export", action: {
+				exportCSV(licenses: items)
+			})
+		}
+		CommandGroup(replacing: CommandGroupPlacement.sidebar) {
+			Button("Edit Mode", action: {
+				viewModes.editMode.toggle()
+			})
+			Divider()
 		}
 	}
 }

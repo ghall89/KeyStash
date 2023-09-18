@@ -22,10 +22,17 @@ struct ValetApp: App {
 		WindowGroup {
 			ContentView()
 				.environmentObject(viewModes)
+				.onAppear {
+					NSWindow.allowsAutomaticWindowTabbing = false
+				}
+		}
+		.commands {
+			MenuBar(viewModes: $viewModes)
 		}
 		.modelContainer(sharedModelContainer)
-		.commands(content: {
-			MenuBar(viewModes: $viewModes)
-		})
+		
+		Settings {
+			AppSettings()
+		}
 	}
 }

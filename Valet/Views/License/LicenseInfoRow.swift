@@ -5,6 +5,7 @@ import Observation
 struct LicenseInfoRow: View {
 	@EnvironmentObject var viewModes: ViewModes
 	@Binding var showToast: Bool
+	@Binding var copiedMessage: String
 	@Binding var value: String
 	var label: String
 	
@@ -38,9 +39,9 @@ struct LicenseInfoRow: View {
 	
 	private func getPlaceholderText() -> String {
 		switch label {
-			case "Registered Name":
+			case "Registered To":
 				return "Johnny Appleseed"
-			case "Registered Email":
+			case "Email":
 				return "sample@email.com"
 			case "License Key":
 				return "XX-XXXX-XXXX-XXXX-XXXX"
@@ -54,6 +55,7 @@ struct LicenseInfoRow: View {
 		clipboard.clearContents()
 		clipboard.setString(value, forType: .string)
 		if showToast == false {
+			copiedMessage = "Copied \(label)"
 			showToast.toggle()
 		}
 	}

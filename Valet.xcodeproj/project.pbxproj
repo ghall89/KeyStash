@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D369F4692AB7BE1A00D8C6B1 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D369F4682AB7BE1A00D8C6B1 /* AppSettings.swift */; };
+		D369F46C2AB87CEA00D8C6B1 /* exportCSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = D369F46B2AB87CEA00D8C6B1 /* exportCSV.swift */; };
 		D39942B92AB5095B00B2DC39 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D39942B82AB5095B00B2DC39 /* Preview Assets.xcassets */; };
 		D39942D42AB509AF00B2DC39 /* ValetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942C02AB509AE00B2DC39 /* ValetApp.swift */; };
 		D39942D52AB509AF00B2DC39 /* ViewModes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942C22AB509AE00B2DC39 /* ViewModes.swift */; };
@@ -28,6 +30,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D369F4682AB7BE1A00D8C6B1 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
+		D369F46B2AB87CEA00D8C6B1 /* exportCSV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = exportCSV.swift; sourceTree = "<group>"; };
 		D39942AC2AB5095A00B2DC39 /* Valet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Valet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D39942B82AB5095B00B2DC39 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D39942BA2AB5095B00B2DC39 /* Valet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Valet.entitlements; sourceTree = "<group>"; };
@@ -61,6 +65,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D369F46A2AB87CC600D8C6B1 /* CSV */ = {
+			isa = PBXGroup;
+			children = (
+				D369F46B2AB87CEA00D8C6B1 /* exportCSV.swift */,
+			);
+			path = CSV;
+			sourceTree = "<group>";
+		};
 		D39942A32AB5095A00B2DC39 = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +136,7 @@
 				D39942C72AB509AE00B2DC39 /* License */,
 				D39942CB2AB509AE00B2DC39 /* Sidebar.swift */,
 				D39942CC2AB509AE00B2DC39 /* ContentView.swift */,
+				D369F4682AB7BE1A00D8C6B1 /* AppSettings.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -151,6 +164,7 @@
 			isa = PBXGroup;
 			children = (
 				D39942D12AB509AF00B2DC39 /* getNSImageAsData.swift */,
+				D369F46A2AB87CC600D8C6B1 /* CSV */,
 				D39942D22AB509AF00B2DC39 /* getInstalledApps.swift */,
 				D39942D32AB509AF00B2DC39 /* getAppIcon.swift */,
 			);
@@ -245,9 +259,11 @@
 				D39942D42AB509AF00B2DC39 /* ValetApp.swift in Sources */,
 				D39942DF2AB509AF00B2DC39 /* getNSImageAsData.swift in Sources */,
 				D39942D52AB509AF00B2DC39 /* ViewModes.swift in Sources */,
+				D369F4692AB7BE1A00D8C6B1 /* AppSettings.swift in Sources */,
 				D39942DE2AB509AF00B2DC39 /* License.swift in Sources */,
 				D39942E02AB509AF00B2DC39 /* getInstalledApps.swift in Sources */,
 				D39942DB2AB509AF00B2DC39 /* Sidebar.swift in Sources */,
+				D369F46C2AB87CEA00D8C6B1 /* exportCSV.swift in Sources */,
 				D3C6503B2AB74CF300E75461 /* MenuBar.swift in Sources */,
 				D39942D82AB509AF00B2DC39 /* LicenceInfo.swift in Sources */,
 			);

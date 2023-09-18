@@ -5,12 +5,17 @@ struct AddLicense: View {
 	@Environment(\.dismiss) private var dismiss
 	
 	@State var newItem: License = License(softwareName: "", icon: nil, licenseKey: "", registeredToName: "", registeredToEmail: "", downloadUrlString: "", notes: "")
-	
+	@State var tabSelection: String = "installed"
 	@State var installedApps: [InstalledApp] = []
 	@State var selectedApp: UUID = UUID()
 	
 	var body: some View {
 		VStack(spacing: 10) {
+			Picker("", selection: $tabSelection) {
+				Text("Installed Apps").tag("installed")
+				Text("Custom App").tag("custom")
+			}
+			.pickerStyle(.segmented)
 			Picker("Select App: ", selection: $selectedApp, content: {
 				ForEach(installedApps) { app in
 					HStack {
