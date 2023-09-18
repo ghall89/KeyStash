@@ -26,7 +26,7 @@ final class License {
 		return NSImage(named: "no_icon")!
 	}
 	var miniIcon: NSImage {
-		resizeImage(image: iconNSImage, toSize: NSSize(width: 16, height: 16))!
+		resizeImage(image: iconNSImage, toSize: NSSize(width: 24, height: 24))!
 	}
 	
 	init(softwareName: String, icon: Data?, licenseKey: String, registeredToName: String, registeredToEmail: String, downloadUrlString: String, notes: String, updatedDate: Date? = nil) {

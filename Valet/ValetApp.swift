@@ -25,6 +25,7 @@ struct ValetApp: App {
 				.onAppear {
 					NSWindow.allowsAutomaticWindowTabbing = false
 				}
+				.frame(minHeight: 260)
 		}
 		.commands {
 			MenuBar(viewModes: $viewModes)

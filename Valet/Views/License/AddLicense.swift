@@ -2,7 +2,7 @@ import SwiftUI
 
 struct AddLicense: View {
 	@Environment(\.modelContext) private var modelContext
-	@Environment(\.dismiss) private var dismiss
+	@EnvironmentObject var viewModes: ViewModes
 	
 	@State var newItem: License = License(softwareName: "", icon: nil, licenseKey: "", registeredToName: "", registeredToEmail: "", downloadUrlString: "", notes: "")
 	@State var tabSelection: String = "installed"
@@ -60,7 +60,7 @@ struct AddLicense: View {
 			HStack {
 				Spacer()
 				Button("Cancel", action: {
-					dismiss()
+					viewModes.showNewAppSheet.toggle()
 				})
 				Button("Add", action: addItem)
 					.keyboardShortcut(.defaultAction)
@@ -87,6 +87,6 @@ struct AddLicense: View {
 			}
 			modelContext.insert(newItem)
 		}
-		dismiss()
+		viewModes.showNewAppSheet.toggle()
 	}
 }
