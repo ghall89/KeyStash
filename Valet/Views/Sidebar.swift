@@ -17,7 +17,7 @@ struct Sidebar: View {
 				NavigationLink(destination: {
 					LicenceInfo(license: item)
 				}, label: {
-					Image(nsImage: item.iconNSImage )
+					Image(nsImage: item.miniIcon )
 						.resizable()
 						.aspectRatio(contentMode: .fit)
 						.frame(width: 24)

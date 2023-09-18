@@ -5,7 +5,6 @@ import Observation
 struct LicenseInfoRow: View {
 	@EnvironmentObject var viewModes: ViewModes
 	@Binding var showToast: Bool
-	@Binding var copiedMessage: String
 	@Binding var value: String
 	var label: String
 	
@@ -55,7 +54,6 @@ struct LicenseInfoRow: View {
 		clipboard.clearContents()
 		clipboard.setString(value, forType: .string)
 		if showToast == false {
-			copiedMessage = "Copied \(label)"
 			showToast.toggle()
 		}
 	}

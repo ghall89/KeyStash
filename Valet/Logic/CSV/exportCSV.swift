@@ -16,8 +16,10 @@ func exportCSV(licenses: [License]) {
 func convertToCSV(data: [License]) -> String {
 	var csvString = "Name,URL,Registered To,Email,License Key,Notes\n"
 	
-	for license in data {
-		let row = "\(license.softwareName),\(license.downloadUrlString),\(license.registeredToName),\(license.registeredToEmail),\(license.licenseKey),\(license.notes)"
+	let licenses = data.sorted { $0.softwareName < $1.softwareName }
+	
+	for license in licenses {
+		let row = "\(license.softwareName),\(license.downloadUrlString),\(license.registeredToName),\(license.registeredToEmail),\(license.licenseKey),\(license.notes)\n"
 		print(row)
 		csvString.append(row)
 	}

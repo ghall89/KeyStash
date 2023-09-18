@@ -12,6 +12,8 @@ final class License {
 	var registeredToEmail: String
 	var downloadUrlString: String
 	var notes: String
+	var createdDate: Date = Date()
+	var updatedDate: Date?
 	
 	var downloadUrl: URL? {
 		return URL(string: downloadUrlString)
@@ -23,8 +25,11 @@ final class License {
 		
 		return NSImage(named: "no_icon")!
 	}
+	var miniIcon: NSImage {
+		resizeImage(image: iconNSImage, toSize: NSSize(width: 16, height: 16))!
+	}
 	
-	init(softwareName: String, icon: Data?, licenseKey: String, registeredToName: String, registeredToEmail: String, downloadUrlString: String, notes: String) {
+	init(softwareName: String, icon: Data?, licenseKey: String, registeredToName: String, registeredToEmail: String, downloadUrlString: String, notes: String, updatedDate: Date? = nil) {
 		self.softwareName = softwareName
 		self.icon = icon
 		self.licenseKey = licenseKey
@@ -32,5 +37,6 @@ final class License {
 		self.registeredToEmail = registeredToEmail
 		self.downloadUrlString = downloadUrlString
 		self.notes = notes
+		self.updatedDate = updatedDate
 	}
 }
