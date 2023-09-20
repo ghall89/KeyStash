@@ -8,7 +8,7 @@ func exportCSV(licenses: [License]) {
 		do {
 			try csvString.write(toFile: filePath, atomically: true, encoding: .utf8)
 		} catch {
-			print("Error exporting CSV file: \(error)")
+			print("Error: \(error.localizedDescription)")
 		}
 	}
 }

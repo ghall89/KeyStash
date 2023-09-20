@@ -31,6 +31,9 @@
 		D3B08F832AB6A5FD004715F5 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = D3B08F822AB6A5FD004715F5 /* MarkdownUI */; };
 		D3B08F892AB6A8D4004715F5 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = D3B08F882AB6A8D4004715F5 /* AlertToast */; };
 		D3C6503B2AB74CF300E75461 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C6503A2AB74CF300E75461 /* MenuBar.swift */; };
+		D3CFBECF2ABB82A600C1D4BC /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CFBECE2ABB82A600C1D4BC /* Attachment.swift */; };
+		D3CFBED22ABB82C700C1D4BC /* addAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CFBED12ABB82C700C1D4BC /* addAttachment.swift */; };
+		D3CFBED42ABB841D00C1D4BC /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CFBED32ABB841D00C1D4BC /* Tag.swift */; };
 		D3F4B6EC2ABA25D3002AFDFD /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F4B6EB2ABA25D3002AFDFD /* Sidebar.swift */; };
 /* End PBXBuildFile section */
 
@@ -58,6 +61,9 @@
 		D39942D22AB509AF00B2DC39 /* getInstalledApps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getInstalledApps.swift; sourceTree = "<group>"; };
 		D39942D32AB509AF00B2DC39 /* getAppIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getAppIcon.swift; sourceTree = "<group>"; };
 		D3C6503A2AB74CF300E75461 /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
+		D3CFBECE2ABB82A600C1D4BC /* Attachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
+		D3CFBED12ABB82C700C1D4BC /* addAttachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = addAttachment.swift; sourceTree = "<group>"; };
+		D3CFBED32ABB841D00C1D4BC /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		D3F4B6EB2ABA25D3002AFDFD /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -178,7 +184,7 @@
 			isa = PBXGroup;
 			children = (
 				D39942CE2AB509AE00B2DC39 /* InstalledApp.swift */,
-				D39942CF2AB509AE00B2DC39 /* License.swift */,
+				D3CFBED52ABB848300C1D4BC /* Schema */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -186,11 +192,30 @@
 		D39942D02AB509AF00B2DC39 /* Logic */ = {
 			isa = PBXGroup;
 			children = (
+				D3CFBED02ABB82C700C1D4BC /* Attachments */,
 				D33AB53C2AB8C95300B49922 /* AppIcons */,
 				D369F46A2AB87CC600D8C6B1 /* CSV */,
 				D39942D22AB509AF00B2DC39 /* getInstalledApps.swift */,
 			);
 			path = Logic;
+			sourceTree = "<group>";
+		};
+		D3CFBED02ABB82C700C1D4BC /* Attachments */ = {
+			isa = PBXGroup;
+			children = (
+				D3CFBED12ABB82C700C1D4BC /* addAttachment.swift */,
+			);
+			path = Attachments;
+			sourceTree = "<group>";
+		};
+		D3CFBED52ABB848300C1D4BC /* Schema */ = {
+			isa = PBXGroup;
+			children = (
+				D39942CF2AB509AE00B2DC39 /* License.swift */,
+				D3CFBECE2ABB82A600C1D4BC /* Attachment.swift */,
+				D3CFBED32ABB841D00C1D4BC /* Tag.swift */,
+			);
+			path = Schema;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -297,6 +322,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D39942D92AB509AF00B2DC39 /* LicenseInfoRow.swift in Sources */,
+				D3CFBECF2ABB82A600C1D4BC /* Attachment.swift in Sources */,
 				D39942DA2AB509AF00B2DC39 /* AddLicense.swift in Sources */,
 				D39942DD2AB509AF00B2DC39 /* InstalledApp.swift in Sources */,
 				D39942E12AB509AF00B2DC39 /* getAppIcon.swift in Sources */,
@@ -309,12 +335,14 @@
 				D3F4B6EC2ABA25D3002AFDFD /* Sidebar.swift in Sources */,
 				D369F4692AB7BE1A00D8C6B1 /* AppSettings.swift in Sources */,
 				D33AB53B2AB8C8F400B49922 /* getCustomIcon.swift in Sources */,
+				D3CFBED42ABB841D00C1D4BC /* Tag.swift in Sources */,
 				D39942DE2AB509AF00B2DC39 /* License.swift in Sources */,
 				D39942E02AB509AF00B2DC39 /* getInstalledApps.swift in Sources */,
 				D39942DB2AB509AF00B2DC39 /* LicenseList.swift in Sources */,
 				D369F46C2AB87CEA00D8C6B1 /* exportCSV.swift in Sources */,
 				D3C6503B2AB74CF300E75461 /* MenuBar.swift in Sources */,
 				D39942D82AB509AF00B2DC39 /* LicenceInfo.swift in Sources */,
+				D3CFBED22ABB82C700C1D4BC /* addAttachment.swift in Sources */,
 				D369F46E2AB8838300D8C6B1 /* importCSV.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

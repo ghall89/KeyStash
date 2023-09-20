@@ -47,6 +47,11 @@ struct LicenceInfo: View {
 					LicenseInfoRow(showToast: $showToast, value: $license.registeredToName, label: "Registered To")
 					LicenseInfoRow(showToast: $showToast, value: $license.registeredToEmail, label: "Email")
 					LicenseInfoRow(showToast: $showToast, value: $license.licenseKey, label: "License Key")
+					if viewModes.editMode == true {
+						Button(action: handleAttachment, label: {
+							Label("Add Attachment", systemImage: "paperclip")
+						})
+					}
 					Divider()
 					Text("Notes")
 						.font(.caption)
@@ -94,5 +99,11 @@ struct LicenceInfo: View {
 		let downloadExtensions: [String] = ["zip", "dmg", "app"]
 		
 		return downloadExtensions.contains(pathExtension)
+	}
+	
+	private func handleAttachment() {
+		if let attachment = addAttachment() {
+			license.attachment = attachment
+		}
 	}
 }
