@@ -65,7 +65,20 @@ struct LicenceInfo: View {
 		.toast(isPresenting: $showToast) {
 			AlertToast(type: .complete(.accent), title: "Copied to Clipboard")
 		}
+		.onChange(of: license, {
+			if viewModes.editMode == true {
+				viewModes.editMode.toggle()
+			}
+		})
+		.onAppear {
+			if viewModes.editMode == true {
+				viewModes.editMode.toggle()
+			}
+		}
 		.toolbar {
+			ToolbarItem {
+				Spacer()
+			}
 			ToolbarItem {
 				Button(action: {
 					viewModes.editMode.toggle()

@@ -1,4 +1,5 @@
 import SwiftUI
+import AppKit
 import SwiftData
 
 struct LicenseList: View {
@@ -10,6 +11,8 @@ struct LicenseList: View {
 	
 	var body: some View {
 		List {
+			NSSearchFieldWrapper(searchText: $searchString)
+				.textFieldStyle(RoundedBorderTextFieldStyle())
 			ForEach(items
 				.filter { searchString.count > 0 ? $0.softwareName.lowercased().contains(searchString.lowercased()) : true }
 				.sorted { $0.softwareName < $1.softwareName }
@@ -32,7 +35,6 @@ struct LicenseList: View {
 			}
 			.onDelete(perform: deleteItems)
 		}
-		.searchable(text: $searchString)
 		.toolbar {
 			if viewModes.splitViewVisibility != NavigationSplitViewVisibility.detailOnly {
 				ToolbarItem {
@@ -51,6 +53,39 @@ struct LicenseList: View {
 			for index in offsets {
 				modelContext.delete(items[index])
 			}
+		}
+	}
+	
+	// search bar
+	private struct NSSearchFieldWrapper: NSViewRepresentable {
+		class Coordinator: NSObject, NSSearchFieldDelegate {
+			var parent: NSSearchFieldWrapper
+			
+			init(parent: NSSearchFieldWrapper) {
+				self.parent = parent
+			}
+			
+			func controlTextDidChange(_ notification: Notification) {
+				if let textField = notification.object as? NSTextField {
+					parent.searchText = textField.stringValue
+				}
+			}
+		}
+		
+		@Binding var searchText: String
+		
+		func makeNSView(context: Context) -> NSSearchField {
+			let searchField = NSSearchField()
+			searchField.delegate = context.coordinator
+			return searchField
+		}
+		
+		func updateNSView(_ nsView: NSSearchField, context: Context) {
+			nsView.stringValue = searchText
+		}
+		
+		func makeCoordinator() -> Coordinator {
+			return Coordinator(parent: self)
 		}
 	}
 }

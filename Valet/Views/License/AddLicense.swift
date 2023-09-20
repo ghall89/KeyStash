@@ -4,7 +4,7 @@ struct AddLicense: View {
 	@Environment(\.modelContext) private var modelContext
 	@EnvironmentObject var viewModes: ViewModes
 	
-	@State var newItem: License = License(softwareName: "", icon: nil, licenseKey: "", registeredToName: "", registeredToEmail: "", downloadUrlString: "", notes: "")
+	@State var newItem: License = License(softwareName: "", icon: nil, attachment: nil, licenseKey: "", registeredToName: "", registeredToEmail: "", downloadUrlString: "", notes: "", inTrash: false)
 	@State var tabSelection: String = "installed"
 	@State var installedApps: [InstalledApp] = []
 	@State var selectedApp: UUID = UUID()
@@ -21,19 +21,8 @@ struct AddLicense: View {
 				case "installed":
 					Picker("Select App: ", selection: $selectedApp, content: {
 						ForEach(installedApps) { app in
-							HStack {
-//								ZStack {
-//									if let icon = app.icon {
-//										Image(nsImage: icon )
-//											.resizable()
-//									} else {
-//										Image("no_icon")
-//											.resizable()
-//									}
-//								}
-								Text(app.name)
-							}
-							.tag(app.id)
+							Text(app.name)
+								.tag(app.id)
 						}
 					})
 				case "custom":

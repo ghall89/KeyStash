@@ -4,16 +4,21 @@ import SwiftData
 
 @Model
 final class License {
-	var id: UUID = UUID()
+	@Attribute(.unique) var id: UUID = UUID()
 	var softwareName: String
 	var icon: Data?
-	var licenseKey: String
-	var registeredToName: String
-	var registeredToEmail: String
+	@Attribute(.allowsCloudEncryption) var attachment: Data?
+	@Attribute(.allowsCloudEncryption) var licenseKey: String
+	@Attribute(.allowsCloudEncryption) var registeredToName: String
+	@Attribute(.allowsCloudEncryption) var registeredToEmail: String
 	var downloadUrlString: String
-	var notes: String
+	@Attribute(.allowsCloudEncryption) var notes: String
 	var createdDate: Date = Date()
 	var updatedDate: Date?
+	var tags: [String]?
+	
+	var inTrash: Bool
+	var trashDate: Date?
 	
 	var downloadUrl: URL? {
 		return URL(string: downloadUrlString)
@@ -29,14 +34,18 @@ final class License {
 		resizeImage(image: iconNSImage, toSize: NSSize(width: 24, height: 24))!
 	}
 	
-	init(softwareName: String, icon: Data?, licenseKey: String, registeredToName: String, registeredToEmail: String, downloadUrlString: String, notes: String, updatedDate: Date? = nil) {
+	init(softwareName: String, icon: Data?, attachment: Data?, licenseKey: String, registeredToName: String, registeredToEmail: String, downloadUrlString: String, notes: String, updatedDate: Date? = nil, tags: [String]? = [], inTrash: Bool, trashDate: Date? = nil) {
 		self.softwareName = softwareName
 		self.icon = icon
+		self.attachment = attachment
 		self.licenseKey = licenseKey
 		self.registeredToName = registeredToName
 		self.registeredToEmail = registeredToEmail
 		self.downloadUrlString = downloadUrlString
 		self.notes = notes
 		self.updatedDate = updatedDate
+		self.tags = tags
+		self.inTrash = inTrash
+		self.trashDate = trashDate
 	}
 }

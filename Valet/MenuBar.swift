@@ -20,9 +20,10 @@ struct MenuBar: Commands {
 			})
 		}
 		CommandGroup(replacing: CommandGroupPlacement.sidebar) {
-			Button("Edit Mode", action: {
+			Button("Toggle Edit Mode", action: {
 				viewModes.editMode.toggle()
 			})
+			.keyboardShortcut(KeyboardShortcut(KeyEquivalent("E")))
 			Divider()
 		}
 	}

@@ -9,6 +9,6 @@ struct InstalledApp: Identifiable, Hashable {
 		return url.deletingPathExtension().lastPathComponent
 	}
 	var icon: NSImage? {
-		getAppIcon(appName: name)
+		getAppIcon(appName: name) ?? nil
 	}
 }
