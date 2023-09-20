@@ -20,7 +20,6 @@ func convertToCSV(data: [License]) -> String {
 	
 	for license in licenses {
 		let row = "\(license.softwareName),\(license.downloadUrlString),\(license.registeredToName),\(license.registeredToEmail),\(license.licenseKey),\(license.notes)\n"
-		print(row)
 		csvString.append(row)
 	}
 	
@@ -29,7 +28,7 @@ func convertToCSV(data: [License]) -> String {
 
 func chooseFilePath() -> String? {
 	let savePanel = NSSavePanel()
-	savePanel.allowedFileTypes = ["csv"]
+	savePanel.allowedContentTypes = [.commaSeparatedText]
 	savePanel.nameFieldStringValue = "licenses.csv"
 	
 	if savePanel.runModal() == .OK {

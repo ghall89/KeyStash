@@ -12,7 +12,9 @@ struct MenuBar: Commands {
 			})
 			.keyboardShortcut(KeyboardShortcut(KeyEquivalent("N")))
 			Divider()
-			Button("Import", action: {})
+			Button("Import", action: {
+				importCSV()
+			})
 			Button("Export", action: {
 				exportCSV(licenses: items)
 			})

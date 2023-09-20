@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		D30C58082AB91A5300A86426 /* resizeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30C58072AB91A5300A86426 /* resizeImage.swift */; };
 		D33AB53B2AB8C8F400B49922 /* getCustomIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33AB53A2AB8C8F400B49922 /* getCustomIcon.swift */; };
 		D34E55BA2AB8914400151B95 /* SwiftCSV in Frameworks */ = {isa = PBXBuildFile; productRef = D34E55B92AB8914400151B95 /* SwiftCSV */; };
 		D369F4692AB7BE1A00D8C6B1 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D369F4682AB7BE1A00D8C6B1 /* AppSettings.swift */; };
@@ -20,7 +21,7 @@
 		D39942D82AB509AF00B2DC39 /* LicenceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942C82AB509AE00B2DC39 /* LicenceInfo.swift */; };
 		D39942D92AB509AF00B2DC39 /* LicenseInfoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942C92AB509AE00B2DC39 /* LicenseInfoRow.swift */; };
 		D39942DA2AB509AF00B2DC39 /* AddLicense.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942CA2AB509AE00B2DC39 /* AddLicense.swift */; };
-		D39942DB2AB509AF00B2DC39 /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942CB2AB509AE00B2DC39 /* Sidebar.swift */; };
+		D39942DB2AB509AF00B2DC39 /* LicenseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942CB2AB509AE00B2DC39 /* LicenseList.swift */; };
 		D39942DC2AB509AF00B2DC39 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942CC2AB509AE00B2DC39 /* ContentView.swift */; };
 		D39942DD2AB509AF00B2DC39 /* InstalledApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942CE2AB509AE00B2DC39 /* InstalledApp.swift */; };
 		D39942DE2AB509AF00B2DC39 /* License.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942CF2AB509AE00B2DC39 /* License.swift */; };
@@ -30,9 +31,11 @@
 		D3B08F832AB6A5FD004715F5 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = D3B08F822AB6A5FD004715F5 /* MarkdownUI */; };
 		D3B08F892AB6A8D4004715F5 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = D3B08F882AB6A8D4004715F5 /* AlertToast */; };
 		D3C6503B2AB74CF300E75461 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C6503A2AB74CF300E75461 /* MenuBar.swift */; };
+		D3F4B6EC2ABA25D3002AFDFD /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F4B6EB2ABA25D3002AFDFD /* Sidebar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		D30C58072AB91A5300A86426 /* resizeImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = resizeImage.swift; sourceTree = "<group>"; };
 		D33AB53A2AB8C8F400B49922 /* getCustomIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getCustomIcon.swift; sourceTree = "<group>"; };
 		D369F4682AB7BE1A00D8C6B1 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		D369F46B2AB87CEA00D8C6B1 /* exportCSV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = exportCSV.swift; sourceTree = "<group>"; };
@@ -47,7 +50,7 @@
 		D39942C82AB509AE00B2DC39 /* LicenceInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicenceInfo.swift; sourceTree = "<group>"; };
 		D39942C92AB509AE00B2DC39 /* LicenseInfoRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicenseInfoRow.swift; sourceTree = "<group>"; };
 		D39942CA2AB509AE00B2DC39 /* AddLicense.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLicense.swift; sourceTree = "<group>"; };
-		D39942CB2AB509AE00B2DC39 /* Sidebar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
+		D39942CB2AB509AE00B2DC39 /* LicenseList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicenseList.swift; sourceTree = "<group>"; };
 		D39942CC2AB509AE00B2DC39 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		D39942CE2AB509AE00B2DC39 /* InstalledApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InstalledApp.swift; sourceTree = "<group>"; };
 		D39942CF2AB509AE00B2DC39 /* License.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = License.swift; sourceTree = "<group>"; };
@@ -55,6 +58,7 @@
 		D39942D22AB509AF00B2DC39 /* getInstalledApps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getInstalledApps.swift; sourceTree = "<group>"; };
 		D39942D32AB509AF00B2DC39 /* getAppIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getAppIcon.swift; sourceTree = "<group>"; };
 		D3C6503A2AB74CF300E75461 /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
+		D3F4B6EB2ABA25D3002AFDFD /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,6 +81,7 @@
 				D39942D32AB509AF00B2DC39 /* getAppIcon.swift */,
 				D33AB53A2AB8C8F400B49922 /* getCustomIcon.swift */,
 				D39942D12AB509AF00B2DC39 /* getNSImageAsData.swift */,
+				D30C58072AB91A5300A86426 /* resizeImage.swift */,
 			);
 			path = AppIcons;
 			sourceTree = "<group>";
@@ -151,9 +156,10 @@
 			isa = PBXGroup;
 			children = (
 				D39942C72AB509AE00B2DC39 /* License */,
-				D39942CB2AB509AE00B2DC39 /* Sidebar.swift */,
+				D39942CB2AB509AE00B2DC39 /* LicenseList.swift */,
 				D39942CC2AB509AE00B2DC39 /* ContentView.swift */,
 				D369F4682AB7BE1A00D8C6B1 /* AppSettings.swift */,
+				D3F4B6EB2ABA25D3002AFDFD /* Sidebar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -197,6 +203,7 @@
 				D39942A82AB5095A00B2DC39 /* Sources */,
 				D39942A92AB5095A00B2DC39 /* Frameworks */,
 				D39942AA2AB5095A00B2DC39 /* Resources */,
+				D3D40B402AB9E2F400462E63 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -263,6 +270,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		D3D40B402AB9E2F400462E63 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${CONFIGURATION}\" = \"Release\" ]; then\n    buildNumber=$(git rev-list --count head)\n    /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D39942A82AB5095A00B2DC39 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -273,15 +301,17 @@
 				D39942DD2AB509AF00B2DC39 /* InstalledApp.swift in Sources */,
 				D39942E12AB509AF00B2DC39 /* getAppIcon.swift in Sources */,
 				D39942DC2AB509AF00B2DC39 /* ContentView.swift in Sources */,
+				D30C58082AB91A5300A86426 /* resizeImage.swift in Sources */,
 				D39942D62AB509AF00B2DC39 /* FilePicker.swift in Sources */,
 				D39942D42AB509AF00B2DC39 /* ValetApp.swift in Sources */,
 				D39942DF2AB509AF00B2DC39 /* getNSImageAsData.swift in Sources */,
 				D39942D52AB509AF00B2DC39 /* ViewModes.swift in Sources */,
+				D3F4B6EC2ABA25D3002AFDFD /* Sidebar.swift in Sources */,
 				D369F4692AB7BE1A00D8C6B1 /* AppSettings.swift in Sources */,
 				D33AB53B2AB8C8F400B49922 /* getCustomIcon.swift in Sources */,
 				D39942DE2AB509AF00B2DC39 /* License.swift in Sources */,
 				D39942E02AB509AF00B2DC39 /* getInstalledApps.swift in Sources */,
-				D39942DB2AB509AF00B2DC39 /* Sidebar.swift in Sources */,
+				D39942DB2AB509AF00B2DC39 /* LicenseList.swift in Sources */,
 				D369F46C2AB87CEA00D8C6B1 /* exportCSV.swift in Sources */,
 				D3C6503B2AB74CF300E75461 /* MenuBar.swift in Sources */,
 				D39942D82AB509AF00B2DC39 /* LicenceInfo.swift in Sources */,

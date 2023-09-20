@@ -73,13 +73,6 @@ struct LicenceInfo: View {
 					Image(systemName: viewModes.editMode == true ? "checkmark.circle.fill" : "pencil")
 				})
 			}
-			
-			ToolbarItem {
-				Button(action: /*@START_MENU_TOKEN@*/{}/*@END_MENU_TOKEN@*/, label: {
-					Image(systemName: "square.and.arrow.up")
-				})
-				.disabled(viewModes.editMode)
-			}
 		}
 	}
 	
