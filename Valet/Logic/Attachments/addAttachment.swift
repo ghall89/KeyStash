@@ -5,22 +5,20 @@ func addAttachment() -> Attachment? {
 	let openPanel = NSOpenPanel()
 	
 	openPanel.allowsMultipleSelection = false
-	openPanel.allowedContentTypes = [.data]
+	openPanel.canChooseFiles = true
+	openPanel.canChooseDirectories = false
 	
 	if openPanel.runModal() == .OK {
-		let path = openPanel.url?.path
-		
-		if let url = URL(string: path!) {
-			print(url.lastPathComponent)
-			do {
-				let attachment = try Data(contentsOf: url)
-				return Attachment(filename: url.lastPathComponent, data: attachment)
-			} catch {
-				print("Error: \(error.localizedDescription)")
-				return nil
-			}
+		do {
+			let path = openPanel.url!.path
+			let attachment = try Data(NSData(contentsOfFile: path))
+			return Attachment(filename: openPanel.url!.lastPathComponent, data: attachment)
+		} catch {
+			print("Error: \(error.localizedDescription)")
+			return nil
 		}
 	}
+	
 	
 	return nil
 }

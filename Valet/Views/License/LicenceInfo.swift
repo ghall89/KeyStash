@@ -1,6 +1,6 @@
 import SwiftUI
-import Observation
 import AppKit
+import SwiftData
 import MarkdownUI
 import AlertToast
 
@@ -47,11 +47,7 @@ struct LicenceInfo: View {
 					LicenseInfoRow(showToast: $showToast, value: $license.registeredToName, label: "Registered To")
 					LicenseInfoRow(showToast: $showToast, value: $license.registeredToEmail, label: "Email")
 					LicenseInfoRow(showToast: $showToast, value: $license.licenseKey, label: "License Key")
-					if viewModes.editMode == true {
-						Button(action: handleAttachment, label: {
-							Label("Add Attachment", systemImage: "paperclip")
-						})
-					}
+					AttachmentRow(file: $license.attachment)
 					Divider()
 					Text("Notes")
 						.font(.caption)
@@ -100,10 +96,143 @@ struct LicenceInfo: View {
 		
 		return downloadExtensions.contains(pathExtension)
 	}
+}
+
+struct LicenseInfoRow: View {
+	@EnvironmentObject var viewModes: ViewModes
+	@Binding var showToast: Bool
+	@Binding var value: String
+	var label: String
+	
+	var body: some View {
+		HStack(alignment: .top) {
+			if value.count > 0 || viewModes.editMode == true {
+				Button(action: {
+					copyToClipboard(value: value)
+				}, label: {
+					Image(systemName: "doc.on.doc.fill")
+						.foregroundStyle(.accent)
+				})
+				.buttonStyle(.plain)
+				.disabled(viewModes.editMode)
+				VStack(alignment: .leading) {
+					Text(label)
+						.font(.caption)
+					if viewModes.editMode == true {
+						TextField(getPlaceholderText(), text: $value)
+							.textFieldStyle(.plain)
+							.lineLimit(label == "License Key" ? 10 : 1)
+					} else {
+						Text(value)
+					}
+				}
+				.multilineTextAlignment(.leading)
+				Spacer()
+			}
+		}
+	}
+	
+	private func getPlaceholderText() -> String {
+		switch label {
+			case "Registered To":
+				return "Johnny Appleseed"
+			case "Email":
+				return "sample@email.com"
+			case "License Key":
+				return "XX-XXXX-XXXX-XXXX-XXXX"
+			default:
+				return "Lorem ipsum..."
+		}
+	}
+	
+	private func copyToClipboard(value: String) {
+		let clipboard = NSPasteboard.general
+		clipboard.clearContents()
+		clipboard.setString(value, forType: .string)
+		if showToast == false {
+			showToast.toggle()
+		}
+	}
+}
+
+struct AttachmentRow: View {
+	@Environment(\.modelContext) private var modelContext
+	@Query private var files: [Attachment]
+	@EnvironmentObject var viewModes: ViewModes
+	@Binding var file: Attachment?
+	
+	@State var showDeleteAlert: Bool = false
+	let label = "Attachment"
+	
+	var body: some View {
+		if viewModes.editMode == true {
+			if let attachment = file {
+				HStack {
+					Button(action: {
+						showDeleteAlert.toggle()
+					}, label: {
+						Image(systemName: "xmark.circle.fill")
+							.foregroundStyle(.red)
+					})
+					.buttonStyle(.plain)
+					VStack(alignment: .leading) {
+						Text(label)
+							.font(.caption)
+						Text(attachment.filename)
+							.fontDesign(.monospaced)
+					}
+				}
+				.alert("Are you sure you want to remove this attachment? Data will be lost.", isPresented: $showDeleteAlert, actions: {
+					Button(action: {
+						showDeleteAlert.toggle()
+					}, label: {
+						Text("Cancel")
+					})
+					.keyboardShortcut(.defaultAction)
+					Button(action: {
+						removeAttachment()
+						showDeleteAlert.toggle()
+					}, label: {
+						Text("Delete")
+					})
+				})
+			} else {
+				Button(action: handleAttachment, label: {
+					Label("Add Attachment", systemImage: "paperclip")
+				})
+			}
+		} else {
+			if let attachment = file {
+				HStack(alignment: .top) {
+					Button(action: {
+						exportAttachment(file: attachment)
+					}, label: {
+						Image(systemName: "arrow.down.circle.fill")
+							.foregroundStyle(.accent)
+					})
+					.buttonStyle(.plain)
+					VStack(alignment: .leading) {
+						Text(label)
+							.font(.caption)
+						Text(attachment.filename)
+							.fontDesign(.monospaced)
+					}
+				}
+			}
+		}
+	}
 	
 	private func handleAttachment() {
 		if let attachment = addAttachment() {
-			license.attachment = attachment
+			file = attachment
+		}
+	}
+	
+	private func removeAttachment() {
+		if let attachmentId = file?.id {
+			let index = files.firstIndex(where: { $0.id == attachmentId })!
+			file = nil
+			modelContext.delete(files[index])
 		}
 	}
 }

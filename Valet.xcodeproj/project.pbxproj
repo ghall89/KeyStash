@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D30C58082AB91A5300A86426 /* resizeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30C58072AB91A5300A86426 /* resizeImage.swift */; };
+		D3163CEA2ABBC91B00BC5F63 /* exportAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3163CE92ABBC91B00BC5F63 /* exportAttachment.swift */; };
 		D33AB53B2AB8C8F400B49922 /* getCustomIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33AB53A2AB8C8F400B49922 /* getCustomIcon.swift */; };
 		D34E55BA2AB8914400151B95 /* SwiftCSV in Frameworks */ = {isa = PBXBuildFile; productRef = D34E55B92AB8914400151B95 /* SwiftCSV */; };
 		D369F4692AB7BE1A00D8C6B1 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D369F4682AB7BE1A00D8C6B1 /* AppSettings.swift */; };
@@ -19,7 +20,6 @@
 		D39942D62AB509AF00B2DC39 /* FilePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942C42AB509AE00B2DC39 /* FilePicker.swift */; };
 		D39942D72AB509AF00B2DC39 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D39942C52AB509AE00B2DC39 /* Assets.xcassets */; };
 		D39942D82AB509AF00B2DC39 /* LicenceInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942C82AB509AE00B2DC39 /* LicenceInfo.swift */; };
-		D39942D92AB509AF00B2DC39 /* LicenseInfoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942C92AB509AE00B2DC39 /* LicenseInfoRow.swift */; };
 		D39942DA2AB509AF00B2DC39 /* AddLicense.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942CA2AB509AE00B2DC39 /* AddLicense.swift */; };
 		D39942DB2AB509AF00B2DC39 /* LicenseList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942CB2AB509AE00B2DC39 /* LicenseList.swift */; };
 		D39942DC2AB509AF00B2DC39 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942CC2AB509AE00B2DC39 /* ContentView.swift */; };
@@ -39,6 +39,7 @@
 
 /* Begin PBXFileReference section */
 		D30C58072AB91A5300A86426 /* resizeImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = resizeImage.swift; sourceTree = "<group>"; };
+		D3163CE92ABBC91B00BC5F63 /* exportAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = exportAttachment.swift; sourceTree = "<group>"; };
 		D33AB53A2AB8C8F400B49922 /* getCustomIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getCustomIcon.swift; sourceTree = "<group>"; };
 		D369F4682AB7BE1A00D8C6B1 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		D369F46B2AB87CEA00D8C6B1 /* exportCSV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = exportCSV.swift; sourceTree = "<group>"; };
@@ -51,7 +52,6 @@
 		D39942C42AB509AE00B2DC39 /* FilePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilePicker.swift; sourceTree = "<group>"; };
 		D39942C52AB509AE00B2DC39 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		D39942C82AB509AE00B2DC39 /* LicenceInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicenceInfo.swift; sourceTree = "<group>"; };
-		D39942C92AB509AE00B2DC39 /* LicenseInfoRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicenseInfoRow.swift; sourceTree = "<group>"; };
 		D39942CA2AB509AE00B2DC39 /* AddLicense.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddLicense.swift; sourceTree = "<group>"; };
 		D39942CB2AB509AE00B2DC39 /* LicenseList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LicenseList.swift; sourceTree = "<group>"; };
 		D39942CC2AB509AE00B2DC39 /* ContentView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -162,7 +162,6 @@
 			isa = PBXGroup;
 			children = (
 				D39942C72AB509AE00B2DC39 /* License */,
-				D39942CB2AB509AE00B2DC39 /* LicenseList.swift */,
 				D39942CC2AB509AE00B2DC39 /* ContentView.swift */,
 				D369F4682AB7BE1A00D8C6B1 /* AppSettings.swift */,
 				D3F4B6EB2ABA25D3002AFDFD /* Sidebar.swift */,
@@ -173,8 +172,8 @@
 		D39942C72AB509AE00B2DC39 /* License */ = {
 			isa = PBXGroup;
 			children = (
+				D39942CB2AB509AE00B2DC39 /* LicenseList.swift */,
 				D39942C82AB509AE00B2DC39 /* LicenceInfo.swift */,
-				D39942C92AB509AE00B2DC39 /* LicenseInfoRow.swift */,
 				D39942CA2AB509AE00B2DC39 /* AddLicense.swift */,
 			);
 			path = License;
@@ -204,6 +203,7 @@
 			isa = PBXGroup;
 			children = (
 				D3CFBED12ABB82C700C1D4BC /* addAttachment.swift */,
+				D3163CE92ABBC91B00BC5F63 /* exportAttachment.swift */,
 			);
 			path = Attachments;
 			sourceTree = "<group>";
@@ -228,7 +228,7 @@
 				D39942A82AB5095A00B2DC39 /* Sources */,
 				D39942A92AB5095A00B2DC39 /* Frameworks */,
 				D39942AA2AB5095A00B2DC39 /* Resources */,
-				D3D40B402AB9E2F400462E63 /* ShellScript */,
+				D3163CE82ABBC0A300BC5F63 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -296,7 +296,7 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		D3D40B402AB9E2F400462E63 /* ShellScript */ = {
+		D3163CE82ABBC0A300BC5F63 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
 			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
@@ -312,7 +312,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" = \"Release\" ]; then\n    buildNumber=$(git rev-list --count head)\n    /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\nfi\n";
+			shellScript = "git=$(sh /etc/profile; which git)\nnumber_of_commits=$(\"$git\" rev-list HEAD --count)\ngit_release_version=$(\"$git\" describe --tags --always --abbrev=0)\n\ntarget_plist=\"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\ndsym_plist=\"$DWARF_DSYM_FOLDER_PATH/$DWARF_DSYM_FILE_NAME/Contents/Info.plist\"\n\nfor plist in \"$target_plist\" \"$dsym_plist\"; do\n  if [ -f \"$plist\" ]; then\n    /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $number_of_commits\" \"$plist\"\n    /usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString ${git_release_version#*v}\" \"$plist\"\n  fi\ndone\n";
+			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -321,7 +322,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D39942D92AB509AF00B2DC39 /* LicenseInfoRow.swift in Sources */,
 				D3CFBECF2ABB82A600C1D4BC /* Attachment.swift in Sources */,
 				D39942DA2AB509AF00B2DC39 /* AddLicense.swift in Sources */,
 				D39942DD2AB509AF00B2DC39 /* InstalledApp.swift in Sources */,
@@ -333,6 +333,7 @@
 				D39942DF2AB509AF00B2DC39 /* getNSImageAsData.swift in Sources */,
 				D39942D52AB509AF00B2DC39 /* ViewModes.swift in Sources */,
 				D3F4B6EC2ABA25D3002AFDFD /* Sidebar.swift in Sources */,
+				D3163CEA2ABBC91B00BC5F63 /* exportAttachment.swift in Sources */,
 				D369F4692AB7BE1A00D8C6B1 /* AppSettings.swift in Sources */,
 				D33AB53B2AB8C8F400B49922 /* getCustomIcon.swift in Sources */,
 				D3CFBED42ABB841D00C1D4BC /* Tag.swift in Sources */,
@@ -480,9 +481,11 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Valet/Preview Content\"";
 				DEVELOPMENT_TEAM = B3DFV278UN;
-				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Valet;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -510,9 +513,11 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Valet/Preview Content\"";
 				DEVELOPMENT_TEAM = B3DFV278UN;
-				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_HARDENED_RUNTIME = NO;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = Valet;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
