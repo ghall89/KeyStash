@@ -5,13 +5,14 @@ struct ContentView: View {
 	@Environment(\.modelContext) private var modelContext
 	@EnvironmentObject var viewModes: ViewModes
 	@Query private var items: [License]
+	@AppStorage("sidebarSelection") var sidebarSelection: String = "all_apps"
 	
 	var body: some View {
 		NavigationSplitView {
-			Sidebar()
+			Sidebar(selection: $sidebarSelection)
 				.navigationSplitViewColumnWidth(min: 160, ideal: 200)
 		} content: {
-			LicenseList()
+			LicenseList(sidebarSelection: $sidebarSelection)
 				.navigationSplitViewColumnWidth(min: 340, ideal: 350)
 		} detail: {
 			VStack(spacing: 10) {
@@ -31,6 +32,9 @@ struct ContentView: View {
 		}
 		.sheet(isPresented: $viewModes.showNewAppSheet, content: {
 			AddLicense()
+		})
+		.onChange(of: sidebarSelection, {
+			print(sidebarSelection)
 		})
 	}
 }

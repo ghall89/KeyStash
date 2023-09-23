@@ -84,7 +84,7 @@ struct LicenceInfo: View {
 				Button(action: {
 					viewModes.editMode.toggle()
 				}, label: {
-					Image(systemName: viewModes.editMode == true ? "checkmark.circle.fill" : "pencil")
+					Image(systemName: viewModes.editMode == true ? "checkmark.circle.fill" : "square.and.pencil")
 				})
 			}
 		}
