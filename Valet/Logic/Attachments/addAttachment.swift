@@ -19,6 +19,5 @@ func addAttachment() -> Attachment? {
 		}
 	}
 	
-	
 	return nil
 }

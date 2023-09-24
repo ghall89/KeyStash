@@ -10,6 +10,10 @@
 		D30C58082AB91A5300A86426 /* resizeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30C58072AB91A5300A86426 /* resizeImage.swift */; };
 		D3163CEA2ABBC91B00BC5F63 /* exportAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3163CE92ABBC91B00BC5F63 /* exportAttachment.swift */; };
 		D33797EE2ABFA49800C5E6BC /* snakeToTitleCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33797ED2ABFA49800C5E6BC /* snakeToTitleCase.swift */; };
+		D33797F32ABFA9A800C5E6BC /* isDownloadLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33797F22ABFA9A800C5E6BC /* isDownloadLink.swift */; };
+		D33797F52ABFA9F200C5E6BC /* stringToClipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33797F42ABFA9F200C5E6BC /* stringToClipboard.swift */; };
+		D33797F82ABFAA6C00C5E6BC /* LicenseInfoRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33797F72ABFAA6C00C5E6BC /* LicenseInfoRow.swift */; };
+		D33797FA2ABFAA8700C5E6BC /* AttachmentRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33797F92ABFAA8700C5E6BC /* AttachmentRow.swift */; };
 		D33AB53B2AB8C8F400B49922 /* getCustomIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33AB53A2AB8C8F400B49922 /* getCustomIcon.swift */; };
 		D34E55BA2AB8914400151B95 /* SwiftCSV in Frameworks */ = {isa = PBXBuildFile; productRef = D34E55B92AB8914400151B95 /* SwiftCSV */; };
 		D369F4692AB7BE1A00D8C6B1 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D369F4682AB7BE1A00D8C6B1 /* AppSettings.swift */; };
@@ -42,6 +46,10 @@
 		D30C58072AB91A5300A86426 /* resizeImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = resizeImage.swift; sourceTree = "<group>"; };
 		D3163CE92ABBC91B00BC5F63 /* exportAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = exportAttachment.swift; sourceTree = "<group>"; };
 		D33797ED2ABFA49800C5E6BC /* snakeToTitleCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = snakeToTitleCase.swift; sourceTree = "<group>"; };
+		D33797F22ABFA9A800C5E6BC /* isDownloadLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = isDownloadLink.swift; sourceTree = "<group>"; };
+		D33797F42ABFA9F200C5E6BC /* stringToClipboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stringToClipboard.swift; sourceTree = "<group>"; };
+		D33797F72ABFAA6C00C5E6BC /* LicenseInfoRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LicenseInfoRow.swift; sourceTree = "<group>"; };
+		D33797F92ABFAA8700C5E6BC /* AttachmentRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentRow.swift; sourceTree = "<group>"; };
 		D33AB53A2AB8C8F400B49922 /* getCustomIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getCustomIcon.swift; sourceTree = "<group>"; };
 		D369F4682AB7BE1A00D8C6B1 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		D369F46B2AB87CEA00D8C6B1 /* exportCSV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = exportCSV.swift; sourceTree = "<group>"; };
@@ -84,6 +92,27 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D33797EF2ABFA89F00C5E6BC /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				D39942D22AB509AF00B2DC39 /* getInstalledApps.swift */,
+				D33797ED2ABFA49800C5E6BC /* snakeToTitleCase.swift */,
+				D33797F22ABFA9A800C5E6BC /* isDownloadLink.swift */,
+				D33797F42ABFA9F200C5E6BC /* stringToClipboard.swift */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		D33797F62ABFAA4B00C5E6BC /* LicenseInfo */ = {
+			isa = PBXGroup;
+			children = (
+				D39942C82AB509AE00B2DC39 /* LicenceInfo.swift */,
+				D33797F72ABFAA6C00C5E6BC /* LicenseInfoRow.swift */,
+				D33797F92ABFAA8700C5E6BC /* AttachmentRow.swift */,
+			);
+			path = LicenseInfo;
+			sourceTree = "<group>";
+		};
 		D33AB53C2AB8C95300B49922 /* AppIcons */ = {
 			isa = PBXGroup;
 			children = (
@@ -176,8 +205,8 @@
 		D39942C72AB509AE00B2DC39 /* License */ = {
 			isa = PBXGroup;
 			children = (
+				D33797F62ABFAA4B00C5E6BC /* LicenseInfo */,
 				D39942CB2AB509AE00B2DC39 /* LicenseList.swift */,
-				D39942C82AB509AE00B2DC39 /* LicenceInfo.swift */,
 				D39942CA2AB509AE00B2DC39 /* AddLicense.swift */,
 			);
 			path = License;
@@ -195,11 +224,10 @@
 		D39942D02AB509AF00B2DC39 /* Logic */ = {
 			isa = PBXGroup;
 			children = (
+				D33797EF2ABFA89F00C5E6BC /* Utils */,
 				D3CFBED02ABB82C700C1D4BC /* Attachments */,
 				D33AB53C2AB8C95300B49922 /* AppIcons */,
 				D369F46A2AB87CC600D8C6B1 /* CSV */,
-				D39942D22AB509AF00B2DC39 /* getInstalledApps.swift */,
-				D33797ED2ABFA49800C5E6BC /* snakeToTitleCase.swift */,
 			);
 			path = Logic;
 			sourceTree = "<group>";
@@ -340,10 +368,13 @@
 				D3F4B6EC2ABA25D3002AFDFD /* Sidebar.swift in Sources */,
 				D3163CEA2ABBC91B00BC5F63 /* exportAttachment.swift in Sources */,
 				D369F4692AB7BE1A00D8C6B1 /* AppSettings.swift in Sources */,
+				D33797F32ABFA9A800C5E6BC /* isDownloadLink.swift in Sources */,
+				D33797F52ABFA9F200C5E6BC /* stringToClipboard.swift in Sources */,
 				D33AB53B2AB8C8F400B49922 /* getCustomIcon.swift in Sources */,
 				D3CFBED42ABB841D00C1D4BC /* Tag.swift in Sources */,
 				D39942DE2AB509AF00B2DC39 /* License.swift in Sources */,
 				D39942E02AB509AF00B2DC39 /* getInstalledApps.swift in Sources */,
+				D33797FA2ABFAA8700C5E6BC /* AttachmentRow.swift in Sources */,
 				D39942DB2AB509AF00B2DC39 /* LicenseList.swift in Sources */,
 				D369F46C2AB87CEA00D8C6B1 /* exportCSV.swift in Sources */,
 				D3C6503B2AB74CF300E75461 /* MenuBar.swift in Sources */,
@@ -351,6 +382,7 @@
 				D39942D82AB509AF00B2DC39 /* LicenceInfo.swift in Sources */,
 				D3CFBED22ABB82C700C1D4BC /* addAttachment.swift in Sources */,
 				D369F46E2AB8838300D8C6B1 /* importCSV.swift in Sources */,
+				D33797F82ABFAA6C00C5E6BC /* LicenseInfoRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

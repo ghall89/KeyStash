@@ -33,9 +33,6 @@ struct ContentView: View {
 		.sheet(isPresented: $viewModes.showNewAppSheet, content: {
 			AddLicense()
 		})
-		.onChange(of: sidebarSelection, {
-			print(sidebarSelection)
-		})
 	}
 }
 

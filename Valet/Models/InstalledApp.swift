@@ -4,11 +4,11 @@ import AppKit
 struct InstalledApp: Identifiable, Hashable {
 	var id: UUID = UUID()
 	var url: URL
-	var downloadUrl: URL?
+	var bundleId: String
 	var name: String {
 		return url.deletingPathExtension().lastPathComponent
 	}
 	var icon: NSImage? {
-		getAppIcon(appName: name) ?? nil
+		getAppIcon(identifier: bundleId) ?? nil
 	}
 }

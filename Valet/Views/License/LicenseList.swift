@@ -8,6 +8,8 @@ struct LicenseList: View {
 	@Query private var items: [License]
 	@Binding var sidebarSelection: String
 	@State var searchString: String = ""
+	@State var confirmDelete: Bool = false
+	@State var confirmDeleteAll: Bool = false
 	
 	
 	var body: some View {
@@ -39,20 +41,30 @@ struct LicenseList: View {
 							item.trashDate = nil
 						})
 						Button("Delete Permenently", role: .destructive, action: {
-							let index = IndexSet(integer: items.firstIndex(of: item)!)
-							deleteItems(offsets: index)
+							confirmDelete.toggle()
 						})
 					}
 				}
+				.alert("Are you sure you want to delete your \(item.softwareName) license info? Any files you have attached to it will also be deleted.", isPresented: $confirmDelete, actions: {
+					Button("Delete", role: .destructive, action: {
+						let index = IndexSet(integer: items.firstIndex(of: item)!)
+						deleteItems(offsets: index)
+						confirmDelete.toggle()
+					})
+					Button("Cancel", role: .cancel, action: {
+						confirmDelete.toggle()
+					})
+				})
 			}
-			.onDelete(perform: deleteItems)
 		}
 		.frame(minWidth: 340)
 		.toolbar {
 			if viewModes.splitViewVisibility != NavigationSplitViewVisibility.detailOnly {
 				ToolbarItem {
 					if sidebarSelection == "trash" {
-						Button(action: {}, label: {
+						Button(action: {
+							confirmDeleteAll.toggle()
+						}, label: {
 							Label("Empty Trash", systemImage: "trash.slash")
 								.foregroundStyle(.red)
 						})
@@ -67,12 +79,36 @@ struct LicenseList: View {
 			}
 		}
 		.navigationTitle(snakeToTitleCase(sidebarSelection))
+		.alert("Are you sure you want to empty the trash? Any files you have attached will also be deleted.", isPresented: $confirmDeleteAll, actions: {
+			Button("Empty Trash", role: .destructive, action: {
+				emptyTrash()
+				confirmDeleteAll.toggle()
+			})
+			Button("Cancel", role: .cancel, action: {
+				confirmDeleteAll.toggle()
+			})
+		})
 	}
 	
 	private func deleteItems(offsets: IndexSet) {
 		withAnimation {
 			for index in offsets {
 				modelContext.delete(items[index])
+			}
+		}
+	}
+	
+	private func emptyTrash() {
+		
+		let licensePredicate = #Predicate<License> { item in
+			item.inTrash == true
+		}
+		
+		withAnimation {
+			do {
+				try modelContext.delete(model: License.self, where: licensePredicate)
+			} catch {
+				fatalError(error.localizedDescription)
 			}
 		}
 	}
