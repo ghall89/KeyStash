@@ -5,8 +5,17 @@ import AlertToast
 
 struct LicenceInfo: View {
 	@EnvironmentObject var viewModes: ViewModes
-	@State var showToast: Bool = false
 	@Bindable var license: License
+	
+	@State private var showToast: Bool = false
+	@State private var formState: FormState = FormState(
+		softwareName: "",
+		urlString: "",
+		registeredToName: "",
+		registeredToEmail: "",
+		licenseKey: "",
+		notes: ""
+	)
 	
 	var body: some View {
 		ScrollView {
@@ -20,10 +29,11 @@ struct LicenceInfo: View {
 							.aspectRatio(contentMode: .fit)
 							.frame(width: 75)
 						VStack {
-							
 							if viewModes.editMode == true {
-								TextField("Name", text: $license.softwareName)
-								TextField("URL", text: $license.downloadUrlString)
+								TextField("Some Cool App", text: $formState.softwareName)
+									.textFieldStyle(RoundedBorderTextFieldStyle())
+								TextField("https://sampleapp.com/download", text: $formState.urlString)
+									.textFieldStyle(RoundedBorderTextFieldStyle())
 							} else {
 								Text(license.softwareName)
 									.font(.title)
@@ -45,15 +55,33 @@ struct LicenceInfo: View {
 					.padding()
 				}
 				VStack(alignment: .leading, spacing: 12) {
-					LicenseInfoRow(showToast: $showToast, value: $license.registeredToName, label: "Registered To")
-					LicenseInfoRow(showToast: $showToast, value: $license.registeredToEmail, label: "Email")
-					LicenseInfoRow(showToast: $showToast, value: $license.licenseKey, label: "License Key")
+					
+					LicenseInfoRow(
+						showToast: $showToast,
+						value: $license.registeredToName,
+						formValue: $formState.registeredToName,
+						label: "Registered To"
+					)
+					
+					LicenseInfoRow(
+						showToast: $showToast,
+						value: $license.registeredToEmail,
+						formValue: $formState.registeredToEmail,
+						label: "Email"
+					)
+					
+					LicenseInfoRow(
+						showToast: $showToast,
+						value: $license.licenseKey,
+						formValue: $formState.licenseKey,
+						label: "License Key")
+					
 					AttachmentRow(file: $license.attachment)
 					Divider()
 					Text("Notes")
 						.font(.caption)
 					if viewModes.editMode == true {
-						TextEditor(text: $license.notes)
+						TextEditor(text: $formState.notes)
 							.frame(minHeight: 100)
 					} else {
 						Markdown(license.notes)
@@ -68,22 +96,73 @@ struct LicenceInfo: View {
 		.toast(isPresenting: $showToast) {
 			AlertToast(type: .complete(.accent), title: "Copied to Clipboard")
 		}
-		.onChange(of: license, {
-			if viewModes.editMode == true {
-				viewModes.editMode.toggle()
-			}
-		})
 		.toolbar {
 			ToolbarItem {
 				Spacer()
 			}
+			if viewModes.editMode == true {
+				ToolbarItem {
+					Button(action: {
+						saveFormState()
+						viewModes.editMode.toggle()
+					}, label: {
+						Image(systemName: "checkmark.circle")
+					})
+					.disabled(!isEdited())
+					.keyboardShortcut(KeyEquivalent("s"))
+				}
+			}
 			ToolbarItem {
 				Button(action: {
+					if viewModes.editMode == false {
+						initFormState()
+					}
 					viewModes.editMode.toggle()
 				}, label: {
-					Image(systemName: viewModes.editMode == true ? "checkmark.circle.fill" : "square.and.pencil")
+					Image(systemName: viewModes.editMode == true ? "xmark.circle" : "square.and.pencil")
 				})
 			}
 		}
+	}
+	
+	private func initFormState() {
+		formState.softwareName = license.softwareName
+		formState.urlString = license.downloadUrlString
+		formState.registeredToName = license.registeredToName
+		formState.registeredToEmail = license.registeredToEmail
+		formState.licenseKey = license.licenseKey
+		formState.notes = license.notes
+	}
+	
+	private func saveFormState() {
+		license.softwareName = formState.softwareName
+		license.downloadUrlString = formState.urlString
+		license.registeredToName = formState.registeredToName
+		license.registeredToEmail = formState.registeredToEmail
+		license.licenseKey = formState.licenseKey
+		license.notes = formState.notes
+		license.updatedDate = Date()
+	}
+	
+	private func isEdited() -> Bool {
+		if formState.softwareName == license.softwareName &&
+				formState.urlString == license.downloadUrlString &&
+				formState.registeredToName == license.registeredToName &&
+				formState.registeredToEmail == license.registeredToEmail &&
+				formState.licenseKey == license.licenseKey &&
+				formState.notes == license.notes {
+			return false
+		}
+		
+		return true
+	}
+	
+	private struct FormState: Equatable {
+		var softwareName: String
+		var urlString: String
+		var registeredToName: String
+		var registeredToEmail: String
+		var licenseKey: String
+		var notes: String
 	}
 }

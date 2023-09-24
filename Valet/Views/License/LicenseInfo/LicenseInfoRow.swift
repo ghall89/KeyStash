@@ -4,6 +4,7 @@ struct LicenseInfoRow: View {
 	@EnvironmentObject var viewModes: ViewModes
 	@Binding var showToast: Bool
 	@Binding var value: String
+	@Binding var formValue: String
 	var label: String
 	
 	var body: some View {

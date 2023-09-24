@@ -54,23 +54,24 @@ struct LicenseList: View {
 				})
 			}
 		}
-//		.onChange(of: selection, {
-//			if viewModes.editMode == true {
-//				viewModes.editMode.toggle()
-//			}
-//		})
+		.onChange(of: selection, {
+			if viewModes.editMode == true {
+				viewModes.editMode.toggle()
+			}
+		})
 		.animation(.easeIn, value: filterItems())
 		.frame(minWidth: 340)
 		.toolbar {
 			if viewModes.splitViewVisibility != NavigationSplitViewVisibility.detailOnly {
 				ToolbarItem {
 					if sidebarSelection == "trash" {
-						Button(action: {
-							confirmDeleteAll.toggle()
-						}, label: {
-							Label("Empty Trash", systemImage: "trash.slash")
-								.foregroundStyle(.red)
-						})
+						Button(
+							role: .destructive,
+							action: {
+								confirmDeleteAll.toggle()
+							}, label: {
+								Label("Empty Trash", systemImage: "trash.slash")
+							})
 						.disabled(!items.contains(where: { $0.inTrash == true }))
 					} else {
 						Button(action: {
