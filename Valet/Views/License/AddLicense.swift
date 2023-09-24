@@ -8,6 +8,7 @@ struct AddLicense: View {
 	@State var tabSelection: String = "installed"
 	@State var installedApps: [InstalledApp] = []
 	@State var selectedApp: UUID = UUID()
+	@Binding var licenseSelection: UUID?
 	
 	var body: some View {
 		VStack(spacing: 10) {
@@ -51,7 +52,11 @@ struct AddLicense: View {
 				Button("Cancel", action: {
 					viewModes.showNewAppSheet.toggle()
 				})
-				Button("Add", action: addItem)
+				Button("Add", action: {
+					Task {
+						addItem()
+					}
+				})
 					.keyboardShortcut(.defaultAction)
 					.disabled(tabSelection == "custom" && newItem.softwareName.count == 0)
 			}
@@ -67,6 +72,7 @@ struct AddLicense: View {
 	}
 	
 	private func addItem() {
+		let newId = newItem.id
 		withAnimation {
 			if tabSelection == "installed" {
 				if let appFromList = installedApps.first(where: { $0.id == selectedApp }) {
@@ -76,6 +82,8 @@ struct AddLicense: View {
 			}
 			modelContext.insert(newItem)
 		}
+		licenseSelection = newId
+//		viewModes.editMode.toggle()
 		viewModes.showNewAppSheet.toggle()
 	}
 }

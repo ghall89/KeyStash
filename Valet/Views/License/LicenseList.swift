@@ -10,15 +10,13 @@ struct LicenseList: View {
 	@State var searchString: String = ""
 	@State var confirmDelete: Bool = false
 	@State var confirmDeleteAll: Bool = false
-	
+	@State var selection: UUID? = nil
 	
 	var body: some View {
-		List {
+		List(selection: $selection) {
 			NSSearchFieldWrapper(searchText: $searchString)
 				.textFieldStyle(RoundedBorderTextFieldStyle())
 			ForEach(filterItems()
-				.filter { searchString.count > 0 ? $0.softwareName.lowercased().contains(searchString.lowercased()) : true }
-				.sorted { $0.softwareName < $1.softwareName }
 			) { item in
 				NavigationLink(destination: {
 					LicenceInfo(license: item)
@@ -32,8 +30,7 @@ struct LicenseList: View {
 				.contextMenu {
 					if item.inTrash == false {
 						Button("Move to Trash", role: .destructive, action: {
-							item.inTrash = true
-							item.trashDate = Date()
+							moveToTrash(item: item)
 						})
 					} else {
 						Button("Restore", role: .destructive, action: {
@@ -57,6 +54,12 @@ struct LicenseList: View {
 				})
 			}
 		}
+//		.onChange(of: selection, {
+//			if viewModes.editMode == true {
+//				viewModes.editMode.toggle()
+//			}
+//		})
+		.animation(.easeIn, value: filterItems())
 		.frame(minWidth: 340)
 		.toolbar {
 			if viewModes.splitViewVisibility != NavigationSplitViewVisibility.detailOnly {
@@ -68,6 +71,7 @@ struct LicenseList: View {
 							Label("Empty Trash", systemImage: "trash.slash")
 								.foregroundStyle(.red)
 						})
+						.disabled(!items.contains(where: { $0.inTrash == true }))
 					} else {
 						Button(action: {
 							viewModes.showNewAppSheet.toggle()
@@ -88,11 +92,27 @@ struct LicenseList: View {
 				confirmDeleteAll.toggle()
 			})
 		})
+		.sheet(isPresented: $viewModes.showNewAppSheet, content: {
+			AddLicense(licenseSelection: $selection)
+		})
+	}
+	
+	private func resetSelection(itemId: UUID) {
+		if itemId == selection {
+			selection = nil
+		}
+	}
+	
+	private func moveToTrash(item: License) {
+		item.inTrash = true
+		item.trashDate = Date()
+		resetSelection(itemId: item.id)
 	}
 	
 	private func deleteItems(offsets: IndexSet) {
 		withAnimation {
 			for index in offsets {
+				resetSelection(itemId: items[index].id)
 				modelContext.delete(items[index])
 			}
 		}
@@ -103,7 +123,7 @@ struct LicenseList: View {
 		let licensePredicate = #Predicate<License> { item in
 			item.inTrash == true
 		}
-		
+		selection = nil
 		withAnimation {
 			do {
 				try modelContext.delete(model: License.self, where: licensePredicate)
@@ -114,14 +134,19 @@ struct LicenseList: View {
 	}
 	
 	private func filterItems() -> [License] {
+		var filteredItems: [License] = []
+		
 		switch sidebarSelection {
 			case "all_apps":
-				return items.filter { $0.inTrash == false }
+				filteredItems = items.filter { $0.inTrash == false }
 			case "trash":
-				return items.filter { $0.inTrash == true }
+				filteredItems = items.filter { $0.inTrash == true }
 			default:
-				return items
+				filteredItems = items
 		}
+		return filteredItems
+			.filter { searchString.count > 0 ? $0.softwareName.lowercased().contains(searchString.lowercased()) : true }
+			.sorted { $0.softwareName < $1.softwareName }
 	}
 	
 	// search bar

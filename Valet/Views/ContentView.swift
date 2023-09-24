@@ -30,9 +30,6 @@ struct ContentView: View {
 				})
 			}
 		}
-		.sheet(isPresented: $viewModes.showNewAppSheet, content: {
-			AddLicense()
-		})
 	}
 }
 

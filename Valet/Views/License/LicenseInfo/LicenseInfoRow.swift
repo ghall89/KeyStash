@@ -9,12 +9,7 @@ struct LicenseInfoRow: View {
 	var body: some View {
 		HStack(alignment: .top) {
 			if value.count > 0 || viewModes.editMode == true {
-				Button(action: {
-					stringToClipboard(value: value)
-					if showToast == false {
-						showToast.toggle()
-					}
-				}, label: {
+				Button(action: copyAction, label: {
 					Image(systemName: "doc.on.doc.fill")
 						.foregroundStyle(.accent)
 				})
@@ -31,9 +26,19 @@ struct LicenseInfoRow: View {
 						Text(value)
 					}
 				}
+				.contextMenu {
+					Button("Copy", action: copyAction)
+				}
 				.multilineTextAlignment(.leading)
 				Spacer()
 			}
+		}
+	}
+	
+	private func copyAction() {
+		stringToClipboard(value: value)
+		if showToast == false {
+			showToast.toggle()
 		}
 	}
 	

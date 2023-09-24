@@ -20,12 +20,14 @@ struct LicenceInfo: View {
 							.aspectRatio(contentMode: .fit)
 							.frame(width: 75)
 						VStack {
-							Text(license.softwareName)
-								.font(.title)
-								.multilineTextAlignment(.leading)
+							
 							if viewModes.editMode == true {
+								TextField("Name", text: $license.softwareName)
 								TextField("URL", text: $license.downloadUrlString)
 							} else {
+								Text(license.softwareName)
+									.font(.title)
+									.multilineTextAlignment(.leading)
 								if let url = license.downloadUrl {
 									Link(destination: url, label: {
 										if isDownloadLink(url: url) {
@@ -60,6 +62,7 @@ struct LicenceInfo: View {
 				.frame(maxWidth: .infinity)
 				.padding()
 			}
+			.animation(.easeInOut, value: viewModes.editMode)
 		}
 		.frame(maxWidth: .infinity)
 		.toast(isPresenting: $showToast) {
@@ -70,11 +73,6 @@ struct LicenceInfo: View {
 				viewModes.editMode.toggle()
 			}
 		})
-		.onAppear {
-			if viewModes.editMode == true {
-				viewModes.editMode.toggle()
-			}
-		}
 		.toolbar {
 			ToolbarItem {
 				Spacer()
