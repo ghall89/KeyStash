@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		D30C58082AB91A5300A86426 /* resizeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30C58072AB91A5300A86426 /* resizeImage.swift */; };
 		D3163CEA2ABBC91B00BC5F63 /* exportAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3163CE92ABBC91B00BC5F63 /* exportAttachment.swift */; };
+		D3282EB72AC26ED000A5CD80 /* HighlightableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3282EB62AC26ED000A5CD80 /* HighlightableText.swift */; };
+		D3282EBA2AC270DB00A5CD80 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3282EB92AC270DB00A5CD80 /* SearchBar.swift */; };
 		D33797EE2ABFA49800C5E6BC /* snakeToTitleCase.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33797ED2ABFA49800C5E6BC /* snakeToTitleCase.swift */; };
 		D33797F32ABFA9A800C5E6BC /* isDownloadLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33797F22ABFA9A800C5E6BC /* isDownloadLink.swift */; };
 		D33797F52ABFA9F200C5E6BC /* stringToClipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33797F42ABFA9F200C5E6BC /* stringToClipboard.swift */; };
@@ -46,6 +48,8 @@
 /* Begin PBXFileReference section */
 		D30C58072AB91A5300A86426 /* resizeImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = resizeImage.swift; sourceTree = "<group>"; };
 		D3163CE92ABBC91B00BC5F63 /* exportAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = exportAttachment.swift; sourceTree = "<group>"; };
+		D3282EB62AC26ED000A5CD80 /* HighlightableText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightableText.swift; sourceTree = "<group>"; };
+		D3282EB92AC270DB00A5CD80 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
 		D33797ED2ABFA49800C5E6BC /* snakeToTitleCase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = snakeToTitleCase.swift; sourceTree = "<group>"; };
 		D33797F22ABFA9A800C5E6BC /* isDownloadLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = isDownloadLink.swift; sourceTree = "<group>"; };
 		D33797F42ABFA9F200C5E6BC /* stringToClipboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stringToClipboard.swift; sourceTree = "<group>"; };
@@ -94,6 +98,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		D3282EB82AC2708400A5CD80 /* AppKit */ = {
+			isa = PBXGroup;
+			children = (
+				D3282EB62AC26ED000A5CD80 /* HighlightableText.swift */,
+				D3282EB92AC270DB00A5CD80 /* SearchBar.swift */,
+			);
+			path = AppKit;
+			sourceTree = "<group>";
+		};
 		D33797EF2ABFA89F00C5E6BC /* Utils */ = {
 			isa = PBXGroup;
 			children = (
@@ -197,6 +210,7 @@
 		D39942C62AB509AE00B2DC39 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				D3282EB82AC2708400A5CD80 /* AppKit */,
 				D39942C72AB509AE00B2DC39 /* License */,
 				D39942CC2AB509AE00B2DC39 /* ContentView.swift */,
 				D369F4682AB7BE1A00D8C6B1 /* AppSettings.swift */,
@@ -364,6 +378,7 @@
 				D39942E12AB509AF00B2DC39 /* getAppIcon.swift in Sources */,
 				D39942DC2AB509AF00B2DC39 /* ContentView.swift in Sources */,
 				D38457792AC1DEE70057A34A /* EditFormState.swift in Sources */,
+				D3282EBA2AC270DB00A5CD80 /* SearchBar.swift in Sources */,
 				D30C58082AB91A5300A86426 /* resizeImage.swift in Sources */,
 				D39942D62AB509AF00B2DC39 /* FilePicker.swift in Sources */,
 				D39942D42AB509AF00B2DC39 /* ValetApp.swift in Sources */,
@@ -376,6 +391,7 @@
 				D33797F52ABFA9F200C5E6BC /* stringToClipboard.swift in Sources */,
 				D33AB53B2AB8C8F400B49922 /* getCustomIcon.swift in Sources */,
 				D3CFBED42ABB841D00C1D4BC /* Tag.swift in Sources */,
+				D3282EB72AC26ED000A5CD80 /* HighlightableText.swift in Sources */,
 				D39942DE2AB509AF00B2DC39 /* License.swift in Sources */,
 				D39942E02AB509AF00B2DC39 /* getInstalledApps.swift in Sources */,
 				D33797FA2ABFAA8700C5E6BC /* AttachmentRow.swift in Sources */,

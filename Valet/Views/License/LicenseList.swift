@@ -14,44 +14,50 @@ struct LicenseList: View {
 	
 	var body: some View {
 		List(selection: $selection) {
-			NSSearchFieldWrapper(searchText: $searchString)
-				.textFieldStyle(RoundedBorderTextFieldStyle())
-			ForEach(filterItems()
-			) { item in
-				NavigationLink(destination: {
-					LicenceInfo(license: item)
-				}, label: {
-					Image(nsImage: item.miniIcon )
-						.resizable()
-						.aspectRatio(contentMode: .fit)
-						.frame(width: 24)
-					Text("\(item.softwareName)")
-				})
-				.contextMenu {
-					if item.inTrash == false {
-						Button("Move to Trash", role: .destructive, action: {
-							moveToTrash(item: item)
-						})
-					} else {
-						Button("Restore", role: .destructive, action: {
-							item.inTrash = false
-							item.trashDate = nil
-						})
-						Button("Delete Permenently", role: .destructive, action: {
+			Section {
+				NSSearchFieldWrapper(searchText: $searchString)
+					.textFieldStyle(RoundedBorderTextFieldStyle())
+			}
+			.listSectionSeparator(.hidden)
+			.listRowSeparator(.hidden)
+			
+			Section {
+				ForEach(filterItems()) { item in
+					NavigationLink(destination: {
+						LicenceInfo(license: item)
+					}, label: {
+						Image(nsImage: item.miniIcon )
+							.resizable()
+							.aspectRatio(contentMode: .fit)
+							.frame(width: 24)
+						HighlightableText(text: item.softwareName, highlight: searchString)
+					})
+					.contextMenu {
+						if item.inTrash == false {
+							Button("Move to Trash", role: .destructive, action: {
+								moveToTrash(item: item)
+							})
+						} else {
+							Button("Restore", role: .destructive, action: {
+								item.inTrash = false
+								item.trashDate = nil
+							})
+							Button("Delete Permenently", role: .destructive, action: {
+								confirmDelete.toggle()
+							})
+						}
+					}
+					.confirmationDialog("Are you sure you want to delete your \(item.softwareName) license info? Any files you have attached to it will also be deleted.", isPresented: $confirmDelete, actions: {
+						Button("Delete", role: .destructive, action: {
+							let index = IndexSet(integer: items.firstIndex(of: item)!)
+							deleteItems(offsets: index)
 							confirmDelete.toggle()
 						})
-					}
+						Button("Cancel", role: .cancel, action: {
+							confirmDelete.toggle()
+						})
+					})
 				}
-				.confirmationDialog("Are you sure you want to delete your \(item.softwareName) license info? Any files you have attached to it will also be deleted.", isPresented: $confirmDelete, actions: {
-					Button("Delete", role: .destructive, action: {
-						let index = IndexSet(integer: items.firstIndex(of: item)!)
-						deleteItems(offsets: index)
-						confirmDelete.toggle()
-					})
-					Button("Cancel", role: .cancel, action: {
-						confirmDelete.toggle()
-					})
-				})
 			}
 		}
 		.onChange(of: selection, {
@@ -148,38 +154,5 @@ struct LicenseList: View {
 		return filteredItems
 			.filter { searchString.count > 0 ? $0.softwareName.lowercased().contains(searchString.lowercased()) : true }
 			.sorted { $0.softwareName < $1.softwareName }
-	}
-	
-	// search bar
-	private struct NSSearchFieldWrapper: NSViewRepresentable {
-		class Coordinator: NSObject, NSSearchFieldDelegate {
-			var parent: NSSearchFieldWrapper
-			
-			init(parent: NSSearchFieldWrapper) {
-				self.parent = parent
-			}
-			
-			func controlTextDidChange(_ notification: Notification) {
-				if let textField = notification.object as? NSTextField {
-					parent.searchText = textField.stringValue
-				}
-			}
-		}
-		
-		@Binding var searchText: String
-		
-		func makeNSView(context: Context) -> NSSearchField {
-			let searchField = NSSearchField()
-			searchField.delegate = context.coordinator
-			return searchField
-		}
-		
-		func updateNSView(_ nsView: NSSearchField, context: Context) {
-			nsView.stringValue = searchText
-		}
-		
-		func makeCoordinator() -> Coordinator {
-			return Coordinator(parent: self)
-		}
 	}
 }
