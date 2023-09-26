@@ -19,6 +19,7 @@
 		D369F4692AB7BE1A00D8C6B1 /* AppSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = D369F4682AB7BE1A00D8C6B1 /* AppSettings.swift */; };
 		D369F46C2AB87CEA00D8C6B1 /* exportCSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = D369F46B2AB87CEA00D8C6B1 /* exportCSV.swift */; };
 		D369F46E2AB8838300D8C6B1 /* importCSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = D369F46D2AB8838300D8C6B1 /* importCSV.swift */; };
+		D38457792AC1DEE70057A34A /* EditFormState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38457782AC1DEE70057A34A /* EditFormState.swift */; };
 		D39942B92AB5095B00B2DC39 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D39942B82AB5095B00B2DC39 /* Preview Assets.xcassets */; };
 		D39942D42AB509AF00B2DC39 /* ValetApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942C02AB509AE00B2DC39 /* ValetApp.swift */; };
 		D39942D52AB509AF00B2DC39 /* ViewModes.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942C22AB509AE00B2DC39 /* ViewModes.swift */; };
@@ -54,6 +55,7 @@
 		D369F4682AB7BE1A00D8C6B1 /* AppSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettings.swift; sourceTree = "<group>"; };
 		D369F46B2AB87CEA00D8C6B1 /* exportCSV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = exportCSV.swift; sourceTree = "<group>"; };
 		D369F46D2AB8838300D8C6B1 /* importCSV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = importCSV.swift; sourceTree = "<group>"; };
+		D38457782AC1DEE70057A34A /* EditFormState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFormState.swift; sourceTree = "<group>"; };
 		D39697912ABCCB8C00A9F664 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = Valet/PrivacyInfo.xcprivacy; sourceTree = SOURCE_ROOT; };
 		D39942AC2AB5095A00B2DC39 /* Valet.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Valet.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D39942B82AB5095B00B2DC39 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 			isa = PBXGroup;
 			children = (
 				D39942C22AB509AE00B2DC39 /* ViewModes.swift */,
+				D38457782AC1DEE70057A34A /* EditFormState.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -360,6 +363,7 @@
 				D39942DD2AB509AF00B2DC39 /* InstalledApp.swift in Sources */,
 				D39942E12AB509AF00B2DC39 /* getAppIcon.swift in Sources */,
 				D39942DC2AB509AF00B2DC39 /* ContentView.swift in Sources */,
+				D38457792AC1DEE70057A34A /* EditFormState.swift in Sources */,
 				D30C58082AB91A5300A86426 /* resizeImage.swift in Sources */,
 				D39942D62AB509AF00B2DC39 /* FilePicker.swift in Sources */,
 				D39942D42AB509AF00B2DC39 /* ValetApp.swift in Sources */,

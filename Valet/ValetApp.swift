@@ -4,6 +4,7 @@ import SwiftData
 @main
 struct ValetApp: App {
 	@State var viewModes = ViewModes()
+	@State private var editFormState = EditFormState()
 	
 	var sharedModelContainer: ModelContainer = {
 		let schema = Schema([
@@ -22,6 +23,7 @@ struct ValetApp: App {
 		WindowGroup {
 			ContentView()
 				.environmentObject(viewModes)
+				.environmentObject(editFormState)
 				.onAppear {
 					NSWindow.allowsAutomaticWindowTabbing = false
 				}

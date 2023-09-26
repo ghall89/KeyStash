@@ -7,10 +7,10 @@ struct LicenseList: View {
 	@EnvironmentObject var viewModes: ViewModes
 	@Query private var items: [License]
 	@Binding var sidebarSelection: String
-	@State var searchString: String = ""
-	@State var confirmDelete: Bool = false
-	@State var confirmDeleteAll: Bool = false
-	@State var selection: UUID? = nil
+	@State private var searchString: String = ""
+	@State private var confirmDelete: Bool = false
+	@State private var confirmDeleteAll: Bool = false
+	@State private var selection: UUID? = nil
 	
 	var body: some View {
 		List(selection: $selection) {
@@ -42,7 +42,7 @@ struct LicenseList: View {
 						})
 					}
 				}
-				.alert("Are you sure you want to delete your \(item.softwareName) license info? Any files you have attached to it will also be deleted.", isPresented: $confirmDelete, actions: {
+				.confirmationDialog("Are you sure you want to delete your \(item.softwareName) license info? Any files you have attached to it will also be deleted.", isPresented: $confirmDelete, actions: {
 					Button("Delete", role: .destructive, action: {
 						let index = IndexSet(integer: items.firstIndex(of: item)!)
 						deleteItems(offsets: index)
@@ -84,7 +84,7 @@ struct LicenseList: View {
 			}
 		}
 		.navigationTitle(snakeToTitleCase(sidebarSelection))
-		.alert("Are you sure you want to empty the trash? Any files you have attached will also be deleted.", isPresented: $confirmDeleteAll, actions: {
+		.confirmationDialog("Are you sure you want to empty the trash? Any files you have attached will also be deleted.", isPresented: $confirmDeleteAll, actions: {
 			Button("Empty Trash", role: .destructive, action: {
 				emptyTrash()
 				confirmDeleteAll.toggle()

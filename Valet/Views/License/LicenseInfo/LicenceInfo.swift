@@ -5,17 +5,11 @@ import AlertToast
 
 struct LicenceInfo: View {
 	@EnvironmentObject var viewModes: ViewModes
+	@EnvironmentObject var formState: EditFormState
 	@Bindable var license: License
 	
 	@State private var showToast: Bool = false
-	@State private var formState: FormState = FormState(
-		softwareName: "",
-		urlString: "",
-		registeredToName: "",
-		registeredToEmail: "",
-		licenseKey: "",
-		notes: ""
-	)
+	
 	
 	var body: some View {
 		ScrollView {
@@ -58,21 +52,21 @@ struct LicenceInfo: View {
 					
 					LicenseInfoRow(
 						showToast: $showToast,
-						value: $license.registeredToName,
+						value: license.registeredToName,
 						formValue: $formState.registeredToName,
 						label: "Registered To"
 					)
 					
 					LicenseInfoRow(
 						showToast: $showToast,
-						value: $license.registeredToEmail,
+						value: license.registeredToEmail,
 						formValue: $formState.registeredToEmail,
 						label: "Email"
 					)
 					
 					LicenseInfoRow(
 						showToast: $showToast,
-						value: $license.licenseKey,
+						value: license.licenseKey,
 						formValue: $formState.licenseKey,
 						label: "License Key")
 					
@@ -93,6 +87,7 @@ struct LicenceInfo: View {
 			.animation(.easeInOut, value: viewModes.editMode)
 		}
 		.frame(maxWidth: .infinity)
+		.environmentObject(formState)
 		.toast(isPresenting: $showToast) {
 			AlertToast(type: .complete(.accent), title: "Copied to Clipboard")
 		}
@@ -135,6 +130,7 @@ struct LicenceInfo: View {
 	}
 	
 	private func saveFormState() {
+		print(formState)
 		license.softwareName = formState.softwareName
 		license.downloadUrlString = formState.urlString
 		license.registeredToName = formState.registeredToName
@@ -155,14 +151,5 @@ struct LicenceInfo: View {
 		}
 		
 		return true
-	}
-	
-	private struct FormState: Equatable {
-		var softwareName: String
-		var urlString: String
-		var registeredToName: String
-		var registeredToEmail: String
-		var licenseKey: String
-		var notes: String
 	}
 }

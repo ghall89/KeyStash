@@ -4,10 +4,10 @@ struct AddLicense: View {
 	@Environment(\.modelContext) private var modelContext
 	@EnvironmentObject var viewModes: ViewModes
 	
-	@State var newItem: License = License(softwareName: "", icon: nil, attachment: nil, licenseKey: "", registeredToName: "", registeredToEmail: "", downloadUrlString: "", notes: "", inTrash: false)
-	@State var tabSelection: String = "installed"
-	@State var installedApps: [InstalledApp] = []
-	@State var selectedApp: UUID = UUID()
+	@State private var newItem: License = License(softwareName: "", icon: nil, attachment: nil, licenseKey: "", registeredToName: "", registeredToEmail: "", downloadUrlString: "", notes: "", inTrash: false)
+	@State private var tabSelection: String = "installed"
+	@State private var installedApps: [InstalledApp] = []
+	@State private var selectedApp: UUID = UUID()
 	@Binding var licenseSelection: UUID?
 	
 	var body: some View {

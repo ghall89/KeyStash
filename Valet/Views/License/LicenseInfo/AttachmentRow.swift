@@ -7,7 +7,7 @@ struct AttachmentRow: View {
 	@EnvironmentObject var viewModes: ViewModes
 	@Binding var file: Attachment?
 	
-	@State var showDeleteAlert: Bool = false
+	@State private var showDeleteAlert: Bool = false
 	let label = "Attachment"
 	
 	var body: some View {
@@ -28,7 +28,7 @@ struct AttachmentRow: View {
 							.fontDesign(.monospaced)
 					}
 				}
-				.alert("Are you sure you want to remove this attachment? Data will be lost.", isPresented: $showDeleteAlert, actions: {
+				.confirmationDialog("Are you sure you want to remove this attachment? Data will be lost.", isPresented: $showDeleteAlert, actions: {
 					Button(action: {
 						showDeleteAlert.toggle()
 					}, label: {

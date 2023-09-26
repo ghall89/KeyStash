@@ -3,7 +3,7 @@ import SwiftUI
 struct LicenseInfoRow: View {
 	@EnvironmentObject var viewModes: ViewModes
 	@Binding var showToast: Bool
-	@Binding var value: String
+	var value: String
 	@Binding var formValue: String
 	var label: String
 	
@@ -20,7 +20,7 @@ struct LicenseInfoRow: View {
 					Text(label)
 						.font(.caption)
 					if viewModes.editMode == true {
-						TextField(getPlaceholderText(), text: $value)
+						TextField(getPlaceholderText(), text: $formValue)
 							.textFieldStyle(.plain)
 							.lineLimit(label == "License Key" ? 10 : 1)
 					} else {
