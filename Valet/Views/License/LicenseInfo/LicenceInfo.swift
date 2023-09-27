@@ -22,7 +22,7 @@ struct LicenceInfo: View {
 							.resizable()
 							.aspectRatio(contentMode: .fit)
 							.frame(width: 75)
-						VStack {
+						VStack(alignment: .leading) {
 							if viewModes.editMode == true {
 								TextField("Some Cool App", text: $formState.softwareName)
 									.textFieldStyle(RoundedBorderTextFieldStyle())

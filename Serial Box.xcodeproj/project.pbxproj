@@ -280,7 +280,6 @@
 				D39942A82AB5095A00B2DC39 /* Sources */,
 				D39942A92AB5095A00B2DC39 /* Frameworks */,
 				D39942AA2AB5095A00B2DC39 /* Resources */,
-				D3163CE82ABBC0A300BC5F63 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -346,28 +345,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		D3163CE82ABBC0A300BC5F63 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "git=$(sh /etc/profile; which git)\nnumber_of_commits=$(\"$git\" rev-list HEAD --count)\ngit_release_version=$(\"$git\" describe --tags --always --abbrev=0)\n\ntarget_plist=\"$TARGET_BUILD_DIR/$INFOPLIST_PATH\"\ndsym_plist=\"$DWARF_DSYM_FOLDER_PATH/$DWARF_DSYM_FILE_NAME/Contents/Info.plist\"\n\nfor plist in \"$target_plist\" \"$dsym_plist\"; do\n  if [ -f \"$plist\" ]; then\n    /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $number_of_commits\" \"$plist\"\n    /usr/libexec/PlistBuddy -c \"Set :CFBundleShortVersionString ${git_release_version#*v}\" \"$plist\"\n  fi\ndone\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D39942A82AB5095A00B2DC39 /* Sources */ = {
@@ -538,7 +515,7 @@
 				CODE_SIGN_ENTITLEMENTS = Valet/Valet.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Valet/Preview Content\"";
 				DEVELOPMENT_TEAM = B3DFV278UN;
 				ENABLE_HARDENED_RUNTIME = NO;
@@ -571,7 +548,7 @@
 				CODE_SIGN_ENTITLEMENTS = Valet/Valet.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CURRENT_PROJECT_VERSION = 2;
 				DEVELOPMENT_ASSET_PATHS = "\"Valet/Preview Content\"";
 				DEVELOPMENT_TEAM = B3DFV278UN;
 				ENABLE_HARDENED_RUNTIME = NO;
