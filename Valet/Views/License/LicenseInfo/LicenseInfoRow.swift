@@ -20,9 +20,9 @@ struct LicenseInfoRow: View {
 					Text(label)
 						.font(.caption)
 					if viewModes.editMode == true {
-						TextField(getPlaceholderText(), text: $formValue)
+						TextField(getPlaceholderText(), text: $formValue, axis: label == "License Key" ? .vertical : .horizontal)
 							.textFieldStyle(.plain)
-							.lineLimit(label == "License Key" ? 10 : 1)
+//							.lineLimit(label == "License Key" ? 10 : 1)
 					} else {
 						Text(value)
 					}

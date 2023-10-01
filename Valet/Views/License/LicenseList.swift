@@ -11,6 +11,8 @@ struct LicenseList: View {
 	@State private var confirmDelete: Bool = false
 	@State private var confirmDeleteAll: Bool = false
 	@State private var selection: UUID? = nil
+	@AppStorage("selectedSort") private var selectedSort: SortOptions = .byName
+	@AppStorage("selectedSortOrder") private var selectedSortOrder: OrderOptions = .asc
 	
 	var body: some View {
 		List(selection: $selection) {
@@ -26,11 +28,18 @@ struct LicenseList: View {
 					NavigationLink(destination: {
 						LicenceInfo(license: item)
 					}, label: {
-						Image(nsImage: item.miniIcon )
-							.resizable()
-							.aspectRatio(contentMode: .fit)
-							.frame(width: 24)
-						HighlightableText(text: item.softwareName, highlight: searchString)
+						HStack {
+							Image(nsImage: item.miniIcon )
+								.resizable()
+								.aspectRatio(contentMode: .fit)
+								.frame(width: 24)
+							HighlightableText(text: item.softwareName, highlight: searchString)
+							Spacer()
+							if item.inTrash == true {
+								Text("?? Days")
+									.foregroundStyle(Color.red)
+							}
+						}
 					})
 					.contextMenu {
 						if item.inTrash == false {
@@ -42,21 +51,8 @@ struct LicenseList: View {
 								item.inTrash = false
 								item.trashDate = nil
 							})
-							Button("Delete Permenently", role: .destructive, action: {
-								confirmDelete.toggle()
-							})
 						}
 					}
-					.confirmationDialog("Are you sure you want to delete your \(item.softwareName) license info? Any files you have attached to it will also be deleted.", isPresented: $confirmDelete, actions: {
-						Button("Delete", role: .destructive, action: {
-							let index = IndexSet(integer: items.firstIndex(of: item)!)
-							deleteItems(offsets: index)
-							confirmDelete.toggle()
-						})
-						Button("Cancel", role: .cancel, action: {
-							confirmDelete.toggle()
-						})
-					})
 				}
 			}
 		}
@@ -70,6 +66,22 @@ struct LicenseList: View {
 		.toolbar {
 			if viewModes.splitViewVisibility != NavigationSplitViewVisibility.detailOnly {
 				ToolbarItem {
+					Menu(content: {
+						Picker("Sort By", selection: $selectedSort, content: {
+							ForEach(SortOptions.allCases, id: \.self) { sortOption in
+								Text(sortOption.rawValue).tag(sortOption)
+							}
+						})
+						Picker("Sort Order", selection: $selectedSortOrder, content: {
+							ForEach(OrderOptions.allCases, id: \.self) { orderOption in
+								Text(orderOption.rawValue).tag(orderOption)
+							}
+						})
+					}, label: {
+						Image(systemName: "arrow.up.arrow.down")
+					})
+				}
+				ToolbarItem {
 					if sidebarSelection == "trash" {
 						Button(
 							role: .destructive,
@@ -79,12 +91,14 @@ struct LicenseList: View {
 								Label("Empty Trash", systemImage: "trash.slash")
 							})
 						.disabled(!items.contains(where: { $0.inTrash == true }))
+						.help("Empty Trash")
 					} else {
 						Button(action: {
 							viewModes.showNewAppSheet.toggle()
-						}) {
+						}, label: {
 							Label("Add Item", systemImage: "plus")
-						}
+						})
+						.help("Add Item")
 					}
 				}
 			}
@@ -153,6 +167,6 @@ struct LicenseList: View {
 		}
 		return filteredItems
 			.filter { searchString.count > 0 ? $0.softwareName.lowercased().contains(searchString.lowercased()) : true }
-			.sorted { $0.softwareName < $1.softwareName }
+			.sorted(by: sortBy(sort: selectedSort, order: selectedSortOrder))
 	}
 }

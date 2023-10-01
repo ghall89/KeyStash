@@ -105,6 +105,7 @@ struct LicenceInfo: View {
 					})
 					.disabled(!isEdited())
 					.keyboardShortcut(KeyEquivalent("s"))
+					.help("Save")
 				}
 			}
 			ToolbarItem {
@@ -116,6 +117,7 @@ struct LicenceInfo: View {
 				}, label: {
 					Image(systemName: viewModes.editMode == true ? "xmark.circle" : "square.and.pencil")
 				})
+				.help(viewModes.editMode == true ? "Cancel" : "Edit")
 			}
 		}
 	}
