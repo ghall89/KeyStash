@@ -10,6 +10,7 @@ struct LicenceInfo: View {
 	
 	@State private var showToast: Bool = false
 	
+	@AppStorage("disableAnimations") private var disableAnimations: Bool = false
 	
 	var body: some View {
 		ScrollView {
@@ -84,7 +85,7 @@ struct LicenceInfo: View {
 				.frame(maxWidth: .infinity)
 				.padding()
 			}
-			.animation(.easeInOut, value: viewModes.editMode)
+			.animation(disableAnimations == false ? .easeIn : nil, value: viewModes.editMode)
 		}
 		.frame(maxWidth: .infinity)
 		.environmentObject(formState)
@@ -132,7 +133,6 @@ struct LicenceInfo: View {
 	}
 	
 	private func saveFormState() {
-		print(formState)
 		license.softwareName = formState.softwareName
 		license.downloadUrlString = formState.urlString
 		license.registeredToName = formState.registeredToName

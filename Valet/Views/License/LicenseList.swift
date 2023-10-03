@@ -6,66 +6,80 @@ struct LicenseList: View {
 	@Environment(\.modelContext) private var modelContext
 	@EnvironmentObject var viewModes: ViewModes
 	@Query private var items: [License]
+	
 	@Binding var sidebarSelection: String
+	
 	@State private var searchString: String = ""
 	@State private var confirmDelete: Bool = false
 	@State private var confirmDeleteAll: Bool = false
 	@State private var selection: UUID? = nil
+	
 	@AppStorage("selectedSort") private var selectedSort: SortOptions = .byName
 	@AppStorage("selectedSortOrder") private var selectedSortOrder: OrderOptions = .asc
+	@AppStorage("compactList") private var compactList: Bool = false
+	@AppStorage("disableAnimations") private var disableAnimations: Bool = false
 	
 	var body: some View {
-		List(selection: $selection) {
-			Section {
-				NSSearchFieldWrapper(searchText: $searchString)
-					.textFieldStyle(RoundedBorderTextFieldStyle())
-			}
-			.listSectionSeparator(.hidden)
-			.listRowSeparator(.hidden)
-			
-			Section {
-				ForEach(filterItems()) { item in
-					NavigationLink(destination: {
-						LicenceInfo(license: item)
-					}, label: {
-						HStack {
-							Image(nsImage: item.miniIcon )
-								.resizable()
-								.aspectRatio(contentMode: .fit)
-								.frame(width: 24)
-							HighlightableText(text: item.softwareName, highlight: searchString)
-							Spacer()
-							if item.inTrash == true {
-								Text("?? Days")
-									.foregroundStyle(Color.red)
+		ZStack(alignment: .top) {
+			List(selection: $selection) {
+				Section {
+					EmptyView()
+				}
+				.listSectionSeparator(.hidden)
+				.listRowSeparator(.hidden)
+				Section {
+					EmptyView()
+				}
+				.listSectionSeparator(.hidden)
+				.listRowSeparator(.hidden)
+				
+				Section {
+					ForEach(filterItems()) { item in
+						NavigationLink(destination: {
+							LicenceInfo(license: item)
+						}, label: {
+							HStack {
+								if compactList == false {
+									Image(nsImage: item.miniIcon )
+										.resizable()
+										.aspectRatio(contentMode: .fit)
+										.frame(width: 24)
+								}
+								HighlightableText(text: item.softwareName, highlight: searchString)
+								Spacer()
+								if item.inTrash == true {
+									Text("?? Days")
+										.foregroundStyle(Color.red)
+								}
 							}
-						}
-					})
-					.contextMenu {
-						if item.inTrash == false {
-							Button("Move to Trash", role: .destructive, action: {
-								moveToTrash(item: item)
-							})
-						} else {
-							Button("Restore", role: .destructive, action: {
-								item.inTrash = false
-								item.trashDate = nil
-							})
+						})
+						.contextMenu {
+							if item.inTrash == false {
+								Button("Move to Trash", role: .destructive, action: {
+									moveToTrash(item: item)
+								})
+							} else {
+								Button("Restore", role: .destructive, action: {
+									item.inTrash = false
+									item.trashDate = nil
+								})
+							}
 						}
 					}
 				}
 			}
-		}
-		.onChange(of: selection, {
-			if viewModes.editMode == true {
-				viewModes.editMode.toggle()
-			}
-		})
-		.animation(.easeIn, value: filterItems())
-		.frame(minWidth: 340)
-		.toolbar {
-			if viewModes.splitViewVisibility != NavigationSplitViewVisibility.detailOnly {
-				ToolbarItem {
+			.onChange(of: selection, {
+				if viewModes.editMode == true {
+					viewModes.editMode.toggle()
+				}
+			})
+			.animation(disableAnimations == false ? .easeIn : nil, value: filterItems())
+			
+			VStack {
+				HStack {
+					NSSearchFieldWrapper(searchText: $searchString)
+						.textFieldStyle(RoundedBorderTextFieldStyle())
+					
 					Menu(content: {
 						Picker("Sort By", selection: $selectedSort, content: {
 							ForEach(SortOptions.allCases, id: \.self) { sortOption in
@@ -80,7 +94,16 @@ struct LicenseList: View {
 					}, label: {
 						Image(systemName: "arrow.up.arrow.down")
 					})
+					.menuStyle(BorderlessButtonMenuStyle())
+					.frame(width: 40)
 				}
+				.padding(8)
+			}
+			.background(Material.ultraThin)
+		}
+		.frame(minWidth: 340)
+		.toolbar {
+			if viewModes.splitViewVisibility != NavigationSplitViewVisibility.detailOnly {
 				ToolbarItem {
 					if sidebarSelection == "trash" {
 						Button(

@@ -10,7 +10,7 @@ struct ContentView: View {
 	var body: some View {
 		NavigationSplitView {
 			Sidebar(selection: $sidebarSelection)
-				.navigationSplitViewColumnWidth(min: 160, ideal: 200)
+				.navigationSplitViewColumnWidth(min: 160, ideal: 230)
 		} content: {
 			LicenseList(sidebarSelection: $sidebarSelection)
 				.navigationSplitViewColumnWidth(min: 340, ideal: 350)

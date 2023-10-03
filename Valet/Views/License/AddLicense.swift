@@ -3,6 +3,8 @@ import SwiftUI
 struct AddLicense: View {
 	@Environment(\.modelContext) private var modelContext
 	@EnvironmentObject var viewModes: ViewModes
+	@AppStorage("defaultName") private var defaultName: String = ""
+	@AppStorage("defaultEmail") private var defaultEmail: String = ""
 	
 	@State private var newItem: License = License(softwareName: "", icon: nil, attachment: nil, licenseKey: "", registeredToName: "", registeredToEmail: "", downloadUrlString: "", notes: "", inTrash: false)
 	@State private var tabSelection: String = "installed"
@@ -77,6 +79,8 @@ struct AddLicense: View {
 			if tabSelection == "installed" {
 				if let appFromList = installedApps.first(where: { $0.id == selectedApp }) {
 					newItem.softwareName = appFromList.name
+					newItem.registeredToName = defaultName
+					newItem.registeredToEmail = defaultEmail
 					newItem.icon = getNSImageAsData(image: ((appFromList.icon) ?? NSImage(named: "no_icon"))!)
 				}
 			}
