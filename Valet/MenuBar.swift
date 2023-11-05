@@ -12,12 +12,12 @@ struct MenuBar: Commands {
 			})
 			.keyboardShortcut(KeyboardShortcut(KeyEquivalent("N")))
 			Divider()
-			Button("Import", action: {
-				importCSV()
-			})
-			Button("Export", action: {
-				exportCSV(licenses: items)
-			})
+//			Button("Import", action: {
+//				importCSV()
+//			})
+//			Button("Export", action: {
+//				exportCSV(licenses: items)
+//			})
 		}
 		CommandGroup(replacing: CommandGroupPlacement.sidebar) {
 			Button("Toggle Edit Mode", action: {

@@ -7,14 +7,16 @@ struct Sidebar: View {
 	
 	var body: some View {
 		List(selection: $selection) {
-			VStack {
-				if compactList == false {
-					Label("All Apps", systemImage: "square.stack" )
-				} else {
-					Text("All Apps")
+			Section {
+				VStack {
+					if compactList == false {
+						Label("All Apps", systemImage: "square.stack")
+					} else {
+						Text("All Apps")
+					}
 				}
+				.tag("all_apps")
 			}
-			.tag("all_apps")
 			//			Section("Tags") {
 			//				Label("Sample Tag", systemImage: "tag")
 			//			}

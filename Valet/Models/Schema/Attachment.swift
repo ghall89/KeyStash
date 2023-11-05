@@ -2,10 +2,12 @@ import Foundation
 import SwiftData
 
 @Model
-class Attachment {
+final class Attachment {
 	var id: UUID = UUID()
-	var filename: String
-	var data: Data
+//	@Relationship(inverse: \License.attachment)
+	var license: License?
+	var filename: String = ""
+	var data: Data = Data()
 	
 	init(filename: String, data: Data) {
 		self.filename = filename

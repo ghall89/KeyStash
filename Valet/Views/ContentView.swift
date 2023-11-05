@@ -4,10 +4,14 @@ import SwiftData
 struct ContentView: View {
 	@Environment(\.modelContext) private var modelContext
 	@EnvironmentObject var viewModes: ViewModes
+	@EnvironmentObject var authentication: Authentication
 	@Query private var items: [License]
 	@AppStorage("sidebarSelection") var sidebarSelection: String = "all_apps"
+	@AppStorage("disableAnimations") private var disableAnimations: Bool = false
 	
 	var body: some View {
+		//		GeometryReader { geometry in
+		//			ZStack {
 		NavigationSplitView {
 			Sidebar(selection: $sidebarSelection)
 				.navigationSplitViewColumnWidth(min: 160, ideal: 230)
@@ -30,7 +34,43 @@ struct ContentView: View {
 				})
 			}
 		}
+		
+		
+		//				if authentication.lockApp == true {
+		//					VStack {
+		//
+		//						Image(systemName: authentication.isAuthenticated ? "lock.open.fill" : "lock.fill")
+		//							.font(.system(size: 70))
+		//							.animation(.snappy, value: authentication.isAuthenticated)
+		//						Button("Unlock...", action: {
+		//							authenticate()
+		//						})
+		//					}
+		//					.frame(maxWidth: .infinity, maxHeight: .infinity)
+		//					.background(.thickMaterial)
+		//					.offset(y: authentication.isAuthenticated ? -geometry.size.height : 0)
+		//					.animation(.easeInOut, value: authentication.isAuthenticated)
+		//					.onAppear(perform: {
+		//						authenticate()
+		//					})
+		//				}
+		//			}
+		//		}
 	}
+	
+	//	private func authenticate() {
+	//		if authentication.lockApp == true && authentication.isAuthenticated == false {
+	//			authenticateUser(reason: "unlock app") { result in
+	//				switch result {
+	//					case .success(let success):
+	//						authentication.isAuthenticated = success
+	//						print("Authentication success: \(success)")
+	//					case .failure(let error):
+	//						print("Authentication failed with error: \(error)")
+	//				}
+	//			}
+	//		}
+	//	}
 }
 
 

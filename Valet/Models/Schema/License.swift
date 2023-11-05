@@ -4,20 +4,20 @@ import SwiftData
 
 @Model
 final class License {
-	@Attribute(.unique) var id: UUID = UUID()
-	var softwareName: String
+	@Attribute var id: UUID = UUID()
+	var softwareName: String = ""
 	var icon: Data?
 	@Attribute(.allowsCloudEncryption) var attachment: Attachment?
-	@Attribute(.allowsCloudEncryption) var licenseKey: String
-	@Attribute(.allowsCloudEncryption) var registeredToName: String
-	@Attribute(.allowsCloudEncryption) var registeredToEmail: String
-	var downloadUrlString: String
-	@Attribute(.allowsCloudEncryption) var notes: String
+	@Attribute(.allowsCloudEncryption) var licenseKey: String = ""
+	@Attribute(.allowsCloudEncryption) var registeredToName: String = ""
+	@Attribute(.allowsCloudEncryption) var registeredToEmail: String = ""
+	var downloadUrlString: String = ""
+	@Attribute(.allowsCloudEncryption) var notes: String = ""
 	var createdDate: Date = Date()
 	var updatedDate: Date?
 	var tags: [Tag]?
 	
-	var inTrash: Bool
+	var inTrash: Bool = false
 	var trashDate: Date?
 	
 	var downloadUrl: URL? {

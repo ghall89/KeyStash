@@ -103,6 +103,7 @@ struct LicenceInfo: View {
 						viewModes.editMode.toggle()
 					}, label: {
 						Image(systemName: "checkmark.circle")
+//							.contentTransition(.symbolEffect(.replace.downUp.byLayer))
 					})
 					.disabled(!isEdited())
 					.keyboardShortcut(KeyEquivalent("s"))
@@ -117,6 +118,7 @@ struct LicenceInfo: View {
 					viewModes.editMode.toggle()
 				}, label: {
 					Image(systemName: viewModes.editMode == true ? "xmark.circle" : "square.and.pencil")
+//						.contentTransition(.symbolEffect(.replace.downUp.byLayer))
 				})
 				.help(viewModes.editMode == true ? "Cancel" : "Edit")
 			}

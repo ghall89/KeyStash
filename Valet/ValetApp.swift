@@ -1,23 +1,11 @@
 import SwiftUI
 import SwiftData
+import CloudKit
 
 @main
 struct ValetApp: App {
-	@State var viewModes = ViewModes()
+	@State private var viewModes = ViewModes()
 	@State private var editFormState = EditFormState()
-	
-	var sharedModelContainer: ModelContainer = {
-		let schema = Schema([
-			License.self,
-		])
-		let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-		
-		do {
-			return try ModelContainer(for: schema, configurations: [modelConfiguration])
-		} catch {
-			fatalError("Fatal Error: \(error)")
-		}
-	}()
 	
 	var body: some Scene {
 		WindowGroup {
@@ -32,7 +20,11 @@ struct ValetApp: App {
 		.commands {
 			MenuBar(viewModes: $viewModes)
 		}
-		.modelContainer(sharedModelContainer)
+		.modelContainer(for: [
+			License.self,
+			Attachment.self,
+			Tag.self
+		])
 		
 		Settings {
 			AppSettings()

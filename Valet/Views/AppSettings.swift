@@ -1,4 +1,6 @@
 import SwiftUI
+import LocalAuthentication
+import CloudKit
 
 struct AppSettings: View {
 	
@@ -7,11 +9,11 @@ struct AppSettings: View {
 			GeneralSettings().tabItem {
 				Label("General", systemImage: "gearshape")
 			}
-			SecuritySettings().tabItem {
-				Label("Security", systemImage: "lock.open")
-			}
-			AppearanceSettings().tabItem {
-				Label("Appearance", systemImage: "paintbrush")
+//			SecuritySettings().tabItem {
+//				Label("Security", systemImage: "lock.open")
+//			}
+			CloudKitSettings().tabItem {
+				Label("iCloud", systemImage: "arrow.triangle.2.circlepath.icloud.fill")
 			}
 		})
 		.frame(width: 375, height: 150)
@@ -38,31 +40,64 @@ struct GeneralSettings: View {
 }
 
 struct SecuritySettings: View {
-	@AppStorage("lockApp") private var lockApp: Bool = false
+	@EnvironmentObject var authentication: Authentication
 	
 	var body: some View {
 		Form {
-			Text("🔨 Coming Soon...")
-//			Toggle(isOn: $lockApp, label: {
-//				Text("Lock Data")
-//			})
-//			.toggleStyle(.switch)
+			Toggle(isOn: $authentication.lockApp, label: {
+				Text("Lock Data")
+			})
+			.toggleStyle(.switch)
 		}
+		.onChange(of: authentication.lockApp, {
+			authenticateUser(reason: "change security settings") { result in
+				switch result {
+					case .success(let success):
+						saveSettingToKeychain(value: authentication.lockApp)
+						print("Authentication success: \(success)")
+					case .failure(let error):
+						authentication.lockApp.toggle()
+						print("Authentication failed with error: \(error)")
+				}
+			}
+		})
 	}
 }
 
-struct AppearanceSettings: View {
-	@AppStorage("compactList") private var compactList: Bool = false
-	@AppStorage("disableAnimations") private var disableAnimations: Bool = false
+
+struct CloudKitSettings: View {
+	@State var iCloudStatus: String = ""
 	
 	var body: some View {
-		Form {
-			Section {
-				Toggle("Compact List", isOn: $compactList)
-				Text("Hide icons, and display lists in a more compact form.")
-					.font(.caption)
-				Toggle("Disable Animations", isOn: $disableAnimations)
-			}
+		VStack {
+			Text(iCloudStatus)
+		}
+		.onAppear {
+			var status = getCloudStatus()
+			iCloudStatus = status
 		}
 	}
+	
+	func getCloudStatus() -> String {
+		
+		var status = "Unable to determine iCloud status"
+		
+		CKContainer.default().accountStatus { (accountStatus, error) in
+			print(accountStatus.rawValue)
+			switch accountStatus {
+				case .available:
+					status = "iCloud Available"
+				case .noAccount:
+					status = "No iCloud account"
+				case .restricted:
+					status = "iCloud restricted"
+				default:
+					status = "Unable to determine iCloud status"
+			}
+		}
+		
+		return status
+	}
+	
 }
+

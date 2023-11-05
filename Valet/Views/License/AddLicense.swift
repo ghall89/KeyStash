@@ -14,12 +14,14 @@ struct AddLicense: View {
 	
 	var body: some View {
 		VStack(spacing: 10) {
-			Picker("", selection: $tabSelection) {
-				Text("Choose Installed").tag("installed")
-				Text("Add Manually").tag("custom")
+			if !installedApps.isEmpty {
+				Picker("", selection: $tabSelection) {
+					Text("Choose Installed").tag("installed")
+					Text("Add Manually").tag("custom")
+				}
+				.pickerStyle(.segmented)
+				.padding(.bottom)
 			}
-			.pickerStyle(.segmented)
-			.padding(.bottom)
 			switch(tabSelection) {
 				case "installed":
 					Picker("Select App: ", selection: $selectedApp, content: {
@@ -68,8 +70,12 @@ struct AddLicense: View {
 		.padding()
 		.onAppear {
 			let apps = getInstalledApps()
-			installedApps = apps
-			selectedApp = apps[0].id
+			if apps.isEmpty {
+				tabSelection = "custom"
+			} else {
+				installedApps = apps
+				selectedApp = apps[0].id
+			}
 		}
 	}
 	

@@ -47,10 +47,10 @@ struct LicenseList: View {
 								}
 								HighlightableText(text: item.softwareName, highlight: searchString)
 								Spacer()
-								if item.inTrash == true {
-									Text("?? Days")
-										.foregroundStyle(Color.red)
-								}
+//								if item.inTrash == true {
+//									Text("?? Days")
+//										.foregroundStyle(Color.red)
+//								}
 							}
 						})
 						.contextMenu {
