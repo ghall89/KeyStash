@@ -1,11 +1,8 @@
 import Foundation
-import SwiftData
+import GRDB
 
-@Model
-final class Tag: Identifiable {
+final class Tag: Identifiable, Codable, FetchableRecord, PersistableRecord {
 	var id: UUID = UUID()
-	@Relationship(inverse: \License.tags)
-	var licenses: [License]? = [License]()
 	var name: String = ""
 	
 	init(name: String) {

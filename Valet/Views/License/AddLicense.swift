@@ -1,12 +1,11 @@
 import SwiftUI
 
 struct AddLicense: View {
-	@Environment(\.modelContext) private var modelContext
 	@EnvironmentObject var viewModes: ViewModes
 	@AppStorage("defaultName") private var defaultName: String = ""
 	@AppStorage("defaultEmail") private var defaultEmail: String = ""
 	
-	@State private var newItem: License = License(softwareName: "", icon: nil, attachment: nil, licenseKey: "", registeredToName: "", registeredToEmail: "", downloadUrlString: "", notes: "", inTrash: false)
+	@State private var newItem: License = License(softwareName: "", icon: nil, licenseKey: "", registeredToName: "", registeredToEmail: "", downloadUrlString: "", notes: "", inTrash: false)
 	@State private var tabSelection: String = "installed"
 	@State private var installedApps: [InstalledApp] = []
 	@State private var selectedApp: UUID = UUID()
@@ -90,7 +89,11 @@ struct AddLicense: View {
 					newItem.icon = getNSImageAsData(image: ((appFromList.icon) ?? NSImage(named: "no_icon"))!)
 				}
 			}
-			modelContext.insert(newItem)
+		}
+		do {
+			try addLicense(newItem)
+		} catch {
+			print("failed to create license")
 		}
 		licenseSelection = newId
 //		viewModes.editMode.toggle()

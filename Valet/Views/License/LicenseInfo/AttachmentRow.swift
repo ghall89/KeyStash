@@ -2,8 +2,6 @@ import SwiftUI
 import SwiftData
 
 struct AttachmentRow: View {
-	@Environment(\.modelContext) private var modelContext
-	@Query private var files: [Attachment]
 	@EnvironmentObject var viewModes: ViewModes
 	@Binding var file: Attachment?
 	
@@ -75,10 +73,10 @@ struct AttachmentRow: View {
 	}
 	
 	private func removeAttachment() {
-		if let attachmentId = file?.id {
-			let index = files.firstIndex(where: { $0.id == attachmentId })!
-			file = nil
-			modelContext.delete(files[index])
-		}
+//		if let attachmentId = file?.id {
+//			let index = files.firstIndex(where: { $0.id == attachmentId })!
+//			file = nil
+//			modelContext.delete(files[index])
+//		}
 	}
 }

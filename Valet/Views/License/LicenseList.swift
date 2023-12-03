@@ -3,12 +3,12 @@ import AppKit
 import SwiftData
 
 struct LicenseList: View {
-	@Environment(\.modelContext) private var modelContext
+	@EnvironmentObject var observableDatabase: ObservableDatabase
 	@EnvironmentObject var viewModes: ViewModes
-	@Query private var items: [License]
 	
 	@Binding var sidebarSelection: String
 	
+	@State private var licenses: [License] = []
 	@State private var searchString: String = ""
 	@State private var confirmDelete: Bool = false
 	@State private var confirmDeleteAll: Bool = false
@@ -27,14 +27,9 @@ struct LicenseList: View {
 				}
 				.listSectionSeparator(.hidden)
 				.listRowSeparator(.hidden)
-				Section {
-					EmptyView()
-				}
-				.listSectionSeparator(.hidden)
-				.listRowSeparator(.hidden)
 				
 				Section {
-					ForEach(filterItems()) { item in
+					ForEach(licenses) { item in
 						NavigationLink(destination: {
 							LicenceInfo(license: item)
 						}, label: {
@@ -47,10 +42,6 @@ struct LicenseList: View {
 								}
 								HighlightableText(text: item.softwareName, highlight: searchString)
 								Spacer()
-//								if item.inTrash == true {
-//									Text("?? Days")
-//										.foregroundStyle(Color.red)
-//								}
 							}
 						})
 						.contextMenu {
@@ -60,71 +51,40 @@ struct LicenseList: View {
 								})
 							} else {
 								Button("Restore", role: .destructive, action: {
-									item.inTrash = false
-									item.trashDate = nil
+									//									item.inTrash = false
+									//									item.trashDate = nil
 								})
 							}
 						}
 					}
 				}
 			}
-			.onChange(of: selection, {
-				if viewModes.editMode == true {
-					viewModes.editMode.toggle()
-				}
-			})
-			.animation(disableAnimations == false ? .easeIn : nil, value: filterItems())
 			
-			VStack {
-				HStack {
-					NSSearchFieldWrapper(searchText: $searchString)
-						.textFieldStyle(RoundedBorderTextFieldStyle())
-					
-					Menu(content: {
-						Picker("Sort By", selection: $selectedSort, content: {
-							ForEach(SortOptions.allCases, id: \.self) { sortOption in
-								Text(sortOption.rawValue).tag(sortOption)
-							}
-						})
-						Picker("Sort Order", selection: $selectedSortOrder, content: {
-							ForEach(OrderOptions.allCases, id: \.self) { orderOption in
-								Text(orderOption.rawValue).tag(orderOption)
-							}
-						})
-					}, label: {
-						Image(systemName: "arrow.up.arrow.down")
-					})
-					.menuStyle(BorderlessButtonMenuStyle())
-					.frame(width: 40)
-				}
-				.padding(8)
-			}
-			.background(Material.ultraThin)
+			SearchBar(searchString: $searchString)
 		}
 		.frame(minWidth: 340)
 		.toolbar {
-			if viewModes.splitViewVisibility != NavigationSplitViewVisibility.detailOnly {
-				ToolbarItem {
-					if sidebarSelection == "trash" {
-						Button(
-							role: .destructive,
-							action: {
-								confirmDeleteAll.toggle()
-							}, label: {
-								Label("Empty Trash", systemImage: "trash.slash")
-							})
-						.disabled(!items.contains(where: { $0.inTrash == true }))
-						.help("Empty Trash")
-					} else {
-						Button(action: {
-							viewModes.showNewAppSheet.toggle()
+			ToolbarItem {
+				if sidebarSelection == "trash" {
+					Button(
+						role: .destructive,
+						action: {
+							confirmDeleteAll.toggle()
 						}, label: {
-							Label("Add Item", systemImage: "plus")
+							Label("Empty Trash", systemImage: "trash.slash")
 						})
-						.help("Add Item")
-					}
+					.disabled(licenses.contains(where: { $0.inTrash == true }))
+					.help("Empty Trash")
+				} else {
+					Button(action: {
+						viewModes.showNewAppSheet.toggle()
+					}, label: {
+						Label("Add Item", systemImage: "plus")
+					})
+					.help("Add Item")
 				}
 			}
+			
 		}
 		.navigationTitle(snakeToTitleCase(sidebarSelection))
 		.confirmationDialog("Are you sure you want to empty the trash? Any files you have attached will also be deleted.", isPresented: $confirmDeleteAll, actions: {
@@ -148,48 +108,51 @@ struct LicenseList: View {
 	}
 	
 	private func moveToTrash(item: License) {
-		item.inTrash = true
-		item.trashDate = Date()
-		resetSelection(itemId: item.id)
+		//		item.inTrash = true
+		//		item.trashDate = Date()
+		//		resetSelection(itemId: item.id)
 	}
 	
 	private func deleteItems(offsets: IndexSet) {
-		withAnimation {
-			for index in offsets {
-				resetSelection(itemId: items[index].id)
-				modelContext.delete(items[index])
-			}
-		}
+		//		withAnimation {
+		//			for index in offsets {
+		//				resetSelection(itemId: items[index].id)
+		//				modelContext.delete(items[index])
+		//			}
+		//		}
 	}
 	
 	private func emptyTrash() {
 		
-		let licensePredicate = #Predicate<License> { item in
-			item.inTrash == true
-		}
-		selection = nil
-		withAnimation {
-			do {
-				try modelContext.delete(model: License.self, where: licensePredicate)
-			} catch {
-				fatalError(error.localizedDescription)
-			}
-		}
+		//		let licensePredicate = #Predicate<License> { item in
+		//			item.inTrash == true
+		//		}
+		//		selection = nil
+		//		withAnimation {
+		//			do {
+		//				try modelContext.delete(model: License.self, where: licensePredicate)
+		//			} catch {
+		//				fatalError(error.localizedDescription)
+		//			}
+		//		}
 	}
 	
-	private func filterItems() -> [License] {
-		var filteredItems: [License] = []
-		
-		switch sidebarSelection {
-			case "all_apps":
-				filteredItems = items.filter { $0.inTrash == false }
-			case "trash":
-				filteredItems = items.filter { $0.inTrash == true }
-			default:
-				filteredItems = items
+	private func getItems() {
+		do {
+			try observableDatabase.dbQueue.read { db in
+				switch sidebarSelection {
+					case "all_apps":
+						licenses = try License.fetchAll(db)
+					case "trash":
+						licenses = try License.fetchAll(db)
+					default:
+						licenses = try License.fetchAll(db)
+				}
+			}
+		} catch {
+			fatalError(error.localizedDescription)
 		}
-		return filteredItems
-			.filter { searchString.count > 0 ? $0.softwareName.lowercased().contains(searchString.lowercased()) : true }
-			.sorted(by: sortBy(sort: selectedSort, order: selectedSortOrder))
+		//		return dbItems
+		//			.sorted(by: sortBy(sort: selectedSort, order: selectedSortOrder))
 	}
 }

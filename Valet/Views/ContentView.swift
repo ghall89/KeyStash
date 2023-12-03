@@ -2,10 +2,10 @@ import SwiftUI
 import SwiftData
 
 struct ContentView: View {
-	@Environment(\.modelContext) private var modelContext
+
 	@EnvironmentObject var viewModes: ViewModes
 	@EnvironmentObject var authentication: Authentication
-	@Query private var items: [License]
+	
 	@AppStorage("sidebarSelection") var sidebarSelection: String = "all_apps"
 	@AppStorage("disableAnimations") private var disableAnimations: Bool = false
 	

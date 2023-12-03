@@ -1,15 +1,16 @@
 import SwiftUI
 import SwiftData
-import CloudKit
 
 @main
 struct ValetApp: App {
+	@StateObject var observableDatabase = ObservableDatabase()
 	@State private var viewModes = ViewModes()
 	@State private var editFormState = EditFormState()
 	
 	var body: some Scene {
 		WindowGroup {
 			ContentView()
+				.environmentObject(observableDatabase)
 				.environmentObject(viewModes)
 				.environmentObject(editFormState)
 				.onAppear {
@@ -20,11 +21,6 @@ struct ValetApp: App {
 		.commands {
 			MenuBar(viewModes: $viewModes)
 		}
-		.modelContainer(for: [
-			License.self,
-			Attachment.self,
-			Tag.self
-		])
 		
 		Settings {
 			AppSettings()

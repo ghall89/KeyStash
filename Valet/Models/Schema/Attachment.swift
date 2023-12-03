@@ -1,11 +1,8 @@
 import Foundation
-import SwiftData
+import GRDB
 
-@Model
-final class Attachment {
+struct Attachment: Identifiable, Codable, FetchableRecord, PersistableRecord {
 	var id: UUID = UUID()
-//	@Relationship(inverse: \License.attachment)
-	var license: License?
 	var filename: String = ""
 	var data: Data = Data()
 	
@@ -14,3 +11,4 @@ final class Attachment {
 		self.data = data
 	}
 }
+
