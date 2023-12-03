@@ -1,8 +1,8 @@
 import SwiftUI
-import SwiftData
 import MarkdownUI
 
 struct LicenceInfo: View {
+	@EnvironmentObject var databaseManager: DatabaseManager
 	@EnvironmentObject var viewModes: ViewModes
 	@EnvironmentObject var formState: EditFormState
 	var license: License
@@ -95,7 +95,7 @@ struct LicenceInfo: View {
 			if viewModes.editMode == true {
 				ToolbarItem {
 					Button(action: {
-//						saveFormState()
+						saveFormState()
 						viewModes.editMode.toggle()
 					}, label: {
 						Image(systemName: "checkmark.circle")
@@ -130,15 +130,21 @@ struct LicenceInfo: View {
 		formState.notes = license.notes
 	}
 	
-//	private func saveFormState() {
-//		license.softwareName = formState.softwareName
-//		license.downloadUrlString = formState.urlString
-//		license.registeredToName = formState.registeredToName
-//		license.registeredToEmail = formState.registeredToEmail
-//		license.licenseKey = formState.licenseKey
-//		license.notes = formState.notes
-//		license.updatedDate = Date()
-//	}
+	private func saveFormState() {
+		do {
+			var updatedLicense = license
+			updatedLicense.softwareName = formState.softwareName
+			updatedLicense.downloadUrlString = formState.urlString
+			updatedLicense.registeredToName = formState.registeredToName
+			updatedLicense.registeredToEmail = formState.registeredToEmail
+			updatedLicense.licenseKey = formState.licenseKey
+			updatedLicense.notes = formState.notes
+			try updateLicense(updatedLicense)
+			databaseManager.fetchData()
+		} catch {
+			print("update failed: \(error)")
+		}
+	}
 	
 	private func isEdited() -> Bool {
 		if formState.softwareName == license.softwareName &&

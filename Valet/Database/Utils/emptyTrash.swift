@@ -1,12 +1,14 @@
 import Foundation
 import GRDB
 
-func addLicense(_ data: License) throws {
+func emptyTrash() {
 	do {
 		let dbQueue = try connectToDb()
 		
 		try dbQueue?.write { db in
-			try data.insert(db)
+			try License
+				.filter(Column("inTrash") == true)
+				.deleteAll(db)
 		}
 	} catch {
 		print(error)

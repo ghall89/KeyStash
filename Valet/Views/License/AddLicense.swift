@@ -1,6 +1,7 @@
 import SwiftUI
 
 struct AddLicense: View {
+	@EnvironmentObject var databaseManager: DatabaseManager
 	@EnvironmentObject var viewModes: ViewModes
 	@AppStorage("defaultName") private var defaultName: String = ""
 	@AppStorage("defaultEmail") private var defaultEmail: String = ""
@@ -92,6 +93,7 @@ struct AddLicense: View {
 		}
 		do {
 			try addLicense(newItem)
+			databaseManager.fetchData()
 		} catch {
 			print("failed to create license")
 		}

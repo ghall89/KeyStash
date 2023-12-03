@@ -1,14 +1,12 @@
 import SwiftUI
 import AppKit
-import SwiftData
 
 struct LicenseList: View {
-	@EnvironmentObject var observableDatabase: ObservableDatabase
+	@EnvironmentObject var databaseManager: DatabaseManager
 	@EnvironmentObject var viewModes: ViewModes
 	
 	@Binding var sidebarSelection: String
-	
-	@State private var licenses: [License] = []
+
 	@State private var searchString: String = ""
 	@State private var confirmDelete: Bool = false
 	@State private var confirmDeleteAll: Bool = false
@@ -27,9 +25,14 @@ struct LicenseList: View {
 				}
 				.listSectionSeparator(.hidden)
 				.listRowSeparator(.hidden)
+				Section {
+					EmptyView()
+				}
+				.listSectionSeparator(.hidden)
+				.listRowSeparator(.hidden)
 				
 				Section {
-					ForEach(licenses) { item in
+					ForEach(filterItems()) { item in
 						NavigationLink(destination: {
 							LicenceInfo(license: item)
 						}, label: {
@@ -47,12 +50,11 @@ struct LicenseList: View {
 						.contextMenu {
 							if item.inTrash == false {
 								Button("Move to Trash", role: .destructive, action: {
-									moveToTrash(item: item)
+									moveToTrash(item)
 								})
 							} else {
 								Button("Restore", role: .destructive, action: {
-									//									item.inTrash = false
-									//									item.trashDate = nil
+									moveToTrash(item)
 								})
 							}
 						}
@@ -73,7 +75,7 @@ struct LicenseList: View {
 						}, label: {
 							Label("Empty Trash", systemImage: "trash.slash")
 						})
-					.disabled(licenses.contains(where: { $0.inTrash == true }))
+//					.disabled(databaseManager.licenses.contains(where: { $0.inTrash == true }))
 					.help("Empty Trash")
 				} else {
 					Button(action: {
@@ -86,10 +88,12 @@ struct LicenseList: View {
 			}
 			
 		}
+		.onAppear(perform: databaseManager.fetchData)
 		.navigationTitle(snakeToTitleCase(sidebarSelection))
 		.confirmationDialog("Are you sure you want to empty the trash? Any files you have attached will also be deleted.", isPresented: $confirmDeleteAll, actions: {
 			Button("Empty Trash", role: .destructive, action: {
 				emptyTrash()
+				databaseManager.fetchData()
 				confirmDeleteAll.toggle()
 			})
 			Button("Cancel", role: .cancel, action: {
@@ -107,52 +111,32 @@ struct LicenseList: View {
 		}
 	}
 	
-	private func moveToTrash(item: License) {
-		//		item.inTrash = true
-		//		item.trashDate = Date()
-		//		resetSelection(itemId: item.id)
-	}
-	
-	private func deleteItems(offsets: IndexSet) {
-		//		withAnimation {
-		//			for index in offsets {
-		//				resetSelection(itemId: items[index].id)
-		//				modelContext.delete(items[index])
-		//			}
-		//		}
-	}
-	
-	private func emptyTrash() {
-		
-		//		let licensePredicate = #Predicate<License> { item in
-		//			item.inTrash == true
-		//		}
-		//		selection = nil
-		//		withAnimation {
-		//			do {
-		//				try modelContext.delete(model: License.self, where: licensePredicate)
-		//			} catch {
-		//				fatalError(error.localizedDescription)
-		//			}
-		//		}
-	}
-	
-	private func getItems() {
+	private func moveToTrash(_ item: License) {
 		do {
-			try observableDatabase.dbQueue.read { db in
-				switch sidebarSelection {
-					case "all_apps":
-						licenses = try License.fetchAll(db)
-					case "trash":
-						licenses = try License.fetchAll(db)
-					default:
-						licenses = try License.fetchAll(db)
-				}
-			}
+			var updatedLicense = item
+			updatedLicense.inTrash.toggle()
+			try updateLicense(updatedLicense)
+			databaseManager.fetchData()
+			resetSelection(itemId: item.id)
 		} catch {
-			fatalError(error.localizedDescription)
+			print("update failed: \(error)")
 		}
-		//		return dbItems
-		//			.sorted(by: sortBy(sort: selectedSort, order: selectedSortOrder))
 	}
+	
+	private func filterItems() -> [License] {
+		var filteredItems: [License] = []
+		
+		switch sidebarSelection {
+			case "all_apps":
+				filteredItems = databaseManager.licenses.filter { $0.inTrash == false }
+			case "trash":
+				filteredItems = databaseManager.licenses.filter { $0.inTrash == true }
+			default:
+				filteredItems = databaseManager.licenses
+		}
+		return filteredItems
+			.filter { searchString.count > 0 ? $0.softwareName.lowercased().contains(searchString.lowercased()) : true }
+			.sorted(by: sortBy(sort: selectedSort, order: selectedSortOrder))
+	}
+		
 }

@@ -1,5 +1,4 @@
 import SwiftUI
-import SwiftData
 
 struct MenuBar: Commands {
 	@Binding var viewModes: ViewModes

@@ -1,16 +1,15 @@
 import SwiftUI
-import SwiftData
 
 @main
 struct ValetApp: App {
-	@StateObject var observableDatabase = ObservableDatabase()
+	@StateObject var databaseManager = DatabaseManager()
 	@State private var viewModes = ViewModes()
 	@State private var editFormState = EditFormState()
 	
 	var body: some Scene {
 		WindowGroup {
 			ContentView()
-				.environmentObject(observableDatabase)
+				.environmentObject(databaseManager)
 				.environmentObject(viewModes)
 				.environmentObject(editFormState)
 				.onAppear {

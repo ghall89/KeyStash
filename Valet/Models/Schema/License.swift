@@ -6,7 +6,7 @@ struct License: Identifiable, Codable, FetchableRecord, PersistableRecord {
 	var id: UUID = UUID()
 	var softwareName: String = ""
 	var icon: Data?
-	//	var attachment: Attachment?
+	var attachmentId: UUID?
 	var licenseKey: String = ""
 	var registeredToName: String = ""
 	var registeredToEmail: String = ""
@@ -39,7 +39,7 @@ struct License: Identifiable, Codable, FetchableRecord, PersistableRecord {
 	init(
 		softwareName: String,
 		icon: Data?,
-		//		attachment: Attachment?,
+		attachmentId: UUID? = nil,
 		licenseKey: String,
 		registeredToName: String,
 		registeredToEmail: String,
@@ -51,7 +51,7 @@ struct License: Identifiable, Codable, FetchableRecord, PersistableRecord {
 	) {
 		self.softwareName = softwareName
 		self.icon = icon
-		//		self.attachment = attachment
+		self.attachmentId = attachmentId
 		self.licenseKey = licenseKey
 		self.registeredToName = registeredToName
 		self.registeredToEmail = registeredToEmail

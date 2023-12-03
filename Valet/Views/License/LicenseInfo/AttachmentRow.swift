@@ -1,5 +1,4 @@
 import SwiftUI
-import SwiftData
 
 struct AttachmentRow: View {
 	@EnvironmentObject var viewModes: ViewModes
