@@ -1,9 +1,12 @@
 import SwiftUI
+import GRDB
 
 struct AttachmentRow: View {
+	@EnvironmentObject var databaseManager: DatabaseManager
 	@EnvironmentObject var viewModes: ViewModes
-	@Binding var file: Attachment?
+	var license: License
 	
+	@State var file: Attachment? = nil
 	@State private var showDeleteAlert: Bool = false
 	let label = "Attachment"
 	
@@ -45,10 +48,12 @@ struct AttachmentRow: View {
 				})
 			}
 		} else {
-			if let attachment = file {
+			if license.attachmentId != nil {
 				HStack(alignment: .top) {
 					Button(action: {
-						exportAttachment(file: attachment)
+						if let downloadableFile = file {
+							exportAttachment(file: downloadableFile)
+						}
 					}, label: {
 						Image(systemName: "arrow.down.circle.fill")
 							.foregroundStyle(.accent)
@@ -57,25 +62,50 @@ struct AttachmentRow: View {
 					VStack(alignment: .leading) {
 						Text(label)
 							.font(.caption)
-						Text(attachment.filename)
+						Text(file?.filename ?? "")
 							.fontDesign(.monospaced)
 					}
+				}
+				.onChange(of: license.id, initial: true) {
+					fetchAttachment()
 				}
 			}
 		}
 	}
 	
 	private func handleAttachment() {
-		if let attachment = addAttachment() {
-			file = attachment
+		if let fileFromDisk = getAttachment() {
+			do {
+				var updatedLicense = license
+				updatedLicense.attachmentId = fileFromDisk.id
+				try addAttachmentToLicense(databaseManager.dbQueue, data: updatedLicense, attachment: fileFromDisk)
+				file = fileFromDisk
+			} catch {
+				print("Error: \(error)")
+			}
 		}
 	}
 	
 	private func removeAttachment() {
-//		if let attachmentId = file?.id {
-//			let index = files.firstIndex(where: { $0.id == attachmentId })!
-//			file = nil
-//			modelContext.delete(files[index])
-//		}
+		//		if let attachmentId = file?.id {
+		//			let index = files.firstIndex(where: { $0.id == attachmentId })!
+		//			file = nil
+		//			modelContext.delete(files[index])
+		//		}
+	}
+	
+	private func fetchAttachment() {
+		if let attachmentId = license.attachmentId {
+			do {
+				try databaseManager.dbQueue.read { db in
+					print(db)
+					let attachment = try Attachment.find(db, id: attachmentId)
+					print(attachment)
+					file = attachment
+				}
+			} catch {
+				print("Error: \(error)")
+			}
+		}
 	}
 }

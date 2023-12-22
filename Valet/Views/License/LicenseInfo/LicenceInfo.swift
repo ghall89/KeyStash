@@ -8,6 +8,7 @@ struct LicenceInfo: View {
 	var license: License
 	
 	@State private var showToast: Bool = false
+
 	
 	@AppStorage("disableAnimations") private var disableAnimations: Bool = false
 	
@@ -70,7 +71,7 @@ struct LicenceInfo: View {
 						formValue: $formState.licenseKey,
 						label: "License Key")
 					
-//					AttachmentRow(file: license.attachment)
+					AttachmentRow(license: license)
 					Divider()
 					Text("Notes")
 						.font(.caption)
@@ -139,7 +140,7 @@ struct LicenceInfo: View {
 			updatedLicense.registeredToEmail = formState.registeredToEmail
 			updatedLicense.licenseKey = formState.licenseKey
 			updatedLicense.notes = formState.notes
-			try updateLicense(updatedLicense)
+			try updateLicense(databaseManager.dbQueue, data: updatedLicense)
 			databaseManager.fetchData()
 		} catch {
 			print("update failed: \(error)")

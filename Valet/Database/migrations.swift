@@ -9,6 +9,7 @@ func migrations(_ dbQueue: DatabaseQueue) throws {
 				t.column("id", .any).primaryKey().unique()
 				t.column("softwareName", .text).notNull()
 				t.column("icon", .blob)
+				t.column("attachmentId", .any).unique()
 				t.column("licenseKey", .text).notNull()
 				t.column("registeredToName", .text).notNull()
 				t.column("registeredToEmail", .text).notNull()
@@ -21,23 +22,10 @@ func migrations(_ dbQueue: DatabaseQueue) throws {
 			}
 			
 			try db.create(table: "attachment") { t in
-				t.column("id", .text).primaryKey().unique()
-				t.column("filename", .text).notNull()
-				t.column("data", .blob).notNull()
+				t.column("id", .any).primaryKey().unique()
+				t.column("filename", .text).unique()
+				t.column("path", .text).unique()
 			}
-		})
-		
-		migrator.registerMigration("v2", migrate: { db in
-				try db.alter(table: "attachment", body: { t in
-					t.add(column: "addedDate", .date).notNull()
-					t.add(column: "updatedDate", .date)
-				})
-		})
-		
-		migrator.registerMigration("v3", migrate: { db in
-			try db.alter(table: "license", body: { t in
-				t.add(column: "attachmentId", .text).references("attachment", onDelete: .cascade)
-			})
 		})
 		
 		try migrator.migrate(dbQueue)

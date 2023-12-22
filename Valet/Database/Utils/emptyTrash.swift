@@ -1,16 +1,14 @@
 import Foundation
 import GRDB
 
-func emptyTrash() {
+func emptyTrash(_ dbQueue: DatabaseQueue) {
 	do {
-		let dbQueue = try connectToDb()
-		
-		try dbQueue?.write { db in
+		try dbQueue.write { db in
 			try License
 				.filter(Column("inTrash") == true)
 				.deleteAll(db)
 		}
 	} catch {
-		print(error)
+		print("failed to empty trash: \(error)")
 	}
 }

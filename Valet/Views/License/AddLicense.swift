@@ -92,7 +92,7 @@ struct AddLicense: View {
 			}
 		}
 		do {
-			try addLicense(newItem)
+			try addLicense(databaseManager.dbQueue, data: newItem)
 			databaseManager.fetchData()
 		} catch {
 			print("failed to create license")

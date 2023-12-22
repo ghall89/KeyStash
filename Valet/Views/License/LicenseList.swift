@@ -92,7 +92,7 @@ struct LicenseList: View {
 		.navigationTitle(snakeToTitleCase(sidebarSelection))
 		.confirmationDialog("Are you sure you want to empty the trash? Any files you have attached will also be deleted.", isPresented: $confirmDeleteAll, actions: {
 			Button("Empty Trash", role: .destructive, action: {
-				emptyTrash()
+				emptyTrash(databaseManager.dbQueue)
 				databaseManager.fetchData()
 				confirmDeleteAll.toggle()
 			})
@@ -115,7 +115,7 @@ struct LicenseList: View {
 		do {
 			var updatedLicense = item
 			updatedLicense.inTrash.toggle()
-			try updateLicense(updatedLicense)
+			try updateLicense(databaseManager.dbQueue, data: updatedLicense)
 			databaseManager.fetchData()
 			resetSelection(itemId: item.id)
 		} catch {
