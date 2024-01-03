@@ -11,65 +11,67 @@ struct AttachmentRow: View {
 	let label = "Attachment"
 	
 	var body: some View {
-		if viewModes.editMode == true {
-			if let attachment = file {
-				HStack {
-					Button(action: {
-						showDeleteAlert.toggle()
-					}, label: {
-						Image(systemName: "xmark.circle.fill")
-							.foregroundStyle(.red)
-					})
-					.buttonStyle(.plain)
-					VStack(alignment: .leading) {
-						Text(label)
-							.font(.caption)
-						Text(attachment.filename)
-							.fontDesign(.monospaced)
-					}
-				}
-				.confirmationDialog("Are you sure you want to remove this attachment? Data will be lost.", isPresented: $showDeleteAlert, actions: {
-					Button(action: {
-						showDeleteAlert.toggle()
-					}, label: {
-						Text("Cancel")
-					})
-					.keyboardShortcut(.defaultAction)
-					Button(action: {
-						removeAttachment()
-						showDeleteAlert.toggle()
-					}, label: {
-						Text("Delete")
-					})
-				})
-			} else {
-				Button(action: handleAttachment, label: {
-					Label("Add Attachment", systemImage: "paperclip")
-				})
-			}
-		} else {
-			if license.attachmentId != nil {
-				HStack(alignment: .top) {
-					Button(action: {
-						if let downloadableFile = file {
-							exportAttachment(file: downloadableFile)
+		VStack {
+			if viewModes.editMode == true {
+				if let attachment = file {
+					HStack {
+						Button(action: {
+							showDeleteAlert.toggle()
+						}, label: {
+							Image(systemName: "xmark.circle.fill")
+								.foregroundStyle(.red)
+						})
+						.buttonStyle(.plain)
+						VStack(alignment: .leading) {
+							Text(label)
+								.font(.caption)
+							Text(attachment.filename)
+								.fontDesign(.monospaced)
 						}
-					}, label: {
-						Image(systemName: "arrow.down.circle.fill")
-							.foregroundStyle(.accent)
+					}
+					.confirmationDialog("Are you sure you want to remove this attachment? The file will be moved to your computer's Trash.", isPresented: $showDeleteAlert, actions: {
+						Button(action: {
+							showDeleteAlert.toggle()
+						}, label: {
+							Text("Cancel")
+						})
+						.keyboardShortcut(.defaultAction)
+						Button(action: {
+							removeAttachment()
+							showDeleteAlert.toggle()
+						}, label: {
+							Text("Delete")
+						})
 					})
-					.buttonStyle(.plain)
-					VStack(alignment: .leading) {
-						Text(label)
-							.font(.caption)
-						Text(file?.filename ?? "")
-							.fontDesign(.monospaced)
+				} else {
+					Button(action: handleAttachment, label: {
+						Label("Add Attachment", systemImage: "paperclip")
+					})
+				}
+			} else {
+				if file != nil {
+					HStack(alignment: .top) {
+						Button(action: {
+							if let downloadableFile = file {
+								exportAttachment(file: downloadableFile)
+							}
+						}, label: {
+							Image(systemName: "arrow.down.circle.fill")
+								.foregroundStyle(.accent)
+						})
+						.buttonStyle(.plain)
+						VStack(alignment: .leading) {
+							Text(label)
+								.font(.caption)
+							Text(file?.filename ?? "")
+								.fontDesign(.monospaced)
+						}
 					}
 				}
-				.onChange(of: license.id, initial: true) {
-					fetchAttachment()
-				}
 			}
+		}
+		.onChange(of: license.id, initial: true) {
+			fetchAttachment()
 		}
 	}
 	
@@ -79,6 +81,7 @@ struct AttachmentRow: View {
 				var updatedLicense = license
 				updatedLicense.attachmentId = fileFromDisk.id
 				try addAttachmentToLicense(databaseManager.dbQueue, data: updatedLicense, attachment: fileFromDisk)
+				databaseManager.fetchData()
 				file = fileFromDisk
 			} catch {
 				print("Error: \(error)")
@@ -90,6 +93,8 @@ struct AttachmentRow: View {
 		if let attachmentObj = file {
 			do {
 				try deleteAttachment(databaseManager.dbQueue, attachment: attachmentObj)
+				databaseManager.fetchData()
+				file = nil
 			} catch {
 				print("Error: \(error)")
 			}

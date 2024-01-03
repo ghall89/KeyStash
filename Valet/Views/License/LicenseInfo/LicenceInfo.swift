@@ -8,7 +8,6 @@ struct LicenceInfo: View {
 	var license: License
 	
 	@State private var showToast: Bool = false
-
 	
 	@AppStorage("disableAnimations") private var disableAnimations: Bool = false
 	
@@ -89,6 +88,9 @@ struct LicenceInfo: View {
 		}
 		.frame(maxWidth: .infinity)
 		.environmentObject(formState)
+		.onAppear {
+			print(license)
+		}
 		.toolbar {
 			ToolbarItem {
 				Spacer()
@@ -100,7 +102,6 @@ struct LicenceInfo: View {
 						viewModes.editMode.toggle()
 					}, label: {
 						Image(systemName: "checkmark.circle")
-//							.contentTransition(.symbolEffect(.replace.downUp.byLayer))
 					})
 					.disabled(!isEdited())
 					.keyboardShortcut(KeyEquivalent("s"))
@@ -115,7 +116,6 @@ struct LicenceInfo: View {
 					viewModes.editMode.toggle()
 				}, label: {
 					Image(systemName: viewModes.editMode == true ? "xmark.circle" : "square.and.pencil")
-//						.contentTransition(.symbolEffect(.replace.downUp.byLayer))
 				})
 				.help(viewModes.editMode == true ? "Cancel" : "Edit")
 			}

@@ -20,7 +20,7 @@ struct License: Identifiable, Codable, FetchableRecord, PersistableRecord {
 	
 	// attachment relation
 	var attachmentId: String?
-	static let attachment = belongsTo(Attachment.self, using: ForeignKey("attachmentId"))
+	static let attachment = belongsTo(Attachment.self, key: "attachmendId")
 	
 	// convert download string to a URL
 	var downloadUrl: URL? {
