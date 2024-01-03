@@ -87,11 +87,13 @@ struct AttachmentRow: View {
 	}
 	
 	private func removeAttachment() {
-		//		if let attachmentId = file?.id {
-		//			let index = files.firstIndex(where: { $0.id == attachmentId })!
-		//			file = nil
-		//			modelContext.delete(files[index])
-		//		}
+		if let attachmentObj = file {
+			do {
+				try deleteAttachment(databaseManager.dbQueue, attachment: attachmentObj)
+			} catch {
+				print("Error: \(error)")
+			}
+		}
 	}
 	
 	private func fetchAttachment() {
@@ -99,7 +101,7 @@ struct AttachmentRow: View {
 			do {
 				try databaseManager.dbQueue.read { db in
 					print(db)
-					let attachment = try Attachment.find(db, id: attachmentId)
+					let attachment = try Attachment.find(db, key: ["id": attachmentId])
 					print(attachment)
 					file = attachment
 				}

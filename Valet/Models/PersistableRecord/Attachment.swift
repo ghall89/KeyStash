@@ -2,7 +2,7 @@ import Foundation
 import GRDB
 
 struct Attachment: Identifiable, Codable, FetchableRecord, PersistableRecord {
-	var id: UUID = UUID()
+	var id: String = UUID().uuidString
 	var filename: String
 	var path: URL
 	

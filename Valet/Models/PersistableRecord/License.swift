@@ -3,10 +3,9 @@ import AppKit
 import GRDB
 
 struct License: Identifiable, Codable, FetchableRecord, PersistableRecord {
-	var id: UUID = UUID()
+	var id: String = UUID().uuidString
 	var softwareName: String = ""
 	var icon: Data?
-	var attachmentId: UUID?
 	var licenseKey: String = ""
 	var registeredToName: String = ""
 	var registeredToEmail: String = ""
@@ -15,12 +14,20 @@ struct License: Identifiable, Codable, FetchableRecord, PersistableRecord {
 	var createdDate: Date = Date()
 	var updatedDate: Date?
 	
+	// trash status
 	var inTrash: Bool = false
 	var trashDate: Date?
 	
+	// attachment relation
+	var attachmentId: String?
+	static let attachment = belongsTo(Attachment.self, using: ForeignKey("attachmentId"))
+	
+	// convert download string to a URL
 	var downloadUrl: URL? {
 		return URL(string: downloadUrlString)
 	}
+	
+	// decode the icon PNG blob to NSImage
 	var iconNSImage: NSImage {
 		if let iconData = icon {
 			return NSImage(data: iconData)!
@@ -29,6 +36,7 @@ struct License: Identifiable, Codable, FetchableRecord, PersistableRecord {
 		return NSImage(named: "no_icon")!
 	}
 	
+	// create small icon for list view, for best performance
 	var miniIcon: NSImage {
 		resizeImage(
 			image: iconNSImage,
@@ -39,7 +47,7 @@ struct License: Identifiable, Codable, FetchableRecord, PersistableRecord {
 	init(
 		softwareName: String,
 		icon: Data?,
-		attachmentId: UUID? = nil,
+		attachmentId: String? = nil,
 		licenseKey: String,
 		registeredToName: String,
 		registeredToEmail: String,

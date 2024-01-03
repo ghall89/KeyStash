@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D30C58082AB91A5300A86426 /* resizeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30C58072AB91A5300A86426 /* resizeImage.swift */; };
+		D3127DAE2B352803004343EF /* deleteAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3127DAD2B352803004343EF /* deleteAttachment.swift */; };
 		D3163CEA2ABBC91B00BC5F63 /* exportAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3163CE92ABBC91B00BC5F63 /* exportAttachment.swift */; };
 		D3282EB72AC26ED000A5CD80 /* HighlightableText.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3282EB62AC26ED000A5CD80 /* HighlightableText.swift */; };
 		D3282EBA2AC270DB00A5CD80 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3282EB92AC270DB00A5CD80 /* SearchBar.swift */; };
@@ -59,6 +60,7 @@
 
 /* Begin PBXFileReference section */
 		D30C58072AB91A5300A86426 /* resizeImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = resizeImage.swift; sourceTree = "<group>"; };
+		D3127DAD2B352803004343EF /* deleteAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = deleteAttachment.swift; sourceTree = "<group>"; };
 		D3163CE92ABBC91B00BC5F63 /* exportAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = exportAttachment.swift; sourceTree = "<group>"; };
 		D3282EB62AC26ED000A5CD80 /* HighlightableText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HighlightableText.swift; sourceTree = "<group>"; };
 		D3282EB92AC270DB00A5CD80 /* SearchBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchBar.swift; sourceTree = "<group>"; };
@@ -307,6 +309,7 @@
 				D395519E2B1C23E000BCF076 /* updateLicense.swift */,
 				D39551A02B1C332B00BCF076 /* emptyTrash.swift */,
 				D3D3F6532B1E1A2F00E951B2 /* addAttachmentToLicense.swift */,
+				D3127DAD2B352803004343EF /* deleteAttachment.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -424,6 +427,7 @@
 				D39942D42AB509AF00B2DC39 /* ValetApp.swift in Sources */,
 				D39942DF2AB509AF00B2DC39 /* getNSImageAsData.swift in Sources */,
 				D39942D52AB509AF00B2DC39 /* ViewModes.swift in Sources */,
+				D3127DAE2B352803004343EF /* deleteAttachment.swift in Sources */,
 				D3F4B6EC2ABA25D3002AFDFD /* Sidebar.swift in Sources */,
 				D3163CEA2ABBC91B00BC5F63 /* exportAttachment.swift in Sources */,
 				D395519F2B1C23E000BCF076 /* updateLicense.swift in Sources */,

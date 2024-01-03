@@ -10,7 +10,7 @@ struct AddLicense: View {
 	@State private var tabSelection: String = "installed"
 	@State private var installedApps: [InstalledApp] = []
 	@State private var selectedApp: UUID = UUID()
-	@Binding var licenseSelection: UUID?
+	@Binding var licenseSelection: String?
 	
 	var body: some View {
 		VStack(spacing: 10) {

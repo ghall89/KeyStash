@@ -5,6 +5,7 @@ class DatabaseManager: ObservableObject {
 	@Published var dbQueue: DatabaseQueue
 	@Published var licenses: [License] = []
 	
+	// initialize db connection
 	init() {
 		do {
 			self.dbQueue = try connectToDb()!
@@ -13,6 +14,7 @@ class DatabaseManager: ObservableObject {
 		}
 	}
 	
+	// fetch current license data
 	func fetchData() {
 		do {
 			try dbQueue.read { db in

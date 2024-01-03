@@ -23,6 +23,6 @@ func updateLicense(_ dbQueue: DatabaseQueue, data: License) throws {
 				.updateAll(db, columns)
 		}
 	} catch {
-		print("failed to update license: \(error)")
+		print("error: \(error)")
 	}
 }

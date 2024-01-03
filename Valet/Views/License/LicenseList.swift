@@ -10,7 +10,7 @@ struct LicenseList: View {
 	@State private var searchString: String = ""
 	@State private var confirmDelete: Bool = false
 	@State private var confirmDeleteAll: Bool = false
-	@State private var selection: UUID? = nil
+	@State private var selection: String? = nil
 	
 	@AppStorage("selectedSort") private var selectedSort: SortOptions = .byName
 	@AppStorage("selectedSortOrder") private var selectedSortOrder: OrderOptions = .asc
@@ -105,12 +105,12 @@ struct LicenseList: View {
 		})
 	}
 	
-	private func resetSelection(itemId: UUID) {
+	private func resetSelection(itemId: String) {
 		if itemId == selection {
 			selection = nil
 		}
 	}
-	
+		
 	private func moveToTrash(_ item: License) {
 		do {
 			var updatedLicense = item
