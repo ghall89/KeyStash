@@ -22,6 +22,7 @@ struct AttachmentRow: View {
 								.foregroundStyle(.red)
 						})
 						.buttonStyle(.plain)
+						
 						VStack(alignment: .leading) {
 							Text(label)
 								.font(.caption)
@@ -29,20 +30,23 @@ struct AttachmentRow: View {
 								.fontDesign(.monospaced)
 						}
 					}
-					.confirmationDialog("Are you sure you want to remove this attachment? The file will be moved to your computer's Trash.", isPresented: $showDeleteAlert, actions: {
-						Button(action: {
-							showDeleteAlert.toggle()
-						}, label: {
-							Text("Cancel")
+					.confirmationDialog(
+						"Are you sure you want to remove this attachment? The file will be moved to your computer's Trash.",
+						isPresented: $showDeleteAlert,
+						actions: {
+							Button(action: {
+								showDeleteAlert.toggle()
+							}, label: {
+								Text("Cancel")
+							})
+							.keyboardShortcut(.defaultAction)
+							Button(action: {
+								removeAttachment()
+								showDeleteAlert.toggle()
+							}, label: {
+								Text("Delete")
+							})
 						})
-						.keyboardShortcut(.defaultAction)
-						Button(action: {
-							removeAttachment()
-							showDeleteAlert.toggle()
-						}, label: {
-							Text("Delete")
-						})
-					})
 				} else {
 					Button(action: handleAttachment, label: {
 						Label("Add Attachment", systemImage: "paperclip")
@@ -71,7 +75,7 @@ struct AttachmentRow: View {
 			}
 		}
 		.onChange(of: license.id, initial: true) {
-			fetchAttachment()
+			setAttachment()
 		}
 	}
 	
@@ -92,7 +96,7 @@ struct AttachmentRow: View {
 	private func removeAttachment() {
 		if let attachmentObj = file {
 			do {
-				try deleteAttachment(databaseManager.dbQueue, attachment: attachmentObj)
+				try deleteAttachment(databaseManager.dbQueue, attachmentId: attachmentObj.id)
 				databaseManager.fetchData()
 				file = nil
 			} catch {
@@ -101,18 +105,16 @@ struct AttachmentRow: View {
 		}
 	}
 	
-	private func fetchAttachment() {
-		if let attachmentId = license.attachmentId {
-			do {
-				try databaseManager.dbQueue.read { db in
-					print(db)
-					let attachment = try Attachment.find(db, key: ["id": attachmentId])
-					print(attachment)
-					file = attachment
-				}
-			} catch {
-				print("Error: \(error)")
+	private func setAttachment() {
+		do {
+			if let attachmentId = license.attachmentId {
+				let attachmentById = try fetchAttachment(
+					databaseManager.attachments,
+					id: attachmentId
+				)
 			}
+		} catch {
+			print("Error: \(error)")
 		}
 	}
 }

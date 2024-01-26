@@ -6,14 +6,17 @@ struct LicenseInfoRow: View {
 	var value: String
 	@Binding var formValue: String
 	var label: String
+	@State var iconName = "doc.on.doc.fill"
 	
 	var body: some View {
 		HStack(alignment: .top) {
 			if value.count > 0 || viewModes.editMode == true {
 				Button(action: copyAction, label: {
-					Image(systemName: "doc.on.doc.fill")
+					Image(systemName: iconName)
 						.foregroundStyle(.accent)
+						.contentTransition(.symbolEffect(.replace.downUp.byLayer))
 				})
+				.frame(width: 12)
 				.buttonStyle(.plain)
 				.disabled(viewModes.editMode)
 				VStack(alignment: .leading) {
@@ -38,8 +41,9 @@ struct LicenseInfoRow: View {
 	
 	private func copyAction() {
 		stringToClipboard(value: value)
-		if showToast == false {
-			showToast.toggle()
+		iconName = "checkmark"
+		DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+			iconName = "doc.on.doc.fill"
 		}
 	}
 	

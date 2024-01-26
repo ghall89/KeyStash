@@ -3,12 +3,16 @@ import GRDB
 
 func emptyTrash(_ dbQueue: DatabaseQueue) {
 	do {
-		try dbQueue.write { db in
-			try License
+		try dbQueue.read { db in
+			let licenses: [License] = try License
 				.filter(Column("inTrash") == true)
-				.deleteAll(db)
+				.fetchAll(db)
+			
+			try licenses.forEach { license in
+				try deleteLicense(dbQueue, license: license)
+			}
 		}
 	} catch {
-		print("failed to empty trash: \(error)")
+		print("Error: \(error)")
 	}
 }

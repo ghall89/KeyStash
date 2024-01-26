@@ -4,6 +4,7 @@ import GRDB
 class DatabaseManager: ObservableObject {
 	@Published var dbQueue: DatabaseQueue
 	@Published var licenses: [License] = []
+	@Published var attachments: [Attachment] = []
 	
 	// initialize db connection
 	init() {
@@ -19,6 +20,7 @@ class DatabaseManager: ObservableObject {
 		do {
 			try dbQueue.read { db in
 				self.licenses = try License.fetchAll(db)
+				self.attachments = try Attachment.fetchAll(db)
 			}
 		} catch {
 			print("Error fetching data: \(error)")

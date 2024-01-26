@@ -41,7 +41,9 @@
 		D39942DF2AB509AF00B2DC39 /* getNSImageAsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942D12AB509AF00B2DC39 /* getNSImageAsData.swift */; };
 		D39942E02AB509AF00B2DC39 /* getInstalledApps.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942D22AB509AF00B2DC39 /* getInstalledApps.swift */; };
 		D39942E12AB509AF00B2DC39 /* getAppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942D32AB509AF00B2DC39 /* getAppIcon.swift */; };
+		D3AACD242B4623E4008D01A8 /* deleteLicense.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AACD232B4623E4008D01A8 /* deleteLicense.swift */; };
 		D3B08F832AB6A5FD004715F5 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = D3B08F822AB6A5FD004715F5 /* MarkdownUI */; };
+		D3BA5FBF2B45ADD900F0B7C5 /* fetchAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BA5FBE2B45ADD900F0B7C5 /* fetchAttachment.swift */; };
 		D3BB2EA52AD07ACF006A3593 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB2EA42AD07ACE006A3593 /* Authentication.swift */; };
 		D3C6503B2AB74CF300E75461 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C6503A2AB74CF300E75461 /* MenuBar.swift */; };
 		D3C961FE2B1BD8EB008BE15D /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = D3C961FD2B1BD8EB008BE15D /* GRDB */; };
@@ -97,6 +99,8 @@
 		D39942D12AB509AF00B2DC39 /* getNSImageAsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getNSImageAsData.swift; sourceTree = "<group>"; };
 		D39942D22AB509AF00B2DC39 /* getInstalledApps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getInstalledApps.swift; sourceTree = "<group>"; };
 		D39942D32AB509AF00B2DC39 /* getAppIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getAppIcon.swift; sourceTree = "<group>"; };
+		D3AACD232B4623E4008D01A8 /* deleteLicense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = deleteLicense.swift; sourceTree = "<group>"; };
+		D3BA5FBE2B45ADD900F0B7C5 /* fetchAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fetchAttachment.swift; sourceTree = "<group>"; };
 		D3BB2EA42AD07ACE006A3593 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		D3C6503A2AB74CF300E75461 /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		D3C961FF2B1BDA6E008BE15D /* connectToDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = connectToDB.swift; sourceTree = "<group>"; };
@@ -292,6 +296,26 @@
 			path = Logic;
 			sourceTree = "<group>";
 		};
+		D3AACD252B46241E008D01A8 /* License */ = {
+			isa = PBXGroup;
+			children = (
+				D3C962022B1BDF10008BE15D /* addLicense.swift */,
+				D395519E2B1C23E000BCF076 /* updateLicense.swift */,
+				D3AACD232B4623E4008D01A8 /* deleteLicense.swift */,
+			);
+			path = License;
+			sourceTree = "<group>";
+		};
+		D3AACD262B462432008D01A8 /* Attachment */ = {
+			isa = PBXGroup;
+			children = (
+				D3D3F6532B1E1A2F00E951B2 /* addAttachmentToLicense.swift */,
+				D3127DAD2B352803004343EF /* deleteAttachment.swift */,
+				D3BA5FBE2B45ADD900F0B7C5 /* fetchAttachment.swift */,
+			);
+			path = Attachment;
+			sourceTree = "<group>";
+		};
 		D3C961F92B1BD7EE008BE15D /* Database */ = {
 			isa = PBXGroup;
 			children = (
@@ -305,11 +329,9 @@
 		D3C962012B1BDEFF008BE15D /* Utils */ = {
 			isa = PBXGroup;
 			children = (
-				D3C962022B1BDF10008BE15D /* addLicense.swift */,
-				D395519E2B1C23E000BCF076 /* updateLicense.swift */,
+				D3AACD262B462432008D01A8 /* Attachment */,
+				D3AACD252B46241E008D01A8 /* License */,
 				D39551A02B1C332B00BCF076 /* emptyTrash.swift */,
-				D3D3F6532B1E1A2F00E951B2 /* addAttachmentToLicense.swift */,
-				D3127DAD2B352803004343EF /* deleteAttachment.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -343,6 +365,7 @@
 				D39942A82AB5095A00B2DC39 /* Sources */,
 				D39942A92AB5095A00B2DC39 /* Frameworks */,
 				D39942AA2AB5095A00B2DC39 /* Resources */,
+				D30A4FAD2B44E3FC004CA2DA /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -409,6 +432,27 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		D30A4FAD2B44E3FC004CA2DA /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [ \"${CONFIGURATION}\" = \"Release\" ]; then\n    buildNumber=$(git rev-list --count head)\n    /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		D39942A82AB5095A00B2DC39 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -416,6 +460,7 @@
 			files = (
 				D3CFBECF2ABB82A600C1D4BC /* Attachment.swift in Sources */,
 				D39942DA2AB509AF00B2DC39 /* AddLicense.swift in Sources */,
+				D3AACD242B4623E4008D01A8 /* deleteLicense.swift in Sources */,
 				D39551A12B1C332B00BCF076 /* emptyTrash.swift in Sources */,
 				D39942DD2AB509AF00B2DC39 /* InstalledApp.swift in Sources */,
 				D39942E12AB509AF00B2DC39 /* getAppIcon.swift in Sources */,
@@ -446,6 +491,7 @@
 				D3EC78912AC9DD0100C7E522 /* sortBy.swift in Sources */,
 				D33797FA2ABFAA8700C5E6BC /* AttachmentRow.swift in Sources */,
 				D39942DB2AB509AF00B2DC39 /* LicenseList.swift in Sources */,
+				D3BA5FBF2B45ADD900F0B7C5 /* fetchAttachment.swift in Sources */,
 				D369F46C2AB87CEA00D8C6B1 /* exportCSV.swift in Sources */,
 				D3C6503B2AB74CF300E75461 /* MenuBar.swift in Sources */,
 				D3BB2EA52AD07ACF006A3593 /* Authentication.swift in Sources */,
@@ -597,6 +643,7 @@
 				DEVELOPMENT_TEAM = B3DFV278UN;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Serial-Box-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Serial Box";
@@ -631,6 +678,7 @@
 				DEVELOPMENT_TEAM = B3DFV278UN;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Serial-Box-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = "Serial Box";
