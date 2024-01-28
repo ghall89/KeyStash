@@ -5,12 +5,6 @@ func migrations(_ dbQueue: DatabaseQueue) throws {
 	var migrator = DatabaseMigrator()
 	do {
 		migrator.registerMigration("v1", migrate: { db in
-			try db.create(table: "attachment") { t in
-				t.column("id", .text).primaryKey().unique()
-				t.column("filename", .text).unique()
-				t.column("path", .text).unique()
-			}
-			
 			try db.create(table: "license") { t in
 				t.column("id", .text).primaryKey().unique()
 				t.column("softwareName", .text).notNull()
@@ -25,7 +19,7 @@ func migrations(_ dbQueue: DatabaseQueue) throws {
 				t.column("inTrash", .boolean).notNull().defaults(to: false)
 				t.column("trashDate", .date)
 				
-				t.column("attachmentId", .text).unique().references("attachment", onDelete: .setNull)
+				t.column("attachmentPath", .text).unique()
 			}
 		})
 		

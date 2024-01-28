@@ -8,7 +8,7 @@ func deleteAttachment(_ dbQueue: DatabaseQueue, attachmentId: String) throws {
 	do {
 		try dbQueue.write { db in
 //			try fileManager.trashItem(at: attachment.path, resultingItemURL: nil)
-			try Attachment.deleteOne(db, id: attachmentId)
+//			try Attachment.deleteOne(db, id: attachmentId)
 		}
 	} catch {
 		print("error: \(error)")

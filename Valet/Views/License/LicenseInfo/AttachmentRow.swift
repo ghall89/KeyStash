@@ -83,7 +83,7 @@ struct AttachmentRow: View {
 		if let fileFromDisk = getAttachment() {
 			do {
 				var updatedLicense = license
-				updatedLicense.attachmentId = fileFromDisk.id
+				updatedLicense.attachmentPath = fileFromDisk.id
 				try addAttachmentToLicense(databaseManager.dbQueue, data: updatedLicense, attachment: fileFromDisk)
 				databaseManager.fetchData()
 				file = fileFromDisk
@@ -107,12 +107,7 @@ struct AttachmentRow: View {
 	
 	private func setAttachment() {
 		do {
-			if let attachmentId = license.attachmentId {
-				let attachmentById = try fetchAttachment(
-					databaseManager.attachments,
-					id: attachmentId
-				)
-			}
+			
 		} catch {
 			print("Error: \(error)")
 		}

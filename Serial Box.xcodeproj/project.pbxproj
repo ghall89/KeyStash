@@ -50,13 +50,13 @@
 		D3C962002B1BDA6E008BE15D /* connectToDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C961FF2B1BDA6E008BE15D /* connectToDB.swift */; };
 		D3C962032B1BDF10008BE15D /* addLicense.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C962022B1BDF10008BE15D /* addLicense.swift */; };
 		D3C962052B1BDF8A008BE15D /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C962042B1BDF8A008BE15D /* DatabaseManager.swift */; };
-		D3CFBECF2ABB82A600C1D4BC /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CFBECE2ABB82A600C1D4BC /* Attachment.swift */; };
 		D3CFBED22ABB82C700C1D4BC /* getAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CFBED12ABB82C700C1D4BC /* getAttachment.swift */; };
 		D3CFBED42ABB841D00C1D4BC /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CFBED32ABB841D00C1D4BC /* Tag.swift */; };
 		D3D3F6522B1D1DCA00E951B2 /* migrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D3F6512B1D1DCA00E951B2 /* migrations.swift */; };
 		D3D3F6542B1E1A2F00E951B2 /* addAttachmentToLicense.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D3F6532B1E1A2F00E951B2 /* addAttachmentToLicense.swift */; };
 		D3DF9F6A2B2CCC3F00E41FC1 /* SwiftUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = D3DF9F692B2CCC3F00E41FC1 /* SwiftUIKit */; };
 		D3EC78912AC9DD0100C7E522 /* sortBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EC78902AC9DD0100C7E522 /* sortBy.swift */; };
+		D3EE10E62B63FD20002B46B0 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EE10E52B63FD20002B46B0 /* Attachment.swift */; };
 		D3F4B6EC2ABA25D3002AFDFD /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F4B6EB2ABA25D3002AFDFD /* Sidebar.swift */; };
 /* End PBXBuildFile section */
 
@@ -106,12 +106,12 @@
 		D3C961FF2B1BDA6E008BE15D /* connectToDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = connectToDB.swift; sourceTree = "<group>"; };
 		D3C962022B1BDF10008BE15D /* addLicense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addLicense.swift; sourceTree = "<group>"; };
 		D3C962042B1BDF8A008BE15D /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
-		D3CFBECE2ABB82A600C1D4BC /* Attachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Attachment.swift; sourceTree = "<group>"; };
 		D3CFBED12ABB82C700C1D4BC /* getAttachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getAttachment.swift; sourceTree = "<group>"; };
 		D3CFBED32ABB841D00C1D4BC /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		D3D3F6512B1D1DCA00E951B2 /* migrations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = migrations.swift; sourceTree = "<group>"; };
 		D3D3F6532B1E1A2F00E951B2 /* addAttachmentToLicense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addAttachmentToLicense.swift; sourceTree = "<group>"; };
 		D3EC78902AC9DD0100C7E522 /* sortBy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sortBy.swift; sourceTree = "<group>"; };
+		D3EE10E52B63FD20002B46B0 /* Attachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Attachment.swift; path = ../../../../../../.Trash/Attachment.swift; sourceTree = "<group>"; };
 		D3F4B6EB2ABA25D3002AFDFD /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -348,7 +348,7 @@
 		D3CFBED52ABB848300C1D4BC /* PersistableRecord */ = {
 			isa = PBXGroup;
 			children = (
-				D3CFBECE2ABB82A600C1D4BC /* Attachment.swift */,
+				D3EE10E52B63FD20002B46B0 /* Attachment.swift */,
 				D39942CF2AB509AE00B2DC39 /* License.swift */,
 				D3CFBED32ABB841D00C1D4BC /* Tag.swift */,
 			);
@@ -458,7 +458,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3CFBECF2ABB82A600C1D4BC /* Attachment.swift in Sources */,
 				D39942DA2AB509AF00B2DC39 /* AddLicense.swift in Sources */,
 				D3AACD242B4623E4008D01A8 /* deleteLicense.swift in Sources */,
 				D39551A12B1C332B00BCF076 /* emptyTrash.swift in Sources */,
@@ -499,6 +498,7 @@
 				D39942D82AB509AF00B2DC39 /* LicenceInfo.swift in Sources */,
 				D3CFBED22ABB82C700C1D4BC /* getAttachment.swift in Sources */,
 				D3C962002B1BDA6E008BE15D /* connectToDB.swift in Sources */,
+				D3EE10E62B63FD20002B46B0 /* Attachment.swift in Sources */,
 				D369F46E2AB8838300D8C6B1 /* importCSV.swift in Sources */,
 				D33797F82ABFAA6C00C5E6BC /* LicenseInfoRow.swift in Sources */,
 				D3949C872AC4B11100D893CD /* daysUntilDeleted.swift in Sources */,

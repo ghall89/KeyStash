@@ -17,10 +17,9 @@ struct License: Identifiable, Codable, FetchableRecord, PersistableRecord {
 	// trash status
 	var inTrash: Bool = false
 	var trashDate: Date?
-	
-	// attachment relation
-	var attachmentId: String?
-	static let attachment = belongsTo(Attachment.self, key: "attachmendId")
+
+	// attachment
+	var attachmentPath: String?
 	
 	// convert download string to a URL
 	var downloadUrl: URL? {
@@ -47,7 +46,7 @@ struct License: Identifiable, Codable, FetchableRecord, PersistableRecord {
 	init(
 		softwareName: String,
 		icon: Data?,
-		attachmentId: String? = nil,
+		attachmentPath: String? = nil,
 		licenseKey: String,
 		registeredToName: String,
 		registeredToEmail: String,
@@ -59,7 +58,7 @@ struct License: Identifiable, Codable, FetchableRecord, PersistableRecord {
 	) {
 		self.softwareName = softwareName
 		self.icon = icon
-		self.attachmentId = attachmentId
+		self.attachmentPath = attachmentPath
 		self.licenseKey = licenseKey
 		self.registeredToName = registeredToName
 		self.registeredToEmail = registeredToEmail
