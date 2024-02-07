@@ -3,23 +3,74 @@ import SwiftData
 
 struct ContentView: View {
 	@Environment(\.modelContext) private var modelContext
+	@EnvironmentObject var viewModes: ViewModes
+	@EnvironmentObject var authentication: Authentication
 	@Query private var items: [License]
-	
-	@State var showNewItemSheet: Bool = false
+	@AppStorage("sidebarSelection") var sidebarSelection: String = "all_apps"
+	@AppStorage("disableAnimations") private var disableAnimations: Bool = false
 	
 	var body: some View {
+		//		GeometryReader { geometry in
+		//			ZStack {
 		NavigationSplitView {
-			Sidebar(newItemSheet: $showNewItemSheet)
-				.navigationSplitViewColumnWidth(min: 180, ideal: 200)
+			Sidebar(selection: $sidebarSelection)
+				.navigationSplitViewColumnWidth(min: 160, ideal: 230)
+		} content: {
+			LicenseList(sidebarSelection: $sidebarSelection)
+				.navigationSplitViewColumnWidth(min: 340, ideal: 350)
 		} detail: {
-			Text("Select an item")
-				.font(.title)
-				.navigationSplitViewColumnWidth(min: 400, ideal: 700)
+			VStack(spacing: 10) {
+				Image(systemName: "app.dashed")
+					.font(.system(size: 80, weight: .thin))
+					.foregroundStyle(.secondary)
+				Text("Select an item")
+					.font(.title)
+					.foregroundStyle(.secondary)
+			}
+			.navigationSplitViewColumnWidth(min: 400, ideal: 700)
+			.toolbar {
+				ToolbarItem(content: {
+					Spacer()
+				})
+			}
 		}
-		.sheet(isPresented: $showNewItemSheet, content: {
-			AddLicense(newItemSheet: $showNewItemSheet)
-		})
+		
+		
+		//				if authentication.lockApp == true {
+		//					VStack {
+		//
+		//						Image(systemName: authentication.isAuthenticated ? "lock.open.fill" : "lock.fill")
+		//							.font(.system(size: 70))
+		//							.animation(.snappy, value: authentication.isAuthenticated)
+		//						Button("Unlock...", action: {
+		//							authenticate()
+		//						})
+		//					}
+		//					.frame(maxWidth: .infinity, maxHeight: .infinity)
+		//					.background(.thickMaterial)
+		//					.offset(y: authentication.isAuthenticated ? -geometry.size.height : 0)
+		//					.animation(.easeInOut, value: authentication.isAuthenticated)
+		//					.onAppear(perform: {
+		//						authenticate()
+		//					})
+		//				}
+		//			}
+		//		}
 	}
+	
+	//	private func authenticate() {
+	//		if authentication.lockApp == true && authentication.isAuthenticated == false {
+	//			authenticateUser(reason: "unlock app") { result in
+	//				switch result {
+	//					case .success(let success):
+	//						authentication.isAuthenticated = success
+	//						print("Authentication success: \(success)")
+	//					case .failure(let error):
+	//						print("Authentication failed with error: \(error)")
+	//				}
+	//			}
+	//		}
+	//	}
 }
 
 

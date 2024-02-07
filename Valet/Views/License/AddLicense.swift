@@ -2,68 +2,98 @@ import SwiftUI
 
 struct AddLicense: View {
 	@Environment(\.modelContext) private var modelContext
-	@Binding var newItemSheet: Bool
+	@EnvironmentObject var viewModes: ViewModes
+	@AppStorage("defaultName") private var defaultName: String = ""
+	@AppStorage("defaultEmail") private var defaultEmail: String = ""
 	
-	@State var newItem: License = License(softwareName: "", icon: nil, licenseKey: "", registeredToName: "", registeredToEmail: "", downloadUrlString: "", notes: "")
-	
-	@State var installedApps: [InstalledApp] = []
-	@State var selectedApp: UUID = UUID()
+	@State private var newItem: License = License(softwareName: "", icon: nil, attachment: nil, licenseKey: "", registeredToName: "", registeredToEmail: "", downloadUrlString: "", notes: "", inTrash: false)
+	@State private var tabSelection: String = "installed"
+	@State private var installedApps: [InstalledApp] = []
+	@State private var selectedApp: UUID = UUID()
+	@Binding var licenseSelection: UUID?
 	
 	var body: some View {
-		Form {
-			Picker("App Name:", selection: $selectedApp, content: {
-				ForEach(installedApps) { app in
-					HStack {
-						ZStack {
-							if let icon = app.icon {
-								Image(nsImage: icon )
-									.resizable()
-							} else {
-								Image("no_icon")
-									.resizable()
-							}
-						}
-						Text(app.name)
-					}
-					.tag(app.id)
+		VStack(spacing: 10) {
+			if !installedApps.isEmpty {
+				Picker("", selection: $tabSelection) {
+					Text("Choose Installed").tag("installed")
+					Text("Add Manually").tag("custom")
 				}
-			})
-			TextField("Download Link:", text: $newItem.downloadUrlString)
-			TextField("Registered To:", text: $newItem.registeredToName)
-			TextField("Email:", text: $newItem.registeredToEmail)
-			TextField("License Key:", text: $newItem.licenseKey)
-				.lineLimit(4, reservesSpace: true)
-			TextEditor(text: $newItem.notes)
-				.frame(height: 100)
+				.pickerStyle(.segmented)
+				.padding(.bottom)
+			}
+			switch(tabSelection) {
+				case "installed":
+					Picker("Select App: ", selection: $selectedApp, content: {
+						ForEach(installedApps) { app in
+							Text(app.name)
+								.tag(app.id)
+						}
+					})
+				case "custom":
+					HStack {
+						VStack {
+							Image(nsImage: newItem.iconNSImage )
+								.resizable()
+								.aspectRatio(contentMode: .fit)
+							Button("Select Icon...", action: {
+								if let iconData = getCustomIcon() {
+									newItem.icon = iconData
+								}
+							})
+						}
+						.frame(width: 160, height: 100)
+						Form {
+							TextField("App Name: ", text: $newItem.softwareName)
+						}
+					}
+				default:
+					Text("🤔")
+			}
+			
 			HStack {
 				Spacer()
 				Button("Cancel", action: {
-					newItemSheet.toggle()
+					viewModes.showNewAppSheet.toggle()
 				})
-				Button("Save", action: addItem)
+				Button("Add", action: {
+					Task {
+						addItem()
+					}
+				})
 					.keyboardShortcut(.defaultAction)
+					.disabled(tabSelection == "custom" && newItem.softwareName.count == 0)
 			}
+			.padding(.top)
 		}
 		.frame(width: 400)
 		.padding()
 		.onAppear {
 			let apps = getInstalledApps()
-			installedApps = apps
-			selectedApp = apps[0].id
-		}
-		.onChange(of: selectedApp, {
-			if let appFromList = installedApps.first(where: { $0.id == selectedApp }) {
-				print(appFromList)
-				newItem.softwareName = appFromList.name
-				newItem.icon = getNSImageAsData(image: ((appFromList.icon) ?? NSImage(named: "no_icon"))!)
+			if apps.isEmpty {
+				tabSelection = "custom"
+			} else {
+				installedApps = apps
+				selectedApp = apps[0].id
 			}
-		})
+		}
 	}
 	
 	private func addItem() {
+		let newId = newItem.id
 		withAnimation {
+			if tabSelection == "installed" {
+				if let appFromList = installedApps.first(where: { $0.id == selectedApp }) {
+					newItem.softwareName = appFromList.name
+					newItem.registeredToName = defaultName
+					newItem.registeredToEmail = defaultEmail
+					newItem.icon = getNSImageAsData(image: ((appFromList.icon) ?? NSImage(named: "no_icon"))!)
+				}
+			}
 			modelContext.insert(newItem)
 		}
-		newItemSheet.toggle()
+		licenseSelection = newId
+//		viewModes.editMode.toggle()
+		viewModes.showNewAppSheet.toggle()
 	}
 }

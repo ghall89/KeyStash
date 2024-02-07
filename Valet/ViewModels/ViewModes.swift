@@ -1,6 +1,8 @@
-import Observation
+import Foundation
+import SwiftUI
 
-@Observable
-final class ViewModes {
-	var editMode: Bool = false
+class ViewModes: ObservableObject {
+	@Published var editMode: Bool = false
+	@Published var showNewAppSheet: Bool = false
+	@Published var splitViewVisibility = NavigationSplitViewVisibility.all
 }

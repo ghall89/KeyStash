@@ -1,25 +1,33 @@
 import SwiftUI
 import SwiftData
+import CloudKit
 
 @main
 struct ValetApp: App {
-	var sharedModelContainer: ModelContainer = {
-		let schema = Schema([
-			License.self,
-		])
-		let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
-		
-		do {
-			return try ModelContainer(for: schema, configurations: [modelConfiguration])
-		} catch {
-			fatalError("Could not create ModelContainer: \(error)")
-		}
-	}()
+	@State private var viewModes = ViewModes()
+	@State private var editFormState = EditFormState()
 	
 	var body: some Scene {
 		WindowGroup {
 			ContentView()
+				.environmentObject(viewModes)
+				.environmentObject(editFormState)
+				.onAppear {
+					NSWindow.allowsAutomaticWindowTabbing = false
+				}
+				.frame(minHeight: 260)
 		}
-		.modelContainer(sharedModelContainer)
+		.commands {
+			MenuBar(viewModes: $viewModes)
+		}
+		.modelContainer(for: [
+			License.self,
+			Attachment.self,
+			Tag.self
+		])
+		
+		Settings {
+			AppSettings()
+		}
 	}
 }

@@ -9,8 +9,9 @@ func getInstalledApps() -> [InstalledApp] {
 		let appURLs = try fileManager.contentsOfDirectory(at: applicationsURL, includingPropertiesForKeys: nil, options: .skipsHiddenFiles)
 		
 		for appURL in appURLs {
-			if isNonSystemApp(appURL: appURL) {
-				nonSystemApps.append(InstalledApp(url: appURL))
+			if isNonSystemApp(appURL: appURL), let bundle = Bundle(url: appURL) {
+				let bundleId = bundle.bundleIdentifier
+				nonSystemApps.append(InstalledApp(url: appURL, bundleId: bundleId!))
 			}
 		}
 	} catch {

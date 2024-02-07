@@ -34,7 +34,7 @@ struct FilePickerView: NSViewControllerRepresentable {
 	func makeNSViewController(context: Context) -> NSViewController {
 		let viewController = NSViewController()
 		let openPanel = NSOpenPanel()
-		openPanel.allowedFileTypes = ["app"]
+		openPanel.allowedContentTypes = [.application]
 		openPanel.delegate = context.coordinator
 		openPanel.canChooseFiles = true
 		openPanel.canChooseDirectories = false
