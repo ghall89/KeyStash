@@ -2,13 +2,23 @@ import GRDB
 import AppKit
 
 // remove attachment from database, and move file to user's trash
-func deleteAttachment(_ dbQueue: DatabaseQueue, attachmentId: String) throws {
+func deleteAttachment(_ dbQueue: DatabaseQueue, license: License) throws {
 	let fileManager = FileManager.default
 	
 	do {
 		try dbQueue.write { db in
-//			try fileManager.trashItem(at: attachment.path, resultingItemURL: nil)
-//			try Attachment.deleteOne(db, id: attachmentId)
+			if let attachmentPath = license.attachmentPath {
+				try fileManager.trashItem(at: attachmentPath, resultingItemURL: nil)
+				
+				let columns: [ColumnAssignment] = [
+					Column("attachmentPath").set(to: nil)
+				]
+				
+				try License
+					.filter(Column("id") == license.id)
+					.updateAll(db, columns)
+				
+			}
 		}
 	} catch {
 		print("error: \(error)")

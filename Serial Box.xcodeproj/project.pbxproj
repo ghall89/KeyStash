@@ -43,7 +43,6 @@
 		D39942E12AB509AF00B2DC39 /* getAppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942D32AB509AF00B2DC39 /* getAppIcon.swift */; };
 		D3AACD242B4623E4008D01A8 /* deleteLicense.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AACD232B4623E4008D01A8 /* deleteLicense.swift */; };
 		D3B08F832AB6A5FD004715F5 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = D3B08F822AB6A5FD004715F5 /* MarkdownUI */; };
-		D3BA5FBF2B45ADD900F0B7C5 /* fetchAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BA5FBE2B45ADD900F0B7C5 /* fetchAttachment.swift */; };
 		D3BB2EA52AD07ACF006A3593 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB2EA42AD07ACE006A3593 /* Authentication.swift */; };
 		D3C6503B2AB74CF300E75461 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C6503A2AB74CF300E75461 /* MenuBar.swift */; };
 		D3C961FE2B1BD8EB008BE15D /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = D3C961FD2B1BD8EB008BE15D /* GRDB */; };
@@ -54,9 +53,9 @@
 		D3CFBED42ABB841D00C1D4BC /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CFBED32ABB841D00C1D4BC /* Tag.swift */; };
 		D3D3F6522B1D1DCA00E951B2 /* migrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D3F6512B1D1DCA00E951B2 /* migrations.swift */; };
 		D3D3F6542B1E1A2F00E951B2 /* addAttachmentToLicense.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D3F6532B1E1A2F00E951B2 /* addAttachmentToLicense.swift */; };
+		D3DBCAB92B72CD3E005839E0 /* SwiftCloudDrive in Frameworks */ = {isa = PBXBuildFile; productRef = D3DBCAB82B72CD3E005839E0 /* SwiftCloudDrive */; };
 		D3DF9F6A2B2CCC3F00E41FC1 /* SwiftUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = D3DF9F692B2CCC3F00E41FC1 /* SwiftUIKit */; };
 		D3EC78912AC9DD0100C7E522 /* sortBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EC78902AC9DD0100C7E522 /* sortBy.swift */; };
-		D3EE10E62B63FD20002B46B0 /* Attachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EE10E52B63FD20002B46B0 /* Attachment.swift */; };
 		D3F4B6EC2ABA25D3002AFDFD /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F4B6EB2ABA25D3002AFDFD /* Sidebar.swift */; };
 /* End PBXBuildFile section */
 
@@ -100,7 +99,6 @@
 		D39942D22AB509AF00B2DC39 /* getInstalledApps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getInstalledApps.swift; sourceTree = "<group>"; };
 		D39942D32AB509AF00B2DC39 /* getAppIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getAppIcon.swift; sourceTree = "<group>"; };
 		D3AACD232B4623E4008D01A8 /* deleteLicense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = deleteLicense.swift; sourceTree = "<group>"; };
-		D3BA5FBE2B45ADD900F0B7C5 /* fetchAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fetchAttachment.swift; sourceTree = "<group>"; };
 		D3BB2EA42AD07ACE006A3593 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		D3C6503A2AB74CF300E75461 /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		D3C961FF2B1BDA6E008BE15D /* connectToDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = connectToDB.swift; sourceTree = "<group>"; };
@@ -111,7 +109,6 @@
 		D3D3F6512B1D1DCA00E951B2 /* migrations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = migrations.swift; sourceTree = "<group>"; };
 		D3D3F6532B1E1A2F00E951B2 /* addAttachmentToLicense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addAttachmentToLicense.swift; sourceTree = "<group>"; };
 		D3EC78902AC9DD0100C7E522 /* sortBy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sortBy.swift; sourceTree = "<group>"; };
-		D3EE10E52B63FD20002B46B0 /* Attachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Attachment.swift; path = ../../../../../../.Trash/Attachment.swift; sourceTree = "<group>"; };
 		D3F4B6EB2ABA25D3002AFDFD /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -121,6 +118,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3B08F832AB6A5FD004715F5 /* MarkdownUI in Frameworks */,
+				D3DBCAB92B72CD3E005839E0 /* SwiftCloudDrive in Frameworks */,
 				D3DF9F6A2B2CCC3F00E41FC1 /* SwiftUIKit in Frameworks */,
 				D3C961FE2B1BD8EB008BE15D /* GRDB in Frameworks */,
 			);
@@ -311,7 +309,6 @@
 			children = (
 				D3D3F6532B1E1A2F00E951B2 /* addAttachmentToLicense.swift */,
 				D3127DAD2B352803004343EF /* deleteAttachment.swift */,
-				D3BA5FBE2B45ADD900F0B7C5 /* fetchAttachment.swift */,
 			);
 			path = Attachment;
 			sourceTree = "<group>";
@@ -348,7 +345,6 @@
 		D3CFBED52ABB848300C1D4BC /* PersistableRecord */ = {
 			isa = PBXGroup;
 			children = (
-				D3EE10E52B63FD20002B46B0 /* Attachment.swift */,
 				D39942CF2AB509AE00B2DC39 /* License.swift */,
 				D3CFBED32ABB841D00C1D4BC /* Tag.swift */,
 			);
@@ -376,6 +372,7 @@
 				D3B08F822AB6A5FD004715F5 /* MarkdownUI */,
 				D3C961FD2B1BD8EB008BE15D /* GRDB */,
 				D3DF9F692B2CCC3F00E41FC1 /* SwiftUIKit */,
+				D3DBCAB82B72CD3E005839E0 /* SwiftCloudDrive */,
 			);
 			productName = Valet;
 			productReference = D39942AC2AB5095A00B2DC39 /* Serial Box.app */;
@@ -410,6 +407,7 @@
 				D3B08F812AB6A5FD004715F5 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 				D3C961FC2B1BD8EB008BE15D /* XCRemoteSwiftPackageReference "GRDB" */,
 				D3DF9F682B2CCC3F00E41FC1 /* XCRemoteSwiftPackageReference "SwiftUIKit" */,
+				D3DBCAB72B72CD3E005839E0 /* XCRemoteSwiftPackageReference "SwiftCloudDrive" */,
 			);
 			productRefGroup = D39942AD2AB5095A00B2DC39 /* Products */;
 			projectDirPath = "";
@@ -490,7 +488,6 @@
 				D3EC78912AC9DD0100C7E522 /* sortBy.swift in Sources */,
 				D33797FA2ABFAA8700C5E6BC /* AttachmentRow.swift in Sources */,
 				D39942DB2AB509AF00B2DC39 /* LicenseList.swift in Sources */,
-				D3BA5FBF2B45ADD900F0B7C5 /* fetchAttachment.swift in Sources */,
 				D369F46C2AB87CEA00D8C6B1 /* exportCSV.swift in Sources */,
 				D3C6503B2AB74CF300E75461 /* MenuBar.swift in Sources */,
 				D3BB2EA52AD07ACF006A3593 /* Authentication.swift in Sources */,
@@ -498,7 +495,6 @@
 				D39942D82AB509AF00B2DC39 /* LicenceInfo.swift in Sources */,
 				D3CFBED22ABB82C700C1D4BC /* getAttachment.swift in Sources */,
 				D3C962002B1BDA6E008BE15D /* connectToDB.swift in Sources */,
-				D3EE10E62B63FD20002B46B0 /* Attachment.swift in Sources */,
 				D369F46E2AB8838300D8C6B1 /* importCSV.swift in Sources */,
 				D33797F82ABFAA6C00C5E6BC /* LicenseInfoRow.swift in Sources */,
 				D3949C872AC4B11100D893CD /* daysUntilDeleted.swift in Sources */,
@@ -737,6 +733,14 @@
 				kind = branch;
 			};
 		};
+		D3DBCAB72B72CD3E005839E0 /* XCRemoteSwiftPackageReference "SwiftCloudDrive" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/drewmccormack/SwiftCloudDrive.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.0;
+			};
+		};
 		D3DF9F682B2CCC3F00E41FC1 /* XCRemoteSwiftPackageReference "SwiftUIKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/danielsaidi/SwiftUIKit.git";
@@ -757,6 +761,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D3C961FC2B1BD8EB008BE15D /* XCRemoteSwiftPackageReference "GRDB" */;
 			productName = GRDB;
+		};
+		D3DBCAB82B72CD3E005839E0 /* SwiftCloudDrive */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D3DBCAB72B72CD3E005839E0 /* XCRemoteSwiftPackageReference "SwiftCloudDrive" */;
+			productName = SwiftCloudDrive;
 		};
 		D3DF9F692B2CCC3F00E41FC1 /* SwiftUIKit */ = {
 			isa = XCSwiftPackageProductDependency;

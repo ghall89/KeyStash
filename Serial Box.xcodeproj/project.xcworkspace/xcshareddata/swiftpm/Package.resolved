@@ -28,6 +28,15 @@
       }
     },
     {
+      "identity" : "swiftclouddrive",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/drewmccormack/SwiftCloudDrive.git",
+      "state" : {
+        "revision" : "ab85984451c9dc4aa14e9388b9490e4856bcc757",
+        "version" : "1.1.0"
+      }
+    },
+    {
       "identity" : "swiftuikit",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/danielsaidi/SwiftUIKit.git",

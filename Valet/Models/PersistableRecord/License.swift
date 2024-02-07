@@ -19,7 +19,7 @@ struct License: Identifiable, Codable, FetchableRecord, PersistableRecord {
 	var trashDate: Date?
 
 	// attachment
-	var attachmentPath: String?
+	var attachmentPath: URL?
 	
 	// convert download string to a URL
 	var downloadUrl: URL? {
@@ -46,7 +46,7 @@ struct License: Identifiable, Codable, FetchableRecord, PersistableRecord {
 	init(
 		softwareName: String,
 		icon: Data?,
-		attachmentPath: String? = nil,
+		attachmentPath: URL? = nil,
 		licenseKey: String,
 		registeredToName: String,
 		registeredToEmail: String,

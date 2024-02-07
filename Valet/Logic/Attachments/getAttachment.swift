@@ -1,7 +1,7 @@
 import Foundation
 import AppKit
 
-func getAttachment() -> Attachment? {
+func getAttachment() -> URL? {
 	let openPanel = NSOpenPanel()
 	let fileManager = FileManager.default
 	
@@ -39,7 +39,7 @@ func getAttachment() -> Attachment? {
 					to: fileDestination
 				)
 				
-				return Attachment(filename: sourceURL.lastPathComponent, path: fileDestination)
+				return fileDestination
 			} else {
 				print("Source file does not exist at \(sourceURL)")
 			}

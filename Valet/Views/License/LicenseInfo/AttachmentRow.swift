@@ -6,14 +6,13 @@ struct AttachmentRow: View {
 	@EnvironmentObject var viewModes: ViewModes
 	var license: License
 	
-	@State var file: Attachment? = nil
 	@State private var showDeleteAlert: Bool = false
 	let label = "Attachment"
 	
 	var body: some View {
 		VStack {
 			if viewModes.editMode == true {
-				if let attachment = file {
+				if let attachment = license.attachmentPath {
 					HStack {
 						Button(action: {
 							showDeleteAlert.toggle()
@@ -26,7 +25,7 @@ struct AttachmentRow: View {
 						VStack(alignment: .leading) {
 							Text(label)
 								.font(.caption)
-							Text(attachment.filename)
+							Text(attachment.lastPathComponent)
 								.fontDesign(.monospaced)
 						}
 					}
@@ -53,10 +52,10 @@ struct AttachmentRow: View {
 					})
 				}
 			} else {
-				if file != nil {
+				if license.attachmentPath != nil {
 					HStack(alignment: .top) {
 						Button(action: {
-							if let downloadableFile = file {
+							if let downloadableFile = license.attachmentPath {
 								exportAttachment(file: downloadableFile)
 							}
 						}, label: {
@@ -67,15 +66,12 @@ struct AttachmentRow: View {
 						VStack(alignment: .leading) {
 							Text(label)
 								.font(.caption)
-							Text(file?.filename ?? "")
+							Text(license.attachmentPath?.lastPathComponent ?? "")
 								.fontDesign(.monospaced)
 						}
 					}
 				}
 			}
-		}
-		.onChange(of: license.id, initial: true) {
-			setAttachment()
 		}
 	}
 	
@@ -83,10 +79,9 @@ struct AttachmentRow: View {
 		if let fileFromDisk = getAttachment() {
 			do {
 				var updatedLicense = license
-				updatedLicense.attachmentPath = fileFromDisk.id
+				updatedLicense.attachmentPath = fileFromDisk
 				try addAttachmentToLicense(databaseManager.dbQueue, data: updatedLicense, attachment: fileFromDisk)
 				databaseManager.fetchData()
-				file = fileFromDisk
 			} catch {
 				print("Error: \(error)")
 			}
@@ -94,20 +89,9 @@ struct AttachmentRow: View {
 	}
 	
 	private func removeAttachment() {
-		if let attachmentObj = file {
-			do {
-				try deleteAttachment(databaseManager.dbQueue, attachmentId: attachmentObj.id)
-				databaseManager.fetchData()
-				file = nil
-			} catch {
-				print("Error: \(error)")
-			}
-		}
-	}
-	
-	private func setAttachment() {
 		do {
-			
+			try deleteAttachment(databaseManager.dbQueue, license: license)
+			databaseManager.fetchData()
 		} catch {
 			print("Error: \(error)")
 		}

@@ -70,7 +70,7 @@ struct LicenceInfo: View {
 						formValue: $formState.licenseKey,
 						label: "License Key")
 					
-//					AttachmentRow(license: license)
+					AttachmentRow(license: license)
 					Divider()
 					Text("Notes")
 						.font(.caption)

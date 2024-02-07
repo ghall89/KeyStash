@@ -1,14 +1,12 @@
 import Foundation
 import GRDB
 
-func addAttachmentToLicense(_ dbQueue: DatabaseQueue, data: License, attachment: Attachment) throws {
+func addAttachmentToLicense(_ dbQueue: DatabaseQueue, data: License, attachment: URL) throws {
 	do {
 		try dbQueue.write { db in
-			try attachment.insert(db)
-			
-			// update license w/ attachment id
+			// update license w/ attachment
 			let columns: [ColumnAssignment] = [
-				Column("attachmentId").set(to: attachment.id)
+				Column("attachmentPath").set(to: attachment)
 			]
 			
 			try License
