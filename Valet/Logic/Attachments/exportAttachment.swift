@@ -1,14 +1,20 @@
 import Foundation
 import AppKit
 
-func exportAttachment(file: Attachment) {
+func exportAttachment(file: URL) {
 	let savePanel = NSSavePanel()
-	savePanel.nameFieldStringValue = file.filename
+	let fileManager = FileManager.default
+	savePanel.nameFieldStringValue = file.lastPathComponent
 	
 	if savePanel.runModal() == .OK {
-		let path = savePanel.url?.path
+		print(file.path)
 		do {
-			try file.data.write(to: URL(filePath: path!))
+			if let destinationPath = savePanel.url {
+				try fileManager.copyItem(
+					at: file,
+					to: destinationPath
+				)
+			}
 		} catch {
 			print("Error: \(error.localizedDescription)")
 		}

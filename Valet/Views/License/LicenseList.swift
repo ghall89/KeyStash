@@ -1,18 +1,16 @@
 import SwiftUI
 import AppKit
-import SwiftData
 
 struct LicenseList: View {
-	@Environment(\.modelContext) private var modelContext
+	@EnvironmentObject var databaseManager: DatabaseManager
 	@EnvironmentObject var viewModes: ViewModes
-	@Query private var items: [License]
 	
 	@Binding var sidebarSelection: String
-	
+
 	@State private var searchString: String = ""
 	@State private var confirmDelete: Bool = false
 	@State private var confirmDeleteAll: Bool = false
-	@State private var selection: UUID? = nil
+	@State private var selection: String? = nil
 	
 	@AppStorage("selectedSort") private var selectedSort: SortOptions = .byName
 	@AppStorage("selectedSortOrder") private var selectedSortOrder: OrderOptions = .asc
@@ -47,89 +45,55 @@ struct LicenseList: View {
 								}
 								HighlightableText(text: item.softwareName, highlight: searchString)
 								Spacer()
-//								if item.inTrash == true {
-//									Text("?? Days")
-//										.foregroundStyle(Color.red)
-//								}
 							}
 						})
 						.contextMenu {
 							if item.inTrash == false {
 								Button("Move to Trash", role: .destructive, action: {
-									moveToTrash(item: item)
+									moveToTrash(item)
 								})
 							} else {
 								Button("Restore", role: .destructive, action: {
-									item.inTrash = false
-									item.trashDate = nil
+									moveToTrash(item)
 								})
 							}
 						}
 					}
 				}
 			}
-			.onChange(of: selection, {
-				if viewModes.editMode == true {
-					viewModes.editMode.toggle()
-				}
-			})
-			.animation(disableAnimations == false ? .easeIn : nil, value: filterItems())
 			
-			VStack {
-				HStack {
-					NSSearchFieldWrapper(searchText: $searchString)
-						.textFieldStyle(RoundedBorderTextFieldStyle())
-					
-					Menu(content: {
-						Picker("Sort By", selection: $selectedSort, content: {
-							ForEach(SortOptions.allCases, id: \.self) { sortOption in
-								Text(sortOption.rawValue).tag(sortOption)
-							}
-						})
-						Picker("Sort Order", selection: $selectedSortOrder, content: {
-							ForEach(OrderOptions.allCases, id: \.self) { orderOption in
-								Text(orderOption.rawValue).tag(orderOption)
-							}
-						})
-					}, label: {
-						Image(systemName: "arrow.up.arrow.down")
-					})
-					.menuStyle(BorderlessButtonMenuStyle())
-					.frame(width: 40)
-				}
-				.padding(8)
-			}
-			.background(Material.ultraThin)
+			SearchBar(searchString: $searchString)
 		}
 		.frame(minWidth: 340)
 		.toolbar {
-			if viewModes.splitViewVisibility != NavigationSplitViewVisibility.detailOnly {
-				ToolbarItem {
-					if sidebarSelection == "trash" {
-						Button(
-							role: .destructive,
-							action: {
-								confirmDeleteAll.toggle()
-							}, label: {
-								Label("Empty Trash", systemImage: "trash.slash")
-							})
-						.disabled(!items.contains(where: { $0.inTrash == true }))
-						.help("Empty Trash")
-					} else {
-						Button(action: {
-							viewModes.showNewAppSheet.toggle()
+			ToolbarItem {
+				if sidebarSelection == "trash" {
+					Button(
+						role: .destructive,
+						action: {
+							confirmDeleteAll.toggle()
 						}, label: {
-							Label("Add Item", systemImage: "plus")
+							Label("Empty Trash", systemImage: "trash.slash")
 						})
-						.help("Add Item")
-					}
+//					.disabled(databaseManager.licenses.contains(where: { $0.inTrash == true }))
+					.help("Empty Trash")
+				} else {
+					Button(action: {
+						viewModes.showNewAppSheet.toggle()
+					}, label: {
+						Label("Add Item", systemImage: "plus")
+					})
+					.help("Add Item")
 				}
 			}
+			
 		}
+		.onAppear(perform: databaseManager.fetchData)
 		.navigationTitle(snakeToTitleCase(sidebarSelection))
 		.confirmationDialog("Are you sure you want to empty the trash? Any files you have attached will also be deleted.", isPresented: $confirmDeleteAll, actions: {
 			Button("Empty Trash", role: .destructive, action: {
-				emptyTrash()
+				emptyTrash(databaseManager.dbQueue)
+				databaseManager.fetchData()
 				confirmDeleteAll.toggle()
 			})
 			Button("Cancel", role: .cancel, action: {
@@ -141,39 +105,21 @@ struct LicenseList: View {
 		})
 	}
 	
-	private func resetSelection(itemId: UUID) {
+	private func resetSelection(itemId: String) {
 		if itemId == selection {
 			selection = nil
 		}
 	}
-	
-	private func moveToTrash(item: License) {
-		item.inTrash = true
-		item.trashDate = Date()
-		resetSelection(itemId: item.id)
-	}
-	
-	private func deleteItems(offsets: IndexSet) {
-		withAnimation {
-			for index in offsets {
-				resetSelection(itemId: items[index].id)
-				modelContext.delete(items[index])
-			}
-		}
-	}
-	
-	private func emptyTrash() {
 		
-		let licensePredicate = #Predicate<License> { item in
-			item.inTrash == true
-		}
-		selection = nil
-		withAnimation {
-			do {
-				try modelContext.delete(model: License.self, where: licensePredicate)
-			} catch {
-				fatalError(error.localizedDescription)
-			}
+	private func moveToTrash(_ item: License) {
+		do {
+			var updatedLicense = item
+			updatedLicense.inTrash.toggle()
+			try updateLicense(databaseManager.dbQueue, data: updatedLicense)
+			databaseManager.fetchData()
+			resetSelection(itemId: item.id)
+		} catch {
+			print("update failed: \(error)")
 		}
 	}
 	
@@ -182,14 +128,15 @@ struct LicenseList: View {
 		
 		switch sidebarSelection {
 			case "all_apps":
-				filteredItems = items.filter { $0.inTrash == false }
+				filteredItems = databaseManager.licenses.filter { $0.inTrash == false }
 			case "trash":
-				filteredItems = items.filter { $0.inTrash == true }
+				filteredItems = databaseManager.licenses.filter { $0.inTrash == true }
 			default:
-				filteredItems = items
+				filteredItems = databaseManager.licenses
 		}
 		return filteredItems
 			.filter { searchString.count > 0 ? $0.softwareName.lowercased().contains(searchString.lowercased()) : true }
 			.sorted(by: sortBy(sort: selectedSort, order: selectedSortOrder))
 	}
+		
 }

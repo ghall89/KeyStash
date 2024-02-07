@@ -1,12 +1,11 @@
 import SwiftUI
-import SwiftData
 import MarkdownUI
-import AlertToast
 
 struct LicenceInfo: View {
+	@EnvironmentObject var databaseManager: DatabaseManager
 	@EnvironmentObject var viewModes: ViewModes
 	@EnvironmentObject var formState: EditFormState
-	@Bindable var license: License
+	var license: License
 	
 	@State private var showToast: Bool = false
 	
@@ -71,7 +70,7 @@ struct LicenceInfo: View {
 						formValue: $formState.licenseKey,
 						label: "License Key")
 					
-					AttachmentRow(file: $license.attachment)
+					AttachmentRow(license: license)
 					Divider()
 					Text("Notes")
 						.font(.caption)
@@ -89,8 +88,8 @@ struct LicenceInfo: View {
 		}
 		.frame(maxWidth: .infinity)
 		.environmentObject(formState)
-		.toast(isPresenting: $showToast) {
-			AlertToast(type: .complete(.accent), title: "Copied to Clipboard")
+		.onAppear {
+			print(license)
 		}
 		.toolbar {
 			ToolbarItem {
@@ -103,7 +102,6 @@ struct LicenceInfo: View {
 						viewModes.editMode.toggle()
 					}, label: {
 						Image(systemName: "checkmark.circle")
-//							.contentTransition(.symbolEffect(.replace.downUp.byLayer))
 					})
 					.disabled(!isEdited())
 					.keyboardShortcut(KeyEquivalent("s"))
@@ -118,7 +116,6 @@ struct LicenceInfo: View {
 					viewModes.editMode.toggle()
 				}, label: {
 					Image(systemName: viewModes.editMode == true ? "xmark.circle" : "square.and.pencil")
-//						.contentTransition(.symbolEffect(.replace.downUp.byLayer))
 				})
 				.help(viewModes.editMode == true ? "Cancel" : "Edit")
 			}
@@ -135,13 +132,19 @@ struct LicenceInfo: View {
 	}
 	
 	private func saveFormState() {
-		license.softwareName = formState.softwareName
-		license.downloadUrlString = formState.urlString
-		license.registeredToName = formState.registeredToName
-		license.registeredToEmail = formState.registeredToEmail
-		license.licenseKey = formState.licenseKey
-		license.notes = formState.notes
-		license.updatedDate = Date()
+		do {
+			var updatedLicense = license
+			updatedLicense.softwareName = formState.softwareName
+			updatedLicense.downloadUrlString = formState.urlString
+			updatedLicense.registeredToName = formState.registeredToName
+			updatedLicense.registeredToEmail = formState.registeredToEmail
+			updatedLicense.licenseKey = formState.licenseKey
+			updatedLicense.notes = formState.notes
+			try updateLicense(databaseManager.dbQueue, data: updatedLicense)
+			databaseManager.fetchData()
+		} catch {
+			print("update failed: \(error)")
+		}
 	}
 	
 	private func isEdited() -> Bool {

@@ -1,8 +1,6 @@
 import SwiftUI
-import SwiftData
 
 struct MenuBar: Commands {
-	@Query private var items: [License]
 	@Binding var viewModes: ViewModes
 	
 	var body: some Commands {
