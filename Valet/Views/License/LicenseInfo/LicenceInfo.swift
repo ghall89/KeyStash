@@ -1,5 +1,6 @@
 import SwiftUI
 import MarkdownUI
+import AlertToast
 
 struct LicenceInfo: View {
 	@EnvironmentObject var databaseManager: DatabaseManager
@@ -88,8 +89,8 @@ struct LicenceInfo: View {
 		}
 		.frame(maxWidth: .infinity)
 		.environmentObject(formState)
-		.onAppear {
-			print(license)
+		.toast(isPresenting: $showToast){
+			AlertToast(type: .regular, title: "Copied to Clipboard")
 		}
 		.toolbar {
 			ToolbarItem {
@@ -143,7 +144,7 @@ struct LicenceInfo: View {
 			try updateLicense(databaseManager.dbQueue, data: updatedLicense)
 			databaseManager.fetchData()
 		} catch {
-			print("update failed: \(error)")
+			logger.error("ERROR: \(error)")
 		}
 	}
 	

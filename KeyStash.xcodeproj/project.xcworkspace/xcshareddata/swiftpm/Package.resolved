@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "alerttoast",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/elai950/AlertToast.git",
+      "state" : {
+        "revision" : "b39252eacd159904afd7d718bba0afabb87f2f2f",
+        "version" : "1.3.9"
+      }
+    },
+    {
       "identity" : "grdb.swift",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/groue/GRDB.swift",
@@ -34,15 +43,6 @@
       "state" : {
         "revision" : "ab85984451c9dc4aa14e9388b9490e4856bcc757",
         "version" : "1.1.0"
-      }
-    },
-    {
-      "identity" : "swiftuikit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/danielsaidi/SwiftUIKit.git",
-      "state" : {
-        "revision" : "4027af06475ca407161e55e0db6539b1eccefb5d",
-        "version" : "4.1.2"
       }
     }
   ],

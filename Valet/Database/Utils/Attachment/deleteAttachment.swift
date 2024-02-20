@@ -2,6 +2,7 @@ import GRDB
 import AppKit
 
 // remove attachment from database, and move file to user's trash
+
 func deleteAttachment(_ dbQueue: DatabaseQueue, license: License) throws {
 	let fileManager = FileManager.default
 	
@@ -21,6 +22,6 @@ func deleteAttachment(_ dbQueue: DatabaseQueue, license: License) throws {
 			}
 		}
 	} catch {
-		print("error: \(error)")
+		logger.error("ERROR: \(error)")
 	}
 }

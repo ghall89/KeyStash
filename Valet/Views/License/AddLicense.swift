@@ -61,8 +61,8 @@ struct AddLicense: View {
 						addItem()
 					}
 				})
-					.keyboardShortcut(.defaultAction)
-					.disabled(tabSelection == "custom" && newItem.softwareName.count == 0)
+				.keyboardShortcut(.defaultAction)
+				.disabled(tabSelection == "custom" && newItem.softwareName.count == 0)
 			}
 			.padding(.top)
 		}
@@ -95,10 +95,10 @@ struct AddLicense: View {
 			try addLicense(databaseManager.dbQueue, data: newItem)
 			databaseManager.fetchData()
 		} catch {
-			print("failed to create license")
+			logger.error("Failed to create license!")
 		}
 		licenseSelection = newId
-//		viewModes.editMode.toggle()
+		//		viewModes.editMode.toggle()
 		viewModes.showNewAppSheet.toggle()
 	}
 }

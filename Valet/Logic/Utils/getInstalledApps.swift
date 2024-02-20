@@ -1,5 +1,7 @@
 import Foundation
 
+// get and return a list of non-system apps installed on user's device
+
 func getInstalledApps() -> [InstalledApp] {
 	let applicationsURL = URL(fileURLWithPath: "/Applications")
 	let fileManager = FileManager.default
@@ -15,7 +17,7 @@ func getInstalledApps() -> [InstalledApp] {
 			}
 		}
 	} catch {
-		print("Error: \(error.localizedDescription)")
+		logger.error("ERROR: \(error)")
 	}
 	
 	return nonSystemApps.sorted { $0.name < $1.name }

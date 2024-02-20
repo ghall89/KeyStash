@@ -54,8 +54,9 @@
 		D3D3F6522B1D1DCA00E951B2 /* migrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D3F6512B1D1DCA00E951B2 /* migrations.swift */; };
 		D3D3F6542B1E1A2F00E951B2 /* addAttachmentToLicense.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D3F6532B1E1A2F00E951B2 /* addAttachmentToLicense.swift */; };
 		D3DBCAB92B72CD3E005839E0 /* SwiftCloudDrive in Frameworks */ = {isa = PBXBuildFile; productRef = D3DBCAB82B72CD3E005839E0 /* SwiftCloudDrive */; };
-		D3DF9F6A2B2CCC3F00E41FC1 /* SwiftUIKit in Frameworks */ = {isa = PBXBuildFile; productRef = D3DF9F692B2CCC3F00E41FC1 /* SwiftUIKit */; };
 		D3EC78912AC9DD0100C7E522 /* sortBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EC78902AC9DD0100C7E522 /* sortBy.swift */; };
+		D3EDC9D82B73F0BD001D85B6 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = D3EDC9D72B73F0BD001D85B6 /* AlertToast */; };
+		D3EDC9DA2B73F2B1001D85B6 /* iCloudStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EDC9D92B73F2B1001D85B6 /* iCloudStore.swift */; };
 		D3F4B6EC2ABA25D3002AFDFD /* Sidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F4B6EB2ABA25D3002AFDFD /* Sidebar.swift */; };
 /* End PBXBuildFile section */
 
@@ -82,7 +83,7 @@
 		D395519E2B1C23E000BCF076 /* updateLicense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = updateLicense.swift; sourceTree = "<group>"; };
 		D39551A02B1C332B00BCF076 /* emptyTrash.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = emptyTrash.swift; sourceTree = "<group>"; };
 		D39697912ABCCB8C00A9F664 /* PrivacyInfo.xcprivacy */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = PrivacyInfo.xcprivacy; path = Valet/PrivacyInfo.xcprivacy; sourceTree = SOURCE_ROOT; };
-		D39942AC2AB5095A00B2DC39 /* Serial Box.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Serial Box.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		D39942AC2AB5095A00B2DC39 /* KeyStash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeyStash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		D39942B82AB5095B00B2DC39 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		D39942BA2AB5095B00B2DC39 /* Valet.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Valet.entitlements; sourceTree = "<group>"; };
 		D39942C02AB509AE00B2DC39 /* ValetApp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValetApp.swift; sourceTree = "<group>"; };
@@ -109,6 +110,7 @@
 		D3D3F6512B1D1DCA00E951B2 /* migrations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = migrations.swift; sourceTree = "<group>"; };
 		D3D3F6532B1E1A2F00E951B2 /* addAttachmentToLicense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addAttachmentToLicense.swift; sourceTree = "<group>"; };
 		D3EC78902AC9DD0100C7E522 /* sortBy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sortBy.swift; sourceTree = "<group>"; };
+		D3EDC9D92B73F2B1001D85B6 /* iCloudStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudStore.swift; sourceTree = "<group>"; };
 		D3F4B6EB2ABA25D3002AFDFD /* Sidebar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Sidebar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -118,8 +120,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3B08F832AB6A5FD004715F5 /* MarkdownUI in Frameworks */,
+				D3EDC9D82B73F0BD001D85B6 /* AlertToast in Frameworks */,
 				D3DBCAB92B72CD3E005839E0 /* SwiftCloudDrive in Frameworks */,
-				D3DF9F6A2B2CCC3F00E41FC1 /* SwiftUIKit in Frameworks */,
 				D3C961FE2B1BD8EB008BE15D /* GRDB in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -200,7 +202,7 @@
 		D39942AD2AB5095A00B2DC39 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				D39942AC2AB5095A00B2DC39 /* Serial Box.app */,
+				D39942AC2AB5095A00B2DC39 /* KeyStash.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -316,6 +318,7 @@
 		D3C961F92B1BD7EE008BE15D /* Database */ = {
 			isa = PBXGroup;
 			children = (
+				D3EDC9D92B73F2B1001D85B6 /* iCloudStore.swift */,
 				D3C961FF2B1BDA6E008BE15D /* connectToDB.swift */,
 				D3D3F6512B1D1DCA00E951B2 /* migrations.swift */,
 				D3C962012B1BDEFF008BE15D /* Utils */,
@@ -354,9 +357,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		D39942AB2AB5095A00B2DC39 /* Serial Box */ = {
+		D39942AB2AB5095A00B2DC39 /* KeyStash */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = D39942BD2AB5095B00B2DC39 /* Build configuration list for PBXNativeTarget "Serial Box" */;
+			buildConfigurationList = D39942BD2AB5095B00B2DC39 /* Build configuration list for PBXNativeTarget "KeyStash" */;
 			buildPhases = (
 				D39942A82AB5095A00B2DC39 /* Sources */,
 				D39942A92AB5095A00B2DC39 /* Frameworks */,
@@ -367,15 +370,15 @@
 			);
 			dependencies = (
 			);
-			name = "Serial Box";
+			name = KeyStash;
 			packageProductDependencies = (
 				D3B08F822AB6A5FD004715F5 /* MarkdownUI */,
 				D3C961FD2B1BD8EB008BE15D /* GRDB */,
-				D3DF9F692B2CCC3F00E41FC1 /* SwiftUIKit */,
 				D3DBCAB82B72CD3E005839E0 /* SwiftCloudDrive */,
+				D3EDC9D72B73F0BD001D85B6 /* AlertToast */,
 			);
 			productName = Valet;
-			productReference = D39942AC2AB5095A00B2DC39 /* Serial Box.app */;
+			productReference = D39942AC2AB5095A00B2DC39 /* KeyStash.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -394,7 +397,7 @@
 					};
 				};
 			};
-			buildConfigurationList = D39942A72AB5095A00B2DC39 /* Build configuration list for PBXProject "Serial Box" */;
+			buildConfigurationList = D39942A72AB5095A00B2DC39 /* Build configuration list for PBXProject "KeyStash" */;
 			compatibilityVersion = "Xcode 15.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -406,14 +409,14 @@
 			packageReferences = (
 				D3B08F812AB6A5FD004715F5 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 				D3C961FC2B1BD8EB008BE15D /* XCRemoteSwiftPackageReference "GRDB" */,
-				D3DF9F682B2CCC3F00E41FC1 /* XCRemoteSwiftPackageReference "SwiftUIKit" */,
 				D3DBCAB72B72CD3E005839E0 /* XCRemoteSwiftPackageReference "SwiftCloudDrive" */,
+				D3EDC9D62B73F0BD001D85B6 /* XCRemoteSwiftPackageReference "AlertToast" */,
 			);
 			productRefGroup = D39942AD2AB5095A00B2DC39 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				D39942AB2AB5095A00B2DC39 /* Serial Box */,
+				D39942AB2AB5095A00B2DC39 /* KeyStash */,
 			);
 		};
 /* End PBXProject section */
@@ -486,6 +489,7 @@
 				D39942DE2AB509AF00B2DC39 /* License.swift in Sources */,
 				D39942E02AB509AF00B2DC39 /* getInstalledApps.swift in Sources */,
 				D3EC78912AC9DD0100C7E522 /* sortBy.swift in Sources */,
+				D3EDC9DA2B73F2B1001D85B6 /* iCloudStore.swift in Sources */,
 				D33797FA2ABFAA8700C5E6BC /* AttachmentRow.swift in Sources */,
 				D39942DB2AB509AF00B2DC39 /* LicenseList.swift in Sources */,
 				D369F46C2AB87CEA00D8C6B1 /* exportCSV.swift in Sources */,
@@ -642,7 +646,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Serial-Box-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Serial Box";
+				INFOPLIST_KEY_CFBundleDisplayName = KeyStash;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -651,8 +655,10 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ghalldev.SerialBox;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ghalldev.KeyStash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = macosx;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
@@ -677,7 +683,7 @@
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Serial-Box-Info.plist";
-				INFOPLIST_KEY_CFBundleDisplayName = "Serial Box";
+				INFOPLIST_KEY_CFBundleDisplayName = KeyStash;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -686,8 +692,10 @@
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = com.ghalldev.SerialBox;
+				PRODUCT_BUNDLE_IDENTIFIER = com.ghalldev.KeyStash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = macosx;
+				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 			};
@@ -696,7 +704,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		D39942A72AB5095A00B2DC39 /* Build configuration list for PBXProject "Serial Box" */ = {
+		D39942A72AB5095A00B2DC39 /* Build configuration list for PBXProject "KeyStash" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D39942BB2AB5095B00B2DC39 /* Debug */,
@@ -705,7 +713,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		D39942BD2AB5095B00B2DC39 /* Build configuration list for PBXNativeTarget "Serial Box" */ = {
+		D39942BD2AB5095B00B2DC39 /* Build configuration list for PBXNativeTarget "KeyStash" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				D39942BE2AB5095B00B2DC39 /* Debug */,
@@ -741,12 +749,12 @@
 				minimumVersion = 1.1.0;
 			};
 		};
-		D3DF9F682B2CCC3F00E41FC1 /* XCRemoteSwiftPackageReference "SwiftUIKit" */ = {
+		D3EDC9D62B73F0BD001D85B6 /* XCRemoteSwiftPackageReference "AlertToast" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/danielsaidi/SwiftUIKit.git";
+			repositoryURL = "https://github.com/elai950/AlertToast.git";
 			requirement = {
 				kind = upToNextMajorVersion;
-				minimumVersion = 4.1.2;
+				minimumVersion = 1.3.9;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
@@ -767,10 +775,10 @@
 			package = D3DBCAB72B72CD3E005839E0 /* XCRemoteSwiftPackageReference "SwiftCloudDrive" */;
 			productName = SwiftCloudDrive;
 		};
-		D3DF9F692B2CCC3F00E41FC1 /* SwiftUIKit */ = {
+		D3EDC9D72B73F0BD001D85B6 /* AlertToast */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D3DF9F682B2CCC3F00E41FC1 /* XCRemoteSwiftPackageReference "SwiftUIKit" */;
-			productName = SwiftUIKit;
+			package = D3EDC9D62B73F0BD001D85B6 /* XCRemoteSwiftPackageReference "AlertToast" */;
+			productName = AlertToast;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

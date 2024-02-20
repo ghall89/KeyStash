@@ -15,7 +15,7 @@ func saveSettingToKeychain(value: Bool) {
 	let status = SecItemAdd(query as CFDictionary, nil)
 	
 	if status != errSecSuccess {
-		print("Error saving to Keychain: \(status)")
+		logger.error("Error saving to Keychain: \(status)")
 	}
 }
 
@@ -33,7 +33,7 @@ func retrieveSettingFromKeychain() -> Bool {
 	if status == errSecSuccess, let data = retrievedData as? Data, let value = data.first {
 		return value == 1
 	} else {
-		print("Error retrieving from Keychain: \(status)")
+		logger.error("Error retrieving from Keychain: \(status)")
 		return false
 	}
 }

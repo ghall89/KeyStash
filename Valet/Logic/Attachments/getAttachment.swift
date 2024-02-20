@@ -1,6 +1,8 @@
 import Foundation
 import AppKit
 
+// display file open dialog and copy selected file to application container
+
 func getAttachment() -> URL? {
 	let openPanel = NSOpenPanel()
 	let fileManager = FileManager.default
@@ -12,7 +14,7 @@ func getAttachment() -> URL? {
 	if openPanel.runModal() == .OK {
 		do {
 			guard let sourceURL = openPanel.urls.first else {
-				print("No file selected.")
+				logger.warning("No file selected.")
 				return nil
 			}
 			
@@ -28,8 +30,8 @@ func getAttachment() -> URL? {
 			
 			try fileManager.createDirectory(at: destinationURL, withIntermediateDirectories: true, attributes: nil)
 			
-			print("Source Path: \(sourceURL.path)")
-			print("Destination Path: \(destinationURL.path)")
+			logger.log("Source: \(sourceURL.path)")
+			logger.log("Destination: \(destinationURL.path)")
 			
 			let fileDestination = destinationURL.appendingPathComponent(sourceURL.lastPathComponent)
 
@@ -41,11 +43,11 @@ func getAttachment() -> URL? {
 				
 				return fileDestination
 			} else {
-				print("Source file does not exist at \(sourceURL)")
+				logger.error("Source file does not exist at \(sourceURL)")
 			}
 			
 		} catch {
-			print("Error: \(error.localizedDescription)")
+			logger.error("ERROR: \(error)")
 			return nil
 		}
 	}

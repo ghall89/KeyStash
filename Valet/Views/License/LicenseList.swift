@@ -119,7 +119,7 @@ struct LicenseList: View {
 			databaseManager.fetchData()
 			resetSelection(itemId: item.id)
 		} catch {
-			print("update failed: \(error)")
+			logger.error("ERROR: \(error)")
 		}
 	}
 	

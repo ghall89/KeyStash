@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "D39942AB2AB5095A00B2DC39"
-               BuildableName = "Serial Box.app"
-               BlueprintName = "Serial Box"
-               ReferencedContainer = "container:Serial Box.xcodeproj">
+               BuildableName = "KeyStash.app"
+               BlueprintName = "KeyStash"
+               ReferencedContainer = "container:KeyStash.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -44,9 +44,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D39942AB2AB5095A00B2DC39"
-            BuildableName = "Serial Box.app"
-            BlueprintName = "Serial Box"
-            ReferencedContainer = "container:Serial Box.xcodeproj">
+            BuildableName = "KeyStash.app"
+            BlueprintName = "KeyStash"
+            ReferencedContainer = "container:KeyStash.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -61,9 +61,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "D39942AB2AB5095A00B2DC39"
-            BuildableName = "Serial Box.app"
-            BlueprintName = "Serial Box"
-            ReferencedContainer = "container:Serial Box.xcodeproj">
+            BuildableName = "KeyStash.app"
+            BlueprintName = "KeyStash"
+            ReferencedContainer = "container:KeyStash.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

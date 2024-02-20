@@ -25,6 +25,6 @@ func migrations(_ dbQueue: DatabaseQueue) throws {
 		
 		try migrator.migrate(dbQueue)
 	} catch {
-		print("migration failed: \(error)")
+		logger.error("ERROR: \(error)")
 	}
 }

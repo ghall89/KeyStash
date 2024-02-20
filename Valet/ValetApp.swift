@@ -1,4 +1,7 @@
 import SwiftUI
+import OSLog
+
+let logger = Logger(subsystem: "com.ghalldev.KeyStash", category: "keystash-logging")
 
 @main
 struct ValetApp: App {
@@ -18,7 +21,10 @@ struct ValetApp: App {
 				.frame(minHeight: 260)
 		}
 		.commands {
-			MenuBar(viewModes: $viewModes)
+			MenuBar(
+				viewModes: $viewModes,
+				licenses: databaseManager.licenses
+			)
 		}
 		
 		Settings {

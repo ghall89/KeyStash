@@ -83,7 +83,7 @@ struct AttachmentRow: View {
 				try addAttachmentToLicense(databaseManager.dbQueue, data: updatedLicense, attachment: fileFromDisk)
 				databaseManager.fetchData()
 			} catch {
-				print("Error: \(error)")
+				logger.error("ERROR: \(error)")
 			}
 		}
 	}
@@ -93,7 +93,7 @@ struct AttachmentRow: View {
 			try deleteAttachment(databaseManager.dbQueue, license: license)
 			databaseManager.fetchData()
 		} catch {
-			print("Error: \(error)")
+			logger.error("ERROR: \(error)")
 		}
 	}
 }

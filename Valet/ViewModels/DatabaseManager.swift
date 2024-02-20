@@ -1,5 +1,6 @@
 import Foundation
 import GRDB
+import SwiftCloudDrive
 
 class DatabaseManager: ObservableObject {
 	@Published var dbQueue: DatabaseQueue
@@ -22,7 +23,7 @@ class DatabaseManager: ObservableObject {
 				self.licenses = try License.fetchAll(db)
 			}
 		} catch {
-			print("Error fetching data: \(error)")
+			logger.error("ERROR: \(error)")
 		}
 	}
 }

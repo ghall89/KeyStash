@@ -3,7 +3,7 @@ import AppKit
 
 func importCSV() {
 	if let file = chooseFile() {
-		print("Success!")
+		logger.log("Success!")
 	}
 }
 
@@ -21,7 +21,7 @@ func chooseFile() -> Data? {
 				let csvData = try Data(contentsOf: url)
 				return csvData
 			} catch {
-				print("Error: \(error.localizedDescription)")
+				logger.error("ERROR: \(error)")
 			}
 		}
 	}
