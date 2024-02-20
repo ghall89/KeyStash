@@ -6,7 +6,7 @@ import GRDB
 func updateLicense(_ dbQueue: DatabaseQueue, data: License) throws {
 	do {
 		try dbQueue.write { db in
-			
+
 			// define updated license doc
 			let columns: [ColumnAssignment] = [
 				Column("softwareName").set(to: data.softwareName),
@@ -20,7 +20,7 @@ func updateLicense(_ dbQueue: DatabaseQueue, data: License) throws {
 				Column("inTrash").set(to: data.inTrash),
 				Column("trashDate").set(to: data.inTrash ? Date() : nil)
 			]
-			
+
 			// write update to db
 			try License
 				.filter(Column("id") == data.id)

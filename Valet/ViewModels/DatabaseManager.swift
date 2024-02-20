@@ -6,7 +6,6 @@ class DatabaseManager: ObservableObject {
 	@Published var dbQueue: DatabaseQueue
 	@Published var licenses: [License] = []
 
-	
 	// initialize db connection
 	init() {
 		do {
@@ -15,7 +14,7 @@ class DatabaseManager: ObservableObject {
 			fatalError("Failed to connect to the database: \(error)")
 		}
 	}
-	
+
 	// fetch current license data
 	func fetchData() {
 		do {

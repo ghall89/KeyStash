@@ -1,5 +1,5 @@
-import SwiftUI
 import AppKit
+import SwiftUI
 
 struct FilePickerView: NSViewControllerRepresentable {
 	class Coordinator: NSObject, NSOpenSavePanelDelegate {

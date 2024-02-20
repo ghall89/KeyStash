@@ -1,5 +1,5 @@
-import SwiftUI
 import OSLog
+import SwiftUI
 
 let logger = Logger(subsystem: "com.ghalldev.KeyStash", category: "keystash-logging")
 
@@ -8,7 +8,7 @@ struct ValetApp: App {
 	@StateObject var databaseManager = DatabaseManager()
 	@State private var viewModes = ViewModes()
 	@State private var editFormState = EditFormState()
-	
+
 	var body: some Scene {
 		WindowGroup {
 			ContentView()
@@ -26,7 +26,7 @@ struct ValetApp: App {
 				licenses: databaseManager.licenses
 			)
 		}
-		
+
 		Settings {
 			AppSettings()
 		}

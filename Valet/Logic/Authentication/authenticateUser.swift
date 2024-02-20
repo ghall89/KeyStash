@@ -1,8 +1,8 @@
 import LocalAuthentication
 
-func authenticateUser(reason: String, completion: @escaping (Result<Bool, Error>) -> Void ) {
+func authenticateUser(reason: String, completion: @escaping (Result<Bool, Error>) -> Void) {
 	let context = LAContext()
-	
+
 	var error: NSError?
 	if context.canEvaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, error: &error) {
 		context.evaluatePolicy(.deviceOwnerAuthenticationWithBiometrics, localizedReason: reason) { success, _ in

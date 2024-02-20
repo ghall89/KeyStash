@@ -6,10 +6,10 @@ struct AddLicense: View {
 	@AppStorage("defaultName") private var defaultName: String = ""
 	@AppStorage("defaultEmail") private var defaultEmail: String = ""
 	
-	@State private var newItem: License = License(softwareName: "", icon: nil, licenseKey: "", registeredToName: "", registeredToEmail: "", downloadUrlString: "", notes: "", inTrash: false)
+	@State private var newItem: License = .init(softwareName: "", icon: nil, licenseKey: "", registeredToName: "", registeredToEmail: "", downloadUrlString: "", notes: "", inTrash: false)
 	@State private var tabSelection: String = "installed"
 	@State private var installedApps: [InstalledApp] = []
-	@State private var selectedApp: UUID = UUID()
+	@State private var selectedApp: UUID = .init()
 	@Binding var licenseSelection: String?
 	
 	var body: some View {
@@ -22,7 +22,7 @@ struct AddLicense: View {
 				.pickerStyle(.segmented)
 				.padding(.bottom)
 			}
-			switch(tabSelection) {
+			switch tabSelection {
 				case "installed":
 					Picker("Select App: ", selection: $selectedApp, content: {
 						ForEach(installedApps) { app in
@@ -33,7 +33,7 @@ struct AddLicense: View {
 				case "custom":
 					HStack {
 						VStack {
-							Image(nsImage: newItem.iconNSImage )
+							Image(nsImage: newItem.iconNSImage)
 								.resizable()
 								.aspectRatio(contentMode: .fit)
 							Button("Select Icon...", action: {

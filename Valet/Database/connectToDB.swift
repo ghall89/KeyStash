@@ -12,16 +12,14 @@ func connectToDb() throws -> DatabaseQueue? {
 			appropriateFor: nil,
 			create: true
 		).appendingPathComponent("db.sqlite")
-		
+
 		let dbQueue = try DatabaseQueue(path: dbPath.absoluteString)
-		
+
 		try migrations(dbQueue)
-		
+
 		return dbQueue
 	} catch {
 		logger.error("ERROR: \(error)")
 		return nil
 	}
 }
-
-

@@ -1,5 +1,5 @@
-import Foundation
 import AppKit
+import Foundation
 
 // display file open dialog and copy selected file to application container
 

@@ -1,5 +1,5 @@
-import SwiftUI
 import GRDB
+import SwiftUI
 
 struct AttachmentRow: View {
 	@EnvironmentObject var databaseManager: DatabaseManager

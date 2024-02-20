@@ -14,7 +14,7 @@ func emptyTrash(_ dbQueue: DatabaseQueue) {
 				.fetchAll(db)
 			
 			// iterate through licensesWithAttachments and delete attachments
-			try licensesWithAttachments.forEach { lwa in
+			for lwa in licensesWithAttachments {
 				try deleteAttachment(dbQueue, license: lwa)
 			}
 			
@@ -22,7 +22,6 @@ func emptyTrash(_ dbQueue: DatabaseQueue) {
 			try License
 				.filter(trashFilterPredicate)
 				.deleteAll(db)
-			
 		}
 	} catch {
 		logger.error("ERROR: \(error)")

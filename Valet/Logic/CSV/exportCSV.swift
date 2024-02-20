@@ -1,5 +1,5 @@
-import Foundation
 import AppKit
+import Foundation
 
 func exportCSV(licenses: [License]) {
 	let csvString = convertToCSV(data: licenses)
