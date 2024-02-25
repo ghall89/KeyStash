@@ -1,16 +1,13 @@
 import AppKit
 import SwiftUI
 
-struct LicenseList: View {
+struct LicenseListView: View {
 	@EnvironmentObject var databaseManager: DatabaseManager
-	@EnvironmentObject var viewModes: ViewModes
-	
-	@Binding var sidebarSelection: String
+	@EnvironmentObject var appState: AppState
 
 	@State private var searchString: String = ""
 	@State private var confirmDelete: Bool = false
 	@State private var confirmDeleteAll: Bool = false
-	@State private var selection: String? = nil
 	
 	@AppStorage("selectedSort") private var selectedSort: SortOptions = .byName
 	@AppStorage("selectedSortOrder") private var selectedSortOrder: OrderOptions = .asc
@@ -19,7 +16,7 @@ struct LicenseList: View {
 	
 	var body: some View {
 		ZStack(alignment: .top) {
-			List(selection: $selection) {
+			List(selection: $appState.selectedLicense) {
 				Section {
 					EmptyView()
 				}
@@ -34,7 +31,7 @@ struct LicenseList: View {
 				Section {
 					ForEach(filterItems()) { item in
 						NavigationLink(destination: {
-							LicenceInfo(license: item)
+							LicenceInfoView(license: item)
 						}, label: {
 							HStack {
 								if compactList == false {
@@ -67,7 +64,7 @@ struct LicenseList: View {
 		.frame(minWidth: 340)
 		.toolbar {
 			ToolbarItem {
-				if sidebarSelection == "trash" {
+				if appState.sidebarSelection == "trash" {
 					Button(
 						role: .destructive,
 						action: {
@@ -79,7 +76,7 @@ struct LicenseList: View {
 						.help("Empty Trash")
 				} else {
 					Button(action: {
-						viewModes.showNewAppSheet.toggle()
+						appState.showNewAppSheet.toggle()
 					}, label: {
 						Label("Add Item", systemImage: "plus")
 					})
@@ -88,7 +85,7 @@ struct LicenseList: View {
 			}
 		}
 		.onAppear(perform: databaseManager.fetchData)
-		.navigationTitle(snakeToTitleCase(sidebarSelection))
+		.navigationTitle(snakeToTitleCase(appState.sidebarSelection))
 		.confirmationDialog("Are you sure you want to empty the trash? Any files you have attached will also be deleted.", isPresented: $confirmDeleteAll, actions: {
 			Button("Empty Trash", role: .destructive, action: {
 				emptyTrash(databaseManager.dbQueue)
@@ -99,14 +96,14 @@ struct LicenseList: View {
 				confirmDeleteAll.toggle()
 			})
 		})
-		.sheet(isPresented: $viewModes.showNewAppSheet, content: {
-			AddLicense(licenseSelection: $selection)
+		.sheet(isPresented: $appState.showNewAppSheet, content: {
+			AddLicenseView()
 		})
 	}
 	
 	private func resetSelection(itemId: String) {
-		if itemId == selection {
-			selection = nil
+		if itemId == appState.selectedLicense {
+			appState.selectedLicense = nil
 		}
 	}
 		
@@ -125,7 +122,7 @@ struct LicenseList: View {
 	private func filterItems() -> [License] {
 		var filteredItems: [License] = []
 		
-		switch sidebarSelection {
+		switch appState.sidebarSelection {
 			case "all_apps":
 				filteredItems = databaseManager.licenses.filter { $0.inTrash == false }
 			case "trash":

@@ -1,20 +1,19 @@
 import SwiftUI
 
 struct ContentView: View {
-	@EnvironmentObject var viewModes: ViewModes
+	@EnvironmentObject var appState: AppState
 	@EnvironmentObject var authentication: Authentication
 
-	@AppStorage("sidebarSelection") var sidebarSelection: String = "all_apps"
 	@AppStorage("disableAnimations") private var disableAnimations: Bool = false
 
 	var body: some View {
 		//		GeometryReader { geometry in
 		//			ZStack {
 		NavigationSplitView {
-			Sidebar(selection: $sidebarSelection)
+			SidebarView()
 				.navigationSplitViewColumnWidth(min: 160, ideal: 230)
 		} content: {
-			LicenseList(sidebarSelection: $sidebarSelection)
+			LicenseListView()
 				.navigationSplitViewColumnWidth(min: 340, ideal: 350)
 		} detail: {
 			VStack(spacing: 10) {

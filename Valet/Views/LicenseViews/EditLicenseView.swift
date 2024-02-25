@@ -1,9 +1,9 @@
 import SwiftUI
 
-struct EditAppView: View {
+struct EditLicenseView: View {
 	@EnvironmentObject var databaseManager: DatabaseManager
 	@EnvironmentObject var formState: EditFormState
-	@EnvironmentObject var viewModes: ViewModes
+	@EnvironmentObject var appState: AppState
 	
 	@Binding var isPresented: Bool
 	

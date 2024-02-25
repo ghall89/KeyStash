@@ -1,8 +1,9 @@
 import SwiftUI
 
-struct AddLicense: View {
+struct AddLicenseView: View {
 	@EnvironmentObject var databaseManager: DatabaseManager
-	@EnvironmentObject var viewModes: ViewModes
+	@EnvironmentObject var appState: AppState
+	
 	@AppStorage("defaultName") private var defaultName: String = ""
 	@AppStorage("defaultEmail") private var defaultEmail: String = ""
 	
@@ -10,7 +11,6 @@ struct AddLicense: View {
 	@State private var tabSelection: String = "installed"
 	@State private var installedApps: [InstalledApp] = []
 	@State private var selectedApp: UUID = .init()
-	@Binding var licenseSelection: String?
 	
 	var body: some View {
 		VStack(spacing: 10) {
@@ -54,7 +54,7 @@ struct AddLicense: View {
 			HStack {
 				Spacer()
 				Button("Cancel", action: {
-					viewModes.showNewAppSheet.toggle()
+					appState.showNewAppSheet.toggle()
 				})
 				Button("Add", action: {
 					Task {
@@ -97,8 +97,9 @@ struct AddLicense: View {
 		} catch {
 			logger.error("Failed to create license!")
 		}
-		licenseSelection = newId
-		//		viewModes.editMode.toggle()
-		viewModes.showNewAppSheet.toggle()
+		
+		appState.selectedLicense = newId
+		appState.showNewAppSheet.toggle()
+		appState.showEditAppSheet.toggle()
 	}
 }

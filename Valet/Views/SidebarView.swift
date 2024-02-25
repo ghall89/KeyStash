@@ -1,12 +1,12 @@
 import SwiftUI
 
-struct Sidebar: View {
+struct SidebarView: View {
+	@EnvironmentObject var appState: AppState
+	
 	@AppStorage("compactList") private var compactList: Bool = false
 
-	@Binding var selection: String
-
 	var body: some View {
-		List(selection: $selection) {
+		List(selection: $appState.sidebarSelection) {
 			Section {
 				VStack {
 					if compactList == false {
