@@ -18,12 +18,12 @@ struct MenuBar: Commands {
 				exportCSV(licenses: licenses)
 			})
 		}
-		CommandGroup(replacing: CommandGroupPlacement.sidebar) {
-			Button("Toggle Edit Mode", action: {
-				viewModes.editMode.toggle()
-			})
-			.keyboardShortcut(KeyboardShortcut(KeyEquivalent("E")))
-			Divider()
-		}
+//		CommandGroup(replacing: CommandGroupPlacement.sidebar) {
+//			Button("Toggle Edit Mode", action: {
+//				viewModes.editMode.toggle()
+//			})
+//			.keyboardShortcut(KeyboardShortcut(KeyEquivalent("E")))
+//			Divider()
+//		}
 	}
 }

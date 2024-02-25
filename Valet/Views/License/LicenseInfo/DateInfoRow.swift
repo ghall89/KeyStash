@@ -1,44 +1,23 @@
 import SwiftUI
 
 struct DateInfoRow: View {
-	@EnvironmentObject var viewModes: ViewModes
 	var value: Date?
-	@Binding var formValue: Date?
 	var label: String
-	
-	@State var selectedDate: Date = .init()
 	
 	var body: some View {
 		HStack(alignment: .top) {
-			if value != nil || viewModes.editMode == true {
+			if value != nil {
 				VStack(alignment: .leading) {
 					Text(label)
 						.font(.caption)
-					if viewModes.editMode == true {
-						DatePicker(
-							"",
-							selection: $selectedDate,
-							displayedComponents: [.date]
-						)
-						.labelsHidden()
-					} else {
-						Text(valueString())
-							.foregroundStyle(isPast() ? Color.red : Color.primary)
-					}
+					Text(valueString())
+						.foregroundStyle(isPast() ? Color.red : Color.primary)
 				}
 				.multilineTextAlignment(.leading)
 				Spacer()
 			}
 		}
 		.padding(.leading, 20)
-		.onChange(of: selectedDate) {
-			formValue = selectedDate
-		}
-		.onAppear {
-			if value != nil {
-				selectedDate = value!
-			}
-		}
 	}
 	
 	private func valueString() -> String {

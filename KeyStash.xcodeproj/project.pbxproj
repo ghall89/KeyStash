@@ -50,6 +50,7 @@
 		D3C962002B1BDA6E008BE15D /* connectToDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C961FF2B1BDA6E008BE15D /* connectToDB.swift */; };
 		D3C962032B1BDF10008BE15D /* addLicense.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C962022B1BDF10008BE15D /* addLicense.swift */; };
 		D3C962052B1BDF8A008BE15D /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C962042B1BDF8A008BE15D /* DatabaseManager.swift */; };
+		D3CAF4B02B8BCC6000CB61D4 /* EditAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CAF4AF2B8BCC6000CB61D4 /* EditAppView.swift */; };
 		D3CFBED22ABB82C700C1D4BC /* getAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CFBED12ABB82C700C1D4BC /* getAttachment.swift */; };
 		D3CFBED42ABB841D00C1D4BC /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CFBED32ABB841D00C1D4BC /* Tag.swift */; };
 		D3D3F6522B1D1DCA00E951B2 /* migrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D3F6512B1D1DCA00E951B2 /* migrations.swift */; };
@@ -107,6 +108,7 @@
 		D3C961FF2B1BDA6E008BE15D /* connectToDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = connectToDB.swift; sourceTree = "<group>"; };
 		D3C962022B1BDF10008BE15D /* addLicense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addLicense.swift; sourceTree = "<group>"; };
 		D3C962042B1BDF8A008BE15D /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		D3CAF4AF2B8BCC6000CB61D4 /* EditAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditAppView.swift; sourceTree = "<group>"; };
 		D3CFBED12ABB82C700C1D4BC /* getAttachment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getAttachment.swift; sourceTree = "<group>"; };
 		D3CFBED32ABB841D00C1D4BC /* Tag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		D3D3F6512B1D1DCA00E951B2 /* migrations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = migrations.swift; sourceTree = "<group>"; };
@@ -274,6 +276,7 @@
 				D33797F62ABFAA4B00C5E6BC /* LicenseInfo */,
 				D39942CB2AB509AE00B2DC39 /* LicenseList.swift */,
 				D39942CA2AB509AE00B2DC39 /* AddLicense.swift */,
+				D3CAF4AF2B8BCC6000CB61D4 /* EditAppView.swift */,
 			);
 			path = License;
 			sourceTree = "<group>";
@@ -496,6 +499,7 @@
 				D3EDC9DA2B73F2B1001D85B6 /* iCloudStore.swift in Sources */,
 				D33797FA2ABFAA8700C5E6BC /* AttachmentRow.swift in Sources */,
 				D39942DB2AB509AF00B2DC39 /* LicenseList.swift in Sources */,
+				D3CAF4B02B8BCC6000CB61D4 /* EditAppView.swift in Sources */,
 				D369F46C2AB87CEA00D8C6B1 /* exportCSV.swift in Sources */,
 				D3C6503B2AB74CF300E75461 /* MenuBar.swift in Sources */,
 				D3BB2EA52AD07ACF006A3593 /* Authentication.swift in Sources */,
