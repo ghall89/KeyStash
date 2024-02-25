@@ -6,5 +6,6 @@ class EditFormState: ObservableObject {
 	@Published var registeredToName: String = ""
 	@Published var registeredToEmail: String = ""
 	@Published var licenseKey: String = ""
+	@Published var expirationDt: Date? = nil
 	@Published var notes: String = ""
 }

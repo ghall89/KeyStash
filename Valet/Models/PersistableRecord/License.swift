@@ -6,6 +6,7 @@ struct License: Identifiable, Codable, FetchableRecord, PersistableRecord {
 	var id: String = UUID().uuidString
 	var softwareName: String = ""
 	var icon: Data?
+	var expirationDt: Date?
 	var licenseKey: String = ""
 	var registeredToName: String = ""
 	var registeredToEmail: String = ""
@@ -47,18 +48,22 @@ struct License: Identifiable, Codable, FetchableRecord, PersistableRecord {
 		softwareName: String,
 		icon: Data?,
 		attachmentPath: URL? = nil,
+		expirationDt: Date? = nil,
 		licenseKey: String,
 		registeredToName: String,
 		registeredToEmail: String,
 		downloadUrlString: String,
 		notes: String,
+		
 		updatedDate: Date? = nil,
+		
 		inTrash: Bool,
 		trashDate: Date? = nil
 	) {
 		self.softwareName = softwareName
 		self.icon = icon
 		self.attachmentPath = attachmentPath
+		self.expirationDt = expirationDt
 		self.licenseKey = licenseKey
 		self.registeredToName = registeredToName
 		self.registeredToEmail = registeredToEmail

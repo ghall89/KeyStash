@@ -71,6 +71,12 @@ struct LicenceInfo: View {
 						label: "License Key"
 					)
 					
+					DateInfoRow(
+						value: license.expirationDt,
+						formValue: $formState.expirationDt,
+						label: "Expiration Date"
+					)
+					
 					AttachmentRow(license: license)
 					Divider()
 					Text("Notes")
@@ -129,6 +135,7 @@ struct LicenceInfo: View {
 		formState.registeredToName = license.registeredToName
 		formState.registeredToEmail = license.registeredToEmail
 		formState.licenseKey = license.licenseKey
+		formState.expirationDt = license.expirationDt
 		formState.notes = license.notes
 	}
 	
