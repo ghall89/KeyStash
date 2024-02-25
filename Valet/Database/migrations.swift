@@ -18,13 +18,13 @@ func migrations(_ dbQueue: DatabaseQueue) throws {
 				t.column("updatedDate", .date)
 				t.column("inTrash", .boolean).notNull().defaults(to: false)
 				t.column("trashDate", .date)
-				
+
 				t.column("attachmentPath", .text).unique()
 			}
 		})
-		
+
 		try migrator.migrate(dbQueue)
 	} catch {
-		print("migration failed: \(error)")
+		logger.error("ERROR: \(error)")
 	}
 }

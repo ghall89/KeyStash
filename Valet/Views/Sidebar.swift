@@ -2,9 +2,9 @@ import SwiftUI
 
 struct Sidebar: View {
 	@AppStorage("compactList") private var compactList: Bool = false
-	
+
 	@Binding var selection: String
-	
+
 	var body: some View {
 		List(selection: $selection) {
 			Section {

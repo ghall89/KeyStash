@@ -1,13 +1,12 @@
 import SwiftUI
 
 struct ContentView: View {
-
 	@EnvironmentObject var viewModes: ViewModes
 	@EnvironmentObject var authentication: Authentication
-	
+
 	@AppStorage("sidebarSelection") var sidebarSelection: String = "all_apps"
 	@AppStorage("disableAnimations") private var disableAnimations: Bool = false
-	
+
 	var body: some View {
 		//		GeometryReader { geometry in
 		//			ZStack {
@@ -33,8 +32,7 @@ struct ContentView: View {
 				})
 			}
 		}
-		
-		
+
 		//				if authentication.lockApp == true {
 		//					VStack {
 		//
@@ -56,7 +54,7 @@ struct ContentView: View {
 		//			}
 		//		}
 	}
-	
+
 	//	private func authenticate() {
 	//		if authentication.lockApp == true && authentication.isAuthenticated == false {
 	//			authenticateUser(reason: "unlock app") { result in
@@ -71,5 +69,3 @@ struct ContentView: View {
 	//		}
 	//	}
 }
-
-

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>top-level-items</key>
+	<array>
+		<dict>
+			<key>query-specification</key>
+			<dict>
+				<key>anchoring</key>
+				<string>word</string>
+				<key>match-case</key>
+				<integer>1</integer>
+				<key>query</key>
+				<string>conformers</string>
+				<key>term</key>
+				<dict>
+					<key>display-string</key>
+					<string>View</string>
+					<key>symbol</key>
+					<string>s:7SwiftUI4ViewP</string>
+				</dict>
+			</dict>
+			<key>title</key>
+			<string>SwiftUI Views</string>
+			<key>type</key>
+			<string>batch-find-query</string>
+		</dict>
+	</array>
+</dict>
+</plist>

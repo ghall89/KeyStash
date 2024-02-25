@@ -1,11 +1,14 @@
+import OSLog
 import SwiftUI
+
+let logger = Logger(subsystem: "com.ghalldev.KeyStash", category: "keystash-logging")
 
 @main
 struct ValetApp: App {
 	@StateObject var databaseManager = DatabaseManager()
 	@State private var viewModes = ViewModes()
 	@State private var editFormState = EditFormState()
-	
+
 	var body: some Scene {
 		WindowGroup {
 			ContentView()
@@ -18,9 +21,12 @@ struct ValetApp: App {
 				.frame(minHeight: 260)
 		}
 		.commands {
-			MenuBar(viewModes: $viewModes)
+			MenuBar(
+				viewModes: $viewModes,
+				licenses: databaseManager.licenses
+			)
 		}
-		
+
 		Settings {
 			AppSettings()
 		}

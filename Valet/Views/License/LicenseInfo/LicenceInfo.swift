@@ -1,5 +1,6 @@
-import SwiftUI
+import AlertToast
 import MarkdownUI
+import SwiftUI
 
 struct LicenceInfo: View {
 	@EnvironmentObject var databaseManager: DatabaseManager
@@ -49,7 +50,6 @@ struct LicenceInfo: View {
 					.padding()
 				}
 				VStack(alignment: .leading, spacing: 12) {
-					
 					LicenseInfoRow(
 						showToast: $showToast,
 						value: license.registeredToName,
@@ -68,7 +68,8 @@ struct LicenceInfo: View {
 						showToast: $showToast,
 						value: license.licenseKey,
 						formValue: $formState.licenseKey,
-						label: "License Key")
+						label: "License Key"
+					)
 					
 					AttachmentRow(license: license)
 					Divider()
@@ -88,8 +89,8 @@ struct LicenceInfo: View {
 		}
 		.frame(maxWidth: .infinity)
 		.environmentObject(formState)
-		.onAppear {
-			print(license)
+		.toast(isPresenting: $showToast) {
+			AlertToast(type: .regular, title: "Copied to Clipboard")
 		}
 		.toolbar {
 			ToolbarItem {
@@ -143,17 +144,18 @@ struct LicenceInfo: View {
 			try updateLicense(databaseManager.dbQueue, data: updatedLicense)
 			databaseManager.fetchData()
 		} catch {
-			print("update failed: \(error)")
+			logger.error("ERROR: \(error)")
 		}
 	}
 	
 	private func isEdited() -> Bool {
 		if formState.softwareName == license.softwareName &&
-				formState.urlString == license.downloadUrlString &&
-				formState.registeredToName == license.registeredToName &&
-				formState.registeredToEmail == license.registeredToEmail &&
-				formState.licenseKey == license.licenseKey &&
-				formState.notes == license.notes {
+			formState.urlString == license.downloadUrlString &&
+			formState.registeredToName == license.registeredToName &&
+			formState.registeredToEmail == license.registeredToEmail &&
+			formState.licenseKey == license.licenseKey &&
+			formState.notes == license.notes
+		{
 			return false
 		}
 		

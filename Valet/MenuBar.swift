@@ -2,7 +2,8 @@ import SwiftUI
 
 struct MenuBar: Commands {
 	@Binding var viewModes: ViewModes
-	
+	var licenses: [License]
+
 	var body: some Commands {
 		CommandGroup(replacing: CommandGroupPlacement.newItem) {
 			Button("Add App", action: {
@@ -13,9 +14,9 @@ struct MenuBar: Commands {
 //			Button("Import", action: {
 //				importCSV()
 //			})
-//			Button("Export", action: {
-//				exportCSV(licenses: items)
-//			})
+			Button("Export", action: {
+				exportCSV(licenses: licenses)
+			})
 		}
 		CommandGroup(replacing: CommandGroupPlacement.sidebar) {
 			Button("Toggle Edit Mode", action: {

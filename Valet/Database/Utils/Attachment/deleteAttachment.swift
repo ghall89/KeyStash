@@ -1,7 +1,8 @@
-import GRDB
 import AppKit
+import GRDB
 
 // remove attachment from database, and move file to user's trash
+
 func deleteAttachment(_ dbQueue: DatabaseQueue, license: License) throws {
 	let fileManager = FileManager.default
 	
@@ -17,10 +18,9 @@ func deleteAttachment(_ dbQueue: DatabaseQueue, license: License) throws {
 				try License
 					.filter(Column("id") == license.id)
 					.updateAll(db, columns)
-				
 			}
 		}
 	} catch {
-		print("error: \(error)")
+		logger.error("ERROR: \(error)")
 	}
 }

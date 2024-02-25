@@ -1,5 +1,5 @@
-import Foundation
 import AppKit
+import Foundation
 
 func exportCSV(licenses: [License]) {
 	let csvString = convertToCSV(data: licenses)
@@ -8,7 +8,7 @@ func exportCSV(licenses: [License]) {
 		do {
 			try csvString.write(toFile: filePath, atomically: true, encoding: .utf8)
 		} catch {
-			print("Error: \(error.localizedDescription)")
+			logger.error("ERROR: \(error)")
 		}
 	}
 }

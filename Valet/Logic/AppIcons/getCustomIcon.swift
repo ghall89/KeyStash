@@ -1,5 +1,5 @@
-import Foundation
 import AppKit
+import Foundation
 
 func getCustomIcon() -> Data? {
 	let openPanel = NSOpenPanel()
@@ -17,4 +17,3 @@ func getCustomIcon() -> Data? {
 	
 	return nil
 }
-

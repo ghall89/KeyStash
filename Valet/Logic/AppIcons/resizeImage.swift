@@ -1,5 +1,5 @@
-import Foundation
 import AppKit
+import Foundation
 
 func resizeImage(image: NSImage, toSize targetSize: NSSize) -> NSImage? {
 	let targetRect = NSRect(x: 0, y: 0, width: targetSize.width, height: targetSize.height)

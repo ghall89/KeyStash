@@ -1,5 +1,5 @@
-import Foundation
 import AppKit
+import Foundation
 
 func getNSImageAsData(image: NSImage) -> Data? {
 	let targetSize = NSSize(width: 120, height: 120)
@@ -21,4 +21,3 @@ func getNSImageAsData(image: NSImage) -> Data? {
 	
 	return nil
 }
-

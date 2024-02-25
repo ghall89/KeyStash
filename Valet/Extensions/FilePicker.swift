@@ -1,5 +1,5 @@
-import SwiftUI
 import AppKit
+import SwiftUI
 
 struct FilePickerView: NSViewControllerRepresentable {
 	class Coordinator: NSObject, NSOpenSavePanelDelegate {
@@ -47,7 +47,7 @@ struct FilePickerView: NSViewControllerRepresentable {
 			if response == .OK, let url = openPanel.urls.first {
 				// Handle selected URL
 				// You can pass this URL to your SwiftUI view or perform any actions
-				print("Selected URL: \(url)")
+				logger.log("Selected URL: \(url)")
 			}
 		}
 		

@@ -17,11 +17,11 @@ func sortBy(sort: SortOptions, order: OrderOptions) -> ((License, License) -> Bo
 			switch sort {
 				case .byName:
 					return { license1, license2 in
-						return license1.softwareName.lowercased() < license2.softwareName.lowercased()
+						license1.softwareName.lowercased() < license2.softwareName.lowercased()
 					}
 				case .byAddedDt:
 					return { license1, license2 in
-						return license1.createdDate < license2.createdDate
+						license1.createdDate < license2.createdDate
 					}
 				case .byUpdatedDt:
 					return { license1, license2 in
@@ -34,11 +34,11 @@ func sortBy(sort: SortOptions, order: OrderOptions) -> ((License, License) -> Bo
 			switch sort {
 				case .byName:
 					return { license1, license2 in
-						return license1.softwareName.lowercased() > license2.softwareName.lowercased()
+						license1.softwareName.lowercased() > license2.softwareName.lowercased()
 					}
 				case .byAddedDt:
 					return { license1, license2 in
-						return license1.createdDate > license2.createdDate
+						license1.createdDate > license2.createdDate
 					}
 				case .byUpdatedDt:
 					return { license1, license2 in

@@ -1,5 +1,5 @@
-import Foundation
 import AppKit
+import Foundation
 
 func getAppIcon(identifier: String) -> NSImage? {
 	if let appPath = NSWorkspace.shared.urlForApplication(withBundleIdentifier: identifier) {

@@ -1,5 +1,5 @@
-import SwiftUI
 import AppKit
+import SwiftUI
 
 struct LicenseList: View {
 	@EnvironmentObject var databaseManager: DatabaseManager
@@ -38,7 +38,7 @@ struct LicenseList: View {
 						}, label: {
 							HStack {
 								if compactList == false {
-									Image(nsImage: item.miniIcon )
+									Image(nsImage: item.miniIcon)
 										.resizable()
 										.aspectRatio(contentMode: .fit)
 										.frame(width: 24)
@@ -76,7 +76,7 @@ struct LicenseList: View {
 							Label("Empty Trash", systemImage: "trash.slash")
 						})
 //					.disabled(databaseManager.licenses.contains(where: { $0.inTrash == true }))
-					.help("Empty Trash")
+						.help("Empty Trash")
 				} else {
 					Button(action: {
 						viewModes.showNewAppSheet.toggle()
@@ -86,7 +86,6 @@ struct LicenseList: View {
 					.help("Add Item")
 				}
 			}
-			
 		}
 		.onAppear(perform: databaseManager.fetchData)
 		.navigationTitle(snakeToTitleCase(sidebarSelection))
@@ -119,7 +118,7 @@ struct LicenseList: View {
 			databaseManager.fetchData()
 			resetSelection(itemId: item.id)
 		} catch {
-			print("update failed: \(error)")
+			logger.error("ERROR: \(error)")
 		}
 	}
 	
@@ -138,5 +137,4 @@ struct LicenseList: View {
 			.filter { searchString.count > 0 ? $0.softwareName.lowercased().contains(searchString.lowercased()) : true }
 			.sorted(by: sortBy(sort: selectedSort, order: selectedSortOrder))
 	}
-		
 }

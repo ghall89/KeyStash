@@ -1,5 +1,5 @@
-import Foundation
 import AppKit
+import Foundation
 import GRDB
 
 struct License: Identifiable, Codable, FetchableRecord, PersistableRecord {
@@ -11,7 +11,7 @@ struct License: Identifiable, Codable, FetchableRecord, PersistableRecord {
 	var registeredToEmail: String = ""
 	var downloadUrlString: String = ""
 	var notes: String = ""
-	var createdDate: Date = Date()
+	var createdDate: Date = .init()
 	var updatedDate: Date?
 	
 	// trash status
