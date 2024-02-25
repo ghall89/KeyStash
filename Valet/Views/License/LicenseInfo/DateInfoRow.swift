@@ -12,22 +12,23 @@ struct DateInfoRow: View {
 		HStack(alignment: .top) {
 			if value != nil || viewModes.editMode == true {
 				VStack(alignment: .leading) {
+					Text(label)
+						.font(.caption)
 					if viewModes.editMode == true {
 						DatePicker(
-							label,
+							"",
 							selection: $selectedDate,
 							displayedComponents: [.date]
 						)
 					} else {
-						Text(label)
-							.font(.caption)
-						Text(value?.formatted() ?? "")
+						Text(value?.formatted(date: .complete, time: .omitted) ?? "")
 					}
 				}
 				.multilineTextAlignment(.leading)
 				Spacer()
 			}
 		}
+		.padding(.leading, 20)
 		.onChange(of: selectedDate, {
 			formValue = selectedDate
 		})

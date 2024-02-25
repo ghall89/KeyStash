@@ -147,6 +147,7 @@ struct LicenceInfo: View {
 			updatedLicense.registeredToName = formState.registeredToName
 			updatedLicense.registeredToEmail = formState.registeredToEmail
 			updatedLicense.licenseKey = formState.licenseKey
+			updatedLicense.expirationDt = formState.expirationDt
 			updatedLicense.notes = formState.notes
 			try updateLicense(databaseManager.dbQueue, data: updatedLicense)
 			databaseManager.fetchData()
@@ -161,6 +162,7 @@ struct LicenceInfo: View {
 			formState.registeredToName == license.registeredToName &&
 			formState.registeredToEmail == license.registeredToEmail &&
 			formState.licenseKey == license.licenseKey &&
+			formState.expirationDt == license.expirationDt &&
 			formState.notes == license.notes
 		{
 			return false
