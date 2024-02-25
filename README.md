@@ -1,12 +1,20 @@
-# Serial Box
+# KeyStash
 
-![GitHub](https://img.shields.io/github/license/ghall89/Serial-Box)
+![GitHub](https://img.shields.io/github/license/ghall89/KeyStash)
 
-![GitHub release (with filter)](https://img.shields.io/github/v/release/ghall89/Serial-Box)
+![GitHub release (with filter)](https://img.shields.io/github/v/release/ghall89/KeyStash)
 
 [![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/T6T66ELM7)
 
-A macOS utility for storing software license keys. Powered by Swift Data, and syncs with iCloud.
+A macOS utility for storing software license keys.
+
+![](screenshot.png)
+
+## Project Goals
+
+1. Replicate the license key feature from 1Password in a fully native Mac application
+2. Store user data in a standard database format (SQLite) and enable the user to easily export their data into a standard format, like CSV
+3. Provide syncing capability via iCloud - and perhaps other options down the road
 
 ## Installation
 
@@ -16,9 +24,7 @@ A macOS utility for storing software license keys. Powered by Swift Data, and sy
 
 ### Instructions
 
-- [Download](https://github.com/ghall89/Serial-Box/releases) the latest release of QuestLogger
-- Unzip the `Serial Box.app.zip` in your Downloads folder
-- Move `Serial Box.app` to your Applications folder in either Macintosh HD or your user folder
+KeyStash is currently a work-in-progress and will be made available as a precompiled binary via GitHub Releases and Homebrew when it’s ready. Until then, feel free to compile from source...
 
 ## Compile From Source
 
@@ -38,6 +44,8 @@ A macOS utility for storing software license keys. Powered by Swift Data, and sy
 
 ## Package Dependencies
 
+- [GRDB](https://github.com/groue/GRDB.swift)
+- [SwiftCloudDrive](https://github.com/drewmccormack/SwiftCloudDrive)
 - [MarkdownUI](https://github.com/gonzalezreal/swift-markdown-ui)
 - [AlertToast](https://github.com/elai950/AlertToast)
 
@@ -45,7 +53,7 @@ A macOS utility for storing software license keys. Powered by Swift Data, and sy
 
 MIT License
 
-Copyright (c) 2023 Graham Hall
+Copyright (c) 2024 Graham Hall
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
