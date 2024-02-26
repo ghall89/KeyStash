@@ -15,6 +15,7 @@ func updateLicense(_ dbQueue: DatabaseQueue, data: License) throws {
 				Column("registeredToName").set(to: data.registeredToName),
 				Column("registeredToEmail").set(to: data.registeredToEmail),
 				Column("licenseKey").set(to: data.licenseKey),
+				Column("expirationDt").set(to: data.expirationDt),
 				Column("notes").set(to: data.notes),
 				Column("updatedDate").set(to: Date()),
 				Column("inTrash").set(to: data.inTrash),

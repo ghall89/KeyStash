@@ -22,6 +22,12 @@ func migrations(_ dbQueue: DatabaseQueue) throws {
 				t.column("attachmentPath", .text).unique()
 			}
 		})
+		
+		migrator.registerMigration("v2", migrate: { db in
+			try db.alter(table: "license") { t in
+				t.add(column: "expirationDt", .date)
+			}
+		})
 
 		try migrator.migrate(dbQueue)
 	} catch {

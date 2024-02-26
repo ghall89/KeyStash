@@ -1,13 +1,13 @@
 import SwiftUI
 
 struct MenuBar: Commands {
-	@Binding var viewModes: ViewModes
+	@Binding var appState: AppState
 	var licenses: [License]
 
 	var body: some Commands {
 		CommandGroup(replacing: CommandGroupPlacement.newItem) {
 			Button("Add App", action: {
-				viewModes.showNewAppSheet.toggle()
+				appState.showNewAppSheet.toggle()
 			})
 			.keyboardShortcut(KeyboardShortcut(KeyEquivalent("N")))
 			Divider()
@@ -18,12 +18,12 @@ struct MenuBar: Commands {
 				exportCSV(licenses: licenses)
 			})
 		}
-		CommandGroup(replacing: CommandGroupPlacement.sidebar) {
-			Button("Toggle Edit Mode", action: {
-				viewModes.editMode.toggle()
-			})
-			.keyboardShortcut(KeyboardShortcut(KeyEquivalent("E")))
-			Divider()
-		}
+//		CommandGroup(replacing: CommandGroupPlacement.sidebar) {
+//			Button("Toggle Edit Mode", action: {
+//				appState.editMode.toggle()
+//			})
+//			.keyboardShortcut(KeyboardShortcut(KeyEquivalent("E")))
+//			Divider()
+//		}
 	}
 }
