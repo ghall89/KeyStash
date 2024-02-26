@@ -2,33 +2,25 @@ import SwiftUI
 
 struct SidebarView: View {
 	@EnvironmentObject var appState: AppState
-	
-	@AppStorage("compactList") private var compactList: Bool = false
+	@EnvironmentObject var databaseManager: DatabaseManager
 
 	var body: some View {
 		List(selection: $appState.sidebarSelection) {
 			Section {
-				VStack {
-					if compactList == false {
-						Label("All Apps", systemImage: "square.stack")
-					} else {
-						Text("All Apps")
-					}
+				Label("All Apps", systemImage: "square.stack")
+					.badge(databaseManager.badgeCount.total)
+					.tag("all_apps")
+				
+				if databaseManager.badgeCount.expired > 0 {
+					Label("Expired", systemImage: "exclamationmark.square")
+						.badge(databaseManager.badgeCount.expired)
+						.tag("expired")
 				}
-				.tag("all_apps")
 			}
-			//			Section("Tags") {
-			//				Label("Sample Tag", systemImage: "tag")
-			//			}
 			Section {
-				VStack {
-					if compactList == false {
-						Label("Trash", systemImage: "trash")
-					} else {
-						Text("Trash")
-					}
-				}
-				.tag("trash")
+				Label("Trash", systemImage: "trash")
+					.badge(databaseManager.badgeCount.inTrash)
+					.tag("trash")
 			}
 		}
 	}

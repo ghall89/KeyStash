@@ -121,10 +121,13 @@ struct LicenseListView: View {
 	
 	private func filterItems() -> [License] {
 		var filteredItems: [License] = []
+		let today = Date()
 		
 		switch appState.sidebarSelection {
 			case "all_apps":
 				filteredItems = databaseManager.licenses.filter { $0.inTrash == false }
+			case "expired":
+				filteredItems = databaseManager.licenses.filter { $0.inTrash == false && $0.expirationDt ?? today < today }
 			case "trash":
 				filteredItems = databaseManager.licenses.filter { $0.inTrash == true }
 			default:

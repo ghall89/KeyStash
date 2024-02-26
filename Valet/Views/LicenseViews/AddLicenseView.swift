@@ -100,6 +100,5 @@ struct AddLicenseView: View {
 		
 		appState.selectedLicense = newId
 		appState.showNewAppSheet.toggle()
-		appState.showEditAppSheet.toggle()
 	}
 }
