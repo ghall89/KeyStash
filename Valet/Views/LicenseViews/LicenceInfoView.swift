@@ -108,6 +108,9 @@ struct LicenceInfoView: View {
 		formState.registeredToName = license.registeredToName
 		formState.registeredToEmail = license.registeredToEmail
 		formState.licenseKey = license.licenseKey
+		if license.expirationDt != nil {
+			formState.addExpiration = true
+		}
 		formState.expirationDt = license.expirationDt
 		formState.notes = license.notes
 	}
