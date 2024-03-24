@@ -22,9 +22,13 @@ A macOS utility for storing software license keys.
 
 - An Intel or Apple Silicon Mac running MacOS 14 Sonoma or later
 
-### Instructions
+### Homebrew
 
-KeyStash is currently a work-in-progress and will be made available as a precompiled binary via GitHub Releases and Homebrew when it’s ready. Until then, feel free to compile from source...
+The suggested method for installing KeyStash is through Homebrew.
+
+Add the 'ghall89/tap' tap with brew tap ghall89/tap
+Install QuestLogger with brew install --cask keystash
+Alternatively, you can [manually download](https://github.com/ghall89/KeyStash/releases) the latest release of KeyStash.
 
 ## Compile From Source
 
