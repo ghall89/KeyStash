@@ -26,8 +26,9 @@ A macOS utility for storing software license keys.
 
 The suggested method for installing KeyStash is through Homebrew.
 
-Add the 'ghall89/tap' tap with brew tap ghall89/tap
-Install QuestLogger with brew install --cask keystash
+- Add the 'ghall89/tap' tap with brew tap `ghall89/tap`
+- Install QuestLogger with `brew install --cask keystash`
+
 Alternatively, you can [manually download](https://github.com/ghall89/KeyStash/releases) the latest release of KeyStash.
 
 ## Compile From Source
