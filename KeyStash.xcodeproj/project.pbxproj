@@ -52,10 +52,8 @@
 		D3CFBED42ABB841D00C1D4BC /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3CFBED32ABB841D00C1D4BC /* Tag.swift */; };
 		D3D3F6522B1D1DCA00E951B2 /* migrations.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D3F6512B1D1DCA00E951B2 /* migrations.swift */; };
 		D3D3F6542B1E1A2F00E951B2 /* addAttachmentToLicense.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3D3F6532B1E1A2F00E951B2 /* addAttachmentToLicense.swift */; };
-		D3DBCAB92B72CD3E005839E0 /* SwiftCloudDrive in Frameworks */ = {isa = PBXBuildFile; productRef = D3DBCAB82B72CD3E005839E0 /* SwiftCloudDrive */; };
 		D3EC78912AC9DD0100C7E522 /* sortBy.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EC78902AC9DD0100C7E522 /* sortBy.swift */; };
 		D3EDC9D82B73F0BD001D85B6 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = D3EDC9D72B73F0BD001D85B6 /* AlertToast */; };
-		D3EDC9DA2B73F2B1001D85B6 /* iCloudStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3EDC9D92B73F2B1001D85B6 /* iCloudStore.swift */; };
 		D3F4B6EC2ABA25D3002AFDFD /* SidebarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3F4B6EB2ABA25D3002AFDFD /* SidebarView.swift */; };
 /* End PBXBuildFile section */
 
@@ -108,7 +106,6 @@
 		D3D3F6512B1D1DCA00E951B2 /* migrations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = migrations.swift; sourceTree = "<group>"; };
 		D3D3F6532B1E1A2F00E951B2 /* addAttachmentToLicense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addAttachmentToLicense.swift; sourceTree = "<group>"; };
 		D3EC78902AC9DD0100C7E522 /* sortBy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = sortBy.swift; sourceTree = "<group>"; };
-		D3EDC9D92B73F2B1001D85B6 /* iCloudStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = iCloudStore.swift; sourceTree = "<group>"; };
 		D3F4B6EB2ABA25D3002AFDFD /* SidebarView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SidebarView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -119,7 +116,6 @@
 			files = (
 				D3B08F832AB6A5FD004715F5 /* MarkdownUI in Frameworks */,
 				D3EDC9D82B73F0BD001D85B6 /* AlertToast in Frameworks */,
-				D3DBCAB92B72CD3E005839E0 /* SwiftCloudDrive in Frameworks */,
 				D3C961FE2B1BD8EB008BE15D /* GRDB in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -307,7 +303,6 @@
 		D3C961F92B1BD7EE008BE15D /* Database */ = {
 			isa = PBXGroup;
 			children = (
-				D3EDC9D92B73F2B1001D85B6 /* iCloudStore.swift */,
 				D3C961FF2B1BDA6E008BE15D /* connectToDB.swift */,
 				D3D3F6512B1D1DCA00E951B2 /* migrations.swift */,
 				D3C962012B1BDEFF008BE15D /* Utils */,
@@ -363,7 +358,6 @@
 			packageProductDependencies = (
 				D3B08F822AB6A5FD004715F5 /* MarkdownUI */,
 				D3C961FD2B1BD8EB008BE15D /* GRDB */,
-				D3DBCAB82B72CD3E005839E0 /* SwiftCloudDrive */,
 				D3EDC9D72B73F0BD001D85B6 /* AlertToast */,
 			);
 			productName = Valet;
@@ -398,7 +392,6 @@
 			packageReferences = (
 				D3B08F812AB6A5FD004715F5 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 				D3C961FC2B1BD8EB008BE15D /* XCRemoteSwiftPackageReference "GRDB" */,
-				D3DBCAB72B72CD3E005839E0 /* XCRemoteSwiftPackageReference "SwiftCloudDrive" */,
 				D3EDC9D62B73F0BD001D85B6 /* XCRemoteSwiftPackageReference "AlertToast" */,
 			);
 			productRefGroup = D39942AD2AB5095A00B2DC39 /* Products */;
@@ -478,7 +471,6 @@
 				D39942DE2AB509AF00B2DC39 /* License.swift in Sources */,
 				D39942E02AB509AF00B2DC39 /* getInstalledApps.swift in Sources */,
 				D3EC78912AC9DD0100C7E522 /* sortBy.swift in Sources */,
-				D3EDC9DA2B73F2B1001D85B6 /* iCloudStore.swift in Sources */,
 				D39942DB2AB509AF00B2DC39 /* LicenseListView.swift in Sources */,
 				D3CAF4B02B8BCC6000CB61D4 /* EditLicenseView.swift in Sources */,
 				D369F46C2AB87CEA00D8C6B1 /* exportCSV.swift in Sources */,
@@ -642,7 +634,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ghalldev.KeyStash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = macosx;
@@ -679,7 +671,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 0.1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ghalldev.KeyStash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = macosx;
@@ -729,14 +721,6 @@
 				kind = branch;
 			};
 		};
-		D3DBCAB72B72CD3E005839E0 /* XCRemoteSwiftPackageReference "SwiftCloudDrive" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/drewmccormack/SwiftCloudDrive.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.1.0;
-			};
-		};
 		D3EDC9D62B73F0BD001D85B6 /* XCRemoteSwiftPackageReference "AlertToast" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/elai950/AlertToast.git";
@@ -757,11 +741,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D3C961FC2B1BD8EB008BE15D /* XCRemoteSwiftPackageReference "GRDB" */;
 			productName = GRDB;
-		};
-		D3DBCAB82B72CD3E005839E0 /* SwiftCloudDrive */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D3DBCAB72B72CD3E005839E0 /* XCRemoteSwiftPackageReference "SwiftCloudDrive" */;
-			productName = SwiftCloudDrive;
 		};
 		D3EDC9D72B73F0BD001D85B6 /* AlertToast */ = {
 			isa = XCSwiftPackageProductDependency;

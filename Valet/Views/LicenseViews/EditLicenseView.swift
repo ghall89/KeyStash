@@ -22,49 +22,56 @@ struct EditLicenseView: View {
 				TextField("Registered To", text: $formState.registeredToName)
 				TextField("Email", text: $formState.registeredToEmail)
 				TextField("License Key", text: $formState.licenseKey)
-				DatePicker(
-					"Expiration Date",
-					selection: $selectedDate,
-					displayedComponents: [.date])
 			}
 			Section {
-								if let attachment = license.attachmentPath {
-									HStack {
-										Button(action: {
-											showDeleteAlert.toggle()
-										}, label: {
-											Image(systemName: "xmark.circle.fill")
-												.foregroundStyle(.red)
-										})
-										.buttonStyle(.plain)
+				Toggle(isOn: $formState.addExpiration, label: {
+					Text("License Expires")
+				})
+				if formState.addExpiration {
+					DatePicker(
+						"Expiration Date",
+						selection: $selectedDate,
+						displayedComponents: [.date])
+				}
+			}
+			Section {
+				if let attachment = license.attachmentPath {
+					HStack {
+						Button(action: {
+							showDeleteAlert.toggle()
+						}, label: {
+							Image(systemName: "xmark.circle.fill")
+								.foregroundStyle(.red)
+						})
+						.buttonStyle(.plain)
 				
-										VStack(alignment: .leading) {
-											Text(attachment.lastPathComponent)
-												.fontDesign(.monospaced)
-										}
-									}
-									.confirmationDialog(
-										"Are you sure you want to remove this attachment? The file will be moved to your computer's Trash.",
-										isPresented: $showDeleteAlert,
-										actions: {
-											Button(action: {
-												showDeleteAlert.toggle()
-											}, label: {
-												Text("Cancel")
-											})
-											.keyboardShortcut(.defaultAction)
-											Button(action: {
-												removeAttachment()
-												showDeleteAlert.toggle()
-											}, label: {
-												Text("Delete")
-											})
-										})
-								} else {
-									Button(action: handleAttachment, label: {
-										Label("Add Attachment", systemImage: "paperclip")
-									})
-								}
+						VStack(alignment: .leading) {
+							Text(attachment.lastPathComponent)
+								.fontDesign(.monospaced)
+						}
+					}
+					.confirmationDialog(
+						"Are you sure you want to remove this attachment? The file will be moved to your computer's Trash.",
+						isPresented: $showDeleteAlert,
+						actions: {
+							Button(action: {
+								showDeleteAlert.toggle()
+							}, label: {
+								Text("Cancel")
+							})
+							.keyboardShortcut(.defaultAction)
+							Button(action: {
+								removeAttachment()
+								showDeleteAlert.toggle()
+							}, label: {
+								Text("Delete")
+							})
+						})
+				} else {
+					Button(action: handleAttachment, label: {
+						Label("Add Attachment", systemImage: "paperclip")
+					})
+				}
 			}
 			Section("Notes") {
 				TextEditor(text: $formState.notes)
@@ -112,7 +119,11 @@ struct EditLicenseView: View {
 			updatedLicense.registeredToName = formState.registeredToName
 			updatedLicense.registeredToEmail = formState.registeredToEmail
 			updatedLicense.licenseKey = formState.licenseKey
-			updatedLicense.expirationDt = formState.expirationDt
+			if formState.addExpiration {
+				updatedLicense.expirationDt = formState.expirationDt
+			} else {
+				updatedLicense.expirationDt = nil
+			}
 			updatedLicense.notes = formState.notes
 			try updateLicense(databaseManager.dbQueue, data: updatedLicense)
 			databaseManager.fetchData()
