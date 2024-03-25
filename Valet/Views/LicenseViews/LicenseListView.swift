@@ -85,7 +85,7 @@ struct LicenseListView: View {
 			}
 		}
 		.onAppear(perform: databaseManager.fetchData)
-		.navigationTitle(snakeToTitleCase(appState.sidebarSelection))
+		.navigationTitle(LocalizedStringKey(snakeToTitleCase(appState.sidebarSelection)))
 		.confirmationDialog("Are you sure you want to empty the trash? Any files you have attached will also be deleted.", isPresented: $confirmDeleteAll, actions: {
 			Button("Empty Trash", role: .destructive, action: {
 				emptyTrash(databaseManager.dbQueue)
