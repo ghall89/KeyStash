@@ -16,12 +16,12 @@ struct SearchBar: View {
 				Menu(content: {
 					Picker("Sort By", selection: $selectedSort, content: {
 						ForEach(SortOptions.allCases, id: \.self) { sortOption in
-							Text(sortOption.rawValue).tag(sortOption)
+							Text(sortOption.localizedString()).tag(sortOption)
 						}
 					})
 					Picker("Sort Order", selection: $selectedSortOrder, content: {
 						ForEach(OrderOptions.allCases, id: \.self) { orderOption in
-							Text(orderOption.rawValue).tag(orderOption)
+							Text(orderOption.localizedString()).tag(orderOption)
 						}
 					})
 				}, label: {
