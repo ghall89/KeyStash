@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B0573CF92BB106AD00298E24 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B0573CF62BB103CF00298E24 /* Localizable.xcstrings */; };
 		D30C58082AB91A5300A86426 /* resizeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30C58072AB91A5300A86426 /* resizeImage.swift */; };
 		D3127DAE2B352803004343EF /* deleteAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3127DAD2B352803004343EF /* deleteAttachment.swift */; };
 		D3163CEA2ABBC91B00BC5F63 /* exportAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3163CE92ABBC91B00BC5F63 /* exportAttachment.swift */; };
@@ -413,6 +414,7 @@
 			files = (
 				D39942D72AB509AF00B2DC39 /* Assets.xcassets in Resources */,
 				D39942B92AB5095B00B2DC39 /* Preview Assets.xcassets in Resources */,
+				B0573CF92BB106AD00298E24 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
