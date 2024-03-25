@@ -58,6 +58,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B0573CF62BB103CF00298E24 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		D30C58072AB91A5300A86426 /* resizeImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = resizeImage.swift; sourceTree = "<group>"; };
 		D3127DAD2B352803004343EF /* deleteAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = deleteAttachment.swift; sourceTree = "<group>"; };
 		D3163CE92ABBC91B00BC5F63 /* exportAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = exportAttachment.swift; sourceTree = "<group>"; };
@@ -195,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				D39942C52AB509AE00B2DC39 /* Assets.xcassets */,
+				B0573CF62BB103CF00298E24 /* Localizable.xcstrings */,
 				D39942C02AB509AE00B2DC39 /* KeyStashApp.swift */,
 				D3C6503A2AB74CF300E75461 /* MenuBar.swift */,
 				D39697912ABCCB8C00A9F664 /* PrivacyInfo.xcprivacy */,
@@ -387,6 +389,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hant",
 			);
 			mainGroup = D39942A32AB5095A00B2DC39;
 			packageReferences = (
