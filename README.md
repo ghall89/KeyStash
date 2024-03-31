@@ -36,7 +36,7 @@ Alternatively, you can [manually download](https://github.com/ghall89/KeyStash/r
 ### Prerequisites
 
 - MacOS 14+
-- Xcode 15+
+- The Latest Version of Xcode
 - An [Apple Developer Account](https://developer.apple.com)
 
 ### Instructions

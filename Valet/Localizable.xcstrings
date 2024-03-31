@@ -319,6 +319,12 @@
         }
       }
     },
+    "Purchase Date" : {
+
+    },
+    "Purchased %@" : {
+
+    },
     "Registered To" : {
       "localizations" : {
         "zh-Hant" : {
@@ -476,6 +482,9 @@
           }
         }
       }
+    },
+    "Version" : {
+
     },
     "Website" : {
       "localizations" : {

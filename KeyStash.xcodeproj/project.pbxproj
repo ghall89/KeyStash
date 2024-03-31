@@ -42,7 +42,6 @@
 		D39942E12AB509AF00B2DC39 /* getAppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942D32AB509AF00B2DC39 /* getAppIcon.swift */; };
 		D3AACD242B4623E4008D01A8 /* deleteLicense.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AACD232B4623E4008D01A8 /* deleteLicense.swift */; };
 		D3B08F832AB6A5FD004715F5 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = D3B08F822AB6A5FD004715F5 /* MarkdownUI */; };
-		D3BB2EA52AD07ACF006A3593 /* Authentication.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3BB2EA42AD07ACE006A3593 /* Authentication.swift */; };
 		D3C6503B2AB74CF300E75461 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C6503A2AB74CF300E75461 /* MenuBar.swift */; };
 		D3C961FE2B1BD8EB008BE15D /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = D3C961FD2B1BD8EB008BE15D /* GRDB */; };
 		D3C962002B1BDA6E008BE15D /* connectToDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C961FF2B1BDA6E008BE15D /* connectToDB.swift */; };
@@ -69,6 +68,10 @@
 		D33797F22ABFA9A800C5E6BC /* isDownloadLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = isDownloadLink.swift; sourceTree = "<group>"; };
 		D33797F42ABFA9F200C5E6BC /* stringToClipboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = stringToClipboard.swift; sourceTree = "<group>"; };
 		D33AB53A2AB8C8F400B49922 /* getCustomIcon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = getCustomIcon.swift; sourceTree = "<group>"; };
+		D3416F2C2BB217F30023E205 /* screenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot.png; sourceTree = "<group>"; };
+		D3416F2D2BB217F30023E205 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
+		D3416F2E2BB217F30023E205 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		D3416F2F2BB218250023E205 /* CONTRIBUTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTING.md; sourceTree = "<group>"; };
 		D34B1FA12AD4408A002E5EE4 /* keychainHandlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keychainHandlers.swift; sourceTree = "<group>"; };
 		D3587C2D2AC34A04001CE2DC /* Serial-Box-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Serial-Box-Info.plist"; sourceTree = "<group>"; };
 		D369F4682AB7BE1A00D8C6B1 /* AppSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsView.swift; sourceTree = "<group>"; };
@@ -97,7 +100,6 @@
 		D39942D22AB509AF00B2DC39 /* getInstalledApps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getInstalledApps.swift; sourceTree = "<group>"; };
 		D39942D32AB509AF00B2DC39 /* getAppIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getAppIcon.swift; sourceTree = "<group>"; };
 		D3AACD232B4623E4008D01A8 /* deleteLicense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = deleteLicense.swift; sourceTree = "<group>"; };
-		D3BB2EA42AD07ACE006A3593 /* Authentication.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Authentication.swift; sourceTree = "<group>"; };
 		D3C6503A2AB74CF300E75461 /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		D3C961FF2B1BDA6E008BE15D /* connectToDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = connectToDB.swift; sourceTree = "<group>"; };
 		D3C962022B1BDF10008BE15D /* addLicense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = addLicense.swift; sourceTree = "<group>"; };
@@ -179,6 +181,10 @@
 		D39942A32AB5095A00B2DC39 = {
 			isa = PBXGroup;
 			children = (
+				D3416F2F2BB218250023E205 /* CONTRIBUTING.md */,
+				D3416F2D2BB217F30023E205 /* LICENSE.md */,
+				D3416F2E2BB217F30023E205 /* README.md */,
+				D3416F2C2BB217F30023E205 /* screenshot.png */,
 				D3587C2D2AC34A04001CE2DC /* Serial-Box-Info.plist */,
 				D39942AE2AB5095A00B2DC39 /* Valet */,
 				D39942AD2AB5095A00B2DC39 /* Products */,
@@ -226,7 +232,6 @@
 			children = (
 				D39942C22AB509AE00B2DC39 /* AppState.swift */,
 				D38457782AC1DEE70057A34A /* EditFormState.swift */,
-				D3BB2EA42AD07ACE006A3593 /* Authentication.swift */,
 				D3C962042B1BDF8A008BE15D /* DatabaseManager.swift */,
 			);
 			path = ViewModels;
@@ -480,7 +485,6 @@
 				D3CAF4B02B8BCC6000CB61D4 /* EditLicenseView.swift in Sources */,
 				D369F46C2AB87CEA00D8C6B1 /* exportCSV.swift in Sources */,
 				D3C6503B2AB74CF300E75461 /* MenuBar.swift in Sources */,
-				D3BB2EA52AD07ACF006A3593 /* Authentication.swift in Sources */,
 				D33797EE2ABFA49800C5E6BC /* snakeToTitleCase.swift in Sources */,
 				D39942D82AB509AF00B2DC39 /* LicenceInfoView.swift in Sources */,
 				D3CFBED22ABB82C700C1D4BC /* getAttachment.swift in Sources */,
@@ -639,7 +643,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ghalldev.KeyStash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = macosx;
@@ -676,7 +680,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 0.1.0;
+				MARKETING_VERSION = 0.2.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ghalldev.KeyStash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = macosx;

@@ -5,8 +5,10 @@ import GRDB
 struct License: Identifiable, Codable, FetchableRecord, PersistableRecord {
 	var id: String = UUID().uuidString
 	var softwareName: String = ""
+	var version: String?
 	var icon: Data?
 	var expirationDt: Date?
+	var purchaseDt: Date? 
 	var licenseKey: String = ""
 	var registeredToName: String = ""
 	var registeredToEmail: String = ""
@@ -54,9 +56,7 @@ struct License: Identifiable, Codable, FetchableRecord, PersistableRecord {
 		registeredToEmail: String,
 		downloadUrlString: String,
 		notes: String,
-		
 		updatedDate: Date? = nil,
-		
 		inTrash: Bool,
 		trashDate: Date? = nil
 	) {

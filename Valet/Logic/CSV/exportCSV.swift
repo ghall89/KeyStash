@@ -19,7 +19,7 @@ func convertToCSV(data: [License]) -> String {
 	let licenses = data.sorted { $0.softwareName < $1.softwareName }
 	
 	for license in licenses {
-		let row = "\(license.softwareName),\(license.downloadUrlString),\(license.registeredToName),\(license.registeredToEmail),\(license.licenseKey),\(license.notes)\n"
+		let row = "\(license.softwareName),\(String(describing: license.downloadUrl)),\(license.registeredToName),\(license.registeredToEmail),\(license.licenseKey),\(license.notes)\n"
 		csvString.append(row)
 	}
 	

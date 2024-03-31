@@ -27,18 +27,26 @@ struct LicenceInfoView: View {
 							Text(license.softwareName)
 								.font(.title)
 								.multilineTextAlignment(.leading)
-							if let url = license.downloadUrl {
-								Link(destination: url, label: {
-									if isDownloadLink(url: url) {
-										Label("Download", systemImage: "arrow.down.circle")
-									} else {
-										Label("Website", systemImage: "safari")
-									}
-								})
-								.buttonStyle(.borderedProminent)
+							if let version = license.version {
+								if !version.isEmpty {
+									Text(version)
+								}
+							}
+							if let purchaseDt = license.purchaseDt {
+								Text("Purchased \(purchaseDt.formatted(date: .abbreviated, time: .omitted))")
 							}
 						}
 						Spacer()
+						if let url = license.downloadUrl {
+							Link(destination: url, label: {
+								if isDownloadLink(url: url) {
+									Label("Download", systemImage: "arrow.down.circle")
+								} else {
+									Label("Website", systemImage: "safari")
+								}
+							})
+							.buttonStyle(.borderedProminent)
+						}
 					}
 					.padding()
 				}
@@ -105,9 +113,13 @@ struct LicenceInfoView: View {
 	private func initFormState() {
 		formState.softwareName = license.softwareName
 		formState.urlString = license.downloadUrlString
+		formState.version = license.version ?? ""
 		formState.registeredToName = license.registeredToName
 		formState.registeredToEmail = license.registeredToEmail
 		formState.licenseKey = license.licenseKey
+		if license.purchaseDt != nil {
+			formState.purchaseDt = license.purchaseDt
+		}
 		if license.expirationDt != nil {
 			formState.addExpiration = true
 		}
