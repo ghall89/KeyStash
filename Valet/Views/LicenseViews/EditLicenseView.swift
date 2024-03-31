@@ -9,19 +9,31 @@ struct EditLicenseView: View {
 	
 	var license: License
 
-	@State var selectedDate: Date = .init()
+	@State var selectedPurchaseDate: Date = .init()
+	@State var selectedExpDate: Date = .init()
 	@State private var showDeleteAlert: Bool = false
+	
+	let formatter: NumberFormatter = {
+		let formatter = NumberFormatter()
+		formatter.numberStyle = .decimal
+		return formatter
+	}()
 
 	var body: some View {
 		Form {
 			Section {
 				TextField("Name", text: $formState.softwareName)
 				TextField("URL", text: $formState.urlString)
+				TextField("Version", text: $formState.version)
 			}
 			Section {
 				TextField("Registered To", text: $formState.registeredToName)
 				TextField("Email", text: $formState.registeredToEmail)
 				TextField("License Key", text: $formState.licenseKey)
+				DatePicker(
+					"Purchase Date",
+					selection: $selectedPurchaseDate,
+					displayedComponents: [.date])
 			}
 			Section {
 				Toggle(isOn: $formState.addExpiration, label: {
@@ -30,7 +42,7 @@ struct EditLicenseView: View {
 				if formState.addExpiration {
 					DatePicker(
 						"Expiration Date",
-						selection: $selectedDate,
+						selection: $selectedExpDate,
 						displayedComponents: [.date])
 				}
 			}
@@ -101,12 +113,15 @@ struct EditLicenseView: View {
 					})
 			}
 		}
-		.onChange(of: selectedDate) {
-			formState.expirationDt = selectedDate
+		.onChange(of: selectedPurchaseDate) {
+			formState.purchaseDt = selectedPurchaseDate
+		}
+		.onChange(of: selectedExpDate) {
+			formState.expirationDt = selectedExpDate
 		}
 		.onAppear {
 			if license.expirationDt != nil {
-				selectedDate = license.expirationDt!
+				selectedExpDate = license.expirationDt!
 			}
 		}
 	}
@@ -115,10 +130,12 @@ struct EditLicenseView: View {
 		do {
 			var updatedLicense = license
 			updatedLicense.softwareName = formState.softwareName
+			updatedLicense.version = formState.version
 			updatedLicense.downloadUrlString = formState.urlString
 			updatedLicense.registeredToName = formState.registeredToName
 			updatedLicense.registeredToEmail = formState.registeredToEmail
 			updatedLicense.licenseKey = formState.licenseKey
+			updatedLicense.purchaseDt = formState.purchaseDt
 			if formState.addExpiration {
 				updatedLicense.expirationDt = formState.expirationDt
 			} else {

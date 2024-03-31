@@ -2,7 +2,6 @@ import SwiftUI
 
 struct ContentView: View {
 	@EnvironmentObject var appState: AppState
-	@EnvironmentObject var authentication: Authentication
 
 	@AppStorage("disableAnimations") private var disableAnimations: Bool = false
 
