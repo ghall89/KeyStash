@@ -4,15 +4,15 @@ struct EditLicenseView: View {
 	@EnvironmentObject var databaseManager: DatabaseManager
 	@EnvironmentObject var formState: EditFormState
 	@EnvironmentObject var appState: AppState
-	
+
 	@Binding var isPresented: Bool
-	
+
 	var license: License
 
 	@State var selectedPurchaseDate: Date = .init()
 	@State var selectedExpDate: Date = .init()
 	@State private var showDeleteAlert: Bool = false
-	
+
 	let formatter: NumberFormatter = {
 		let formatter = NumberFormatter()
 		formatter.numberStyle = .decimal
@@ -33,7 +33,8 @@ struct EditLicenseView: View {
 				DatePicker(
 					"Purchase Date",
 					selection: $selectedPurchaseDate,
-					displayedComponents: [.date])
+					displayedComponents: [.date]
+				)
 			}
 			Section {
 				Toggle(isOn: $formState.addExpiration, label: {
@@ -43,7 +44,8 @@ struct EditLicenseView: View {
 					DatePicker(
 						"Expiration Date",
 						selection: $selectedExpDate,
-						displayedComponents: [.date])
+						displayedComponents: [.date]
+					)
 				}
 			}
 			Section {
@@ -56,7 +58,7 @@ struct EditLicenseView: View {
 								.foregroundStyle(.red)
 						})
 						.buttonStyle(.plain)
-				
+
 						VStack(alignment: .leading) {
 							Text(attachment.lastPathComponent)
 								.fontDesign(.monospaced)
@@ -78,7 +80,8 @@ struct EditLicenseView: View {
 							}, label: {
 								Text("Delete")
 							})
-						})
+						}
+					)
 				} else {
 					Button(action: handleAttachment, label: {
 						Label("Add Attachment", systemImage: "paperclip")
@@ -100,7 +103,8 @@ struct EditLicenseView: View {
 					},
 					label: {
 						Text("Cancel")
-					})
+					}
+				)
 			}
 			ToolbarItem(placement: .primaryAction) {
 				Button(
@@ -110,7 +114,8 @@ struct EditLicenseView: View {
 					},
 					label: {
 						Text("Save")
-					})
+					}
+				)
 			}
 		}
 		.onChange(of: selectedPurchaseDate) {
@@ -125,7 +130,7 @@ struct EditLicenseView: View {
 			}
 		}
 	}
-	
+
 	private func saveFormState() {
 		do {
 			var updatedLicense = license
@@ -148,7 +153,7 @@ struct EditLicenseView: View {
 			logger.error("ERROR: \(error)")
 		}
 	}
-	
+
 	private func handleAttachment() {
 		if let fileFromDisk = getAttachment() {
 			do {
@@ -161,7 +166,7 @@ struct EditLicenseView: View {
 			}
 		}
 	}
-	
+
 	private func removeAttachment() {
 		do {
 			try deleteAttachment(databaseManager.dbQueue, license: license)

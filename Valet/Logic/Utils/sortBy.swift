@@ -4,12 +4,12 @@ enum SortOptions: String, CaseIterable {
 	case byName = "Name"
 	case byAddedDt = "Date Added"
 	case byUpdatedDt = "Date Updated"
-	
+
 	func localizedString() -> String {
 		switch self {
-		case .byName: return String(localized: "SortOptions.byName")
-		case .byAddedDt: return String(localized: "SortOptions.byAddedDt")
-		case .byUpdatedDt: return String(localized: "SortOptions.byUpdatedDt")
+			case .byName: return String(localized: "SortOptions.byName")
+			case .byAddedDt: return String(localized: "SortOptions.byAddedDt")
+			case .byUpdatedDt: return String(localized: "SortOptions.byUpdatedDt")
 		}
 	}
 }
@@ -17,11 +17,11 @@ enum SortOptions: String, CaseIterable {
 enum OrderOptions: String, CaseIterable {
 	case asc = "Ascending"
 	case desc = "Descending"
-	
+
 	func localizedString() -> String {
 		switch self {
-		case .asc: return String(localized: "OrderOptions.asc")
-		case .desc: return String(localized: "OrderOptions.desc")
+			case .asc: return String(localized: "OrderOptions.asc")
+			case .desc: return String(localized: "OrderOptions.desc")
 		}
 	}
 }

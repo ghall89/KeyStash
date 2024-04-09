@@ -3,15 +3,15 @@ import SwiftUI
 struct AddLicenseView: View {
 	@EnvironmentObject var databaseManager: DatabaseManager
 	@EnvironmentObject var appState: AppState
-	
+
 	@AppStorage("defaultName") private var defaultName: String = ""
 	@AppStorage("defaultEmail") private var defaultEmail: String = ""
-	
+
 	@State private var newItem: License = .init(softwareName: "", icon: nil, licenseKey: "", registeredToName: "", registeredToEmail: "", downloadUrlString: "", notes: "", inTrash: false)
 	@State private var tabSelection: String = "installed"
 	@State private var installedApps: [InstalledApp] = []
 	@State private var selectedApp: UUID = .init()
-	
+
 	var body: some View {
 		VStack(spacing: 10) {
 			if !installedApps.isEmpty {
@@ -50,7 +50,7 @@ struct AddLicenseView: View {
 				default:
 					Text("🤔")
 			}
-			
+
 			HStack {
 				Spacer()
 				Button("Cancel", action: {
@@ -78,7 +78,7 @@ struct AddLicenseView: View {
 			}
 		}
 	}
-	
+
 	private func addItem() {
 		let newId = newItem.id
 		withAnimation {
@@ -97,7 +97,7 @@ struct AddLicenseView: View {
 		} catch {
 			logger.error("Failed to create license!")
 		}
-		
+
 		appState.selectedLicense = newId
 		appState.showNewAppSheet.toggle()
 	}

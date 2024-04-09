@@ -5,16 +5,16 @@ import GRDB
 
 func deleteAttachment(_ dbQueue: DatabaseQueue, license: License) throws {
 	let fileManager = FileManager.default
-	
+
 	do {
 		try dbQueue.write { db in
 			if let attachmentPath = license.attachmentPath {
 				try fileManager.trashItem(at: attachmentPath, resultingItemURL: nil)
-				
+
 				let columns: [ColumnAssignment] = [
-					Column("attachmentPath").set(to: nil)
+					Column("attachmentPath").set(to: nil),
 				]
-				
+
 				try License
 					.filter(Column("id") == license.id)
 					.updateAll(db, columns)

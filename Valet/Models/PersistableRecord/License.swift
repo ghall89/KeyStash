@@ -8,7 +8,7 @@ struct License: Identifiable, Codable, FetchableRecord, PersistableRecord {
 	var version: String?
 	var icon: Data?
 	var expirationDt: Date?
-	var purchaseDt: Date? 
+	var purchaseDt: Date?
 	var licenseKey: String = ""
 	var registeredToName: String = ""
 	var registeredToEmail: String = ""
@@ -16,28 +16,28 @@ struct License: Identifiable, Codable, FetchableRecord, PersistableRecord {
 	var notes: String = ""
 	var createdDate: Date = .init()
 	var updatedDate: Date?
-	
+
 	// trash status
 	var inTrash: Bool = false
 	var trashDate: Date?
 
 	// attachment
 	var attachmentPath: URL?
-	
+
 	// convert download string to a URL
 	var downloadUrl: URL? {
 		return URL(string: downloadUrlString)
 	}
-	
+
 	// decode the icon PNG blob to NSImage
 	var iconNSImage: NSImage {
 		if let iconData = icon {
 			return NSImage(data: iconData)!
 		}
-		
+
 		return NSImage(named: "no_icon")!
 	}
-	
+
 	// create small icon for list view, for best performance
 	var miniIcon: NSImage {
 		resizeImage(
@@ -45,7 +45,7 @@ struct License: Identifiable, Codable, FetchableRecord, PersistableRecord {
 			toSize: NSSize(width: 24, height: 24)
 		)!
 	}
-	
+
 	init(
 		softwareName: String,
 		icon: Data?,

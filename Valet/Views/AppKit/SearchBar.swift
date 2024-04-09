@@ -4,15 +4,15 @@ import SwiftUI
 struct SearchBar: View {
 	@AppStorage("selectedSort") private var selectedSort: SortOptions = .byName
 	@AppStorage("selectedSortOrder") private var selectedSortOrder: OrderOptions = .asc
-	
+
 	@Binding var searchString: String
-	
+
 	var body: some View {
 		VStack {
 			HStack {
 				NSSearchFieldWrapper(searchText: $searchString)
 					.textFieldStyle(RoundedBorderTextFieldStyle())
-				
+
 				Menu(content: {
 					Picker("Sort By", selection: $selectedSort, content: {
 						ForEach(SortOptions.allCases, id: \.self) { sortOption in
@@ -39,30 +39,30 @@ struct SearchBar: View {
 struct NSSearchFieldWrapper: NSViewRepresentable {
 	class Coordinator: NSObject, NSSearchFieldDelegate {
 		var parent: NSSearchFieldWrapper
-		
+
 		init(parent: NSSearchFieldWrapper) {
 			self.parent = parent
 		}
-		
+
 		func controlTextDidChange(_ notification: Notification) {
 			if let textField = notification.object as? NSTextField {
 				parent.searchText = textField.stringValue
 			}
 		}
 	}
-	
+
 	@Binding var searchText: String
-	
+
 	func makeNSView(context: Context) -> NSSearchField {
 		let searchField = NSSearchField()
 		searchField.delegate = context.coordinator
 		return searchField
 	}
-	
-	func updateNSView(_ nsView: NSSearchField, context: Context) {
+
+	func updateNSView(_ nsView: NSSearchField, context _: Context) {
 		nsView.stringValue = searchText
 	}
-	
+
 	func makeCoordinator() -> Coordinator {
 		return Coordinator(parent: self)
 	}
