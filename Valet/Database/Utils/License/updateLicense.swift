@@ -21,7 +21,7 @@ func updateLicense(_ dbQueue: DatabaseQueue, data: License) throws {
 				Column("notes").set(to: data.notes),
 				Column("updatedDate").set(to: Date()),
 				Column("inTrash").set(to: data.inTrash),
-				Column("trashDate").set(to: data.inTrash ? Date() : nil)
+				Column("trashDate").set(to: data.inTrash ? Date() : nil),
 			]
 
 			// write update to db

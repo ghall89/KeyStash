@@ -8,12 +8,12 @@ struct LicenseListView: View {
 	@State private var searchString: String = ""
 	@State private var confirmDelete: Bool = false
 	@State private var confirmDeleteAll: Bool = false
-	
+
 	@AppStorage("selectedSort") private var selectedSort: SortOptions = .byName
 	@AppStorage("selectedSortOrder") private var selectedSortOrder: OrderOptions = .asc
 	@AppStorage("compactList") private var compactList: Bool = false
 	@AppStorage("disableAnimations") private var disableAnimations: Bool = false
-	
+
 	var body: some View {
 		ZStack(alignment: .top) {
 			List(selection: $appState.selectedLicense) {
@@ -27,7 +27,7 @@ struct LicenseListView: View {
 				}
 				.listSectionSeparator(.hidden)
 				.listRowSeparator(.hidden)
-				
+
 				Section {
 					ForEach(filterItems()) { item in
 						NavigationLink(destination: {
@@ -58,7 +58,7 @@ struct LicenseListView: View {
 					}
 				}
 			}
-			
+
 			SearchBar(searchString: $searchString)
 		}
 		.frame(minWidth: 340)
@@ -71,9 +71,10 @@ struct LicenseListView: View {
 							confirmDeleteAll.toggle()
 						}, label: {
 							Label("Empty Trash", systemImage: "trash.slash")
-						})
+						}
+					)
 //					.disabled(databaseManager.licenses.contains(where: { $0.inTrash == true }))
-						.help("Empty Trash")
+					.help("Empty Trash")
 				} else {
 					Button(action: {
 						appState.showNewAppSheet.toggle()
@@ -100,13 +101,13 @@ struct LicenseListView: View {
 			AddLicenseView()
 		})
 	}
-	
+
 	private func resetSelection(itemId: String) {
 		if itemId == appState.selectedLicense {
 			appState.selectedLicense = nil
 		}
 	}
-		
+
 	private func moveToTrash(_ item: License) {
 		do {
 			var updatedLicense = item
@@ -118,11 +119,11 @@ struct LicenseListView: View {
 			logger.error("ERROR: \(error)")
 		}
 	}
-	
+
 	private func filterItems() -> [License] {
 		var filteredItems: [License] = []
 		let today = Date()
-		
+
 		switch appState.sidebarSelection {
 			case "all_apps":
 				filteredItems = databaseManager.licenses.filter { $0.inTrash == false }

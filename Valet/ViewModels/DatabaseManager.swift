@@ -9,7 +9,7 @@ class DatabaseManager: ObservableObject {
 	// initialize db connection
 	init() {
 		do {
-			self.dbQueue = try connectToDb()!
+			dbQueue = try connectToDb()!
 		} catch {
 			fatalError("Failed to connect to the database: \(error)")
 		}
@@ -20,12 +20,12 @@ class DatabaseManager: ObservableObject {
 		do {
 			try dbQueue.read { db in
 				self.licenses = try License.fetchAll(db)
-				
+
 				let today = Date()
-				
-				self.badgeCount.total = licenses.filter{ $0.inTrash != true }.count
+
+				self.badgeCount.total = licenses.filter { $0.inTrash != true }.count
 				self.badgeCount.expired = licenses.filter { $0.inTrash == false && $0.expirationDt ?? today < today }.count
-				self.badgeCount.inTrash = licenses.filter{ $0.inTrash == true }.count
+				self.badgeCount.inTrash = licenses.filter { $0.inTrash == true }.count
 			}
 		} catch {
 			logger.error("ERROR: \(error)")

@@ -4,33 +4,33 @@ import SwiftUI
 struct FilePickerView: NSViewControllerRepresentable {
 	class Coordinator: NSObject, NSOpenSavePanelDelegate {
 		var parent: FilePickerView
-		
+
 		init(parent: FilePickerView) {
 			self.parent = parent
 		}
-		
-		func panel(_ sender: Any, shouldEnable url: URL) -> Bool {
+
+		func panel(_: Any, shouldEnable url: URL) -> Bool {
 			return url.pathExtension == "app"
 		}
-		
-		func panel(_ sender: Any, didChangeToDirectoryURL url: URL?) {
+
+		func panel(_: Any, didChangeToDirectoryURL _: URL?) {
 			// Handle directory change
 			// Optionally, you can perform actions when the directory changes
 		}
-		
-		func panel(_ sender: Any, validate url: URL) throws {
+
+		func panel(_: Any, validate _: URL) throws {
 			// Validate selected URL
 		}
-		
-		func panelSelectionDidChange(_ sender: Any?) {
+
+		func panelSelectionDidChange(_: Any?) {
 			// Handle selection change
 		}
 	}
-	
+
 	func makeCoordinator() -> Coordinator {
 		return Coordinator(parent: self)
 	}
-	
+
 	func makeNSViewController(context: Context) -> NSViewController {
 		let viewController = NSViewController()
 		let openPanel = NSOpenPanel()
@@ -41,7 +41,7 @@ struct FilePickerView: NSViewControllerRepresentable {
 		openPanel.canCreateDirectories = false
 		openPanel.allowsMultipleSelection = false
 		openPanel.directoryURL = URL(fileURLWithPath: "/Applications")
-		
+
 		viewController.view = NSHostingView(rootView: Text(""))
 		openPanel.begin { response in
 			if response == .OK, let url = openPanel.urls.first {
@@ -50,11 +50,11 @@ struct FilePickerView: NSViewControllerRepresentable {
 				logger.log("Selected URL: \(url)")
 			}
 		}
-		
+
 		return viewController
 	}
-	
-	func updateNSViewController(_ nsViewController: NSViewController, context: Context) {}
+
+	func updateNSViewController(_: NSViewController, context _: Context) {}
 }
 
 extension View {

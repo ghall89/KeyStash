@@ -14,11 +14,11 @@ struct AppSettingsView: View {
 		.frame(width: 375, height: 150)
 		.padding()
 	}
-	
+
 	private struct GeneralSettingsView: View {
 		@AppStorage("defaultName") private var defaultName: String = ""
 		@AppStorage("defaultEmail") private var defaultEmail: String = ""
-		
+
 		var body: some View {
 			Form {
 				Section("Default Info") {
@@ -30,10 +30,10 @@ struct AppSettingsView: View {
 			}
 		}
 	}
-	
+
 	private struct CloudKitSettingsView: View {
 		@State var iCloudStatus: String = ""
-		
+
 		var body: some View {
 			VStack {
 				Text(iCloudStatus)
