@@ -4,24 +4,37 @@ struct EditLicenseView: View {
 	@EnvironmentObject var databaseManager: DatabaseManager
 	@EnvironmentObject var formState: EditFormState
 	@EnvironmentObject var appState: AppState
-	
+
 	@Binding var isPresented: Bool
-	
+
 	var license: License
 
-	@State var selectedDate: Date = .init()
+	@State var selectedPurchaseDate: Date = .init()
+	@State var selectedExpDate: Date = .init()
 	@State private var showDeleteAlert: Bool = false
+
+	let formatter: NumberFormatter = {
+		let formatter = NumberFormatter()
+		formatter.numberStyle = .decimal
+		return formatter
+	}()
 
 	var body: some View {
 		Form {
 			Section {
 				TextField("Name", text: $formState.softwareName)
 				TextField("URL", text: $formState.urlString)
+				TextField("Version", text: $formState.version)
 			}
 			Section {
 				TextField("Registered To", text: $formState.registeredToName)
 				TextField("Email", text: $formState.registeredToEmail)
 				TextField("License Key", text: $formState.licenseKey)
+				DatePicker(
+					"Purchase Date",
+					selection: $selectedPurchaseDate,
+					displayedComponents: [.date]
+				)
 			}
 			Section {
 				Toggle(isOn: $formState.addExpiration, label: {
@@ -30,8 +43,9 @@ struct EditLicenseView: View {
 				if formState.addExpiration {
 					DatePicker(
 						"Expiration Date",
-						selection: $selectedDate,
-						displayedComponents: [.date])
+						selection: $selectedExpDate,
+						displayedComponents: [.date]
+					)
 				}
 			}
 			Section {
@@ -44,7 +58,7 @@ struct EditLicenseView: View {
 								.foregroundStyle(.red)
 						})
 						.buttonStyle(.plain)
-				
+
 						VStack(alignment: .leading) {
 							Text(attachment.lastPathComponent)
 								.fontDesign(.monospaced)
@@ -66,7 +80,8 @@ struct EditLicenseView: View {
 							}, label: {
 								Text("Delete")
 							})
-						})
+						}
+					)
 				} else {
 					Button(action: handleAttachment, label: {
 						Label("Add Attachment", systemImage: "paperclip")
@@ -88,7 +103,8 @@ struct EditLicenseView: View {
 					},
 					label: {
 						Text("Cancel")
-					})
+					}
+				)
 			}
 			ToolbarItem(placement: .primaryAction) {
 				Button(
@@ -98,27 +114,33 @@ struct EditLicenseView: View {
 					},
 					label: {
 						Text("Save")
-					})
+					}
+				)
 			}
 		}
-		.onChange(of: selectedDate) {
-			formState.expirationDt = selectedDate
+		.onChange(of: selectedPurchaseDate) {
+			formState.purchaseDt = selectedPurchaseDate
+		}
+		.onChange(of: selectedExpDate) {
+			formState.expirationDt = selectedExpDate
 		}
 		.onAppear {
 			if license.expirationDt != nil {
-				selectedDate = license.expirationDt!
+				selectedExpDate = license.expirationDt!
 			}
 		}
 	}
-	
+
 	private func saveFormState() {
 		do {
 			var updatedLicense = license
 			updatedLicense.softwareName = formState.softwareName
+			updatedLicense.version = formState.version
 			updatedLicense.downloadUrlString = formState.urlString
 			updatedLicense.registeredToName = formState.registeredToName
 			updatedLicense.registeredToEmail = formState.registeredToEmail
 			updatedLicense.licenseKey = formState.licenseKey
+			updatedLicense.purchaseDt = formState.purchaseDt
 			if formState.addExpiration {
 				updatedLicense.expirationDt = formState.expirationDt
 			} else {
@@ -131,7 +153,7 @@ struct EditLicenseView: View {
 			logger.error("ERROR: \(error)")
 		}
 	}
-	
+
 	private func handleAttachment() {
 		if let fileFromDisk = getAttachment() {
 			do {
@@ -144,7 +166,7 @@ struct EditLicenseView: View {
 			}
 		}
 	}
-	
+
 	private func removeAttachment() {
 		do {
 			try deleteAttachment(databaseManager.dbQueue, license: license)

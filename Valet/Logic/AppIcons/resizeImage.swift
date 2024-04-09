@@ -6,14 +6,14 @@ func resizeImage(image: NSImage, toSize targetSize: NSSize) -> NSImage? {
 	guard let representation = image.bestRepresentation(for: targetRect, context: nil, hints: nil) else {
 		return nil
 	}
-	
+
 	let targetImage = NSImage(size: targetSize)
 	targetImage.lockFocus()
 	defer { targetImage.unlockFocus() }
-	
+
 	if representation.draw(in: targetRect) {
 		return targetImage
 	}
-	
+
 	return nil
 }

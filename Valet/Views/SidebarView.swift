@@ -10,7 +10,7 @@ struct SidebarView: View {
 				Label("All Apps", systemImage: "square.stack")
 					.badge(databaseManager.badgeCount.total)
 					.tag("all_apps")
-				
+
 				if databaseManager.badgeCount.expired > 0 {
 					Label("Expired", systemImage: "exclamationmark.square")
 						.badge(databaseManager.badgeCount.expired)
