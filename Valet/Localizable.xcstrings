@@ -237,6 +237,9 @@
         }
       }
     },
+    "Import" : {
+
+    },
     "License Expires" : {
       "localizations" : {
         "zh-Hant" : {

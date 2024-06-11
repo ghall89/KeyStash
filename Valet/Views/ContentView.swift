@@ -6,8 +6,6 @@ struct ContentView: View {
 	@AppStorage("disableAnimations") private var disableAnimations: Bool = false
 
 	var body: some View {
-		//		GeometryReader { geometry in
-		//			ZStack {
 		NavigationSplitView {
 			SidebarView()
 				.navigationSplitViewColumnWidth(min: 160, ideal: 230)
