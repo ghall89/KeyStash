@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B0573CF92BB106AD00298E24 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B0573CF62BB103CF00298E24 /* Localizable.xcstrings */; };
+		D30321212C1A322C00E6B401 /* AboutWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30321202C1A322C00E6B401 /* AboutWindowView.swift */; };
 		D30C58082AB91A5300A86426 /* resizeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30C58072AB91A5300A86426 /* resizeImage.swift */; };
 		D3127DAE2B352803004343EF /* deleteAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3127DAD2B352803004343EF /* deleteAttachment.swift */; };
 		D3163CEA2ABBC91B00BC5F63 /* exportAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3163CE92ABBC91B00BC5F63 /* exportAttachment.swift */; };
@@ -58,6 +59,7 @@
 
 /* Begin PBXFileReference section */
 		B0573CF62BB103CF00298E24 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		D30321202C1A322C00E6B401 /* AboutWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutWindowView.swift; sourceTree = "<group>"; };
 		D30C58072AB91A5300A86426 /* resizeImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = resizeImage.swift; sourceTree = "<group>"; };
 		D3127DAD2B352803004343EF /* deleteAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = deleteAttachment.swift; sourceTree = "<group>"; };
 		D3163CE92ABBC91B00BC5F63 /* exportAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = exportAttachment.swift; sourceTree = "<group>"; };
@@ -242,6 +244,7 @@
 				D39942CC2AB509AE00B2DC39 /* ContentView.swift */,
 				D369F4682AB7BE1A00D8C6B1 /* AppSettingsView.swift */,
 				D3F4B6EB2ABA25D3002AFDFD /* SidebarView.swift */,
+				D30321202C1A322C00E6B401 /* AboutWindowView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -475,6 +478,7 @@
 				D3C6503B2AB74CF300E75461 /* MenuBar.swift in Sources */,
 				D33797EE2ABFA49800C5E6BC /* snakeToTitleCase.swift in Sources */,
 				D39942D82AB509AF00B2DC39 /* LicenceInfoView.swift in Sources */,
+				D30321212C1A322C00E6B401 /* AboutWindowView.swift in Sources */,
 				D3CFBED22ABB82C700C1D4BC /* getAttachment.swift in Sources */,
 				D3C962002B1BDA6E008BE15D /* connectToDB.swift in Sources */,
 				D369F46E2AB8838300D8C6B1 /* importCSV.swift in Sources */,

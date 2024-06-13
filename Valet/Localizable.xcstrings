@@ -4,7 +4,10 @@
     "" : {
 
     },
-    "🤔" : {
+    "About KeyStash" : {
+
+    },
+    "about window" : {
 
     },
     "Add" : {
@@ -106,6 +109,9 @@
           }
         }
       }
+    },
+    "Change Icon" : {
+
     },
     "Choose Installed" : {
       "localizations" : {
@@ -226,6 +232,9 @@
           }
         }
       }
+    },
+    "GitHub" : {
+
     },
     "iCloud" : {
       "localizations" : {
@@ -455,6 +464,9 @@
           }
         }
       }
+    },
+    "Support on Ko-Fi" : {
+
     },
     "These will be applied to the 'Registered To' fields for any new licenses you add." : {
       "localizations" : {

@@ -4,7 +4,7 @@ import Foundation
 extension String {
 	func stripNewLines() -> String {
 		let newlines = CharacterSet.newlines
-		return self.components(separatedBy: newlines).joined()
+		return components(separatedBy: newlines).joined()
 	}
 }
 
@@ -35,11 +35,11 @@ func convertToCSV(data: [License]) -> String {
 			license.registeredToName,
 			license.registeredToEmail,
 			license.licenseKey.stripNewLines(),
-			license.notes.stripNewLines()
+			license.notes.stripNewLines(),
 		]
-		
+
 		let rowString = row.joined(separator: ",")
-		
+
 		csvString.append(rowString + "\n")
 	}
 	print(csvString)

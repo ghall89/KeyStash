@@ -111,6 +111,7 @@ struct LicenceInfoView: View {
 	}
 
 	private func initFormState() {
+		formState.icon = nil
 		formState.softwareName = license.softwareName
 		formState.urlString = license.downloadUrlString
 		formState.version = license.version ?? ""
