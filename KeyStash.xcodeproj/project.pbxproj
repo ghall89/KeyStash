@@ -345,7 +345,7 @@
 				D39942A82AB5095A00B2DC39 /* Sources */,
 				D39942A92AB5095A00B2DC39 /* Frameworks */,
 				D39942AA2AB5095A00B2DC39 /* Resources */,
-				D30A4FAD2B44E3FC004CA2DA /* ShellScript */,
+				D353428E2C6C1F2E000116F9 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -369,7 +369,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1540;
 				TargetAttributes = {
 					D39942AB2AB5095A00B2DC39 = {
 						CreatedOnToolsVersion = 15.0;
@@ -415,9 +415,8 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		D30A4FAD2B44E3FC004CA2DA /* ShellScript */ = {
+		D353428E2C6C1F2E000116F9 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -431,7 +430,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" = \"Release\" ]; then\n    buildNumber=$(git rev-list --count head)\n    /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\nfi\n";
+			shellScript = "if [ \"${CONFIGURATION}\" = \"Release\" ]; then\n    # Use full path to Git\n    GIT=\"/usr/bin/git\"\n    \n    # Check if we're in a Git repository\n    if [ -d \".git\" ] || git rev-parse --git-dir > /dev/null 2>&1; then\n        buildNumber=$(\"$GIT\" rev-list --count HEAD)\n        \n        # Path to Info.plist\n        INFO_PLIST=\"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n        \n        # Check if Info.plist exists in the expected location\n        if [ -f \"$INFO_PLIST\" ]; then\n            # Update CFBundleVersion using defaults command\n            defaults write \"$INFO_PLIST\" CFBundleVersion -string \"$buildNumber\"\n            echo \"Build number updated to $buildNumber\"\n        else\n            echo \"Error: Info.plist not found at $INFO_PLIST\"\n            exit 1\n        fi\n    else\n        echo \"Error: Not in a Git repository\"\n        exit 1\n    fi\nelse\n    echo \"Not a release build, skipping build number update\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -492,6 +491,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -521,6 +521,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -555,6 +556,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -584,6 +586,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -615,6 +618,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Valet/Preview Content\"";
 				DEVELOPMENT_TEAM = B3DFV278UN;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -651,6 +655,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Valet/Preview Content\"";
 				DEVELOPMENT_TEAM = B3DFV278UN;
 				ENABLE_HARDENED_RUNTIME = YES;
