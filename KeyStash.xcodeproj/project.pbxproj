@@ -42,7 +42,6 @@
 		D3AACD242B4623E4008D01A8 /* deleteLicense.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AACD232B4623E4008D01A8 /* deleteLicense.swift */; };
 		D3B08F832AB6A5FD004715F5 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = D3B08F822AB6A5FD004715F5 /* MarkdownUI */; };
 		D3C6503B2AB74CF300E75461 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C6503A2AB74CF300E75461 /* MenuBar.swift */; };
-		D3C908832C109F8200F0A7B1 /* CSV in Frameworks */ = {isa = PBXBuildFile; productRef = D3C908822C109F8200F0A7B1 /* CSV */; };
 		D3C961FE2B1BD8EB008BE15D /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = D3C961FD2B1BD8EB008BE15D /* GRDB */; };
 		D3C962002B1BDA6E008BE15D /* connectToDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C961FF2B1BDA6E008BE15D /* connectToDB.swift */; };
 		D3C962032B1BDF10008BE15D /* addLicense.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C962022B1BDF10008BE15D /* addLicense.swift */; };
@@ -120,7 +119,6 @@
 				D3B08F832AB6A5FD004715F5 /* MarkdownUI in Frameworks */,
 				D3EDC9D82B73F0BD001D85B6 /* AlertToast in Frameworks */,
 				D3C961FE2B1BD8EB008BE15D /* GRDB in Frameworks */,
-				D3C908832C109F8200F0A7B1 /* CSV in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -358,7 +356,6 @@
 				D3B08F822AB6A5FD004715F5 /* MarkdownUI */,
 				D3C961FD2B1BD8EB008BE15D /* GRDB */,
 				D3EDC9D72B73F0BD001D85B6 /* AlertToast */,
-				D3C908822C109F8200F0A7B1 /* CSV */,
 			);
 			productName = Valet;
 			productReference = D39942AC2AB5095A00B2DC39 /* KeyStash.app */;
@@ -394,7 +391,6 @@
 				D3B08F812AB6A5FD004715F5 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 				D3C961FC2B1BD8EB008BE15D /* XCRemoteSwiftPackageReference "GRDB" */,
 				D3EDC9D62B73F0BD001D85B6 /* XCRemoteSwiftPackageReference "AlertToast" */,
-				D3C908812C109F8200F0A7B1 /* XCRemoteSwiftPackageReference "csv" */,
 			);
 			productRefGroup = D39942AD2AB5095A00B2DC39 /* Products */;
 			projectDirPath = "";
@@ -712,14 +708,6 @@
 				minimumVersion = 2.2.0;
 			};
 		};
-		D3C908812C109F8200F0A7B1 /* XCRemoteSwiftPackageReference "csv" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/skelpo/csv.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.1.2;
-			};
-		};
 		D3C961FC2B1BD8EB008BE15D /* XCRemoteSwiftPackageReference "GRDB" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/groue/GRDB.swift";
@@ -743,11 +731,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D3B08F812AB6A5FD004715F5 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
 			productName = MarkdownUI;
-		};
-		D3C908822C109F8200F0A7B1 /* CSV */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D3C908812C109F8200F0A7B1 /* XCRemoteSwiftPackageReference "csv" */;
-			productName = CSV;
 		};
 		D3C961FD2B1BD8EB008BE15D /* GRDB */ = {
 			isa = XCSwiftPackageProductDependency;

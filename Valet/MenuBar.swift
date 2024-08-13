@@ -24,6 +24,11 @@ struct MenuBar: Commands {
 				exportCSV(licenses: licenses)
 			})
 		}
+		CommandGroup(replacing: .help, addition: {
+			Link(destination: URL(string: "https://github.com/ghall89/KeyStash/issues")!, label: {
+				Text("Submit an Issue")
+			})
+		})
 //		CommandGroup(replacing: CommandGroupPlacement.sidebar) {
 //			Button("Toggle Edit Mode", action: {
 //				appState.editMode.toggle()
