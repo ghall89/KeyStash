@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B0573CF92BB106AD00298E24 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = B0573CF62BB103CF00298E24 /* Localizable.xcstrings */; };
+		D30321212C1A322C00E6B401 /* AboutWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30321202C1A322C00E6B401 /* AboutWindowView.swift */; };
 		D30C58082AB91A5300A86426 /* resizeImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = D30C58072AB91A5300A86426 /* resizeImage.swift */; };
 		D3127DAE2B352803004343EF /* deleteAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3127DAD2B352803004343EF /* deleteAttachment.swift */; };
 		D3163CEA2ABBC91B00BC5F63 /* exportAttachment.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3163CE92ABBC91B00BC5F63 /* exportAttachment.swift */; };
@@ -17,11 +18,9 @@
 		D33797F32ABFA9A800C5E6BC /* isDownloadLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33797F22ABFA9A800C5E6BC /* isDownloadLink.swift */; };
 		D33797F52ABFA9F200C5E6BC /* stringToClipboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33797F42ABFA9F200C5E6BC /* stringToClipboard.swift */; };
 		D33AB53B2AB8C8F400B49922 /* getCustomIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D33AB53A2AB8C8F400B49922 /* getCustomIcon.swift */; };
-		D34B1FA22AD4408A002E5EE4 /* keychainHandlers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D34B1FA12AD4408A002E5EE4 /* keychainHandlers.swift */; };
 		D369F4692AB7BE1A00D8C6B1 /* AppSettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D369F4682AB7BE1A00D8C6B1 /* AppSettingsView.swift */; };
 		D369F46C2AB87CEA00D8C6B1 /* exportCSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = D369F46B2AB87CEA00D8C6B1 /* exportCSV.swift */; };
 		D369F46E2AB8838300D8C6B1 /* importCSV.swift in Sources */ = {isa = PBXBuildFile; fileRef = D369F46D2AB8838300D8C6B1 /* importCSV.swift */; };
-		D37AFFB02ACFA9BD002D31EF /* authenticateUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = D37AFFAF2ACFA9BD002D31EF /* authenticateUser.swift */; };
 		D38457792AC1DEE70057A34A /* EditFormState.swift in Sources */ = {isa = PBXBuildFile; fileRef = D38457782AC1DEE70057A34A /* EditFormState.swift */; };
 		D3949C872AC4B11100D893CD /* daysUntilDeleted.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3949C862AC4B11100D893CD /* daysUntilDeleted.swift */; };
 		D395519F2B1C23E000BCF076 /* updateLicense.swift in Sources */ = {isa = PBXBuildFile; fileRef = D395519E2B1C23E000BCF076 /* updateLicense.swift */; };
@@ -59,6 +58,7 @@
 
 /* Begin PBXFileReference section */
 		B0573CF62BB103CF00298E24 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		D30321202C1A322C00E6B401 /* AboutWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutWindowView.swift; sourceTree = "<group>"; };
 		D30C58072AB91A5300A86426 /* resizeImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = resizeImage.swift; sourceTree = "<group>"; };
 		D3127DAD2B352803004343EF /* deleteAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = deleteAttachment.swift; sourceTree = "<group>"; };
 		D3163CE92ABBC91B00BC5F63 /* exportAttachment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = exportAttachment.swift; sourceTree = "<group>"; };
@@ -72,12 +72,10 @@
 		D3416F2D2BB217F30023E205 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 		D3416F2E2BB217F30023E205 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D3416F2F2BB218250023E205 /* CONTRIBUTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTING.md; sourceTree = "<group>"; };
-		D34B1FA12AD4408A002E5EE4 /* keychainHandlers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = keychainHandlers.swift; sourceTree = "<group>"; };
 		D3587C2D2AC34A04001CE2DC /* Serial-Box-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Serial-Box-Info.plist"; sourceTree = "<group>"; };
 		D369F4682AB7BE1A00D8C6B1 /* AppSettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppSettingsView.swift; sourceTree = "<group>"; };
 		D369F46B2AB87CEA00D8C6B1 /* exportCSV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = exportCSV.swift; sourceTree = "<group>"; };
 		D369F46D2AB8838300D8C6B1 /* importCSV.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = importCSV.swift; sourceTree = "<group>"; };
-		D37AFFAF2ACFA9BD002D31EF /* authenticateUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = authenticateUser.swift; sourceTree = "<group>"; };
 		D38457782AC1DEE70057A34A /* EditFormState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditFormState.swift; sourceTree = "<group>"; };
 		D3949C862AC4B11100D893CD /* daysUntilDeleted.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = daysUntilDeleted.swift; sourceTree = "<group>"; };
 		D395519E2B1C23E000BCF076 /* updateLicense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = updateLicense.swift; sourceTree = "<group>"; };
@@ -158,15 +156,6 @@
 				D30C58072AB91A5300A86426 /* resizeImage.swift */,
 			);
 			path = AppIcons;
-			sourceTree = "<group>";
-		};
-		D34B1FA02AD43D4A002E5EE4 /* Authentication */ = {
-			isa = PBXGroup;
-			children = (
-				D37AFFAF2ACFA9BD002D31EF /* authenticateUser.swift */,
-				D34B1FA12AD4408A002E5EE4 /* keychainHandlers.swift */,
-			);
-			path = Authentication;
 			sourceTree = "<group>";
 		};
 		D369F46A2AB87CC600D8C6B1 /* CSV */ = {
@@ -253,6 +242,7 @@
 				D39942CC2AB509AE00B2DC39 /* ContentView.swift */,
 				D369F4682AB7BE1A00D8C6B1 /* AppSettingsView.swift */,
 				D3F4B6EB2ABA25D3002AFDFD /* SidebarView.swift */,
+				D30321202C1A322C00E6B401 /* AboutWindowView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -280,7 +270,6 @@
 		D39942D02AB509AF00B2DC39 /* Logic */ = {
 			isa = PBXGroup;
 			children = (
-				D34B1FA02AD43D4A002E5EE4 /* Authentication */,
 				D33797EF2ABFA89F00C5E6BC /* Utils */,
 				D3CFBED02ABB82C700C1D4BC /* Attachments */,
 				D33AB53C2AB8C95300B49922 /* AppIcons */,
@@ -356,7 +345,7 @@
 				D39942A82AB5095A00B2DC39 /* Sources */,
 				D39942A92AB5095A00B2DC39 /* Frameworks */,
 				D39942AA2AB5095A00B2DC39 /* Resources */,
-				D30A4FAD2B44E3FC004CA2DA /* ShellScript */,
+				D353428E2C6C1F2E000116F9 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -380,7 +369,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1500;
+				LastUpgradeCheck = 1540;
 				TargetAttributes = {
 					D39942AB2AB5095A00B2DC39 = {
 						CreatedOnToolsVersion = 15.0;
@@ -426,9 +415,8 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		D30A4FAD2B44E3FC004CA2DA /* ShellScript */ = {
+		D353428E2C6C1F2E000116F9 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			alwaysOutOfDate = 1;
 			buildActionMask = 2147483647;
 			files = (
 			);
@@ -442,7 +430,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" = \"Release\" ]; then\n    buildNumber=$(git rev-list --count head)\n    /usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\nfi\n";
+			shellScript = "if [ \"${CONFIGURATION}\" = \"Release\" ]; then\n    # Use full path to Git\n    GIT=\"/usr/bin/git\"\n    \n    # Check if we're in a Git repository\n    if [ -d \".git\" ] || git rev-parse --git-dir > /dev/null 2>&1; then\n        buildNumber=$(\"$GIT\" rev-list --count HEAD)\n        \n        # Path to Info.plist\n        INFO_PLIST=\"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n        \n        # Check if Info.plist exists in the expected location\n        if [ -f \"$INFO_PLIST\" ]; then\n            # Update CFBundleVersion using defaults command\n            defaults write \"$INFO_PLIST\" CFBundleVersion -string \"$buildNumber\"\n            echo \"Build number updated to $buildNumber\"\n        else\n            echo \"Error: Info.plist not found at $INFO_PLIST\"\n            exit 1\n        fi\n    else\n        echo \"Error: Not in a Git repository\"\n        exit 1\n    fi\nelse\n    echo \"Not a release build, skipping build number update\"\nfi\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -471,13 +459,11 @@
 				D369F4692AB7BE1A00D8C6B1 /* AppSettingsView.swift in Sources */,
 				D33797F32ABFA9A800C5E6BC /* isDownloadLink.swift in Sources */,
 				D3D3F6522B1D1DCA00E951B2 /* migrations.swift in Sources */,
-				D37AFFB02ACFA9BD002D31EF /* authenticateUser.swift in Sources */,
 				D3C962032B1BDF10008BE15D /* addLicense.swift in Sources */,
 				D33797F52ABFA9F200C5E6BC /* stringToClipboard.swift in Sources */,
 				D33AB53B2AB8C8F400B49922 /* getCustomIcon.swift in Sources */,
 				D3CFBED42ABB841D00C1D4BC /* Tag.swift in Sources */,
 				D3282EB72AC26ED000A5CD80 /* HighlightableText.swift in Sources */,
-				D34B1FA22AD4408A002E5EE4 /* keychainHandlers.swift in Sources */,
 				D39942DE2AB509AF00B2DC39 /* License.swift in Sources */,
 				D39942E02AB509AF00B2DC39 /* getInstalledApps.swift in Sources */,
 				D3EC78912AC9DD0100C7E522 /* sortBy.swift in Sources */,
@@ -487,6 +473,7 @@
 				D3C6503B2AB74CF300E75461 /* MenuBar.swift in Sources */,
 				D33797EE2ABFA49800C5E6BC /* snakeToTitleCase.swift in Sources */,
 				D39942D82AB509AF00B2DC39 /* LicenceInfoView.swift in Sources */,
+				D30321212C1A322C00E6B401 /* AboutWindowView.swift in Sources */,
 				D3CFBED22ABB82C700C1D4BC /* getAttachment.swift in Sources */,
 				D3C962002B1BDA6E008BE15D /* connectToDB.swift in Sources */,
 				D369F46E2AB8838300D8C6B1 /* importCSV.swift in Sources */,
@@ -504,6 +491,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -533,6 +521,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
@@ -567,6 +556,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -596,6 +586,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COPY_PHASE_STRIP = NO;
+				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -627,7 +618,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 6;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Valet/Preview Content\"";
 				DEVELOPMENT_TEAM = B3DFV278UN;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -643,7 +634,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 0.2.0;
+				MARKETING_VERSION = 0.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ghalldev.KeyStash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = macosx;
@@ -664,7 +655,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 6;
+				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"Valet/Preview Content\"";
 				DEVELOPMENT_TEAM = B3DFV278UN;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -680,7 +671,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 0.2.0;
+				MARKETING_VERSION = 0.3.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ghalldev.KeyStash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = macosx;

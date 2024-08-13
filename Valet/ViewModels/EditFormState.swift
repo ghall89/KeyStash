@@ -1,6 +1,8 @@
 import Foundation
+import AppKit
 
 class EditFormState: ObservableObject {
+	@Published var icon: Data? = nil
 	@Published var softwareName: String = ""
 	@Published var version: String = ""
 	@Published var urlString: String = ""

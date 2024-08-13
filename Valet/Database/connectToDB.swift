@@ -5,9 +5,12 @@ import GRDB
 
 func connectToDb() throws -> DatabaseQueue? {
 	let fileManager = FileManager.default
+	
+	let debugEnv = isDebugEnv()
+	
 	do {
 		let dbPath = try fileManager.url(
-			for: .documentDirectory,
+			for: !debugEnv ? .documentDirectory : .developerDirectory,
 			in: .userDomainMask,
 			appropriateFor: nil,
 			create: true
@@ -22,4 +25,8 @@ func connectToDb() throws -> DatabaseQueue? {
 		logger.error("ERROR: \(error)")
 		return nil
 	}
+}
+
+private func isDebugEnv() -> Bool {
+	return ProcessInfo.processInfo.environment["DYLD_INSERT_LIBRARIES"] != nil
 }

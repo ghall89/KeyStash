@@ -27,6 +27,13 @@ struct ValetApp: App {
 			)
 		}
 
+		Window("about window", id: "about") {
+			AboutWindowView()
+		}
+		.windowResizability(.contentSize)
+		.defaultPosition(.center)
+		.windowStyle(.hiddenTitleBar)
+
 		Settings {
 			AppSettingsView()
 		}

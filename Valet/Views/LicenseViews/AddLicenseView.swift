@@ -8,7 +8,7 @@ struct AddLicenseView: View {
 	@AppStorage("defaultEmail") private var defaultEmail: String = ""
 
 	@State private var newItem: License = .init(softwareName: "", icon: nil, licenseKey: "", registeredToName: "", registeredToEmail: "", downloadUrlString: "", notes: "", inTrash: false)
-	@State private var tabSelection: String = "installed"
+	@State private var tabSelection: TabSelection = .installed
 	@State private var installedApps: [InstalledApp] = []
 	@State private var selectedApp: UUID = .init()
 
@@ -16,21 +16,21 @@ struct AddLicenseView: View {
 		VStack(spacing: 10) {
 			if !installedApps.isEmpty {
 				Picker("", selection: $tabSelection) {
-					Text("Choose Installed").tag("installed")
-					Text("Add Manually").tag("custom")
+					Text("Choose Installed").tag(TabSelection.installed)
+					Text("Add Manually").tag(TabSelection.custom)
 				}
 				.pickerStyle(.segmented)
 				.padding(.bottom)
 			}
 			switch tabSelection {
-				case "installed":
+				case .installed:
 					Picker("Select App: ", selection: $selectedApp, content: {
 						ForEach(installedApps) { app in
 							Text(app.name)
 								.tag(app.id)
 						}
 					})
-				case "custom":
+				case .custom:
 					HStack {
 						VStack {
 							Image(nsImage: newItem.iconNSImage)
@@ -47,8 +47,6 @@ struct AddLicenseView: View {
 							TextField("App Name: ", text: $newItem.softwareName)
 						}
 					}
-				default:
-					Text("🤔")
 			}
 
 			HStack {
@@ -62,7 +60,7 @@ struct AddLicenseView: View {
 					}
 				})
 				.keyboardShortcut(.defaultAction)
-				.disabled(tabSelection == "custom" && newItem.softwareName.count == 0)
+				.disabled(tabSelection == .custom && newItem.softwareName.isEmpty)
 			}
 			.padding(.top)
 		}
@@ -71,7 +69,7 @@ struct AddLicenseView: View {
 		.onAppear {
 			let apps = getInstalledApps()
 			if apps.isEmpty {
-				tabSelection = "custom"
+				tabSelection = .custom
 			} else {
 				installedApps = apps
 				selectedApp = apps[0].id
@@ -82,7 +80,7 @@ struct AddLicenseView: View {
 	private func addItem() {
 		let newId = newItem.id
 		withAnimation {
-			if tabSelection == "installed" {
+			if tabSelection == .installed {
 				if let appFromList = installedApps.first(where: { $0.id == selectedApp }) {
 					newItem.softwareName = appFromList.name
 					newItem.registeredToName = defaultName
@@ -100,5 +98,10 @@ struct AddLicenseView: View {
 
 		appState.selectedLicense = newId
 		appState.showNewAppSheet.toggle()
+	}
+
+	private enum TabSelection {
+		case installed
+		case custom
 	}
 }

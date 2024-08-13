@@ -22,6 +22,17 @@ struct EditLicenseView: View {
 	var body: some View {
 		Form {
 			Section {
+				HStack {
+					Image(nsImage: ((formState.icon != nil) ? NSImage(data: formState.icon!) : license.iconNSImage)!)
+						.resizable()
+						.frame(width: 45, height: 45)
+					Spacer()
+					Button("Change Icon", action: {
+						if let newIcon = getCustomIcon() {
+							formState.icon = newIcon
+						}
+					})
+				}
 				TextField("Name", text: $formState.softwareName)
 				TextField("URL", text: $formState.urlString)
 				TextField("Version", text: $formState.version)
@@ -134,6 +145,7 @@ struct EditLicenseView: View {
 	private func saveFormState() {
 		do {
 			var updatedLicense = license
+			updatedLicense.icon = formState.icon != nil ? formState.icon : license.icon
 			updatedLicense.softwareName = formState.softwareName
 			updatedLicense.version = formState.version
 			updatedLicense.downloadUrlString = formState.urlString

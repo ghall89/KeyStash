@@ -9,6 +9,7 @@ func updateLicense(_ dbQueue: DatabaseQueue, data: License) throws {
 
 			// define updated license doc
 			let columns: [ColumnAssignment] = [
+				Column("icon").set(to: data.icon),
 				Column("softwareName").set(to: data.softwareName),
 				Column("downloadUrlString").set(to: data.downloadUrlString),
 				Column("version").set(to: data.version),
