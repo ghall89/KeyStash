@@ -124,6 +124,7 @@
       }
     },
     "Copy" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
@@ -132,6 +133,9 @@
           }
         }
       }
+    },
+    "Copy \"%@\"" : {
+
     },
     "Default Info" : {
       "localizations" : {

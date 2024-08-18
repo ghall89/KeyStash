@@ -1,11 +1,10 @@
 import AppKit
-import CSV
 import Foundation
 
 func importCSV() {
 	if let fileString = chooseFile() {
 		let lines = fileString.components(separatedBy: "\"\n")
-		for (index, line) in lines.enumerated() {
+		for (_, line) in lines.enumerated() {
 			let fields = line.trimmingCharacters(in: CharacterSet(charactersIn: "\"")).components(separatedBy: "\",\"")
 			print(fields)
 		}
