@@ -133,6 +133,8 @@ struct InfoRowView: View {
 	@Binding var showToast: Bool
 	var value: String
 	var label: String
+	
+	@State var isHovering = false
 
 	var body: some View {
 		HStack(alignment: .top) {
@@ -140,18 +142,29 @@ struct InfoRowView: View {
 				Button(action: copyAction, label: {
 					Image(systemName: "doc.on.doc.fill")
 						.foregroundStyle(.accent)
-						.contentTransition(.symbolEffect(.replace.downUp.byLayer))
+						.opacity(isHovering ? 1 : 0.5)
+						.transition(.opacity)
+						.animation(.easeInOut(duration: 0.15), value: isHovering)
+					VStack(alignment: .leading) {
+						Text(label)
+							.font(.caption)
+						Text(value)
+					}
 				})
-				.frame(width: 12)
 				.buttonStyle(.plain)
-
-				VStack(alignment: .leading) {
-					Text(label)
-						.font(.caption)
-					Text(value)
+				.padding(6)
+				.background {
+					RoundedRectangle(cornerSize: CGSize(width: 10, height: 10), style: .circular)
+						.fill(.primary)
+						.opacity(isHovering ? 0.05 : 0)
+						.transition(.opacity)
+						.animation(.easeInOut(duration: 0.15), value: isHovering)
 				}
+				.onHover(perform: { hovering in
+					isHovering = hovering
+				})
 				.contextMenu {
-					Button("Copy", action: copyAction)
+					Button("Copy \"\(value)\"", action: copyAction)
 				}
 				.multilineTextAlignment(.leading)
 				Spacer()
@@ -161,7 +174,7 @@ struct InfoRowView: View {
 
 	private func copyAction() {
 		stringToClipboard(value: value)
-		showToast.toggle()
+		showToast = true
 	}
 }
 
