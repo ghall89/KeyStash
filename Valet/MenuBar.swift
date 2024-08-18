@@ -20,6 +20,7 @@ struct MenuBar: Commands {
 			Button("Import", action: {
 				importCSV()
 			})
+			.disabled(true)
 			Button("Export", action: {
 				exportCSV(licenses: licenses)
 			})
