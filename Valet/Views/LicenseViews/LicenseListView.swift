@@ -16,7 +16,7 @@ struct LicenseListView: View {
 
 	var body: some View {
 		ZStack(alignment: .top) {
-			List(selection: $appState.selectedLicense) {
+			List {
 				Section {
 					EmptyView()
 				}
@@ -41,7 +41,11 @@ struct LicenseListView: View {
 										.frame(width: 24)
 								}
 								HighlightableText(text: item.softwareName, highlight: searchString)
-								Spacer()
+								if let version = item.version {
+									Text(version)
+										.font(.caption2)
+										.foregroundStyle(Color.gray)
+								}
 							}
 						})
 						.contextMenu {

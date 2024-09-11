@@ -6,12 +6,11 @@ struct InfoButton: View {
 	let onClick: () -> Void
 	let icon: SFSymbol
 	
-	
 	@State var isHovering = false
 	
 	var body: some View {
 		Button(action: onClick, label: {
-			Image(systemName: getSymbol())
+			Image(systemName: icon.name)
 				.foregroundStyle(.accent)
 				.opacity(isHovering ? 1 : 0.5)
 				.transition(.opacity)
@@ -37,19 +36,16 @@ struct InfoButton: View {
 		})
 		.multilineTextAlignment(.leading)
 	}
-	
-
-	private func getSymbol() -> String {
-		switch icon {
-			case SFSymbol.document:
-				return "doc.on.doc.fill"
-			case SFSymbol.arrowDown:
-				return "arrow.down.circle.fill"
-		}
-	}
 }
 
 enum SFSymbol {
 	case document
 	case arrowDown
+	
+	var name: String {
+		switch self {
+			case .document: return "doc.on.doc.fill"
+			case .arrowDown: return "arrow.down.circle.fill"
+		}
+	}
 }

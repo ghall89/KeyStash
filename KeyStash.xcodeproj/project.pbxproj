@@ -39,6 +39,7 @@
 		D39942DF2AB509AF00B2DC39 /* getNSImageAsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942D12AB509AF00B2DC39 /* getNSImageAsData.swift */; };
 		D39942E02AB509AF00B2DC39 /* getInstalledApps.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942D22AB509AF00B2DC39 /* getInstalledApps.swift */; };
 		D39942E12AB509AF00B2DC39 /* getAppIcon.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39942D32AB509AF00B2DC39 /* getAppIcon.swift */; };
+		D39BD7262C72A20200F03D80 /* InfoButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = D39BD7252C72A20200F03D80 /* InfoButton.swift */; };
 		D3AACD242B4623E4008D01A8 /* deleteLicense.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3AACD232B4623E4008D01A8 /* deleteLicense.swift */; };
 		D3B08F832AB6A5FD004715F5 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = D3B08F822AB6A5FD004715F5 /* MarkdownUI */; };
 		D3C6503B2AB74CF300E75461 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = D3C6503A2AB74CF300E75461 /* MenuBar.swift */; };
@@ -97,6 +98,7 @@
 		D39942D12AB509AF00B2DC39 /* getNSImageAsData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getNSImageAsData.swift; sourceTree = "<group>"; };
 		D39942D22AB509AF00B2DC39 /* getInstalledApps.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getInstalledApps.swift; sourceTree = "<group>"; };
 		D39942D32AB509AF00B2DC39 /* getAppIcon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = getAppIcon.swift; sourceTree = "<group>"; };
+		D39BD7252C72A20200F03D80 /* InfoButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InfoButton.swift; sourceTree = "<group>"; };
 		D3AACD232B4623E4008D01A8 /* deleteLicense.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = deleteLicense.swift; sourceTree = "<group>"; };
 		D3C6503A2AB74CF300E75461 /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		D3C961FF2B1BDA6E008BE15D /* connectToDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = connectToDB.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 				D39942C52AB509AE00B2DC39 /* Assets.xcassets */,
 				B0573CF62BB103CF00298E24 /* Localizable.xcstrings */,
 				D39942C02AB509AE00B2DC39 /* KeyStashApp.swift */,
+				D39942CC2AB509AE00B2DC39 /* ContentView.swift */,
 				D3C6503A2AB74CF300E75461 /* MenuBar.swift */,
 				D39697912ABCCB8C00A9F664 /* PrivacyInfo.xcprivacy */,
 				D3C961F92B1BD7EE008BE15D /* Database */,
@@ -201,6 +204,7 @@
 				D39942D02AB509AF00B2DC39 /* Logic */,
 				D39942CD2AB509AE00B2DC39 /* Models */,
 				D39942C12AB509AE00B2DC39 /* ViewModels */,
+				D39BD7272C72A85900F03D80 /* Components */,
 				D39942C62AB509AE00B2DC39 /* Views */,
 				D39942BA2AB5095B00B2DC39 /* Valet.entitlements */,
 				D39942B72AB5095B00B2DC39 /* Preview Content */,
@@ -237,9 +241,7 @@
 		D39942C62AB509AE00B2DC39 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				D3282EB82AC2708400A5CD80 /* AppKit */,
 				D39942C72AB509AE00B2DC39 /* LicenseViews */,
-				D39942CC2AB509AE00B2DC39 /* ContentView.swift */,
 				D369F4682AB7BE1A00D8C6B1 /* AppSettingsView.swift */,
 				D3F4B6EB2ABA25D3002AFDFD /* SidebarView.swift */,
 				D30321202C1A322C00E6B401 /* AboutWindowView.swift */,
@@ -276,6 +278,15 @@
 				D369F46A2AB87CC600D8C6B1 /* CSV */,
 			);
 			path = Logic;
+			sourceTree = "<group>";
+		};
+		D39BD7272C72A85900F03D80 /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				D3282EB82AC2708400A5CD80 /* AppKit */,
+				D39BD7252C72A20200F03D80 /* InfoButton.swift */,
+			);
+			path = Components;
 			sourceTree = "<group>";
 		};
 		D3AACD252B46241E008D01A8 /* License */ = {
@@ -443,6 +454,7 @@
 				D3AACD242B4623E4008D01A8 /* deleteLicense.swift in Sources */,
 				D39551A12B1C332B00BCF076 /* emptyTrash.swift in Sources */,
 				D39942DD2AB509AF00B2DC39 /* InstalledApp.swift in Sources */,
+				D39BD7262C72A20200F03D80 /* InfoButton.swift in Sources */,
 				D39942E12AB509AF00B2DC39 /* getAppIcon.swift in Sources */,
 				D39942DC2AB509AF00B2DC39 /* ContentView.swift in Sources */,
 				D38457792AC1DEE70057A34A /* EditFormState.swift in Sources */,
@@ -634,7 +646,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 0.3.1;
+				MARKETING_VERSION = 0.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ghalldev.KeyStash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = macosx;
@@ -671,7 +683,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 14.0;
-				MARKETING_VERSION = 0.3.1;
+				MARKETING_VERSION = 0.3.2;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ghalldev.KeyStash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = macosx;
