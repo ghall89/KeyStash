@@ -1,5 +1,4 @@
 import AlertToast
-import MarkdownUI
 import SwiftUI
 
 struct LicenceInfoView: View {
@@ -9,8 +8,6 @@ struct LicenceInfoView: View {
 	var license: License
 
 	@State private var showToast: Bool = false
-
-	@AppStorage("disableAnimations") private var disableAnimations: Bool = false
 
 	var body: some View {
 		ScrollView {
@@ -51,34 +48,30 @@ struct LicenceInfoView: View {
 					.padding()
 				}
 				VStack(alignment: .leading, spacing: 12) {
+					DateRowView(
+						value: license.expirationDt,
+						label: "Expires"
+					)
 					InfoRowView(
 						showToast: $showToast,
 						value: license.registeredToName,
 						label: "Registered To"
 					)
-
 					InfoRowView(
 						showToast: $showToast,
 						value: license.registeredToEmail,
 						label: "Email"
 					)
-
 					InfoRowView(
 						showToast: $showToast,
 						value: license.licenseKey,
 						label: "License Key"
 					)
-
-					DateRowView(
-						value: license.expirationDt,
-						label: "Expiration Date"
-					)
-
 					AttachmentRowView(license: license)
 					Divider()
 					Text("Notes")
 						.font(.caption)
-					Markdown(license.notes)
+					Text(license.notes)
 				}
 				.frame(maxWidth: .infinity)
 				.padding()
@@ -136,37 +129,20 @@ struct InfoRowView: View {
 	
 	@State var isHovering = false
 
+	@State var isHovering = false
+
 	var body: some View {
 		HStack(alignment: .top) {
-			if value.count > 0 {
-				Button(action: copyAction, label: {
-					Image(systemName: "doc.on.doc.fill")
-						.foregroundStyle(.accent)
-						.opacity(isHovering ? 1 : 0.5)
-						.transition(.opacity)
-						.animation(.easeInOut(duration: 0.15), value: isHovering)
-					VStack(alignment: .leading) {
-						Text(label)
-							.font(.caption)
-						Text(value)
-					}
-				})
-				.buttonStyle(.plain)
-				.padding(6)
-				.background {
-					RoundedRectangle(cornerSize: CGSize(width: 10, height: 10), style: .circular)
-						.fill(.primary)
-						.opacity(isHovering ? 0.05 : 0)
-						.transition(.opacity)
-						.animation(.easeInOut(duration: 0.15), value: isHovering)
-				}
-				.onHover(perform: { hovering in
-					isHovering = hovering
-				})
+			if !value.isEmpty {
+				InfoButton(
+					label: label,
+					value: value,
+					onClick: copyAction,
+					icon: SFSymbol.document
+				)
 				.contextMenu {
 					Button("Copy \"\(value)\"", action: copyAction)
 				}
-				.multilineTextAlignment(.leading)
 				Spacer()
 			}
 		}
@@ -195,7 +171,7 @@ struct DateRowView: View {
 				Spacer()
 			}
 		}
-		.padding(.leading, 20)
+		.padding(.leading, 30)
 	}
 
 	private func valueString() -> String {
@@ -231,29 +207,25 @@ struct DateRowView: View {
 struct AttachmentRowView: View {
 	var license: License
 
-	let label = "Attachment"
-
 	var body: some View {
 		VStack {
 			if license.attachmentPath != nil {
 				HStack(alignment: .top) {
-					Button(action: {
-						if let downloadableFile = license.attachmentPath {
-							exportAttachment(file: downloadableFile)
-						}
-					}, label: {
-						Image(systemName: "arrow.down.circle.fill")
-							.foregroundStyle(.accent)
-					})
-					.buttonStyle(.plain)
-					VStack(alignment: .leading) {
-						Text(label)
-							.font(.caption)
-						Text(license.attachmentPath?.lastPathComponent ?? "")
-							.fontDesign(.monospaced)
-					}
+					InfoButton(
+						label: "Attachment",
+						value: license.attachmentPath?.lastPathComponent ?? "",
+						onClick: downloadAttachment,
+						icon: SFSymbol.arrowDown
+					)
+					.monospaced()
 				}
 			}
+		}
+	}
+
+	private func downloadAttachment() {
+		if let downloadableFile = license.attachmentPath {
+			exportAttachment(file: downloadableFile)
 		}
 	}
 }

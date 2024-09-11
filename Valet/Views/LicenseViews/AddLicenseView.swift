@@ -1,31 +1,34 @@
 import SwiftUI
 
+final class AddLicenseViewModel: ObservableObject {
+	@Published var newItem: License = .init(softwareName: "", icon: nil, licenseKey: "", registeredToName: "", registeredToEmail: "", downloadUrlString: "", notes: "", inTrash: false)
+	@Published var tabSelection: TabSelection = .installed
+	@Published var installedApps: [InstalledApp] = []
+	@Published var selectedApp: UUID = .init()
+}
+
 struct AddLicenseView: View {
-	@EnvironmentObject var databaseManager: DatabaseManager
-	@EnvironmentObject var appState: AppState
+	@EnvironmentObject private var databaseManager: DatabaseManager
+	@EnvironmentObject private var appState: AppState
+	@StateObject private var viewModel = AddLicenseViewModel()
 
 	@AppStorage("defaultName") private var defaultName: String = ""
 	@AppStorage("defaultEmail") private var defaultEmail: String = ""
 
-	@State private var newItem: License = .init(softwareName: "", icon: nil, licenseKey: "", registeredToName: "", registeredToEmail: "", downloadUrlString: "", notes: "", inTrash: false)
-	@State private var tabSelection: TabSelection = .installed
-	@State private var installedApps: [InstalledApp] = []
-	@State private var selectedApp: UUID = .init()
-
 	var body: some View {
 		VStack(spacing: 10) {
-			if !installedApps.isEmpty {
-				Picker("", selection: $tabSelection) {
+			if !viewModel.installedApps.isEmpty {
+				Picker("", selection: $viewModel.tabSelection) {
 					Text("Choose Installed").tag(TabSelection.installed)
 					Text("Add Manually").tag(TabSelection.custom)
 				}
 				.pickerStyle(.segmented)
 				.padding(.bottom)
 			}
-			switch tabSelection {
+			switch viewModel.tabSelection {
 				case .installed:
-					Picker("Select App: ", selection: $selectedApp, content: {
-						ForEach(installedApps) { app in
+					Picker("Select App: ", selection: $viewModel.selectedApp, content: {
+						ForEach(viewModel.installedApps) { app in
 							Text(app.name)
 								.tag(app.id)
 						}
@@ -33,18 +36,18 @@ struct AddLicenseView: View {
 				case .custom:
 					HStack {
 						VStack {
-							Image(nsImage: newItem.iconNSImage)
+							Image(nsImage: viewModel.newItem.iconNSImage)
 								.resizable()
 								.aspectRatio(contentMode: .fit)
 							Button("Select Icon...", action: {
 								if let iconData = getCustomIcon() {
-									newItem.icon = iconData
+									viewModel.newItem.icon = iconData
 								}
 							})
 						}
 						.frame(width: 160, height: 100)
 						Form {
-							TextField("App Name: ", text: $newItem.softwareName)
+							TextField("App Name: ", text: $viewModel.newItem.softwareName)
 						}
 					}
 			}
@@ -60,7 +63,7 @@ struct AddLicenseView: View {
 					}
 				})
 				.keyboardShortcut(.defaultAction)
-				.disabled(tabSelection == .custom && newItem.softwareName.isEmpty)
+				.disabled(viewModel.tabSelection == .custom && viewModel.newItem.softwareName.isEmpty)
 			}
 			.padding(.top)
 		}
@@ -69,28 +72,28 @@ struct AddLicenseView: View {
 		.onAppear {
 			let apps = getInstalledApps()
 			if apps.isEmpty {
-				tabSelection = .custom
+				viewModel.tabSelection = .custom
 			} else {
-				installedApps = apps
-				selectedApp = apps[0].id
+				viewModel.installedApps = apps
+				viewModel.selectedApp = apps[0].id
 			}
 		}
 	}
 
 	private func addItem() {
-		let newId = newItem.id
+		let newId = viewModel.newItem.id
 		withAnimation {
-			if tabSelection == .installed {
-				if let appFromList = installedApps.first(where: { $0.id == selectedApp }) {
-					newItem.softwareName = appFromList.name
-					newItem.registeredToName = defaultName
-					newItem.registeredToEmail = defaultEmail
-					newItem.icon = getNSImageAsData(image: ((appFromList.icon) ?? NSImage(named: "no_icon"))!)
+			if viewModel.tabSelection == .installed {
+				if let appFromList = viewModel.installedApps.first(where: { $0.id == viewModel.selectedApp }) {
+					viewModel.newItem.softwareName = appFromList.name
+					viewModel.newItem.registeredToName = defaultName
+					viewModel.newItem.registeredToEmail = defaultEmail
+					viewModel.newItem.icon = getNSImageAsData(image: ((appFromList.icon) ?? NSImage(named: "no_icon"))!)
 				}
 			}
 		}
 		do {
-			try addLicense(databaseManager.dbQueue, data: newItem)
+			try addLicense(databaseManager.dbQueue, data: viewModel.newItem)
 			databaseManager.fetchData()
 		} catch {
 			logger.error("Failed to create license!")
@@ -99,9 +102,9 @@ struct AddLicenseView: View {
 		appState.selectedLicense = newId
 		appState.showNewAppSheet.toggle()
 	}
+}
 
-	private enum TabSelection {
-		case installed
-		case custom
-	}
+enum TabSelection {
+	case installed
+	case custom
 }
