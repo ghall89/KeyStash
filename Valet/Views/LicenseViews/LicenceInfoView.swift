@@ -126,6 +126,8 @@ struct InfoRowView: View {
 	@Binding var showToast: Bool
 	var value: String
 	var label: String
+	
+	@State var isHovering = false
 
 	@State var isHovering = false
 
