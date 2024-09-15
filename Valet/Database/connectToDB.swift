@@ -10,7 +10,8 @@ func connectToDb() throws -> DatabaseQueue? {
 	
 	do {
 		let dbPath = try fileManager.url(
-			for: !debugEnv ? .documentDirectory : .developerDirectory,
+//			for: !debugEnv ? .documentDirectory : .developerDirectory,
+			for: .documentDirectory,
 			in: .userDomainMask,
 			appropriateFor: nil,
 			create: true

@@ -2,7 +2,7 @@ import AppKit
 import Foundation
 import GRDB
 
-struct License: Identifiable, Codable, FetchableRecord, PersistableRecord {
+struct License: Identifiable, Codable, Hashable, FetchableRecord, PersistableRecord {
 	var id: String = UUID().uuidString
 	var softwareName: String = ""
 	var version: String?
