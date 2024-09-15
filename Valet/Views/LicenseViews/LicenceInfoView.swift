@@ -8,6 +8,10 @@ struct LicenceInfoView: View {
 	var license: License
 
 	@State private var showToast: Bool = false
+	
+	init (_ license: License) {
+		self.license = license
+	}
 
 	var body: some View {
 		ScrollView {
@@ -86,7 +90,7 @@ struct LicenceInfoView: View {
 			ToolbarItem {
 				Spacer()
 			}
-			ToolbarItem(placement: .primaryAction) {
+			ToolbarItem(placement: .cancellationAction) {
 				Button(action: {
 					if appState.showEditAppSheet == false {
 						initFormState()

@@ -15,58 +15,63 @@ struct LicenseListView: View {
 	@AppStorage("disableAnimations") private var disableAnimations: Bool = false
 
 	var body: some View {
-		ZStack(alignment: .top) {
-			List {
-				Section {
-					EmptyView()
-				}
-				.listSectionSeparator(.hidden)
-				.listRowSeparator(.hidden)
-				Section {
-					EmptyView()
-				}
-				.listSectionSeparator(.hidden)
-				.listRowSeparator(.hidden)
-
-				Section {
-					ForEach(filterItems()) { item in
-						NavigationLink(destination: {
-							LicenceInfoView(license: item)
-						}, label: {
-							HStack {
-								if compactList == false {
-									Image(nsImage: item.miniIcon)
-										.resizable()
-										.aspectRatio(contentMode: .fit)
-										.frame(width: 24)
-								}
-								HighlightableText(text: item.softwareName, highlight: searchString)
-								if let version = item.version {
-									Text(version)
-										.font(.caption2)
-										.foregroundStyle(Color.gray)
-								}
-							}
-						})
-						.contextMenu {
-							if item.inTrash == false {
-								Button("Move to Trash", role: .destructive, action: {
-									moveToTrash(item)
-								})
-							} else {
-								Button("Restore", role: .destructive, action: {
-									moveToTrash(item)
-								})
-							}
+		List(filterItems()) { item in
+			NavigationLink(
+				value: item,
+				label: {
+					HStack {
+						if compactList == false {
+							Image(nsImage: item.miniIcon)
+								.resizable()
+								.aspectRatio(contentMode: .fit)
+								.frame(width: 24)
+						}
+						HighlightableText(text: item.softwareName, highlight: searchString)
+						if let version = item.version {
+							Text(version)
+								.font(.caption2)
+								.foregroundStyle(Color.gray)
 						}
 					}
+					.padding(3)
+				}
+			)
+			.listRowSeparator(.hidden)
+			.contextMenu {
+				if item.inTrash == false {
+					Button("Move to Trash", role: .destructive, action: {
+						moveToTrash(item)
+					})
+				} else {
+					Button("Restore", role: .destructive, action: {
+						moveToTrash(item)
+					})
 				}
 			}
-
-			SearchBar(searchString: $searchString)
 		}
+		.listStyle(InsetListStyle())
 		.frame(minWidth: 340)
+		.navigationDestination(for: License.self) { license in
+			LicenceInfoView(license)
+		}
+		.searchable(text: $searchString)
 		.toolbar {
+			ToolbarItem {
+				Menu(content: {
+					Picker("Sort By", selection: $selectedSort, content: {
+						ForEach(SortOptions.allCases, id: \.self) { sortOption in
+							Text(sortOption.localizedString()).tag(sortOption)
+						}
+					})
+					Picker("Sort Order", selection: $selectedSortOrder, content: {
+						ForEach(OrderOptions.allCases, id: \.self) { orderOption in
+							Text(orderOption.localizedString()).tag(orderOption)
+						}
+					})
+				}, label: {
+					Image(systemName: "arrow.up.arrow.down")
+				})
+			}
 			ToolbarItem {
 				if appState.sidebarSelection == "trash" {
 					Button(
@@ -139,7 +144,7 @@ struct LicenseListView: View {
 				filteredItems = databaseManager.licenses
 		}
 		return filteredItems
-			.filter { searchString.count > 0 ? $0.softwareName.lowercased().contains(searchString.lowercased()) : true }
+			.filter { !searchString.isEmpty ? $0.softwareName.lowercased().contains(searchString.lowercased()) : true }
 			.sorted(by: sortBy(sort: selectedSort, order: selectedSortOrder))
 	}
 }
