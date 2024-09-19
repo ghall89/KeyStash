@@ -7,11 +7,9 @@ struct ContentView: View {
 
 	var body: some View {
 		NavigationSplitView {
-			SidebarView()
-				.navigationSplitViewColumnWidth(min: 160, ideal: 230)
-		} content: {
 			LicenseListView()
 				.navigationSplitViewColumnWidth(min: 340, ideal: 350)
+				.toolbar(removing: .sidebarToggle)
 		} detail: {
 			VStack(spacing: 10) {
 				Image(systemName: "app.dashed")

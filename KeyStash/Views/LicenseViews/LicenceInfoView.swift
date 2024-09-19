@@ -8,8 +8,8 @@ struct LicenceInfoView: View {
 	var license: License
 
 	@State private var showToast: Bool = false
-	
-	init (_ license: License) {
+
+	init(_ license: License) {
 		self.license = license
 	}
 
@@ -46,32 +46,30 @@ struct LicenceInfoView: View {
 									Label("Website", systemImage: "safari")
 								}
 							})
-							.buttonStyle(.borderedProminent)
+							.buttonStyle(.borderless)
+							.foregroundStyle(Color.accent)
 						}
 					}
 					.padding()
 				}
 				VStack(alignment: .leading, spacing: 12) {
-					DateRowView(
-						value: license.expirationDt,
-						label: "Expires"
+					DateRow(
+						"Expires",
+						value: license.expirationDt
 					)
-					InfoRowView(
-						showToast: $showToast,
-						value: license.registeredToName,
-						label: "Registered To"
+					InfoRow(
+						"Registered To",
+						value: license.registeredToName
 					)
-					InfoRowView(
-						showToast: $showToast,
-						value: license.registeredToEmail,
-						label: "Email"
+					InfoRow(
+						"Email",
+						value: license.registeredToEmail
 					)
-					InfoRowView(
-						showToast: $showToast,
-						value: license.licenseKey,
-						label: "License Key"
+					InfoRow(
+						"License Key",
+						value: license.licenseKey
 					)
-					AttachmentRowView(license: license)
+					AttachmentRow()
 					Divider()
 					Text("Notes")
 						.font(.caption)
@@ -124,46 +122,53 @@ struct LicenceInfoView: View {
 		formState.expirationDt = license.expirationDt
 		formState.notes = license.notes
 	}
-}
 
-struct InfoRowView: View {
-	@Binding var showToast: Bool
-	var value: String
-	var label: String
-	
-	@State var isHovering = false
-
-	@State var isHovering = false
-
-	var body: some View {
-		HStack(alignment: .top) {
+	private func InfoRow(_ label: String, value: String) -> some View {
+		return HStack(alignment: .top) {
 			if !value.isEmpty {
 				InfoButton(
 					label: label,
 					value: value,
-					onClick: copyAction,
+					onClick: {
+						copyAction(value)
+					},
 					icon: SFSymbol.document
 				)
 				.contextMenu {
-					Button("Copy \"\(value)\"", action: copyAction)
+					Button("Copy \"\(value)\"", action: {
+						copyAction(value)
+					})
 				}
 				Spacer()
 			}
 		}
 	}
 
-	private func copyAction() {
-		stringToClipboard(value: value)
-		showToast = true
-	}
-}
+	private func DateRow(_ label: String, value: Date?) -> some View {
+		let valueString = {
+			let now = Date()
+			if let dateToCompare = value {
+				let dateString = value?.formatted(date: .complete, time: .omitted) ?? ""
+				let daysLeft = differenceInDays(date1: now, date2: dateToCompare)
+				let parensString = isPast() ? "Expired" : "\(daysLeft) Days Left"
 
-struct DateRowView: View {
-	var value: Date?
-	var label: String
+				return "\(dateString) (\(parensString))"
+			}
 
-	var body: some View {
-		HStack(alignment: .top) {
+			return ""
+		}
+
+		func isPast() -> Bool {
+			let now = Date()
+
+			if let dateToCompare = value {
+				return dateToCompare < now
+			}
+
+			return false
+		}
+
+		return HStack(alignment: .top) {
 			if value != nil {
 				VStack(alignment: .leading) {
 					Text(label)
@@ -178,41 +183,8 @@ struct DateRowView: View {
 		.padding(.leading, 30)
 	}
 
-	private func valueString() -> String {
-		let now = Date()
-		if let dateToCompare = value {
-			let dateString = value?.formatted(date: .complete, time: .omitted) ?? ""
-			let daysLeft = differenceInDays(date1: now, date2: dateToCompare)
-			let parensString = isPast() ? "Expired" : "\(daysLeft) Days Left"
-
-			return "\(dateString) (\(parensString))"
-		}
-
-		return ""
-	}
-
-	private func differenceInDays(date1: Date, date2: Date) -> Int {
-		let calendar = Calendar.current
-		let components = calendar.dateComponents([.day], from: date1, to: date2)
-		return abs(components.day ?? 0)
-	}
-
-	private func isPast() -> Bool {
-		let now = Date()
-
-		if let dateToCompare = value {
-			return dateToCompare < now
-		}
-
-		return false
-	}
-}
-
-struct AttachmentRowView: View {
-	var license: License
-
-	var body: some View {
-		VStack {
+	private func AttachmentRow() -> some View {
+		return VStack {
 			if license.attachmentPath != nil {
 				HStack(alignment: .top) {
 					InfoButton(
@@ -231,5 +203,10 @@ struct AttachmentRowView: View {
 		if let downloadableFile = license.attachmentPath {
 			exportAttachment(file: downloadableFile)
 		}
+	}
+
+	private func copyAction(_ value: String) {
+		stringToClipboard(value: value)
+		showToast = true
 	}
 }

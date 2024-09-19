@@ -27,10 +27,12 @@ struct LicenseListView: View {
 								.frame(width: 24)
 						}
 						HighlightableText(text: item.softwareName, highlight: searchString)
+						Spacer()
 						if let version = item.version {
 							Text(version)
 								.font(.caption2)
-								.foregroundStyle(Color.gray)
+								.foregroundStyle(Color.primary)
+								.opacity(0.8)
 						}
 					}
 					.padding(3)
@@ -49,13 +51,50 @@ struct LicenseListView: View {
 				}
 			}
 		}
-		.listStyle(InsetListStyle())
+		.listStyle(.sidebar)
 		.frame(minWidth: 340)
 		.navigationDestination(for: License.self) { license in
 			LicenceInfoView(license)
 		}
 		.searchable(text: $searchString)
 		.toolbar {
+			toolbar()
+		}
+		.onAppear(perform: databaseManager.fetchData)
+		.navigationTitle(LocalizedStringKey(snakeToTitleCase(appState.sidebarSelection)))
+		.confirmationDialog("Are you sure you want to empty the trash? Any files you have attached will also be deleted.", isPresented: $confirmDeleteAll, actions: {
+			Button("Empty Trash", role: .destructive, action: {
+				emptyTrash(databaseManager.dbQueue)
+				databaseManager.fetchData()
+				confirmDeleteAll.toggle()
+			})
+			Button("Cancel", role: .cancel, action: {
+				confirmDeleteAll.toggle()
+			})
+		})
+		.sheet(isPresented: $appState.showNewAppSheet, content: {
+			AddLicenseView()
+		})
+	}
+
+	private func toolbar() -> some ToolbarContent {
+		Group {
+			ToolbarItem {
+				Picker("View", selection: $appState.sidebarSelection, content: {
+					Text("All")
+						.badge(databaseManager.badgeCount.total)
+						.tag("all_apps")
+					Text("Expired")
+						.badge(databaseManager.badgeCount.expired)
+						.tag("expired")
+					Text("Trash")
+						.badge(databaseManager.badgeCount.inTrash)
+						.tag("trash")
+				})
+			}
+			ToolbarItem {
+				Spacer()
+			}
 			ToolbarItem {
 				Menu(content: {
 					Picker("Sort By", selection: $selectedSort, content: {
@@ -82,7 +121,7 @@ struct LicenseListView: View {
 							Label("Empty Trash", systemImage: "trash.slash")
 						}
 					)
-//					.disabled(databaseManager.licenses.contains(where: { $0.inTrash == true }))
+					//					.disabled(databaseManager.licenses.contains(where: { $0.inTrash == true }))
 					.help("Empty Trash")
 				} else {
 					Button(action: {
@@ -94,21 +133,6 @@ struct LicenseListView: View {
 				}
 			}
 		}
-		.onAppear(perform: databaseManager.fetchData)
-		.navigationTitle(LocalizedStringKey(snakeToTitleCase(appState.sidebarSelection)))
-		.confirmationDialog("Are you sure you want to empty the trash? Any files you have attached will also be deleted.", isPresented: $confirmDeleteAll, actions: {
-			Button("Empty Trash", role: .destructive, action: {
-				emptyTrash(databaseManager.dbQueue)
-				databaseManager.fetchData()
-				confirmDeleteAll.toggle()
-			})
-			Button("Cancel", role: .cancel, action: {
-				confirmDeleteAll.toggle()
-			})
-		})
-		.sheet(isPresented: $appState.showNewAppSheet, content: {
-			AddLicenseView()
-		})
 	}
 
 	private func resetSelection(itemId: String) {
