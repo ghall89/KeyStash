@@ -1,5 +1,4 @@
 import Foundation
-import AppKit
 
 class EditFormState: ObservableObject {
 	@Published var icon: Data? = nil
