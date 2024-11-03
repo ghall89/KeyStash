@@ -1,7 +1,7 @@
 import AppKit
 import Foundation
 
-func getCustomIcon() -> Data? {
+@MainActor func getCustomIcon() -> Data? {
 	let openPanel = NSOpenPanel()
 
 	openPanel.allowsMultipleSelection = false

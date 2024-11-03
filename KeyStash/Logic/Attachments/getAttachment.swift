@@ -3,7 +3,7 @@ import Foundation
 
 // display file open dialog and copy selected file to application container
 
-func getAttachment() -> URL? {
+@MainActor func getAttachment() -> URL? {
 	let openPanel = NSOpenPanel()
 	let fileManager = FileManager.default
 

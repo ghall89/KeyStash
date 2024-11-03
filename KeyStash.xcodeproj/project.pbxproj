@@ -10,7 +10,6 @@
 		D34B191B2CC6937C0057BB81 /* GetApps in Frameworks */ = {isa = PBXBuildFile; productRef = D34B191A2CC6937C0057BB81 /* GetApps */; };
 		D3A9125E2CA7A17700A8B55F /* AppUpdater in Frameworks */ = {isa = PBXBuildFile; productRef = D3A9125D2CA7A17700A8B55F /* AppUpdater */; };
 		D3B08F832AB6A5FD004715F5 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = D3B08F822AB6A5FD004715F5 /* MarkdownUI */; };
-		D3B658EB2CC1700E006FC8E0 /* CSV in Frameworks */ = {isa = PBXBuildFile; productRef = D3B658EA2CC1700E006FC8E0 /* CSV */; };
 		D3C961FE2B1BD8EB008BE15D /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = D3C961FD2B1BD8EB008BE15D /* GRDB */; };
 		D3EDC9D82B73F0BD001D85B6 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = D3EDC9D72B73F0BD001D85B6 /* AlertToast */; };
 /* End PBXBuildFile section */
@@ -34,7 +33,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				D3A9125E2CA7A17700A8B55F /* AppUpdater in Frameworks */,
-				D3B658EB2CC1700E006FC8E0 /* CSV in Frameworks */,
 				D3B08F832AB6A5FD004715F5 /* MarkdownUI in Frameworks */,
 				D34B191B2CC6937C0057BB81 /* GetApps in Frameworks */,
 				D3EDC9D82B73F0BD001D85B6 /* AlertToast in Frameworks */,
@@ -91,7 +89,6 @@
 				D3C961FD2B1BD8EB008BE15D /* GRDB */,
 				D3EDC9D72B73F0BD001D85B6 /* AlertToast */,
 				D3A9125D2CA7A17700A8B55F /* AppUpdater */,
-				D3B658EA2CC1700E006FC8E0 /* CSV */,
 				D34B191A2CC6937C0057BB81 /* GetApps */,
 			);
 			productName = Valet;
@@ -129,7 +126,6 @@
 				D3C961FC2B1BD8EB008BE15D /* XCRemoteSwiftPackageReference "GRDB" */,
 				D3EDC9D62B73F0BD001D85B6 /* XCRemoteSwiftPackageReference "AlertToast" */,
 				D3A9125C2CA7A17700A8B55F /* XCRemoteSwiftPackageReference "AppUpdater" */,
-				D3B658E92CC1700E006FC8E0 /* XCRemoteSwiftPackageReference "CSV" */,
 				D34B19192CC6937C0057BB81 /* XCRemoteSwiftPackageReference "swift-get-apps" */,
 			);
 			productRefGroup = D39942AD2AB5095A00B2DC39 /* Products */;
@@ -337,7 +333,7 @@
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Debug;
 		};
@@ -373,7 +369,7 @@
 				SUPPORTED_PLATFORMS = macosx;
 				SUPPORTS_MACCATALYST = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
-				SWIFT_VERSION = 5.0;
+				SWIFT_VERSION = 6.0;
 			};
 			name = Release;
 		};
@@ -425,14 +421,6 @@
 				minimumVersion = 2.2.0;
 			};
 		};
-		D3B658E92CC1700E006FC8E0 /* XCRemoteSwiftPackageReference "CSV" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/yaslab/CSV.swift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.5.1;
-			};
-		};
 		D3C961FC2B1BD8EB008BE15D /* XCRemoteSwiftPackageReference "GRDB" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/groue/GRDB.swift";
@@ -466,11 +454,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D3B08F812AB6A5FD004715F5 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */;
 			productName = MarkdownUI;
-		};
-		D3B658EA2CC1700E006FC8E0 /* CSV */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D3B658E92CC1700E006FC8E0 /* XCRemoteSwiftPackageReference "CSV" */;
-			productName = CSV;
 		};
 		D3C961FD2B1BD8EB008BE15D /* GRDB */ = {
 			isa = XCSwiftPackageProductDependency;

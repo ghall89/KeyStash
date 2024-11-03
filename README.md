@@ -50,7 +50,6 @@ Alternatively, you can [manually download](https://github.com/ghall89/KeyStash/r
 ## Package Dependencies
 
 - [GRDB](https://github.com/groue/GRDB.swift)
-- [CSV.swift](https://github.com/yaslab/CSV.swift)
 - [SwiftCloudDrive](https://github.com/drewmccormack/SwiftCloudDrive)
 - [MarkdownUI](https://github.com/gonzalezreal/swift-markdown-ui)
 - [AlertToast](https://github.com/elai950/AlertToast)

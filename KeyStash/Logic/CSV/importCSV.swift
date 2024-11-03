@@ -1,7 +1,7 @@
 import AppKit
 import Foundation
 
-func importCSV() {
+@MainActor func importCSV() {
 	if let fileString = chooseFile() {
 		let lines = fileString.components(separatedBy: "\"\n")
 		for (_, line) in lines.enumerated() {
@@ -11,7 +11,7 @@ func importCSV() {
 	}
 }
 
-func chooseFile() -> String? {
+@MainActor func chooseFile() -> String? {
 	let openPanel = NSOpenPanel()
 	let fileManager = FileManager.default
 
@@ -26,7 +26,7 @@ func chooseFile() -> String? {
 
 		if fileManager.fileExists(atPath: path.path) {
 			do {
-				let csv = try String(contentsOf: path)
+				let csv = try String(contentsOf: path, encoding: .utf8)
 				return csv
 			} catch {
 				logger.error("ERROR: \(error)")

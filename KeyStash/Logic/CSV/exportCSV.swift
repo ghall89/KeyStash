@@ -8,7 +8,7 @@ extension String {
 	}
 }
 
-func exportCSV(licenses: [License]) {
+@MainActor func exportCSV(licenses: [License]) {
 	let csvString = convertToCSV(data: licenses)
 
 	if let filePath = chooseFilePath() {
@@ -56,7 +56,7 @@ func convertToCSV(data: [License]) -> String {
 	return csvString
 }
 
-func chooseFilePath() -> String? {
+@MainActor func chooseFilePath() -> String? {
 	let savePanel = NSSavePanel()
 	savePanel.allowedContentTypes = [.commaSeparatedText]
 	savePanel.nameFieldStringValue = "licenses.csv"
