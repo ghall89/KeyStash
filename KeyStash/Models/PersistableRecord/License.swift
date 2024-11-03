@@ -73,4 +73,5 @@ struct License: Identifiable, Codable, Hashable, FetchableRecord, PersistableRec
 		self.inTrash = inTrash
 		self.trashDate = trashDate
 	}
+
 }

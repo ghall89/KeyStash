@@ -20,7 +20,6 @@ struct MenuBar: Commands {
 			Button("Import", action: {
 				importCSV()
 			})
-			.disabled(true)
 			Button("Export", action: {
 				exportCSV(licenses: licenses)
 			})
@@ -30,12 +29,5 @@ struct MenuBar: Commands {
 				Text("Submit an Issue")
 			})
 		})
-//		CommandGroup(replacing: CommandGroupPlacement.sidebar) {
-//			Button("Toggle Edit Mode", action: {
-//				appState.editMode.toggle()
-//			})
-//			.keyboardShortcut(KeyboardShortcut(KeyEquivalent("E")))
-//			Divider()
-//		}
 	}
 }

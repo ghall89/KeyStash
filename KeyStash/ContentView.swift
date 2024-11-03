@@ -3,13 +3,10 @@ import SwiftUI
 struct ContentView: View {
 	@EnvironmentObject var appState: AppState
 
-	@AppStorage("disableAnimations") private var disableAnimations: Bool = false
-
 	var body: some View {
-		NavigationSplitView {
+		NavigationSplitView(columnVisibility: $appState.splitViewVisibility) {
 			LicenseListView()
 				.navigationSplitViewColumnWidth(min: 340, ideal: 350)
-				.toolbar(removing: .sidebarToggle)
 		} detail: {
 			VStack(spacing: 10) {
 				Image(systemName: "app.dashed")

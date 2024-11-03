@@ -30,10 +30,14 @@ struct ValetApp: App {
 
 		Window("about window", id: "about") {
 			AboutWindowView()
+				.toolbar(removing: .title)
+				.toolbarBackground(.hidden, for: .windowToolbar)
+				.containerBackground(.thickMaterial, for: .window)
+				.windowMinimizeBehavior(.disabled)
 		}
 		.windowResizability(.contentSize)
 		.defaultPosition(.center)
-		.windowStyle(.hiddenTitleBar)
+		.restorationBehavior(.disabled)
 
 		Settings {
 			AppSettingsView()

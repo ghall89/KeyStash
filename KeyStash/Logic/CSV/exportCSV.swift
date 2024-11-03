@@ -21,28 +21,38 @@ func exportCSV(licenses: [License]) {
 }
 
 func convertToCSV(data: [License]) -> String {
-	var csvString = "Name,Verion,URL,Purchase Date,Expiration Date,Registered To,Email,License Key,Notes\n"
-
+	var csvString = ""
+	
+	var headers: [String] = []
+	
+	for field in CSVFields.allCases {
+		headers.append(field.headerName())
+	}
+	
+	let headerString = headers.joined(separator: ", ")
+	
+	csvString.append(headerString + "\n")
+	
 	let licenses = data.sorted { $0.softwareName < $1.softwareName }
 
 	for license in licenses {
-		let row: [String] = [
-			license.softwareName,
-			license.version ?? "",
-			license.downloadUrlString,
-			license.purchaseDt?.formatted(date: .numeric, time: .omitted) ?? "",
-			license.expirationDt?.formatted(date: .numeric, time: .omitted) ?? "",
-			license.registeredToName,
-			license.registeredToEmail,
-			license.licenseKey.stripNewLines(),
-			license.notes.stripNewLines(),
-		]
+		var row: [String] = []
+
+		for field in CSVFields.allCases {
+			let value: String? = field.value(from: license)
+			
+			if let value = value {
+				row.append(value)
+			} else {
+				row.append("")
+			}
+		}
 
 		let rowString = row.joined(separator: ",")
 
 		csvString.append(rowString + "\n")
 	}
-	print(csvString)
+	
 	return csvString
 }
 

@@ -77,58 +77,61 @@ struct LicenseListView: View {
 	}
 
 	private func toolbar() -> some ToolbarContent {
+		
 		Group {
-			ToolbarItem {
-				Picker("View", selection: $appState.sidebarSelection, content: {
-					Text("All")
-						.badge(databaseManager.badgeCount.total)
-						.tag("all_apps")
-					Text("Expired")
-						.badge(databaseManager.badgeCount.expired)
-						.tag("expired")
-					Text("Trash")
-						.badge(databaseManager.badgeCount.inTrash)
-						.tag("trash")
-				})
-			}
-			ToolbarItem {
-				Spacer()
-			}
-			ToolbarItem {
-				Menu(content: {
-					Picker("Sort By", selection: $selectedSort, content: {
-						ForEach(SortOptions.allCases, id: \.self) { sortOption in
-							Text(sortOption.localizedString()).tag(sortOption)
-						}
+			if appState.splitViewVisibility != NavigationSplitViewVisibility.detailOnly {
+				ToolbarItem {
+					Picker("View", selection: $appState.sidebarSelection, content: {
+						Text("All")
+							.badge(databaseManager.badgeCount.total)
+							.tag("all_apps")
+						Text("Expired")
+							.badge(databaseManager.badgeCount.expired)
+							.tag("expired")
+						Text("Trash")
+							.badge(databaseManager.badgeCount.inTrash)
+							.tag("trash")
 					})
-					Picker("Sort Order", selection: $selectedSortOrder, content: {
-						ForEach(OrderOptions.allCases, id: \.self) { orderOption in
-							Text(orderOption.localizedString()).tag(orderOption)
-						}
-					})
-				}, label: {
-					Image(systemName: "arrow.up.arrow.down")
-				})
-			}
-			ToolbarItem {
-				if appState.sidebarSelection == "trash" {
-					Button(
-						role: .destructive,
-						action: {
-							confirmDeleteAll.toggle()
-						}, label: {
-							Label("Empty Trash", systemImage: "trash.slash")
-						}
-					)
-					//					.disabled(databaseManager.licenses.contains(where: { $0.inTrash == true }))
-					.help("Empty Trash")
-				} else {
-					Button(action: {
-						appState.showNewAppSheet.toggle()
+				}
+				ToolbarItem {
+					Spacer()
+				}
+				ToolbarItem {
+					Menu(content: {
+						Picker("Sort By", selection: $selectedSort, content: {
+							ForEach(SortOptions.allCases, id: \.self) { sortOption in
+								Text(sortOption.localizedString()).tag(sortOption)
+							}
+						})
+						Picker("Sort Order", selection: $selectedSortOrder, content: {
+							ForEach(OrderOptions.allCases, id: \.self) { orderOption in
+								Text(orderOption.localizedString()).tag(orderOption)
+							}
+						})
 					}, label: {
-						Label("Add Item", systemImage: "plus")
+						Image(systemName: "arrow.up.arrow.down")
 					})
-					.help("Add Item")
+				}
+				ToolbarItem {
+					if appState.sidebarSelection == "trash" {
+						Button(
+							role: .destructive,
+							action: {
+								confirmDeleteAll.toggle()
+							}, label: {
+								Label("Empty Trash", systemImage: "trash.slash")
+							}
+						)
+						//					.disabled(databaseManager.licenses.contains(where: { $0.inTrash == true }))
+						.help("Empty Trash")
+					} else {
+						Button(action: {
+							appState.showNewAppSheet.toggle()
+						}, label: {
+							Label("Add Item", systemImage: "plus")
+						})
+						.help("Add Item")
+					}
 				}
 			}
 		}
@@ -166,6 +169,7 @@ struct LicenseListView: View {
 			default:
 				filteredItems = databaseManager.licenses
 		}
+		
 		return filteredItems
 			.filter { !searchString.isEmpty ? $0.softwareName.lowercased().contains(searchString.lowercased()) : true }
 			.sorted(by: sortBy(sort: selectedSort, order: selectedSortOrder))

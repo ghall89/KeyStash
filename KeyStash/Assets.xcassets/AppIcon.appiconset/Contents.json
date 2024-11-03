@@ -43,13 +43,13 @@
       "size" : "256x256"
     },
     {
-      "filename" : "mac512.png",
+      "filename" : "mac512 2.png",
       "idiom" : "mac",
       "scale" : "2x",
       "size" : "256x256"
     },
     {
-      "filename" : "mac512 1.png",
+      "filename" : "mac512.png",
       "idiom" : "mac",
       "scale" : "1x",
       "size" : "512x512"

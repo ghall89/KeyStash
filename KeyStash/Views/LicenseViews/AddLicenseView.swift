@@ -1,4 +1,5 @@
 import SwiftUI
+import GetApps
 
 final class AddLicenseViewModel: ObservableObject {
 	@Published var newItem: License = .init(softwareName: "", icon: nil, licenseKey: "", registeredToName: "", registeredToEmail: "", downloadUrlString: "", notes: "", inTrash: false)
@@ -70,7 +71,7 @@ struct AddLicenseView: View {
 		.frame(width: 400)
 		.padding()
 		.onAppear {
-			let apps = getInstalledApps()
+			let apps = getInstalledApps(ignoreSystemApps: true)
 			if apps.isEmpty {
 				viewModel.tabSelection = .custom
 			} else {
