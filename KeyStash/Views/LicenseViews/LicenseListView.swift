@@ -16,7 +16,9 @@ struct LicenseListView: View {
 	var body: some View {
 		List(filterItems()) { item in
 			NavigationLink(
-				value: item,
+				destination: {
+					LicenceInfoView(item)
+				},
 				label: {
 					HStack {
 						if compactList == false {
@@ -52,9 +54,6 @@ struct LicenseListView: View {
 		}
 		.listStyle(.sidebar)
 		.frame(minWidth: 340)
-		.navigationDestination(for: License.self) { license in
-			LicenceInfoView(license)
-		}
 		.searchable(text: $searchString)
 		.toolbar {
 			toolbar()
