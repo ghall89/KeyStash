@@ -1,11 +1,12 @@
 import SwiftUI
+import AlertToast
 
 struct ContentView: View {
 	@EnvironmentObject var appState: AppState
 
 	var body: some View {
 		NavigationSplitView(columnVisibility: $appState.splitViewVisibility) {
-			LicenseListView()
+			SidebarView()
 				.navigationSplitViewColumnWidth(min: 340, ideal: 350)
 		} detail: {
 			VStack(spacing: 10) {
@@ -17,6 +18,9 @@ struct ContentView: View {
 					.foregroundStyle(.secondary)
 			}
 			.navigationSplitViewColumnWidth(min: 400, ideal: 700)
+			.toast(isPresenting: $appState.showToast) {
+				AlertToast(type: .regular, title: appState.toastMessage)
+			}
 			.toolbar {
 				ToolbarItem(content: {
 					Spacer()

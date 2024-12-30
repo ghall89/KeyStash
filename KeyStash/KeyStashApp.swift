@@ -20,7 +20,6 @@ struct ValetApp: App {
 				}
 				.frame(minHeight: 260)
 		}
-		.windowStyle(.hiddenTitleBar)
 		.commands {
 			MenuBar(
 				appState: $appState,

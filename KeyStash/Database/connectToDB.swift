@@ -5,12 +5,13 @@ import GRDB
 
 func connectToDb() throws -> DatabaseQueue? {
 	let fileManager = FileManager.default
-	
+
 	let debugEnv = isDebugEnv()
-	
+
 	do {
 		let dbPath = try fileManager.url(
 			for: !debugEnv ? .documentDirectory : .developerDirectory,
+//			for: .documentDirectory,
 			in: .userDomainMask,
 			appropriateFor: nil,
 			create: true

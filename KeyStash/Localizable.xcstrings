@@ -64,6 +64,7 @@
 
     },
     "All Apps" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
