@@ -41,6 +41,7 @@
       }
     },
     "Add Item" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
@@ -59,6 +60,9 @@
           }
         }
       }
+    },
+    "Add new license" : {
+
     },
     "All" : {
 
@@ -181,6 +185,9 @@
         }
       }
     },
+    "Edit license" : {
+
+    },
     "Email" : {
       "localizations" : {
         "zh-Hant" : {
@@ -297,6 +304,9 @@
         }
       }
     },
+    "New License" : {
+
+    },
     "Notes" : {
       "localizations" : {
         "zh-Hant" : {
@@ -354,6 +364,9 @@
           }
         }
       }
+    },
+    "Remove Attachment" : {
+
     },
     "Restore" : {
       "localizations" : {

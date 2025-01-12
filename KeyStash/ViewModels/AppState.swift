@@ -7,6 +7,8 @@ class AppState: ObservableObject {
 	@Published var showNewAppSheet: Bool = false
 	@Published var showEditAppSheet: Bool = false
 	@Published var showImportCSVSheet: Bool = false
+	
+	@Published var confirmDeleteAll: Bool = false
 
 	// display toast
 	@Published var showToast: Bool = false
@@ -19,7 +21,13 @@ class AppState: ObservableObject {
 	
 	func triggerToast(message: String) {
 		print(message)
-		showToast = true
-		toastMessage = message
+		self.showToast = true
+		self.toastMessage = message
+	}
+	
+	 func resetSelection(itemId: String) {
+		if itemId == self.selectedLicense {
+			self.selectedLicense = nil
+		}
 	}
 }

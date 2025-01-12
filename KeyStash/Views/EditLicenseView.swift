@@ -27,11 +27,11 @@ struct EditLicenseView: View {
 						.resizable()
 						.frame(width: 45, height: 45)
 					Spacer()
-					Button("Change Icon", action: {
+					Button("Change Icon") {
 						if let newIcon = getCustomIcon() {
 							formState.icon = newIcon
 						}
-					})
+					}
 				}
 				TextField("Name", text: $formState.softwareName)
 				TextField("URL", text: $formState.urlString)
@@ -62,13 +62,11 @@ struct EditLicenseView: View {
 			Section {
 				if let attachment = license.attachmentPath {
 					HStack {
-						Button(action: {
+						Button("Remove Attachment", systemImage: "xmark.circle.fill") {
 							showDeleteAlert.toggle()
-						}, label: {
-							Image(systemName: "xmark.circle.fill")
-								.foregroundStyle(.red)
-						})
+						}
 						.buttonStyle(.plain)
+						.labelStyle(.iconOnly)
 
 						VStack(alignment: .leading) {
 							Text(attachment.lastPathComponent)
@@ -85,18 +83,16 @@ struct EditLicenseView: View {
 								Text("Cancel")
 							})
 							.keyboardShortcut(.defaultAction)
-							Button(action: {
+							Button("Delete") {
 								removeAttachment()
 								showDeleteAlert.toggle()
-							}, label: {
-								Text("Delete")
-							})
+							}
 						}
 					)
 				} else {
-					Button(action: handleAttachment, label: {
-						Label("Add Attachment", systemImage: "paperclip")
-					})
+					Button("Add Attachment", systemImage: "paperclip") {
+						handleAttachment()
+					}
 				}
 			}
 			Section("Notes") {
@@ -108,25 +104,15 @@ struct EditLicenseView: View {
 		.padding()
 		.toolbar {
 			ToolbarItem(placement: .cancellationAction) {
-				Button(
-					action: {
-						isPresented.toggle()
-					},
-					label: {
-						Text("Cancel")
-					}
-				)
+				Button("Cancel") {
+					isPresented.toggle()
+				}
 			}
 			ToolbarItem(placement: .primaryAction) {
-				Button(
-					action: {
-						saveFormState()
-						isPresented.toggle()
-					},
-					label: {
-						Text("Save")
-					}
-				)
+				Button("Save") {
+					saveFormState()
+					isPresented.toggle()
+				}
 			}
 		}
 		.onChange(of: selectedPurchaseDate) {

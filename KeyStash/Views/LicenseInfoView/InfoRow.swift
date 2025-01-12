@@ -23,9 +23,9 @@ struct InfoRow: View {
 					icon: SFSymbol.document
 				)
 				.contextMenu {
-					Button("Copy \"\(value)\"", action: {
+					Button("Copy \"\(value)\"") {
 						copyAction(value)
-					})
+					}
 				}
 				Spacer()
 			}

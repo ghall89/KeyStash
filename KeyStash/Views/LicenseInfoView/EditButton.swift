@@ -10,15 +10,13 @@ struct EditButton: View {
 	}
 	
 	var body: some View {
-		Button(action: {
+		Button("Edit", systemImage: "square.and.pencil") {
 			if appState.showEditAppSheet == false {
 				initFormState()
 			}
 			appState.showEditAppSheet.toggle()
-		}) {
-			Image(systemName: "square.and.pencil")
 		}
-		.help("Edit")
+		.help("Edit license")
 	}
 	
 	private func initFormState() {
