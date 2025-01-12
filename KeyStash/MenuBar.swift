@@ -2,7 +2,9 @@ import SwiftUI
 
 struct MenuBar: Commands {
 	@Environment(\.openWindow) private var openWindow
+	
 	@Binding var appState: AppState
+	var databaseManager: DatabaseManager
 	var licenses: [License]
 
 	var body: some Commands {
@@ -18,7 +20,7 @@ struct MenuBar: Commands {
 			.keyboardShortcut(KeyboardShortcut(KeyEquivalent("N")))
 			Divider()
 			Button("Import") {
-				importCSV()
+				importCSV(databaseManager.dbQueue)
 			}
 			Button("Export") {
 				exportCSV(licenses: licenses)

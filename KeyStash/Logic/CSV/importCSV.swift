@@ -1,17 +1,58 @@
 import AppKit
 import Foundation
+import GRDB
+import GetApps
 
-@MainActor func importCSV() {
+@MainActor func importCSV(_ dbQueue: DatabaseQueue) {
 	if let fileString = chooseFile() {
-		let lines = fileString.components(separatedBy: "\"\n")
+		var lines = fileString.components(separatedBy: "\n")
+		lines.removeFirst(1)
+		lines.removeLast(1)
+		
+		
 		for (_, line) in lines.enumerated() {
-			let fields = line.trimmingCharacters(in: CharacterSet(charactersIn: "\"")).components(separatedBy: "\",\"")
-			print(fields)
+			let fields = line.trimmingCharacters(in: CharacterSet(charactersIn: "\"")).components(separatedBy: ",")
+			
+			var importedLicense = License(
+				softwareName: "",
+				icon: nil as Data?,
+				licenseKey: "",
+				registeredToName: "",
+				registeredToEmail: "",
+				downloadUrlString: "",
+				notes: "",
+				inTrash: false
+			)
+			
+			
+			
+			importedLicense.softwareName = fields[0]
+			importedLicense.version = fields[1]
+			importedLicense.downloadUrlString = fields[2]
+//			importedLicense.purchaseDt = Date(fields[3])
+//			importedLicense.expirationDt = Date(fields[4])
+			importedLicense.registeredToName = fields[5]
+			importedLicense.registeredToEmail = fields[6]
+			importedLicense.licenseKey = fields[7]
+			importedLicense.notes = fields[8]
+			
+			if let importedAppIconData = getImportedIcon(importedLicense.softwareName) {
+				importedLicense.icon = importedAppIconData
+			}
+			
+			do {
+				try addLicense(dbQueue, data: importedLicense)
+			} catch {
+				logger.error("ERROR: \(error)")
+			}
 		}
+		
+
+		
 	}
 }
 
-@MainActor func chooseFile() -> String? {
+@MainActor private func chooseFile() -> String? {
 	let openPanel = NSOpenPanel()
 	let fileManager = FileManager.default
 
@@ -37,6 +78,12 @@ import Foundation
 	return nil
 }
 
-// func decodeCSV(data: String) -> [License] {
-//
-// }
+private func getImportedIcon(_ appName: String) -> Data? {
+	let apps = getInstalledApps(ignoreSystemApps: true)
+	
+	if let app = apps.first(where: {$0.name == appName}) {
+		return getNSImageAsData(image: app.icon!)
+	}
+	
+	return nil
+}

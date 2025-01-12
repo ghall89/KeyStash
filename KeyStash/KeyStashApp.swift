@@ -23,6 +23,7 @@ struct ValetApp: App {
 		.commands {
 			MenuBar(
 				appState: $appState,
+				databaseManager: databaseManager,
 				licenses: databaseManager.licenses
 			)
 		}
