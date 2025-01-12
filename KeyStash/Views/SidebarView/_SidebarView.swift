@@ -44,16 +44,18 @@ struct SidebarView: View {
 		.listStyle(.sidebar)
 		.frame(minWidth: 340)
 		.navigationDestination(for: License.self) { license in
-			let binding = Binding<License>(
-				get: { license },
-				set: { newValue in
-					if let index = databaseManager.licenses.firstIndex(where: { $0.id == newValue.id }) {
+			if let index = databaseManager.licenses.firstIndex(where: { $0.id == license.id }) {
+				let binding = Binding<License>(
+					get: { databaseManager.licenses[index] },
+					set: { newValue in
 						databaseManager.licenses[index] = newValue
 					}
-				}
-			)
-
-			LicenceInfoView(selectedLicense: binding)
+				)
+				LicenseInfoView(selectedLicense: binding)
+			} else {
+				// Handle the case where the license isn't found
+				Text("Oops, there was a problem")
+			}
 		}
 		.searchable(text: $viewModel.searchString)
 		.toolbar {

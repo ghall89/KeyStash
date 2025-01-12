@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct LicenceInfoView: View {
+struct LicenseInfoView: View {
 	@EnvironmentObject var databaseManager: DatabaseManager
 	@EnvironmentObject var appState: AppState
 	@EnvironmentObject var formState: EditFormState
