@@ -3,7 +3,12 @@ import Foundation
 import GRDB
 import GetApps
 
-@MainActor func importCSV(_ dbQueue: DatabaseQueue) {
+@MainActor func importCSV(_ dbQueue: DatabaseQueue, refetch: () -> Void) {
+	let formatter = DateFormatter()
+	formatter.locale = Locale(identifier: "en_US_POSIX")
+	formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+	
+	
 	if let fileString = chooseFile() {
 		var lines = fileString.components(separatedBy: "\n")
 		lines.removeFirst(1)
@@ -29,8 +34,12 @@ import GetApps
 			importedLicense.softwareName = fields[0]
 			importedLicense.version = fields[1]
 			importedLicense.downloadUrlString = fields[2]
-//			importedLicense.purchaseDt = Date(fields[3])
-//			importedLicense.expirationDt = Date(fields[4])
+			if !fields[3].isEmpty {
+				importedLicense.purchaseDt = formatter.date(from: fields[3])
+			}
+			if !fields[4].isEmpty {
+				importedLicense.expirationDt = formatter.date(from: fields[4])
+			}
 			importedLicense.registeredToName = fields[5]
 			importedLicense.registeredToEmail = fields[6]
 			importedLicense.licenseKey = fields[7]
@@ -42,6 +51,8 @@ import GetApps
 			
 			do {
 				try addLicense(dbQueue, data: importedLicense)
+				
+				refetch()
 			} catch {
 				logger.error("ERROR: \(error)")
 			}

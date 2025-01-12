@@ -20,9 +20,9 @@ enum CSVFields: String, CaseIterable {
 			case .downloadUrlString:
 				return licence.downloadUrlString
 			case .purchaseDt:
-				return licence.purchaseDt?.formatted(date: .numeric, time: .omitted) ?? ""
+				return licence.purchaseDt?.ISO8601Format() ?? ""
 			case .expirationDt:
-				return licence.expirationDt?.formatted(date: .numeric, time: .omitted) ?? ""
+				return licence.expirationDt?.ISO8601Format() ?? ""
 			case .registeredToName:
 				return licence.registeredToName
 			case .registeredToEmail:
