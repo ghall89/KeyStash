@@ -31,6 +31,7 @@
       }
     },
     "Add Attachment" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
@@ -99,6 +100,7 @@
       }
     },
     "Are you sure you want to remove this attachment? The file will be moved to your computer's Trash." : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
@@ -107,6 +109,9 @@
           }
         }
       }
+    },
+    "Backup" : {
+
     },
     "Cancel" : {
       "localizations" : {
@@ -156,6 +161,7 @@
       }
     },
     "Delete" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
@@ -229,6 +235,7 @@
       }
     },
     "Export" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
@@ -260,9 +267,6 @@
           }
         }
       }
-    },
-    "Import" : {
-
     },
     "License Expires" : {
       "localizations" : {
@@ -367,9 +371,6 @@
           }
         }
       }
-    },
-    "Remove Attachment" : {
-
     },
     "Restore" : {
       "localizations" : {

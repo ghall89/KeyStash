@@ -19,10 +19,10 @@ struct MenuBar: Commands {
 			}
 			.keyboardShortcut(KeyboardShortcut(KeyEquivalent("N")))
 			Divider()
-			Button("Import") {
+			Button("Restore") {
 				importCSV(databaseManager.dbQueue)
 			}
-			Button("Export") {
+			Button("Backup") {
 				exportCSV(licenses: licenses)
 			}
 		}
