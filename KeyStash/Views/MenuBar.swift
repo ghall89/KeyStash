@@ -3,7 +3,6 @@ import AppUpdater
 
 struct MenuBar: Commands {
 	@Environment(\.openWindow) private var openWindow
-	@StateObject var updater = AppUpdater(owner: "ghall89", repo: "KeyStash")
 	
 	@Binding var appState: AppState
 	var databaseManager: DatabaseManager
@@ -14,9 +13,9 @@ struct MenuBar: Commands {
 			Button("About KeyStash") {
 				openWindow(id: "about")
 			}
-			Button("Check for Updates...") {
-				updater.check()
-			}
+//			Button("Check for Updates...") {
+//				updater.appUpdater.check()
+//			}
 		})
 		CommandGroup(replacing: CommandGroupPlacement.newItem) {
 			Button("Add App") {

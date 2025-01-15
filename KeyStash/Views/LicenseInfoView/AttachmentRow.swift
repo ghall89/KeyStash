@@ -14,8 +14,7 @@ struct AttachmentRow: View {
 					InfoButton(
 						label: "Attachment",
 						value: license.attachmentPath?.lastPathComponent ?? "",
-						onClick: downloadAttachment,
-						icon: SFSymbol.arrowDown
+						onClick: downloadAttachment
 					)
 					.monospaced()
 				}

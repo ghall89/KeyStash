@@ -19,8 +19,7 @@ struct InfoRow: View {
 					value: value,
 					onClick: {
 						copyAction(value)
-					},
-					icon: SFSymbol.document
+					}
 				)
 				.contextMenu {
 					Button("Copy \"\(value)\"") {
@@ -34,6 +33,5 @@ struct InfoRow: View {
 	
 	private func copyAction(_ value: String) {
 		stringToClipboard(value: value)
-		appState.triggerToast(message: "Copied \(label)")
 	}
 }

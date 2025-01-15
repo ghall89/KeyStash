@@ -4,17 +4,18 @@ struct InfoButton: View {
 	let label: String
 	let value: String
 	let onClick: () -> Void
-	let icon: SFSymbol
 	
-	@State var isHovering = false
+	@State private var isHovering = false
+	@State private var clicked = false
 	
 	var body: some View {
-		Button(action: onClick, label: {
-			Image(systemName: icon.name)
+		Button(action: clickHandler, label: {
+			Image(systemName: clicked ? "checkmark.circle.fill" : "doc.on.doc.fill")
 				.foregroundStyle(.accent)
 				.opacity(isHovering ? 1 : 0.5)
 				.transition(.opacity)
 				.animation(.easeInOut(duration: 0.15), value: isHovering)
+				.contentTransition(.symbolEffect(.replace.magic(fallback: .upUp.byLayer), options: .nonRepeating))
 			VStack(alignment: .leading) {
 				Text(label)
 					.font(.caption)
@@ -36,16 +37,19 @@ struct InfoButton: View {
 		})
 		.multilineTextAlignment(.leading)
 	}
-}
-
-enum SFSymbol {
-	case document
-	case arrowDown
 	
-	var name: String {
-		switch self {
-			case .document: return "doc.on.doc.fill"
-			case .arrowDown: return "arrow.down.circle.fill"
+	private func clickHandler() {
+		if clicked == false {
+			onClick()
+			clicked = true
+			
+			DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+				yourFuncHere()
+			}
+
+			func yourFuncHere() {
+				clicked = false
+			}
 		}
 	}
 }

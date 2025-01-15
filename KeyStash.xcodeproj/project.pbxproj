@@ -8,10 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		D34B191B2CC6937C0057BB81 /* GetApps in Frameworks */ = {isa = PBXBuildFile; productRef = D34B191A2CC6937C0057BB81 /* GetApps */; };
-		D3A9125E2CA7A17700A8B55F /* AppUpdater in Frameworks */ = {isa = PBXBuildFile; productRef = D3A9125D2CA7A17700A8B55F /* AppUpdater */; };
 		D3B08F832AB6A5FD004715F5 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = D3B08F822AB6A5FD004715F5 /* MarkdownUI */; };
 		D3C961FE2B1BD8EB008BE15D /* GRDB in Frameworks */ = {isa = PBXBuildFile; productRef = D3C961FD2B1BD8EB008BE15D /* GRDB */; };
-		D3EDC9D82B73F0BD001D85B6 /* AlertToast in Frameworks */ = {isa = PBXBuildFile; productRef = D3EDC9D72B73F0BD001D85B6 /* AlertToast */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,10 +30,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D3A9125E2CA7A17700A8B55F /* AppUpdater in Frameworks */,
 				D3B08F832AB6A5FD004715F5 /* MarkdownUI in Frameworks */,
 				D34B191B2CC6937C0057BB81 /* GetApps in Frameworks */,
-				D3EDC9D82B73F0BD001D85B6 /* AlertToast in Frameworks */,
 				D3C961FE2B1BD8EB008BE15D /* GRDB in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -87,8 +83,6 @@
 			packageProductDependencies = (
 				D3B08F822AB6A5FD004715F5 /* MarkdownUI */,
 				D3C961FD2B1BD8EB008BE15D /* GRDB */,
-				D3EDC9D72B73F0BD001D85B6 /* AlertToast */,
-				D3A9125D2CA7A17700A8B55F /* AppUpdater */,
 				D34B191A2CC6937C0057BB81 /* GetApps */,
 			);
 			productName = Valet;
@@ -124,8 +118,6 @@
 			packageReferences = (
 				D3B08F812AB6A5FD004715F5 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 				D3C961FC2B1BD8EB008BE15D /* XCRemoteSwiftPackageReference "GRDB" */,
-				D3EDC9D62B73F0BD001D85B6 /* XCRemoteSwiftPackageReference "AlertToast" */,
-				D3A9125C2CA7A17700A8B55F /* XCRemoteSwiftPackageReference "AppUpdater" */,
 				D34B19192CC6937C0057BB81 /* XCRemoteSwiftPackageReference "swift-get-apps" */,
 			);
 			productRefGroup = D39942AD2AB5095A00B2DC39 /* Products */;
@@ -405,14 +397,6 @@
 				minimumVersion = 0.1.0;
 			};
 		};
-		D3A9125C2CA7A17700A8B55F /* XCRemoteSwiftPackageReference "AppUpdater" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/s1ntoneli/AppUpdater.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 2.0.0;
-			};
-		};
 		D3B08F812AB6A5FD004715F5 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui";
@@ -429,14 +413,6 @@
 				kind = branch;
 			};
 		};
-		D3EDC9D62B73F0BD001D85B6 /* XCRemoteSwiftPackageReference "AlertToast" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/elai950/AlertToast.git";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 1.3.9;
-			};
-		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -444,11 +420,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D34B19192CC6937C0057BB81 /* XCRemoteSwiftPackageReference "swift-get-apps" */;
 			productName = GetApps;
-		};
-		D3A9125D2CA7A17700A8B55F /* AppUpdater */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D3A9125C2CA7A17700A8B55F /* XCRemoteSwiftPackageReference "AppUpdater" */;
-			productName = AppUpdater;
 		};
 		D3B08F822AB6A5FD004715F5 /* MarkdownUI */ = {
 			isa = XCSwiftPackageProductDependency;
@@ -459,11 +430,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D3C961FC2B1BD8EB008BE15D /* XCRemoteSwiftPackageReference "GRDB" */;
 			productName = GRDB;
-		};
-		D3EDC9D72B73F0BD001D85B6 /* AlertToast */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D3EDC9D62B73F0BD001D85B6 /* XCRemoteSwiftPackageReference "AlertToast" */;
-			productName = AlertToast;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

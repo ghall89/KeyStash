@@ -1,6 +1,6 @@
+import Combine
 import OSLog
 import SwiftUI
-import AppUpdater
 
 let logger = Logger(subsystem: "com.ghalldev.KeyStash", category: "keystash-logging")
 
@@ -9,7 +9,7 @@ struct ValetApp: App {
 	@StateObject var databaseManager = DatabaseManager()
 	@State private var appState = AppState()
 	@State private var editFormState = EditFormState()
-	
+
 	var body: some Scene {
 		WindowGroup {
 			ContentView()
@@ -29,7 +29,7 @@ struct ValetApp: App {
 			)
 		}
 
-		Window("about window", id: "about") {
+		Window("About KeyStash", id: "about") {
 			AboutWindowView()
 				.toolbar(removing: .title)
 				.toolbarBackground(.hidden, for: .windowToolbar)
