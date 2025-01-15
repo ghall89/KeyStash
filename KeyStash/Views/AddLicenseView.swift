@@ -71,7 +71,7 @@ struct AddLicenseView: View {
 		.frame(width: 400)
 		.padding()
 		.onAppear {
-			let apps = getInstalledApps(ignoreSystemApps: true)
+			let apps = getUserApps()
 			if apps.isEmpty {
 				viewModel.tabSelection = .custom
 			} else {

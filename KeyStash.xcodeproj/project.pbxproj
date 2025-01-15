@@ -15,11 +15,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		D3416F2C2BB217F30023E205 /* screenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot.png; sourceTree = "<group>"; };
 		D3416F2D2BB217F30023E205 /* LICENSE.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = LICENSE.md; sourceTree = "<group>"; };
 		D3416F2E2BB217F30023E205 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		D3416F2F2BB218250023E205 /* CONTRIBUTING.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = CONTRIBUTING.md; sourceTree = "<group>"; };
 		D3587C2D2AC34A04001CE2DC /* KeyStash-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "KeyStash-Info.plist"; sourceTree = "<group>"; };
+		D39835D92D37F6E7003B9EAE /* screenshot.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = screenshot.png; sourceTree = "<group>"; };
 		D39942AC2AB5095A00B2DC39 /* KeyStash.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KeyStash.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -49,10 +49,10 @@
 				D3416F2F2BB218250023E205 /* CONTRIBUTING.md */,
 				D3416F2D2BB217F30023E205 /* LICENSE.md */,
 				D3416F2E2BB217F30023E205 /* README.md */,
-				D3416F2C2BB217F30023E205 /* screenshot.png */,
 				D3587C2D2AC34A04001CE2DC /* KeyStash-Info.plist */,
 				D3A265DF2C9A62DA0067B7E2 /* KeyStash */,
 				D39942AD2AB5095A00B2DC39 /* Products */,
+				D39835D92D37F6E7003B9EAE /* screenshot.png */,
 			);
 			sourceTree = "<group>";
 		};
@@ -401,7 +401,7 @@
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/ghall89/swift-get-apps.git";
 			requirement = {
-				kind = upToNextMinorVersion;
+				kind = upToNextMajorVersion;
 				minimumVersion = 0.1.0;
 			};
 		};

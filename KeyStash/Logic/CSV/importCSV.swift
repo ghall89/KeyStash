@@ -90,7 +90,7 @@ import GetApps
 }
 
 private func getImportedIcon(_ appName: String) -> Data? {
-	let apps = getInstalledApps(ignoreSystemApps: true)
+	let apps = getUserApps()
 	
 	if let app = apps.first(where: {$0.name == appName}) {
 		return getNSImageAsData(image: app.icon!)
