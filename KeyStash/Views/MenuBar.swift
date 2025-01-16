@@ -1,5 +1,4 @@
 import SwiftUI
-import AppUpdater
 
 struct MenuBar: Commands {
 	@Environment(\.openWindow) private var openWindow
