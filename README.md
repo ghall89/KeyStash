@@ -50,9 +50,9 @@ Alternatively, you can [manually download](https://github.com/ghall89/KeyStash/r
 ## Package Dependencies
 
 - [GRDB](https://github.com/groue/GRDB.swift)
-- [SwiftCloudDrive](https://github.com/drewmccormack/SwiftCloudDrive)
 - [MarkdownUI](https://github.com/gonzalezreal/swift-markdown-ui)
-- [AlertToast](https://github.com/elai950/AlertToast)
+- [AppUpdater](https://github.com/s1ntoneli/AppUpdater)
+- [swift-get-apps](https://github.com/ghall89/swift-get-apps)
 
 ## License
 
