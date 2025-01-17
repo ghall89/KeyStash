@@ -26,8 +26,8 @@ A macOS utility for storing software license keys.
 
 The suggested method for installing KeyStash is through Homebrew.
 
-- Add the 'ghall89/tap' tap with brew tap `ghall89/tap`
-- Install QuestLogger with `brew install --cask keystash`
+- Add the 'ghall89/tap' tap with `brew tap ghall89/tap`
+- Install KeyStash with `brew install --cask keystash`
 
 Alternatively, you can [manually download](https://github.com/ghall89/KeyStash/releases) the latest release of KeyStash.
 
@@ -41,11 +41,11 @@ Alternatively, you can [manually download](https://github.com/ghall89/KeyStash/r
 
 ### Instructions
 
-1. Clone this repo with `git clone git@github.com:ghall89/Serial-Box.git`
-2. Open `Serial-Box.xcodeproj` from the project directory
+1. Clone this repo with `git clone git@github.com:ghall89/KeyStash.git`
+2. Open `KeyStash.xcodeproj` from the project directory
 3. Wait for package dependencies to download
 4. From the menubar, go to `Product → Archive`
-5. When archive is complete, click `Distribute App` and select either `Direct Distribution` or `Custom` and follow the prompts
+5. When archive is complete, click `Distribute App` and select `Direct Distribution`, `Debug`, or `Custom` and follow the prompts
 
 ## Package Dependencies
 
