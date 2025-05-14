@@ -1,7 +1,7 @@
 import SwiftUI
 
 struct SidebarItem: View {
-	@EnvironmentObject var sidebarModel: SidebarViewModel
+	@EnvironmentObject var sidebarModel: ContentListViewModel
 	@EnvironmentObject var databaseManager: DatabaseManager
 	@EnvironmentObject var appState: AppState
 	
@@ -32,7 +32,6 @@ struct SidebarItem: View {
 				.padding(3)
 			}
 		)
-		.listRowSeparator(.hidden)
 		.contextMenu {
 			if item.inTrash == false {
 				Button("Move to Trash", role: .destructive) {
@@ -50,7 +49,7 @@ struct SidebarItem: View {
 		do {
 			var updatedLicense = item
 			updatedLicense.inTrash.toggle()
-			try updateLicense(databaseManager.dbQueue, data: updatedLicense)
+			try databaseManager.dbService.updateLicense(data: updatedLicense)
 			databaseManager.fetchData()
 			appState.resetSelection(itemId: item.id)
 		} catch {

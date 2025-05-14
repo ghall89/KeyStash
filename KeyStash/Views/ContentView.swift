@@ -5,7 +5,8 @@ struct ContentView: View {
 
 	var body: some View {
 		NavigationSplitView(columnVisibility: $appState.splitViewVisibility) {
-			SidebarView()
+		} content: {
+			ContentListView()
 				.navigationSplitViewColumnWidth(min: 340, ideal: 350)
 		} detail: {
 			VStack(spacing: 10) {

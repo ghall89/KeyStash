@@ -12,10 +12,10 @@ struct LicenseHeader: View {
 			Image(nsImage: license.iconNSImage)
 				.resizable()
 				.aspectRatio(contentMode: .fit)
-				.frame(width: 75)
+				.frame(width: 65)
 			VStack(alignment: .leading) {
 				Text(license.softwareName)
-					.font(.title)
+					.font(.title2)
 					.multilineTextAlignment(.leading)
 				if let version = license.version {
 					if !version.isEmpty {
@@ -39,6 +39,5 @@ struct LicenseHeader: View {
 				.foregroundStyle(Color.accent)
 			}
 		}
-		.padding()
 	}
 }

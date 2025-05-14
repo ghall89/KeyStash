@@ -133,6 +133,9 @@
         }
       }
     },
+    "Copied" : {
+
+    },
     "Copy" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -144,7 +147,7 @@
         }
       }
     },
-    "Copy \"%@\"" : {
+    "Copy %@" : {
 
     },
     "Default Info" : {

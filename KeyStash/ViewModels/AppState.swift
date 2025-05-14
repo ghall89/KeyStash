@@ -11,7 +11,7 @@ class AppState: ObservableObject {
 	@Published var confirmDeleteAll: Bool = false
 
 	// misc
-	@Published var sidebarSelection: String = "all_apps"
+	@Published var sidebarSelection: SidebarSelection = .all
 	@Published var selectedLicense: String? = nil
 	@Published var splitViewVisibility = NavigationSplitViewVisibility.all
 
@@ -20,4 +20,10 @@ class AppState: ObservableObject {
 			selectedLicense = nil
 		}
 	}
+}
+
+enum SidebarSelection: String {
+	case all = "All"
+	case expired = "Expired"
+	case deleted = "Deleted"
 }

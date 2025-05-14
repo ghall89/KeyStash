@@ -23,7 +23,7 @@ struct MenuBar: Commands {
 			.keyboardShortcut(KeyboardShortcut(KeyEquivalent("N")))
 			Divider()
 			Button("Restore") {
-				importCSV(databaseManager.dbQueue, refetch: databaseManager.fetchData)
+				importCSV(databaseManager.dbService, refetch: databaseManager.fetchData)
 			}
 			Button("Backup") {
 				exportCSV(licenses: licenses)

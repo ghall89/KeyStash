@@ -3,7 +3,7 @@ import Foundation
 import GRDB
 import GetApps
 
-@MainActor func importCSV(_ dbQueue: DatabaseQueue, refetch: () -> Void) {
+@MainActor func importCSV(_ dbService: DatabaseService, refetch: () -> Void) {
 	let formatter = DateFormatter()
 	formatter.locale = Locale(identifier: "en_US_POSIX")
 	formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
@@ -50,7 +50,7 @@ import GetApps
 			}
 			
 			do {
-				try addLicense(dbQueue, data: importedLicense)
+				try dbService.addLicense(data: importedLicense)
 				
 				refetch()
 			} catch {

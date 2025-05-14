@@ -4,7 +4,7 @@ struct PrimaryActionButton: View {
 	@EnvironmentObject var appState: AppState
 	
 	var body: some View {
-		if appState.sidebarSelection == "trash" {
+		if appState.sidebarSelection == .deleted {
 			Button("Empty Trash", systemImage: "trash.slash") {
 				appState.confirmDeleteAll.toggle()
 			}

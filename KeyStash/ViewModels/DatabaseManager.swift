@@ -2,23 +2,16 @@ import Foundation
 import GRDB
 
 class DatabaseManager: ObservableObject {
-	@Published var dbQueue: DatabaseQueue
+	@Published var dbService = DatabaseService()
 	@Published var licenses: [License] = []
 	@Published var badgeCount: SidebarCounts = .init(total: 0, expired: 0, inTrash: 0)
 
-	// initialize db connection
-	init() {
-		do {
-			dbQueue = try connectToDb()!
-		} catch {
-			fatalError("Failed to connect to the database: \(error)")
-		}
-	}
+
 
 	// fetch current license data
 	func fetchData() {
 		do {
-			try dbQueue.read { db in
+			try self.dbService.dbQueue!.read { db in
 				self.licenses = try License.fetchAll(db)
 
 				let today = Date()

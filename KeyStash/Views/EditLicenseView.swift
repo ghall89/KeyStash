@@ -145,32 +145,32 @@ struct EditLicenseView: View {
 				updatedLicense.expirationDt = nil
 			}
 			updatedLicense.notes = formState.notes
-			try updateLicense(databaseManager.dbQueue, data: updatedLicense)
+			try databaseManager.dbService.updateLicense(data: updatedLicense)
 			databaseManager.fetchData()
 		} catch {
 			logger.error("ERROR: \(error)")
 		}
 	}
 
-	private func handleAttachment() {
-		if let fileFromDisk = getAttachment() {
-			do {
-				var updatedLicense = license
-				updatedLicense.attachmentPath = fileFromDisk
-				try addAttachmentToLicense(databaseManager.dbQueue, data: updatedLicense, attachment: fileFromDisk)
-				databaseManager.fetchData()
-			} catch {
-				logger.error("ERROR: \(error)")
-			}
-		}
-	}
-
-	private func removeAttachment() {
-		do {
-			try deleteAttachment(databaseManager.dbQueue, license: license)
-			databaseManager.fetchData()
-		} catch {
-			logger.error("ERROR: \(error)")
-		}
-	}
+//	private func handleAttachment() {
+//		if let fileFromDisk = getAttachment() {
+//			do {
+//				var updatedLicense = license
+//				updatedLicense.attachmentPath = fileFromDisk
+//				try addAttachmentToLicense(databaseManager.dbQueue, data: updatedLicense, attachment: fileFromDisk)
+//				databaseManager.fetchData()
+//			} catch {
+//				logger.error("ERROR: \(error)")
+//			}
+//		}
+//	}
+//
+//	private func removeAttachment() {
+//		do {
+//			try deleteAttachment(databaseManager.dbQueue, license: license)
+//			databaseManager.fetchData()
+//		} catch {
+//			logger.error("ERROR: \(error)")
+//		}
+//	}
 }
