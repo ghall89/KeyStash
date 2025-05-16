@@ -27,8 +27,6 @@ struct ContentListView: View {
 				filteredItems = databaseManager.licenses.filter { $0.inTrash == false && $0.expirationDt ?? today < today }
 			case .deleted:
 				filteredItems = databaseManager.licenses.filter { $0.inTrash == true }
-			default:
-				filteredItems = databaseManager.licenses
 		}
 
 		return filteredItems
@@ -38,11 +36,10 @@ struct ContentListView: View {
 
 	var body: some View {
 		List(filterItems) { item in
-			SidebarItem(item: item)
+			ContentListItem(item: item)
 		}
 		.environmentObject(viewModel)
-		.listStyle(.sidebar)
-		.frame(minWidth: 340)
+		.frame(minWidth: 240)
 		.navigationDestination(for: License.self) { license in
 			if let index = databaseManager.licenses.firstIndex(where: { $0.id == license.id }) {
 				let binding = Binding<License>(

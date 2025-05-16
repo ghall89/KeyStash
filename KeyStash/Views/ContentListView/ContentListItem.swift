@@ -1,6 +1,6 @@
 import SwiftUI
 
-struct SidebarItem: View {
+struct ContentListItem: View {
 	@EnvironmentObject var sidebarModel: ContentListViewModel
 	@EnvironmentObject var databaseManager: DatabaseManager
 	@EnvironmentObject var appState: AppState
@@ -15,10 +15,10 @@ struct SidebarItem: View {
 			label: {
 				HStack {
 					if compactList == false {
-						Image(nsImage: item.miniIcon)
+						Image(nsImage: item.listIcon)
 							.resizable()
 							.aspectRatio(contentMode: .fit)
-							.frame(width: 24)
+							.frame(width: 42)
 					}
 					HighlightableText(text: item.softwareName, highlight: sidebarModel.searchString)
 					Spacer()

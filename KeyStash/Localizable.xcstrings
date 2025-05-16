@@ -4,6 +4,9 @@
     "" : {
 
     },
+    "%lld" : {
+
+    },
     "About KeyStash" : {
 
     },
@@ -60,9 +63,6 @@
       }
     },
     "Add new license" : {
-
-    },
-    "All" : {
 
     },
     "All Apps" : {
@@ -225,6 +225,7 @@
       }
     },
     "Expired" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
@@ -507,6 +508,7 @@
       }
     },
     "Trash" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
@@ -527,9 +529,6 @@
       }
     },
     "Version" : {
-
-    },
-    "View" : {
 
     },
     "Website" : {

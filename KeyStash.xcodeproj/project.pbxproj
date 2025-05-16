@@ -70,7 +70,6 @@
 				D39942A82AB5095A00B2DC39 /* Sources */,
 				D39942A92AB5095A00B2DC39 /* Frameworks */,
 				D39942AA2AB5095A00B2DC39 /* Resources */,
-				D353428E2C6C1F2E000116F9 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -138,26 +137,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		D353428E2C6C1F2E000116F9 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "if [ \"${CONFIGURATION}\" = \"Release\" ]; then\n    # Use full path to Git\n    GIT=\"/usr/bin/git\"\n    \n    # Check if we're in a Git repository\n    if [ -d \".git\" ] || git rev-parse --git-dir > /dev/null 2>&1; then\n        buildNumber=$(\"$GIT\" rev-list --count HEAD)\n        \n        # Path to Info.plist\n        INFO_PLIST=\"${TARGET_BUILD_DIR}/${INFOPLIST_PATH}\"\n        \n        # Check if Info.plist exists in the expected location\n        if [ -f \"$INFO_PLIST\" ]; then\n            # Update CFBundleVersion using defaults command\n            defaults write \"$INFO_PLIST\" CFBundleVersion -string \"$buildNumber\"\n            echo \"Build number updated to $buildNumber\"\n        else\n            echo \"Error: Info.plist not found at $INFO_PLIST\"\n            exit 1\n        fi\n    else\n        echo \"Error: Not in a Git repository\"\n        exit 1\n    fi\nelse\n    echo \"Not a release build, skipping build number update\"\nfi\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		D39942A82AB5095A00B2DC39 /* Sources */ = {
@@ -302,6 +281,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 050;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"KeyStash/Preview Content\"";
 				DEVELOPMENT_TEAM = B3DFV278UN;
@@ -318,7 +298,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 0.4.0;
+				MARKETING_VERSION = 0.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ghalldev.KeyStash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = macosx;
@@ -339,6 +319,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 050;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"KeyStash/Preview Content\"";
 				DEVELOPMENT_TEAM = B3DFV278UN;
@@ -355,7 +336,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 0.4.0;
+				MARKETING_VERSION = 0.5.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ghalldev.KeyStash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = macosx;
