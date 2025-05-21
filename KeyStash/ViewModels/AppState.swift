@@ -15,10 +15,8 @@ class AppState: ObservableObject {
 	@Published var selectedLicense: String? = nil
 	@Published var splitViewVisibility = NavigationSplitViewVisibility.all
 
-	func resetSelection(itemId: String) {
-		if itemId == selectedLicense {
-			selectedLicense = nil
-		}
+	func resetSelection() {
+		selectedLicense = nil
 	}
 }
 

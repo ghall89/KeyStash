@@ -22,7 +22,18 @@ struct DateRow: View {
 		return ""
 	}
 
-	func isPast() -> Bool {
+	var body: some View { HStack(alignment: .top) {
+		HStack {
+			Text(label)
+			Spacer()
+			Text(valueString)
+				.foregroundStyle(isPast() ? Color.red : Color.primary)
+		}
+	}
+	.padding(.leading, 30)
+	}
+
+	private func isPast() -> Bool {
 		let now = Date()
 
 		if let dateToCompare = value {
@@ -30,20 +41,5 @@ struct DateRow: View {
 		}
 
 		return false
-	}
-
-	var body: some View { HStack(alignment: .top) {
-		if value != nil {
-			VStack(alignment: .leading) {
-				Text(label)
-					.font(.caption)
-				Text(valueString)
-					.foregroundStyle(isPast() ? Color.red : Color.primary)
-			}
-			.multilineTextAlignment(.leading)
-			Spacer()
-		}
-	}
-	.padding(.leading, 30)
 	}
 }

@@ -35,7 +35,6 @@ struct SidebarView: View {
 			}
 			.padding(10)
 		}
-		.frame(minWidth: 240)
 	}
 }
 

@@ -11,10 +11,14 @@ struct LicenseDetails: View {
 		Form {
 			Section {
 				LicenseHeader(license)
-				DateRow(
-					"Expires",
-					value: license.expirationDt
-				)
+				if license.expirationDt != nil {
+					DateRow(
+						"Expires",
+						value: license.expirationDt
+					)
+				}
+			}
+			Section {
 				InfoRow(
 					"Registered To",
 					value: license.registeredToName

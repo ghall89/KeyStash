@@ -20,13 +20,14 @@ struct ContentListItem: View {
 							.aspectRatio(contentMode: .fit)
 							.frame(width: 42)
 					}
-					HighlightableText(text: item.softwareName, highlight: sidebarModel.searchString)
-					Spacer()
-					if let version = item.version {
-						Text(version)
-							.font(.caption2)
-							.foregroundStyle(Color.primary)
-							.opacity(0.8)
+					VStack(alignment: .leading) {
+						HighlightableText(text: item.softwareName, highlight: sidebarModel.searchString)
+						if let version = item.version, version != "" {
+							Text("Version \(version)")
+								.font(.caption)
+								.foregroundStyle(Color.primary)
+								.opacity(0.8)
+						}
 					}
 				}
 				.padding(3)
@@ -51,7 +52,6 @@ struct ContentListItem: View {
 			updatedLicense.inTrash.toggle()
 			try databaseManager.dbService.updateLicense(data: updatedLicense)
 			databaseManager.fetchData()
-			appState.resetSelection(itemId: item.id)
 		} catch {
 			logger.error("ERROR: \(error)")
 		}
