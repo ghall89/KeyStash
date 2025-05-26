@@ -5,6 +5,7 @@ private let OUT_SCALE = CGFloat(0.5)
 private let IN_SCALE = CGFloat(1.0)
 
 struct SearchTextFieldStyle: TextFieldStyle {
+	@Environment(\.scenePhase) private var scenePhase
 	@FocusState private var textFieldFocused: Bool
 	@State private var clearButtonScale: CGFloat = OUT_SCALE
 
@@ -44,7 +45,10 @@ struct SearchTextFieldStyle: TextFieldStyle {
 		}
 		.onKeyPress(.escape) {
 			if textFieldFocused {
-				clearText()
+				DispatchQueue.main.async {
+					clearText()
+				}
+		
 				return .handled
 			}
 
@@ -55,11 +59,20 @@ struct SearchTextFieldStyle: TextFieldStyle {
 			RoundedRectangle(cornerRadius: 5)
 				.fill(Material.thick.opacity(textFieldFocused ? 1.0 : 0.0))
 				.stroke(
-					textFieldFocused ? Color.accentHighlight :
-						Color.border,
+					searchFieldBorderColor(),
 					style: textFieldFocused ? .init(lineWidth: 4) : .init(lineWidth: 1)
 				)
 		}
+	}
+	
+	private func searchFieldBorderColor() -> Color {
+		if textFieldFocused && scenePhase == .inactive {
+			return Color.clear
+		} else if textFieldFocused {
+			return Color.accentHighlight
+		}
+		
+		return Color.border
 	}
 
 	private func clearText() {
