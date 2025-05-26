@@ -36,20 +36,7 @@ struct ContentListView: View {
 
 	var body: some View {
 		VStack(spacing: 0) {
-			VStack {
-				TextField("Search",  text: $viewModel.searchString)
-					.textFieldStyle(SearchTextFieldStyle(text: $viewModel.searchString))
-					.padding(8)
-			}
-			.padding(0)
-			.background() {
-				VStack {
-					Spacer()
-					Rectangle()
-						.fill(Color.border)
-						.frame(height: 1)
-				}
-			}
+			SearchBar(searchString: $viewModel.searchString)
 			
 			List(filterItems) { item in
 				ContentListItem(item: item)
