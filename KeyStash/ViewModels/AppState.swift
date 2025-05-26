@@ -9,6 +9,8 @@ class AppState: ObservableObject {
 	@Published var showImportCSVSheet: Bool = false
 
 	@Published var confirmDeleteAll: Bool = false
+	@Published var confirmDeleteOne: Bool = false
+	@Published var licenseToDelete: License?
 
 	// misc
 	@Published var sidebarSelection: SidebarSelection = .all

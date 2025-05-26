@@ -35,18 +35,23 @@ struct ContentListItem: View {
 		)
 		.contextMenu {
 			if item.inTrash == false {
-				Button("Move to Trash", role: .destructive) {
-					moveToTrash(item)
+				Button("Delete...", role: .destructive) {
+					toggleTrashState(item)
 				}
 			} else {
-				Button("Restore", role: .destructive) {
-					moveToTrash(item)
+				Button("Restore") {
+					toggleTrashState(item)
+				}
+				Divider()
+				Button("Permanently Delete", role: .destructive) {
+					appState.confirmDeleteOne.toggle()
+					appState.licenseToDelete = item
 				}
 			}
 		}
 	}
 	
-	private func moveToTrash(_ item: License) {
+	private func toggleTrashState(_ item: License) {
 		do {
 			var updatedLicense = item
 			updatedLicense.inTrash.toggle()

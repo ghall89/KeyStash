@@ -64,7 +64,7 @@ struct ContentListView: View {
 		.onAppear(perform: databaseManager.fetchData)
 		.navigationTitle(LocalizedStringKey(snakeToTitleCase(appState.sidebarSelection.rawValue)))
 		.navigationSubtitle(getSubtitle())
-		.confirmationDialog("Are you sure you want to empty the trash? You will not be able to recover data once this has been done.", isPresented: $appState.confirmDeleteAll, actions: {
+		.confirmationDialog("Are you sure you want to delete all items the trash? This action cannot be undone.", isPresented: $appState.confirmDeleteAll, actions: {
 			Button("Empty Trash", role: .destructive) {
 				databaseManager.dbService.emptyTrash()
 				databaseManager.fetchData()
@@ -72,6 +72,20 @@ struct ContentListView: View {
 			}
 			Button("Cancel", role: .cancel) {
 				appState.confirmDeleteAll.toggle()
+			}
+		})
+		.confirmationDialog("Are you sure you want delete this license? This action cannot be undone.", isPresented: $appState.confirmDeleteOne, actions: {
+			Button("Delete License", role: .destructive) {
+				if let licenseToDelete = appState.licenseToDelete {
+					try! databaseManager.dbService.deleteLicense(license: licenseToDelete)
+					appState.licenseToDelete = nil
+					databaseManager.fetchData()
+					appState.confirmDeleteOne.toggle()
+				}
+			}
+			Button("Cancel", role: .cancel) {
+				appState.confirmDeleteOne.toggle()
+				appState.licenseToDelete = nil
 			}
 		})
 		.sheet(isPresented: $appState.showNewAppSheet, content: {
