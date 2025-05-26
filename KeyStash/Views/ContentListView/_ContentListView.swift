@@ -63,6 +63,7 @@ struct ContentListView: View {
 		}
 		.onAppear(perform: databaseManager.fetchData)
 		.navigationTitle(LocalizedStringKey(snakeToTitleCase(appState.sidebarSelection.rawValue)))
+		.navigationSubtitle(getSubtitle())
 		.confirmationDialog("Are you sure you want to empty the trash? You will not be able to recover data once this has been done.", isPresented: $appState.confirmDeleteAll, actions: {
 			Button("Empty Trash", role: .destructive) {
 				databaseManager.dbService.emptyTrash()
@@ -76,6 +77,12 @@ struct ContentListView: View {
 		.sheet(isPresented: $appState.showNewAppSheet, content: {
 			AddLicenseView()
 		})
+	}
+	
+	private func getSubtitle() -> String {
+		let itemCount = databaseManager.getCount(appState.sidebarSelection)
+		
+		return "\(itemCount) Item\(itemCount == 1 ? "" : "s")"
 	}
 
 	private func toolbar() -> some ToolbarContent {
