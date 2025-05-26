@@ -251,6 +251,7 @@
       }
     },
     "General" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
@@ -264,6 +265,7 @@
 
     },
     "iCloud" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
@@ -377,6 +379,12 @@
         }
       }
     },
+    "Require authentication after: " : {
+
+    },
+    "Require password/Touch ID" : {
+
+    },
     "Restore" : {
       "localizations" : {
         "zh-Hant" : {
@@ -398,6 +406,9 @@
       }
     },
     "Search" : {
+
+    },
+    "Security" : {
 
     },
     "Select an item" : {
@@ -504,7 +515,11 @@
     "Support on Ko-Fi" : {
 
     },
+    "These will be applied to the 'Registered To' and 'Email' fields for any new licenses you add." : {
+
+    },
     "These will be applied to the 'Registered To' fields for any new licenses you add." : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {

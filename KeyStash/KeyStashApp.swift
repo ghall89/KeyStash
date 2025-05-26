@@ -42,6 +42,7 @@ struct ValetApp: App {
 
 		Settings {
 			AppSettingsView()
+				.frame(width: 400)
 		}
 	}
 }
