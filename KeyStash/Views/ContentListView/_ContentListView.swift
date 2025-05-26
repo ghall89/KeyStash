@@ -35,32 +35,48 @@ struct ContentListView: View {
 	}
 
 	var body: some View {
-		List(filterItems) { item in
-			ContentListItem(item: item)
-		}
-		.environmentObject(viewModel)
-		.frame(minWidth: 240)
-		.navigationDestination(for: License.self) { license in
-			if let index = databaseManager.licenses.firstIndex(where: { $0.id == license.id }) {
-				let binding = Binding<License>(
-					get: { databaseManager.licenses[index] },
-					set: { newValue in
-						databaseManager.licenses[index] = newValue
-					}
-				)
-				LicenseInfoView(selectedLicense: binding)
-			} else {
-				// Handle the case where the license isn't found
-				Text("Oops, there was a problem")
+		VStack(spacing: 0) {
+			VStack {
+				TextField("Search",  text: $viewModel.searchString)
+					.textFieldStyle(SearchTextFieldStyle(text: $viewModel.searchString))
+					.padding(8)
+			}
+			.padding(0)
+			.background() {
+				VStack {
+					Spacer()
+					Rectangle()
+						.fill(Color.border)
+						.frame(height: 1)
+				}
+			}
+			
+			List(filterItems) { item in
+				ContentListItem(item: item)
+			}
+			.environmentObject(viewModel)
+			.frame(minWidth: 240)
+			.navigationDestination(for: License.self) { license in
+				if let index = databaseManager.licenses.firstIndex(where: { $0.id == license.id }) {
+					let binding = Binding<License>(
+						get: { databaseManager.licenses[index] },
+						set: { newValue in
+							databaseManager.licenses[index] = newValue
+						}
+					)
+					LicenseInfoView(selectedLicense: binding)
+				} else {
+					// Handle the case where the license isn't found
+					Text("Oops, there was a problem")
+				}
 			}
 		}
-		.searchable(text: $viewModel.searchString, placement: .sidebar)
 		.toolbar {
 			toolbar()
 		}
 		.onAppear(perform: databaseManager.fetchData)
 		.navigationTitle(LocalizedStringKey(snakeToTitleCase(appState.sidebarSelection.rawValue)))
-		.confirmationDialog("Are you sure you want to empty the trash? Any files you have attached will also be deleted.", isPresented: $appState.confirmDeleteAll, actions: {
+		.confirmationDialog("Are you sure you want to empty the trash? You will not be able to recover data once this has been done.", isPresented: $appState.confirmDeleteAll, actions: {
 			Button("Empty Trash", role: .destructive) {
 				databaseManager.dbService.emptyTrash()
 				databaseManager.fetchData()

@@ -87,6 +87,7 @@
       }
     },
     "Are you sure you want to empty the trash? Any files you have attached will also be deleted." : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
@@ -95,6 +96,9 @@
           }
         }
       }
+    },
+    "Are you sure you want to empty the trash? You will not be able to recover data once this has been done." : {
+
     },
     "Are you sure you want to remove this attachment? The file will be moved to your computer's Trash." : {
       "extractionState" : "stale",
@@ -392,6 +396,9 @@
           }
         }
       }
+    },
+    "Search" : {
+
     },
     "Select an item" : {
       "localizations" : {

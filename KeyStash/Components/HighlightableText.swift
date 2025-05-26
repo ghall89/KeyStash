@@ -22,7 +22,9 @@ struct HighlightableText: View {
 			let endIndex = text.distance(from: text.startIndex, to: range.upperBound)
 			
 			if index >= startIndex && index < endIndex {
-				return .orange
+				return .primary
+			} else {
+				return .secondary
 			}
 		}
 		return .primary
