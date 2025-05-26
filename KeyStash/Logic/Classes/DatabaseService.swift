@@ -1,25 +1,21 @@
 import Foundation
 import GRDB
 
-class DatabaseService {
-	var fileManager: FileManager
+final class DatabaseService {
+	var fileService: FileService
 	var debugEnv: Bool
 	var dbQueue: DatabaseQueue?
 
 	init() {
-		fileManager = FileManager.default
+		fileService = .init()
 		debugEnv = ProcessInfo.processInfo.environment["DYLD_INSERT_LIBRARIES"] != nil
 		try! connectToDb()
 	}
 
 	func connectToDb() throws {
 		do {
-			let dbPath = try fileManager.url(
-				for: !debugEnv ? .documentDirectory : .developerDirectory,
-				//			for: .documentDirectory,y
-				in: .userDomainMask,
-				appropriateFor: nil,
-				create: true
+			let dbPath = try fileService.getDirectoryPath(
+				!debugEnv ? .documentDirectory : .developerDirectory
 			).appendingPathComponent("db.sqlite")
 
 			dbQueue = try DatabaseQueue(path: dbPath.absoluteString)
@@ -45,13 +41,7 @@ class DatabaseService {
 
 	func deleteLicense(license: License) throws {
 		do {
-			try self.dbQueue!.write { db in
-				// if a license doc has an attachment, delete attachment
-//				if license.attachmentPath != nil {
-//					logger.log("Deleting attachment...")
-//					try deleteAttachment(dbQueue, license: license)
-//				}
-
+			let result = try dbQueue!.write { db in
 				// delete given license by id
 				try License
 					.filter(Column("id") == license.id)
@@ -95,28 +85,8 @@ class DatabaseService {
 
 	func emptyTrash() {
 		do {
-			try self.dbQueue!.write { db in
+			try dbQueue!.write { db in
 				let trashFilterPredicate = Column("inTrash") == true
-
-				// get all license docs marked "inTrash" with attachments
-				let licensesWithAttachments = try License
-					.filter(trashFilterPredicate && Column("attachmentPath") != nil)
-					.fetchAll(db)
-
-				// iterate through licensesWithAttachments and delete attachments
-				for lwa in licensesWithAttachments {
-					if let attachmentPath = lwa.attachmentPath {
-						if fileManager.fileExists(atPath: attachmentPath.path) {
-							do {
-								try fileManager.trashItem(at: attachmentPath, resultingItemURL: nil)
-							} catch {
-								logger.error("Failed to trash item at \(attachmentPath): \(error)")
-							}
-						} else {
-							logger.warning("File does not exist at path \(attachmentPath)")
-						}
-					}
-				}
 
 				// delete all license docs marked inTrash
 				try License

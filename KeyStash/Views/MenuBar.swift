@@ -2,9 +2,10 @@ import SwiftUI
 
 struct MenuBar: Commands {
 	@Environment(\.openWindow) private var openWindow
+	private let csv = LicenseCSVService()
 	
 	@Binding var appState: AppState
-	var databaseManager: DatabaseManager
+	let databaseManager: DatabaseManager
 	var licenses: [License]
 
 	var body: some Commands {
@@ -12,9 +13,6 @@ struct MenuBar: Commands {
 			Button("About KeyStash") {
 				openWindow(id: "about")
 			}
-//			Button("Check for Updates...") {
-//				updater.appUpdater.check()
-//			}
 		})
 		CommandGroup(replacing: .newItem) {
 			Button("Add App") {
@@ -23,10 +21,10 @@ struct MenuBar: Commands {
 			.keyboardShortcut(KeyboardShortcut(KeyEquivalent("N")))
 			Divider()
 			Button("Restore") {
-				importCSV(databaseManager.dbService, refetch: databaseManager.fetchData)
+				csv.importCSV(databaseManager.dbService, refetch: databaseManager.fetchData)
 			}
 			Button("Backup") {
-				exportCSV(licenses: licenses)
+				csv.exportCSV(licenses: licenses)
 			}
 		}
 		CommandGroup(replacing: .sidebar, addition: {
