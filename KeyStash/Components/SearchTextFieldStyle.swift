@@ -1,13 +1,10 @@
 import SwiftUI
 
-private let XMARK_SIZE = CGFloat(14.0)
-private let OUT_SCALE = CGFloat(0.5)
-private let IN_SCALE = CGFloat(1.0)
-
 struct SearchTextFieldStyle: TextFieldStyle {
-	@Environment(\.scenePhase) private var scenePhase
+	@Environment(\.controlActiveState) private var controlActiveState
 	@FocusState private var textFieldFocused: Bool
-	@State private var clearButtonScale: CGFloat = OUT_SCALE
+	@State private var clearButtonScale: CGFloat = Constants.outScale
+	@State private var windowIsActive: Bool = true
 
 	@Binding var text: String
 
@@ -18,43 +15,47 @@ struct SearchTextFieldStyle: TextFieldStyle {
 			configuration
 				.textFieldStyle(.plain)
 				.focused($textFieldFocused)
-				.overlay(alignment: .trailing) {
-					// show clear button when text exists
-					if !text.isEmpty {
-						Button(
-							action: clearText,
-							label: {
-								Image(systemName: "xmark.circle.fill")
-									.resizable()
-									.scaledToFit()
-									.frame(width: XMARK_SIZE, height: XMARK_SIZE, alignment: .center)
-									.foregroundStyle(Color.gray)
-									.scaleEffect(clearButtonScale)
-									.animation(.easeInOut(duration: 0.1), value: clearButtonScale)
-							}
-						)
-						.buttonStyle(.plain)
-						.onAppear {
-							clearButtonScale = IN_SCALE
-						}
-						.onDisappear {
-							clearButtonScale = OUT_SCALE
-						}
+
+			// show clear button when text exists
+			if !text.isEmpty {
+				Button(
+					action: clearText,
+					label: {
+						Image(systemName: "xmark.circle.fill")
+							.resizable()
+							.scaledToFit()
+							.frame(width: Constants.xMarkSize, height: Constants.xMarkSize, alignment: .center)
+							.foregroundStyle(Color.primary.opacity(0.65))
+							.scaleEffect(clearButtonScale)
+							.animation(.easeInOut(duration: 0.1), value: clearButtonScale)
 					}
+				)
+				.buttonStyle(.plain)
+				.onAppear {
+					clearButtonScale = Constants.inScale
 				}
+				.onDisappear {
+					clearButtonScale = Constants.outScale
+				}
+			}
 		}
 		.onKeyPress(.escape) {
 			if textFieldFocused {
 				DispatchQueue.main.async {
 					clearText()
 				}
-		
+
 				return .handled
 			}
 
 			return .ignored
 		}
-		.padding(4)
+		.padding(EdgeInsets(
+			top: Constants.yPadding,
+			leading: Constants.xPadding,
+			bottom: Constants.yPadding,
+			trailing: Constants.xPadding
+		))
 		.background {
 			RoundedRectangle(cornerRadius: 5)
 				.fill(Material.thick.opacity(textFieldFocused ? 1.0 : 0.0))
@@ -63,15 +64,32 @@ struct SearchTextFieldStyle: TextFieldStyle {
 					style: textFieldFocused ? .init(lineWidth: 4) : .init(lineWidth: 1)
 				)
 		}
-	}
-	
-	private func searchFieldBorderColor() -> Color {
-		if textFieldFocused && scenePhase == .inactive {
-			return Color.clear
-		} else if textFieldFocused {
-			return Color.accentHighlight
+		.onTapGesture {
+			textFieldFocused = true
 		}
-		
+		.onChange(of: controlActiveState) {
+			DispatchQueue.main.async {
+				switch controlActiveState {
+					case .active:
+						windowIsActive = true
+					case .key:
+						windowIsActive = true
+					case .inactive:
+						windowIsActive = false
+					default:
+						logger.error("Unable to get window state")
+				}
+			}
+		}
+	}
+
+	private func searchFieldBorderColor() -> Color {
+		if textFieldFocused && windowIsActive {
+			return Color.accentHighlight
+		} else if textFieldFocused {
+			return Color.clear
+		}
+
 		return Color.border
 	}
 
@@ -80,4 +98,12 @@ struct SearchTextFieldStyle: TextFieldStyle {
 			text = ""
 		}
 	}
+}
+
+private enum Constants {
+	static let xMarkSize = 12.0
+	static let outScale = 0.5
+	static let inScale = 1.0
+	static let xPadding = 6.0
+	static let yPadding = 4.0
 }

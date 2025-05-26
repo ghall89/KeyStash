@@ -20,7 +20,7 @@ struct SearchBar: View {
 			}
 			.background {
 				Rectangle()
-					.fill(Material.bar)
+					.fill(Material.bar.opacity(0.6))
 			}
 		}
 	}
