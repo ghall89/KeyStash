@@ -5,8 +5,6 @@ struct ContentListItem: View {
 	@EnvironmentObject var databaseManager: DatabaseManager
 	@EnvironmentObject var appState: AppState
 	
-	@AppStorage("compactList") private var compactList: Bool = false
-	
 	var item: License
 	
 	var body: some View {
@@ -14,12 +12,10 @@ struct ContentListItem: View {
 			value: item,
 			label: {
 				HStack {
-					if compactList == false {
-						Image(nsImage: item.listIcon)
-							.resizable()
-							.aspectRatio(contentMode: .fit)
-							.frame(width: 42)
-					}
+					Image(nsImage: item.listIcon)
+						.resizable()
+						.aspectRatio(contentMode: .fit)
+						.frame(width: 42)
 					VStack(alignment: .leading) {
 						HighlightableText(text: item.softwareName, highlight: sidebarModel.searchString)
 						if let version = item.version, version != "" {

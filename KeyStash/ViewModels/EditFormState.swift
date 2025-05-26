@@ -1,6 +1,6 @@
 import Foundation
 
-class EditFormState: ObservableObject {
+final class EditFormState: ObservableObject {
 	@Published var icon: Data? = nil
 	@Published var softwareName: String = ""
 	@Published var version: String = ""

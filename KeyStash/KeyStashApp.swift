@@ -6,9 +6,10 @@ let logger = Logger(subsystem: "com.ghalldev.KeyStash", category: "keystash-logg
 
 @main
 struct ValetApp: App {
-	@StateObject var databaseManager = DatabaseManager()
+	@StateObject private var databaseManager = DatabaseManager()
 	@State private var appState = AppState()
-	@State private var editFormState = EditFormState()
+	@StateObject private var editFormState = EditFormState()
+	@StateObject private var settingsState = SettingsState()
 
 	var body: some Scene {
 		WindowGroup {
@@ -16,6 +17,7 @@ struct ValetApp: App {
 				.environmentObject(databaseManager)
 				.environmentObject(appState)
 				.environmentObject(editFormState)
+				.environmentObject(settingsState)
 				.onAppear {
 					NSWindow.allowsAutomaticWindowTabbing = false
 				}
@@ -43,6 +45,7 @@ struct ValetApp: App {
 		Settings {
 			AppSettingsView()
 				.frame(width: 400)
+				.environmentObject(settingsState)
 		}
 	}
 }

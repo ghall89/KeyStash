@@ -2,7 +2,7 @@ import Foundation
 import SwiftUI
 
 // determines various global UI states
-class AppState: ObservableObject {
+final class AppState: ObservableObject {
 	// display modal sheets
 	@Published var showNewAppSheet: Bool = false
 	@Published var showEditAppSheet: Bool = false

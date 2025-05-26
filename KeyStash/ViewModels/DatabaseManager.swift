@@ -1,7 +1,7 @@
 import Foundation
 import GRDB
 
-class DatabaseManager: ObservableObject {
+final class DatabaseManager: ObservableObject {
 	@Published var dbService = DatabaseService()
 	@Published var licenses: [License] = []
 

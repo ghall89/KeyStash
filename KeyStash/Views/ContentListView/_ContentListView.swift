@@ -5,16 +5,12 @@ class ContentListViewModel: ObservableObject {
 }
 
 struct ContentListView: View {
-	@EnvironmentObject var databaseManager: DatabaseManager
-	@EnvironmentObject var appState: AppState
+	@EnvironmentObject private var databaseManager: DatabaseManager
+	@EnvironmentObject private var appState: AppState
+	@EnvironmentObject private var settingsState: SettingsState
 
 	@StateObject var viewModel = ContentListViewModel()
 	@State private var confirmDelete: Bool = false
-
-	@AppStorage("selectedSort") private var selectedSort: SortOptions = .byName
-	@AppStorage("selectedSortOrder") private var selectedSortOrder: OrderOptions = .asc
-	@AppStorage("compactList") private var compactList: Bool = false
-	@AppStorage("disableAnimations") private var disableAnimations: Bool = false
 
 	private var filterItems: [License] {
 		var filteredItems: [License] = []
@@ -31,7 +27,7 @@ struct ContentListView: View {
 
 		return filteredItems
 			.filter { !viewModel.searchString.isEmpty ? $0.softwareName.lowercased().contains(viewModel.searchString.lowercased()) : true }
-			.sorted(by: sortBy(sort: selectedSort, order: selectedSortOrder))
+			.sorted(by: sortBy(sort: settingsState.selectedSort, order: settingsState.selectedSortOrder))
 	}
 
 	var body: some View {
