@@ -5,6 +5,7 @@ struct ContentListItem: View {
 	@EnvironmentObject var databaseManager: DatabaseManager
 	@EnvironmentObject var appState: AppState
 	
+	var matchString: String
 	var item: License
 	
 	var body: some View {
@@ -17,7 +18,7 @@ struct ContentListItem: View {
 						.aspectRatio(contentMode: .fit)
 						.frame(width: 42)
 					VStack(alignment: .leading) {
-						HighlightableText(text: item.softwareName, highlight: sidebarModel.searchString)
+						HighlightableText(text: item.softwareName, highlight: matchString)
 						if let version = item.version, version != "" {
 							Text("Version \(version)")
 								.font(.caption)

@@ -7,6 +7,7 @@ struct SearchTextFieldStyle: TextFieldStyle {
 	@State private var windowIsActive: Bool = true
 
 	@Binding var text: String
+	@Binding var bindingFocus: Bool
 
 	func _body(configuration: TextField<Self._Label>) -> some View {
 		HStack {
@@ -66,6 +67,12 @@ struct SearchTextFieldStyle: TextFieldStyle {
 		}
 		.onTapGesture {
 			textFieldFocused = true
+		}
+		.onChange(of: bindingFocus) {
+			textFieldFocused = bindingFocus
+		}
+		.onChange(of: textFieldFocused) {
+			bindingFocus = textFieldFocused
 		}
 		.onChange(of: controlActiveState) {
 			DispatchQueue.main.async {

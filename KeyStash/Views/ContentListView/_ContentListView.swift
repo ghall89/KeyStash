@@ -1,8 +1,6 @@
 import SwiftUI
 
-class ContentListViewModel: ObservableObject {
-	@Published var searchString: String = ""
-}
+class ContentListViewModel: ObservableObject {}
 
 struct ContentListView: View {
 	@EnvironmentObject private var databaseManager: DatabaseManager
@@ -11,6 +9,7 @@ struct ContentListView: View {
 
 	@StateObject var viewModel = ContentListViewModel()
 	@State private var confirmDelete: Bool = false
+	@State private var searchString: String = ""
 
 	private var filterItems: [License] {
 		var filteredItems: [License] = []
@@ -26,34 +25,31 @@ struct ContentListView: View {
 		}
 
 		return filteredItems
-			.filter { !viewModel.searchString.isEmpty ? $0.softwareName.lowercased().contains(viewModel.searchString.lowercased()) : true }
+			.filter { !searchString.isEmpty ? $0.softwareName.lowercased().contains(searchString.lowercased()) : true }
 			.sorted(by: sortBy(sort: settingsState.selectedSort, order: settingsState.selectedSortOrder))
 	}
 
 	var body: some View {
-		VStack(spacing: 0) {
-			SearchBar(searchString: $viewModel.searchString)
-			
-			List(filterItems) { item in
-				ContentListItem(item: item)
-			}
-			.environmentObject(viewModel)
-			.frame(minWidth: 240)
-			.navigationDestination(for: License.self) { license in
-				if let index = databaseManager.licenses.firstIndex(where: { $0.id == license.id }) {
-					let binding = Binding<License>(
-						get: { databaseManager.licenses[index] },
-						set: { newValue in
-							databaseManager.licenses[index] = newValue
-						}
-					)
-					LicenseInfoView(selectedLicense: binding)
-				} else {
-					// Handle the case where the license isn't found
-					Text("Oops, there was a problem")
-				}
+		List(filterItems) { item in
+			ContentListItem(matchString: searchString, item: item)
+		}
+		.environmentObject(viewModel)
+		.frame(minWidth: 240)
+		.navigationDestination(for: License.self) { license in
+			if let index = databaseManager.licenses.firstIndex(where: { $0.id == license.id }) {
+				let binding = Binding<License>(
+					get: { databaseManager.licenses[index] },
+					set: { newValue in
+						databaseManager.licenses[index] = newValue
+					}
+				)
+				LicenseInfoView(selectedLicense: binding)
+			} else {
+				// Handle the case where the license isn't found
+				Text("Oops, there was a problem")
 			}
 		}
+		.searchable(text: $searchString)
 		.toolbar {
 			toolbar()
 		}
@@ -88,10 +84,10 @@ struct ContentListView: View {
 			AddLicenseView()
 		})
 	}
-	
+
 	private func getSubtitle() -> String {
 		let itemCount = databaseManager.getCount(appState.sidebarSelection)
-		
+
 		return "\(itemCount) Item\(itemCount == 1 ? "" : "s")"
 	}
 
