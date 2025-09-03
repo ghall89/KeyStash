@@ -22,15 +22,13 @@ struct DateRow: View {
 		return ""
 	}
 
-	var body: some View { HStack(alignment: .top) {
+	var body: some View {
 		HStack {
 			Text(label)
 			Spacer()
 			Text(valueString)
 				.foregroundStyle(isPast() ? Color.red : Color.primary)
 		}
-	}
-	.padding(.leading, 30)
 	}
 
 	private func isPast() -> Bool {
