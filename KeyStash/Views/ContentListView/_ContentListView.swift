@@ -1,13 +1,10 @@
 import SwiftUI
 
-class ContentListViewModel: ObservableObject {}
-
 struct ContentListView: View {
 	@EnvironmentObject private var databaseManager: DatabaseManager
 	@EnvironmentObject private var appState: AppState
 	@EnvironmentObject private var settingsState: SettingsState
 
-	@StateObject var viewModel = ContentListViewModel()
 	@State private var confirmDelete: Bool = false
 	@State private var searchString: String = ""
 
@@ -30,25 +27,11 @@ struct ContentListView: View {
 	}
 
 	var body: some View {
-		List(filterItems) { item in
+		List(filterItems, selection: $appState.selectedLicense) { item in
 			ContentListItem(matchString: searchString, item: item)
+				.id(item.id)
 		}
-		.environmentObject(viewModel)
 		.frame(minWidth: 240)
-		.navigationDestination(for: License.self) { license in
-			if let index = databaseManager.licenses.firstIndex(where: { $0.id == license.id }) {
-				let binding = Binding<License>(
-					get: { databaseManager.licenses[index] },
-					set: { newValue in
-						databaseManager.licenses[index] = newValue
-					}
-				)
-				LicenseInfoView(selectedLicense: binding)
-			} else {
-				// Handle the case where the license isn't found
-				Text("Oops, there was a problem")
-			}
-		}
 		.searchable(text: $searchString)
 		.toolbar {
 			toolbar()

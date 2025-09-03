@@ -1,7 +1,6 @@
 import SwiftUI
 
 struct ContentListItem: View {
-	@EnvironmentObject var sidebarModel: ContentListViewModel
 	@EnvironmentObject var databaseManager: DatabaseManager
 	@EnvironmentObject var appState: AppState
 	

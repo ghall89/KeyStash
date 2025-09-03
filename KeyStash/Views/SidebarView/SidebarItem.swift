@@ -13,6 +13,7 @@ struct SidebarItem: View {
 
 		Button(action: {
 			appState.sidebarSelection = button.key
+			appState.resetSelection()
 		}) {
 			RoundedRectangle(cornerRadius: 10)
 				.fill(selected ? button.color : Color.gray)
