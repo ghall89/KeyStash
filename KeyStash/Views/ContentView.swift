@@ -11,7 +11,6 @@ struct ContentView: View {
 		} content: {
 			ContentListView()
 				.navigationSplitViewColumnWidth(min: 240, ideal: 350)
-				.id(appState.sidebarSelection)
 		} detail: {
 			if appState.selectedLicense != nil {
 				if let index = databaseManager.licenses.firstIndex(where: { $0.id == appState.selectedLicense }) {
@@ -22,7 +21,6 @@ struct ContentView: View {
 						}
 					)
 					LicenseInfoView(selectedLicense: binding)
-						.id(binding.wrappedValue.id + appState.sidebarSelection.rawValue)
 				} else {
 					// Handle the case where the license isn't found
 					Text("Oops, there was a problem")
