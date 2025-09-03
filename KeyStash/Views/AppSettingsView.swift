@@ -3,6 +3,10 @@ import SwiftUI
 
 struct AppSettingsView: View {
 	@EnvironmentObject private var settingsState: SettingsState
+	let databaseManager: DatabaseManager
+
+	private let csv = LicenseCSVService()
+	var licenses: [License]
 
 	var body: some View {
 		Form {
@@ -11,23 +15,28 @@ struct AppSettingsView: View {
 				TextField("Name", text: $settingsState.defaultName)
 				TextField("Email", text: $settingsState.defaultEmail)
 			}
-			Section("Security") {
-				Toggle("Require password/Touch ID", isOn: $settingsState.requireUserAuth)
-				if settingsState.requireUserAuth == true {
-					Picker("Require authentication after: ", selection: $settingsState.requireAuthAfter, content: {
-						ForEach(MinutesUntilLocked.allCases, id: \.self, content: { option in
-							Text(option.rawValue).tag(option)
-						})
-					})
+
+			Section {
+				HStack {
+					Button(
+						"Backup to CSV",
+						systemImage: "arrow.down.circle",
+						action: {
+							csv.exportCSV(licenses: licenses)
+						}
+					)
+					.frame(maxWidth: .infinity)
+					Button(
+						"Restore from CSV",
+						systemImage: "arrow.up.circle",
+						action: {
+							csv.importCSV(databaseManager.dbService, refetch: databaseManager.fetchData)
+						}
+					)
+					.frame(maxWidth: .infinity)
 				}
 			}
 		}
 		.formStyle(.grouped)
 	}
-}
-
-enum MinutesUntilLocked: String, CaseIterable {
-	case oneMinute = "1 Minute"
-	case fiveMinutes = "5 Minutes"
-	case tenMinutes = "10 Minutes"
 }

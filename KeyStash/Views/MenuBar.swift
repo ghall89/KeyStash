@@ -19,13 +19,6 @@ struct MenuBar: Commands {
 				appState.showNewAppSheet.toggle()
 			}
 			.keyboardShortcut(KeyboardShortcut(KeyEquivalent("N")))
-			Divider()
-			Button("Restore") {
-				csv.importCSV(databaseManager.dbService, refetch: databaseManager.fetchData)
-			}
-			Button("Backup") {
-				csv.exportCSV(licenses: licenses)
-			}
 		}
 		CommandGroup(replacing: .sidebar, addition: {
 			Button(SidebarSelection.all.rawValue, action: {

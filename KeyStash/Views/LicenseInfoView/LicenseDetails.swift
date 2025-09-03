@@ -32,8 +32,10 @@ struct LicenseDetails: View {
 					value: license.licenseKey
 				)
 			}
-			Section("Notes") {
-				Text(license.notes)
+			if !license.notes.isEmpty {
+				Section("Notes") {
+					Text(license.notes)
+				}
 			}
 		}
 		.formStyle(.grouped)

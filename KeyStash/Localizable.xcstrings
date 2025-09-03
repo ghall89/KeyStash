@@ -114,7 +114,7 @@
         }
       }
     },
-    "Backup" : {
+    "Backup to CSV" : {
 
     },
     "Cancel" : {
@@ -392,12 +392,6 @@
         }
       }
     },
-    "Require authentication after: " : {
-
-    },
-    "Require password/Touch ID" : {
-
-    },
     "Restore" : {
       "localizations" : {
         "zh-Hant" : {
@@ -408,6 +402,9 @@
         }
       }
     },
+    "Restore from CSV" : {
+
+    },
     "Save" : {
       "localizations" : {
         "zh-Hant" : {
@@ -417,9 +414,6 @@
           }
         }
       }
-    },
-    "Security" : {
-
     },
     "Select an item" : {
       "localizations" : {

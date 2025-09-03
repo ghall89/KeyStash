@@ -43,7 +43,7 @@ struct ValetApp: App {
 		.restorationBehavior(.disabled)
 
 		Settings {
-			AppSettingsView()
+			AppSettingsView(databaseManager: databaseManager, licenses: databaseManager.licenses)
 				.frame(width: 400)
 				.environmentObject(settingsState)
 		}
