@@ -1,60 +1,47 @@
 import SwiftUI
 
 struct SidebarItem: View {
-	@EnvironmentObject var sidebarModel: SidebarViewModel
-	@EnvironmentObject var databaseManager: DatabaseManager
 	@EnvironmentObject var appState: AppState
-	
-	@AppStorage("compactList") private var compactList: Bool = false
-	
-	var item: License
-	
+	@State var mouseDown = false
+
+	let button: SidebarButtonProps
+	let count: Int
+
 	var body: some View {
-		NavigationLink(
-			value: item,
-			label: {
-				HStack {
-					if compactList == false {
-						Image(nsImage: item.miniIcon)
-							.resizable()
-							.aspectRatio(contentMode: .fit)
-							.frame(width: 24)
+		let selected = button.key == appState.sidebarSelection
+		let unselectedOpacity = mouseDown ? 0.8 : 0.3
+
+		Button(action: {
+			appState.sidebarSelection = button.key
+			appState.resetSelection()
+		}) {
+			RoundedRectangle(cornerRadius: 10)
+				.fill(selected ? button.color : Color.gray)
+				.opacity(selected ? 1 : unselectedOpacity)
+				.overlay {
+					VStack(alignment: .leading, spacing: 6) {
+						HStack {
+							Circle()
+								.fill(selected ? Color.white : button.color)
+								.frame(width: 24, height: 24, alignment: .center)
+								.overlay {
+									Image(systemName: button.icon)
+										.foregroundStyle(selected ? button.color : Color.white)
+								}
+							Spacer()
+							Text("\(count)")
+								.foregroundStyle(selected ? Color.white : Color.primary)
+								.opacity(selected ? 0.7 : 1)
+						}
+						Text(button.key.rawValue)
+							.foregroundStyle(selected ? Color.white : Color.primary)
 					}
-					HighlightableText(text: item.softwareName, highlight: sidebarModel.searchString)
-					Spacer()
-					if let version = item.version {
-						Text(version)
-							.font(.caption2)
-							.foregroundStyle(Color.primary)
-							.opacity(0.8)
-					}
+					.frame(maxWidth: .infinity)
+					.padding(8)
 				}
-				.padding(3)
-			}
-		)
-		.listRowSeparator(.hidden)
-		.contextMenu {
-			if item.inTrash == false {
-				Button("Move to Trash", role: .destructive) {
-					moveToTrash(item)
-				}
-			} else {
-				Button("Restore", role: .destructive) {
-					moveToTrash(item)
-				}
-			}
+				.frame(height: 60)
 		}
-	}
-	
-	private func moveToTrash(_ item: License) {
-		do {
-			var updatedLicense = item
-			updatedLicense.inTrash.toggle()
-			try updateLicense(databaseManager.dbQueue, data: updatedLicense)
-			databaseManager.fetchData()
-			appState.resetSelection(itemId: item.id)
-		} catch {
-			logger.error("ERROR: \(error)")
-		}
+		.buttonStyle(.plain)
+		.focusable(false)
 	}
 }

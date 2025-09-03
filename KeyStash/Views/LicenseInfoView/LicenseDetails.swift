@@ -8,30 +8,36 @@ struct LicenseDetails: View {
 	}
 
 	var body: some View {
-		VStack(alignment: .leading, spacing: 12) {
-			DateRow(
-				"Expires",
-				value: license.expirationDt
-			)
-			InfoRow(
-				"Registered To",
-				value: license.registeredToName
-			)
-			InfoRow(
-				"Email",
-				value: license.registeredToEmail
-			)
-			InfoRow(
-				"License Key",
-				value: license.licenseKey
-			)
-			AttachmentRow(license)
-			Divider()
-			Text("Notes")
-				.font(.caption)
-			Text(license.notes)
+		Form {
+			Section {
+				LicenseHeader(license)
+				if license.expirationDt != nil {
+					DateRow(
+						"Expires",
+						value: license.expirationDt
+					)
+				}
+			}
+			Section {
+				InfoRow(
+					"Registered To",
+					value: license.registeredToName
+				)
+				InfoRow(
+					"Email",
+					value: license.registeredToEmail
+				)
+				InfoRow(
+					"License Key",
+					value: license.licenseKey
+				)
+			}
+			if !license.notes.isEmpty {
+				Section("Notes") {
+					Text(license.notes)
+				}
+			}
 		}
-		.frame(maxWidth: .infinity)
-		.padding()
+		.formStyle(.grouped)
 	}
 }

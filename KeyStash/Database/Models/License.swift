@@ -45,6 +45,14 @@ struct License: Identifiable, Codable, Hashable, FetchableRecord, PersistableRec
 			toSize: NSSize(width: 24, height: 24)
 		)!
 	}
+	
+	// create small icon for list view, for best performance
+	var listIcon: NSImage {
+		resizeImage(
+			image: iconNSImage,
+			toSize: NSSize(width: 42, height: 42)
+		)!
+	}
 
 	init(
 		softwareName: String,

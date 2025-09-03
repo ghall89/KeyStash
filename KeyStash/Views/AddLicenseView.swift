@@ -11,10 +11,8 @@ final class AddLicenseViewModel: ObservableObject {
 struct AddLicenseView: View {
 	@EnvironmentObject private var databaseManager: DatabaseManager
 	@EnvironmentObject private var appState: AppState
+	@EnvironmentObject private var settingsState: SettingsState
 	@StateObject private var viewModel = AddLicenseViewModel()
-
-	@AppStorage("defaultName") private var defaultName: String = ""
-	@AppStorage("defaultEmail") private var defaultEmail: String = ""
 
 	var body: some View {
 		VStack(spacing: 10) {
@@ -87,14 +85,14 @@ struct AddLicenseView: View {
 			if viewModel.tabSelection == .installed {
 				if let appFromList = viewModel.installedApps.first(where: { $0.id == viewModel.selectedApp }) {
 					viewModel.newItem.softwareName = appFromList.name
-					viewModel.newItem.registeredToName = defaultName
-					viewModel.newItem.registeredToEmail = defaultEmail
+					viewModel.newItem.registeredToName = settingsState.defaultName
+					viewModel.newItem.registeredToEmail = settingsState.defaultEmail
 					viewModel.newItem.icon = getNSImageAsData(image: ((appFromList.icon) ?? NSImage(named: "no_icon"))!)
 				}
 			}
 		}
 		do {
-			try addLicense(databaseManager.dbQueue, data: viewModel.newItem)
+			try databaseManager.dbService.addLicense(data: viewModel.newItem)
 			databaseManager.fetchData()
 		} catch {
 			logger.error("Failed to create license!")

@@ -4,6 +4,9 @@
     "" : {
 
     },
+    "%lld" : {
+
+    },
     "About KeyStash" : {
 
     },
@@ -62,9 +65,6 @@
     "Add new license" : {
 
     },
-    "All" : {
-
-    },
     "All Apps" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -86,7 +86,14 @@
         }
       }
     },
+    "Are you sure you want delete this license? This action cannot be undone." : {
+
+    },
+    "Are you sure you want to delete all items the trash? This action cannot be undone." : {
+
+    },
     "Are you sure you want to empty the trash? Any files you have attached will also be deleted." : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
@@ -107,7 +114,7 @@
         }
       }
     },
-    "Backup" : {
+    "Backup to CSV" : {
 
     },
     "Cancel" : {
@@ -133,6 +140,9 @@
         }
       }
     },
+    "Copied" : {
+
+    },
     "Copy" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -144,7 +154,7 @@
         }
       }
     },
-    "Copy \"%@\"" : {
+    "Copy %@" : {
 
     },
     "Default Info" : {
@@ -167,6 +177,12 @@
           }
         }
       }
+    },
+    "Delete License" : {
+
+    },
+    "Delete..." : {
+
     },
     "Download" : {
       "localizations" : {
@@ -222,6 +238,7 @@
       }
     },
     "Expired" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
@@ -243,6 +260,7 @@
       }
     },
     "General" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
@@ -256,6 +274,7 @@
 
     },
     "iCloud" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
@@ -286,6 +305,7 @@
       }
     },
     "Move to Trash" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
@@ -353,6 +373,9 @@
         }
       }
     },
+    "Permanently Delete" : {
+
+    },
     "Purchase Date" : {
 
     },
@@ -378,6 +401,9 @@
           }
         }
       }
+    },
+    "Restore from CSV" : {
+
     },
     "Save" : {
       "localizations" : {
@@ -493,7 +519,11 @@
     "Support on Ko-Fi" : {
 
     },
+    "These will be applied to the 'Registered To' and 'Email' fields for any new licenses you add." : {
+
+    },
     "These will be applied to the 'Registered To' fields for any new licenses you add." : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
@@ -504,6 +534,7 @@
       }
     },
     "Trash" : {
+      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
@@ -526,7 +557,7 @@
     "Version" : {
 
     },
-    "View" : {
+    "Version %@" : {
 
     },
     "Website" : {
