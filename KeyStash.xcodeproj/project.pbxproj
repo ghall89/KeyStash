@@ -281,7 +281,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 050;
+				CURRENT_PROJECT_VERSION = 051b;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"KeyStash/Preview Content\"";
 				DEVELOPMENT_TEAM = B3DFV278UN;
@@ -298,7 +298,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 0.5.0;
+				MARKETING_VERSION = 0.5.1b;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ghalldev.KeyStash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = macosx;
@@ -319,7 +319,7 @@
 				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				CURRENT_PROJECT_VERSION = 050;
+				CURRENT_PROJECT_VERSION = 051b;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"KeyStash/Preview Content\"";
 				DEVELOPMENT_TEAM = B3DFV278UN;
@@ -336,7 +336,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 15.0;
-				MARKETING_VERSION = 0.5.0;
+				MARKETING_VERSION = 0.5.1b;
 				PRODUCT_BUNDLE_IDENTIFIER = com.ghalldev.KeyStash;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = macosx;
