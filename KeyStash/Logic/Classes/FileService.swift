@@ -2,11 +2,10 @@ import AppKit
 import UniformTypeIdentifiers
 
 final class FileService {
-	let savePanel = NSSavePanel()
-	let openPanel = NSOpenPanel()
 	let fileManager = FileManager.default
 	
 	@MainActor func chooseSaveDirectoryPath(defaultFileName: String, allowedTypes: [UTType]) -> String? {
+		let savePanel = NSSavePanel()
 		savePanel.allowedContentTypes = [.commaSeparatedText]
 		savePanel.nameFieldStringValue = defaultFileName
 		
@@ -18,6 +17,7 @@ final class FileService {
 	}
 	
 	@MainActor func chooseFilePath(allowedTypes: [UTType], multipleSelection: Bool?) -> String? {
+		let openPanel = NSOpenPanel()
 		openPanel.allowsMultipleSelection = false
 		openPanel.allowedContentTypes = [.commaSeparatedText]
 		
