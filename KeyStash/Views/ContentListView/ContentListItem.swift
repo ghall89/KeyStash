@@ -4,6 +4,9 @@ struct ContentListItem: View {
 	@EnvironmentObject var databaseManager: DatabaseManager
 	@EnvironmentObject var appState: AppState
 	
+	@State var confirmMoveToTrash = false
+	@State var targetItemId: String?
+	
 	var matchString: String
 	var item: License
 	
@@ -45,11 +48,13 @@ struct ContentListItem: View {
 				.disabled(item.licenseKey.isEmpty)
 				Divider()
 				Button("Delete...", systemImage: "trash") {
-					setTrashState(item, inTrash: true)
+					targetItemId = item.id
+					confirmMoveToTrash.toggle()
 				}
 			} else {
 				Button("Restore") {
-					setTrashState(item, inTrash: false)
+					targetItemId = item.id
+					setTrashState(inTrash: false)
 				}
 				Divider()
 				Button("Permanently Delete", role: .destructive) {
@@ -58,15 +63,36 @@ struct ContentListItem: View {
 				}
 			}
 		}
+		.confirmationDialog(
+			appState.selectedLicense.contains(targetItemId ?? "") && appState.selectedLicense.count > 1 ?
+			"Are you sure you want to delete these licenses?" :
+			"Are you sure you want to delete this license?",
+			isPresented: $confirmMoveToTrash,
+			actions: {
+				Button("Delete License", role: .destructive) {
+					setTrashState(inTrash: true)
+				}
+				Button("Cancel", role: .cancel) {
+					targetItemId = nil
+				}
+			}, message: {
+				if appState.selectedLicense.contains(targetItemId ?? ""), appState.selectedLicense.count > 1 {
+					Text("These \(appState.selectedLicense.count) licenses will be moved to Recently Deleted.")
+				} else {
+					Text("This license will be moved to Recently Deleted.")
+				}
+			 }
+		)
 	}
 	
-	private func setTrashState(_ item: License, inTrash: Bool) {
-		if appState.selectedLicense.contains(item.id) {
+	private func setTrashState(inTrash: Bool) {
+		if appState.selectedLicense.contains(targetItemId!) {
 			databaseManager.dbService.moveToFromTrashById(appState.selectedLicense, inTrash: inTrash)
 		} else {
 			databaseManager.dbService.moveToFromTrashById([item.id], inTrash: inTrash)
 		}
 		
 		databaseManager.fetchData()
+		targetItemId = nil
 	}
 }
