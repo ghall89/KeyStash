@@ -5,7 +5,7 @@ struct PrimaryActionButton: View {
 	
 	var body: some View {
 		if appState.sidebarSelection == .deleted {
-			Button("Empty Trash", systemImage: "trash.slash") {
+			Button("Empty Trash", systemImage: "trash.slash", role: .destructive) {
 				appState.confirmDeleteAll.toggle()
 			}
 			.help("Empty Trash")

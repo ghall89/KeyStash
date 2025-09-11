@@ -9,6 +9,15 @@ struct InfoButton: View {
 	@State private var clicked = false
 
 	var body: some View {
+		
+		var button: ButtonModifiers {
+			if #available(macOS 26.0, *) {
+				return ButtonModifiers(radius: 16, cornerStyle: .circular, padding: 8)
+			} else {
+				return ButtonModifiers(radius: 10, cornerStyle: .continuous, padding: 6)
+			}
+		}
+		
 		Button(action: clickHandler, label: {
 			VStack(alignment: .trailing) {
 				if clicked {
@@ -23,9 +32,9 @@ struct InfoButton: View {
 			}
 		})
 		.buttonStyle(.plain)
-		.padding(6)
+		.padding(button.padding)
 		.background {
-			RoundedRectangle(cornerSize: CGSize(width: 10, height: 10), style: .circular)
+			RoundedRectangle(cornerRadius: button.radius, style: button.cornerStyle)
 				.fill(.primary)
 				.opacity(isHovering ? 0.05 : 0)
 				.transition(.opacity)
@@ -54,5 +63,11 @@ struct InfoButton: View {
 				}
 			}
 		}
+	}
+	
+	private struct ButtonModifiers {
+		var radius: CGFloat
+		var cornerStyle: RoundedCornerStyle
+		var padding: CGFloat
 	}
 }
