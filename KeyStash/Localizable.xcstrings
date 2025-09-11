@@ -7,6 +7,9 @@
     "%lld" : {
 
     },
+    "%lld Items Selected" : {
+
+    },
     "About KeyStash" : {
 
     },
@@ -155,6 +158,15 @@
       }
     },
     "Copy %@" : {
+
+    },
+    "Copy Email" : {
+
+    },
+    "Copy License Key" : {
+
+    },
+    "Copy Registered To" : {
 
     },
     "Default Info" : {

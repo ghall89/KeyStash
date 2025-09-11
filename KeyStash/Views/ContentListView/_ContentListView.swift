@@ -80,19 +80,11 @@ struct ContentListView: View {
 				ToolbarItem {
 					Spacer()
 				}
-				ToolbarItem {
+				ToolbarItemGroup {
 					SortMenu()
-				}
-				ToolbarItem {
 					PrimaryActionButton()
 				}
 			}
-		}
-	}
-
-	private func resetSelection(itemId: String) {
-		if itemId == appState.selectedLicense {
-			appState.selectedLicense = nil
 		}
 	}
 }

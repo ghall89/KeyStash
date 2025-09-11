@@ -31,7 +31,20 @@ struct ContentListItem: View {
 		)
 		.contextMenu {
 			if item.inTrash == false {
-				Button("Delete...", role: .destructive) {
+				Button("Copy Registered To", systemImage: "document.on.document.fill") {
+					stringToClipboard(value: item.registeredToName)
+				}
+				.disabled(item.registeredToName.isEmpty)
+				Button("Copy Email", systemImage: "document.on.document.fill") {
+					stringToClipboard(value: item.registeredToEmail)
+				}
+				.disabled(!item.registeredToEmail.isEmpty)
+				Button("Copy License Key", systemImage: "document.on.document.fill") {
+					stringToClipboard(value: item.licenseKey)
+				}
+				.disabled(item.licenseKey.isEmpty)
+				Divider()
+				Button("Delete...", systemImage: "trash") {
 					toggleTrashState(item)
 				}
 			} else {

@@ -1,9 +1,9 @@
 import Foundation
 
 enum SortOptions: String, CaseIterable {
-	case byName = "Name"
-	case byAddedDt = "Date Added"
-	case byUpdatedDt = "Date Updated"
+	case byName
+	case byAddedDt
+	case byUpdatedDt
 
 	func localizedString() -> String {
 		switch self {
@@ -12,16 +12,31 @@ enum SortOptions: String, CaseIterable {
 			case .byUpdatedDt: return String(localized: "SortOptions.byUpdatedDt")
 		}
 	}
+
+	func icon() -> String {
+		switch self {
+			case .byName: return "textformat"
+			case .byAddedDt: return "clock"
+			case .byUpdatedDt: return "pencil.line"
+		}
+	}
 }
 
 enum OrderOptions: String, CaseIterable {
-	case asc = "Ascending"
-	case desc = "Descending"
+	case asc
+	case desc
 
 	func localizedString() -> String {
 		switch self {
 			case .asc: return String(localized: "OrderOptions.asc")
 			case .desc: return String(localized: "OrderOptions.desc")
+		}
+	}
+
+	func icon() -> String {
+		switch self {
+			case .asc: return "arrow.up"
+			case .desc: return "arrow.down"
 		}
 	}
 }
