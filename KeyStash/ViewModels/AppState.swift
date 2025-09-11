@@ -14,11 +14,11 @@ final class AppState: ObservableObject {
 
 	// misc
 	@Published var sidebarSelection: SidebarSelection = .all
-	@Published var selectedLicense: String? = nil
+	@Published var selectedLicense = Set<String>()
 	@Published var splitViewVisibility = NavigationSplitViewVisibility.all
 
 	func resetSelection() {
-		selectedLicense = nil
+		selectedLicense = []
 	}
 }
 

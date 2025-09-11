@@ -45,11 +45,11 @@ struct ContentListItem: View {
 				.disabled(item.licenseKey.isEmpty)
 				Divider()
 				Button("Delete...", systemImage: "trash") {
-					toggleTrashState(item)
+					setTrashState(item, inTrash: true)
 				}
 			} else {
 				Button("Restore") {
-					toggleTrashState(item)
+					setTrashState(item, inTrash: false)
 				}
 				Divider()
 				Button("Permanently Delete", role: .destructive) {
@@ -60,14 +60,13 @@ struct ContentListItem: View {
 		}
 	}
 	
-	private func toggleTrashState(_ item: License) {
-		do {
-			var updatedLicense = item
-			updatedLicense.inTrash.toggle()
-			try databaseManager.dbService.updateLicense(data: updatedLicense)
-			databaseManager.fetchData()
-		} catch {
-			logger.error("ERROR: \(error)")
+	private func setTrashState(_ item: License, inTrash: Bool) {
+		if appState.selectedLicense.contains(item.id) {
+			databaseManager.dbService.moveToFromTrashById(appState.selectedLicense, inTrash: inTrash)
+		} else {
+			databaseManager.dbService.moveToFromTrashById([item.id], inTrash: inTrash)
 		}
+		
+		databaseManager.fetchData()
 	}
 }

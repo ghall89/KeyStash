@@ -2,7 +2,7 @@ import AppKit
 import Foundation
 import GRDB
 
-struct License: Identifiable, Codable, Hashable, FetchableRecord, PersistableRecord {
+struct License: Identifiable, Codable, Hashable {
 	var id: String = UUID().uuidString
 	var softwareName: String = ""
 	var version: String?
@@ -45,7 +45,7 @@ struct License: Identifiable, Codable, Hashable, FetchableRecord, PersistableRec
 			toSize: NSSize(width: 24, height: 24)
 		)!
 	}
-	
+
 	// create small icon for list view, for best performance
 	var listIcon: NSImage {
 		resizeImage(
@@ -53,33 +53,24 @@ struct License: Identifiable, Codable, Hashable, FetchableRecord, PersistableRec
 			toSize: NSSize(width: 42, height: 42)
 		)!
 	}
+}
 
-	init(
-		softwareName: String,
-		icon: Data?,
-		attachmentPath: URL? = nil,
-		expirationDt: Date? = nil,
-		licenseKey: String,
-		registeredToName: String,
-		registeredToEmail: String,
-		downloadUrlString: String,
-		notes: String,
-		updatedDate: Date? = nil,
-		inTrash: Bool,
-		trashDate: Date? = nil
-	) {
-		self.softwareName = softwareName
-		self.icon = icon
-		self.attachmentPath = attachmentPath
-		self.expirationDt = expirationDt
-		self.licenseKey = licenseKey
-		self.registeredToName = registeredToName
-		self.registeredToEmail = registeredToEmail
-		self.downloadUrlString = downloadUrlString
-		self.notes = notes
-		self.updatedDate = updatedDate
-		self.inTrash = inTrash
-		self.trashDate = trashDate
+extension License: FetchableRecord, PersistableRecord {
+	enum Columns {
+		static let id = Column(CodingKeys.id)
+		static let softwareName = Column(CodingKeys.softwareName)
+		static let icon = Column(CodingKeys.icon)
+		static let licenseKey = Column(CodingKeys.licenseKey)
+		static let registeredToName = Column(CodingKeys.registeredToName)
+		static let registeredToEmail = Column(CodingKeys.registeredToEmail)
+		static let downloadUrlString = Column(CodingKeys.downloadUrlString)
+		static let notes = Column(CodingKeys.notes)
+		static let createdDate = Column(CodingKeys.createdDate)
+		static let updatedDate = Column(CodingKeys.updatedDate)
+		static let inTrash = Column(CodingKeys.inTrash)
+		static let trashDate = Column(CodingKeys.trashDate)
+		static let expirationDt = Column(CodingKeys.expirationDt)
+		static let purchaseDt = Column(CodingKeys.purchaseDt)
+		static let version = Column(CodingKeys.version)
 	}
-
 }
