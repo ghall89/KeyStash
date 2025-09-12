@@ -12,8 +12,8 @@ struct ContentView: View {
 			ContentListView()
 				.navigationSplitViewColumnWidth(min: 240, ideal: 350)
 		} detail: {
-			if appState.selectedLicense != nil {
-				if let index = databaseManager.licenses.firstIndex(where: { $0.id == appState.selectedLicense }) {
+			if appState.selectedLicense.count == 1 {
+				if let index = databaseManager.licenses.firstIndex(where: { $0.id == appState.selectedLicense.first! as String }) {
 					let binding = Binding<License>(
 						get: { databaseManager.licenses[index] },
 						set: { newValue in
@@ -27,12 +27,16 @@ struct ContentView: View {
 				}
 			} else {
 				VStack(spacing: 10) {
-					Image(systemName: "app.dashed")
+					Image(systemName: appState.selectedLicense.isEmpty ? "app.dashed" : "square.3.layers.3d.down.right")
 						.font(.system(size: 80, weight: .thin))
 						.foregroundStyle(.secondary)
-					Text("Select an item")
-						.font(.title)
-						.foregroundStyle(.secondary)
+					Text(
+						appState.selectedLicense.isEmpty ?
+							"Select an item" :
+							"\(appState.selectedLicense.count) Items Selected"
+					)
+					.font(.title)
+					.foregroundStyle(.secondary)
 				}
 				.navigationSplitViewColumnWidth(min: 400, ideal: 700)
 				.toolbar {

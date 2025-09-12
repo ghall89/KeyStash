@@ -10,12 +10,20 @@ struct SidebarItem: View {
 	var body: some View {
 		let selected = button.key == appState.sidebarSelection
 		let unselectedOpacity = mouseDown ? 0.8 : 0.3
+		
+		var rect: RectagleModifiers {
+			if #available(macOS 26.0, *) {
+				return RectagleModifiers(radius: 20, height: 70, padding: 12)
+			} else {
+				return RectagleModifiers(radius: 10, height: 60, padding: 8)
+			}
+		}
 
 		Button(action: {
 			appState.sidebarSelection = button.key
 			appState.resetSelection()
 		}) {
-			RoundedRectangle(cornerRadius: 10)
+			RoundedRectangle(cornerRadius: rect.radius)
 				.fill(selected ? button.color : Color.gray)
 				.opacity(selected ? 1 : unselectedOpacity)
 				.overlay {
@@ -37,11 +45,17 @@ struct SidebarItem: View {
 							.foregroundStyle(selected ? Color.white : Color.primary)
 					}
 					.frame(maxWidth: .infinity)
-					.padding(8)
+					.padding(rect.padding)
 				}
-				.frame(height: 60)
+				.frame(height: rect.height)
 		}
 		.buttonStyle(.plain)
 		.focusable(false)
+	}
+	
+	private struct RectagleModifiers {
+		var radius: CGFloat
+		var height: CGFloat
+		var padding: CGFloat
 	}
 }

@@ -4,6 +4,9 @@ struct ContentListItem: View {
 	@EnvironmentObject var databaseManager: DatabaseManager
 	@EnvironmentObject var appState: AppState
 	
+	@State var confirmMoveToTrash = false
+	@State var targetItemId: String?
+	
 	var matchString: String
 	var item: License
 	
@@ -31,12 +34,27 @@ struct ContentListItem: View {
 		)
 		.contextMenu {
 			if item.inTrash == false {
-				Button("Delete...", role: .destructive) {
-					toggleTrashState(item)
+				Button("Copy Registered To", systemImage: "document.on.document.fill") {
+					stringToClipboard(value: item.registeredToName)
+				}
+				.disabled(item.registeredToName.isEmpty)
+				Button("Copy Email", systemImage: "document.on.document.fill") {
+					stringToClipboard(value: item.registeredToEmail)
+				}
+				.disabled(!item.registeredToEmail.isEmpty)
+				Button("Copy License Key", systemImage: "document.on.document.fill") {
+					stringToClipboard(value: item.licenseKey)
+				}
+				.disabled(item.licenseKey.isEmpty)
+				Divider()
+				Button("Delete...", systemImage: "trash") {
+					targetItemId = item.id
+					confirmMoveToTrash.toggle()
 				}
 			} else {
 				Button("Restore") {
-					toggleTrashState(item)
+					targetItemId = item.id
+					setTrashState(inTrash: false)
 				}
 				Divider()
 				Button("Permanently Delete", role: .destructive) {
@@ -45,16 +63,36 @@ struct ContentListItem: View {
 				}
 			}
 		}
+		.confirmationDialog(
+			appState.selectedLicense.contains(targetItemId ?? "") && appState.selectedLicense.count > 1 ?
+			"Are you sure you want to delete these licenses?" :
+			"Are you sure you want to delete this license?",
+			isPresented: $confirmMoveToTrash,
+			actions: {
+				Button("Delete License", role: .destructive) {
+					setTrashState(inTrash: true)
+				}
+				Button("Cancel", role: .cancel) {
+					targetItemId = nil
+				}
+			}, message: {
+				if appState.selectedLicense.contains(targetItemId ?? ""), appState.selectedLicense.count > 1 {
+					Text("These \(appState.selectedLicense.count) licenses will be moved to Recently Deleted.")
+				} else {
+					Text("This license will be moved to Recently Deleted.")
+				}
+			 }
+		)
 	}
 	
-	private func toggleTrashState(_ item: License) {
-		do {
-			var updatedLicense = item
-			updatedLicense.inTrash.toggle()
-			try databaseManager.dbService.updateLicense(data: updatedLicense)
-			databaseManager.fetchData()
-		} catch {
-			logger.error("ERROR: \(error)")
+	private func setTrashState(inTrash: Bool) {
+		if appState.selectedLicense.contains(targetItemId!) {
+			databaseManager.dbService.moveToFromTrashById(appState.selectedLicense, inTrash: inTrash)
+		} else {
+			databaseManager.dbService.moveToFromTrashById([item.id], inTrash: inTrash)
 		}
+		
+		databaseManager.fetchData()
+		targetItemId = nil
 	}
 }

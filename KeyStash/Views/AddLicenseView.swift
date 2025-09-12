@@ -98,7 +98,7 @@ struct AddLicenseView: View {
 			logger.error("Failed to create license!")
 		}
 
-		appState.selectedLicense = newId
+		appState.selectedLicense = [newId]
 		appState.showNewAppSheet.toggle()
 	}
 }

@@ -36,7 +36,7 @@ struct LicenseHeader: View {
 					}
 				})
 				.buttonStyle(.borderless)
-				.foregroundStyle(Color.accent)
+				.foregroundStyle(Color.blue)
 			}
 		}
 	}

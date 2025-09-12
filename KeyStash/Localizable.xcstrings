@@ -7,6 +7,9 @@
     "%lld" : {
 
     },
+    "%lld Items Selected" : {
+
+    },
     "About KeyStash" : {
 
     },
@@ -92,6 +95,12 @@
     "Are you sure you want to delete all items the trash? This action cannot be undone." : {
 
     },
+    "Are you sure you want to delete these licenses?" : {
+
+    },
+    "Are you sure you want to delete this license?" : {
+
+    },
     "Are you sure you want to empty the trash? Any files you have attached will also be deleted." : {
       "extractionState" : "stale",
       "localizations" : {
@@ -155,6 +164,15 @@
       }
     },
     "Copy %@" : {
+
+    },
+    "Copy Email" : {
+
+    },
+    "Copy License Key" : {
+
+    },
+    "Copy Registered To" : {
 
     },
     "Default Info" : {
@@ -519,6 +537,9 @@
     "Support on Ko-Fi" : {
 
     },
+    "These %lld licenses will be moved to Recently Deleted." : {
+
+    },
     "These will be applied to the 'Registered To' and 'Email' fields for any new licenses you add." : {
 
     },
@@ -532,6 +553,9 @@
           }
         }
       }
+    },
+    "This license will be moved to Recently Deleted." : {
+
     },
     "Trash" : {
       "extractionState" : "stale",
