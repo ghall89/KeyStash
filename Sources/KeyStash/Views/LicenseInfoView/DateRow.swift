@@ -1,0 +1,43 @@
+import SwiftUI
+
+struct DateRow: View {
+	var label: String
+	var value: Date?
+
+	var valueString: String {
+		let now = Date()
+		if let dateToCompare = value {
+			let dateString = value?.formatted(date: .complete, time: .omitted) ?? ""
+			let daysLeft = differenceInDays(date1: now, date2: dateToCompare)
+			let parensString = isPast() ? "Expired" : "\(daysLeft) Days Left"
+
+			return "\(dateString) (\(parensString))"
+		}
+
+		return ""
+	}
+
+	init(_ label: String, value: Date?) {
+		self.label = label
+		self.value = value
+	}
+
+	var body: some View {
+		HStack {
+			Text(label)
+			Spacer()
+			Text(valueString)
+				.foregroundStyle(isPast() ? Color.red : Color.primary)
+		}
+	}
+
+	private func isPast() -> Bool {
+		let now = Date()
+
+		if let dateToCompare = value {
+			return dateToCompare < now
+		}
+
+		return false
+	}
+}

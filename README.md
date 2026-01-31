@@ -1,79 +1,96 @@
-# KeyStash
+# macos-template
 
-![GitHub](https://img.shields.io/github/license/ghall89/KeyStash)
+A template for creating native macOS apps without using Xcode.
 
-![GitHub release (with filter)](https://img.shields.io/github/v/release/ghall89/KeyStash)
+While the starter code uses SwiftUI, there should be no issues if you prefer to use AppKit to develop your UI. 
 
-[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/T6T66ELM7)
+## Prerequisites
 
-A macOS utility for storing software license keys.
+- [task](https://taskfile.dev/)
+- [mint](https://github.com/yonaskolb/Mint)
+    - [swift-bundler](https://swiftbundler.dev/documentation/swift-bundler)
+- [create-dmg](https://github.com/create-dmg/create-dmg) 
 
-![](screenshot.png)
+## Setup
 
-## Project Goals
+### Install Tooling
 
-1. Replicate the license key feature from 1Password in a fully native Mac application
-2. Store user data in a standard database format (SQLite) and enable the user to easily export their data into a standard format, like CSV
-3. Provide syncing capability via iCloud - and perhaps other options down the road
+1. Install task, mint, and create-dmg, if they aren't already installed. The suggested way to do this is through [homebrew](https://brew.sh)
+    - task - `brew install go-task`
+    -  mint - `brew install mint`
+    - create-dmg - `brew install create-dmg`
+2. Install swift-bundler with mint - `mint install stackotter/swift-bundler@main`
 
-## Installation
+### Add Credentials For Code Signing and Notarization
 
-### Requirements
+If you're going to sign and notarize your application (not required, but suggested if you will be distributing your application), you will need a few things:
 
-- An Intel or Apple Silicon Mac running MacOS 14 Sonoma or later
+1. An [Apple Developer Program membership](https://developer.apple.com/programs/)
+2. Either a Keychain profile with login credentials for the Apple ID associated with your Developer Program membership, or [an app-specific password](https://support.apple.com/en-us/102654)
+3. A [Developer ID Application certifiate](https://developer.apple.com/help/account/certificates/create-developer-id-certificates/)
 
-### Homebrew
+Create a file in the project root with the name `.env` and copy the contents of `.env.example` into it, and fill out the following:
 
-The suggested method for installing KeyStash is through Homebrew.
+- `NAME` - The name of your Developer ID certificate. The name of the certificate you use _must_ begin with `Developer ID Application:` or it will not work.
+- `KEYCHAIN_PROFILE` - The name of your Keychain profile, or the name of the profile you'd like to create.
 
-- Add the 'ghall89/tap' tap with `brew tap ghall89/tap`
-- Install KeyStash with `brew install --cask keystash`
+#### Creating a Keychain Profile
 
-Alternatively, you can [manually download](https://github.com/ghall89/KeyStash/releases) the latest release of KeyStash.
+If you need to create a Keychain profile, also fill out the following:
 
-## Compile From Source
+- `APPLE_ID` - The email address you use to log in to the Apple account associated with your Developer Program membership
+- `PASSWORD` - An app-specific password associated with your Apple account, I suggest [creating a new one](https://support.apple.com/en-us/102654) to use for this process.
 
-### Prerequisites
+Finally, run `task store:credentials` in your terminal from the project root. This will create a profile in your system Keychain (viewable in Keychain.app) with the name you specified in `KEYCHAIN_PROFILE`.
 
-- MacOS 14+
-- The Latest Version of Xcode
-- An [Apple Developer Account](https://developer.apple.com)
+## Configuration
 
-### Instructions
+Most of the configuration will happen in `Bundler.toml`. You can find the full documentation [here](https://swiftbundler.dev/documentation/swift-bundler/configuration), but I've come across a few innacuracies, which are corrected in the `Bundler.toml` file included in this template:
 
-1. Clone this repo with `git clone git@github.com:ghall89/KeyStash.git`
-2. Open `KeyStash.xcodeproj` from the project directory
-3. Wait for package dependencies to download
-4. From the menubar, go to `Product → Archive`
-5. When archive is complete, click `Distribute App` and select `Direct Distribution`, `Debug`, or `Custom` and follow the prompts
+- `identifier` is incorrect, and should be `bundle_identifier`
+- `[apps.HelloWorld.plist]` is incorrect, and should be `[apps.AutoDock.extra_plist_entries]`
 
-## Package Dependencies
+There may be other inaccuracies that I have not come across.
 
-- [GRDB](https://github.com/groue/GRDB.swift)
-- [MarkdownUI](https://github.com/gonzalezreal/swift-markdown-ui)
-- [AppUpdater](https://github.com/s1ntoneli/AppUpdater)
-- [swift-get-apps](https://github.com/ghall89/swift-get-apps)
+### App Name and Bundle Identifier
 
-## License
+Be sure to set the name of your app and its bundle ID in `Bundler.toml` and in `Taskfile.yml`. The easiest way to do this at the moment is to a project-wide find and replace in your editor for "HelloWorld", though you will still have to manually change `bundle_identifier` in `Bundler.toml`.
 
-MIT License
+## Debugging
 
-Copyright (c) 2024 Graham Hall
+To run your app in "debug" mode, run `task debug`. 
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+This is ideal for testing your app, as logs will be printed directly to your terminal. If needed, you can force quit your app from the terminal with `ctrl` + `C`.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+## Building and Distribution
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+### Build
+
+To build your app, run `task build`.
+
+This will output your binary to `.build/bundler/HelloWorld.app`. 
+
+### Sign
+
+First, ensure you have a `.env` file the project root with `NAME="Developer ID Application: <your name> (<team id>)"`, as descrbed in the [Code Signing & Notarization section](#add-credentials-for-code-signing-and-notarization). Then, to sign your application, run `task sign`. To verify your app was signed, run `task verify`. You should see the following output:
+
+```
+.build/bundler/HelloWorld.app: valid on disk
+.build/bundler/HelloWorld.app: satisfies its Designated Requirement
+```
+
+### Create Disk Image
+
+Before notarizing your app, you will need to create a disk image containing your application. Simply run `task disk-image`, and it will package your application in a disk image, and save it to a new folder called `dist`.
+
+### Notarize
+
+Finally, run `task notarize`. This will upload your disk image to Apple's servers and, if successful, will "staple" the response to your disk image. 
+
+Your app is now ready to share!
+
+## Final Notes
+
+This template, as well as the documentation, is a work in progress. I would like to make the developer experience for setting up a new project with this template as nice as possible. 
+
+If you have any thoughts, questions, or comments, please reach out to me on [Mastodon](https://mastodon.social/@ghalldev), or create an issue.
