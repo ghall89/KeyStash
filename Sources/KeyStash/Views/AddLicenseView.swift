@@ -2,6 +2,7 @@ import AppScanner
 import SwiftUI
 
 final class AddLicenseViewModel: ObservableObject {
+	@Published var appScanner = AppScanner()
 	@Published var newItem = License(
 		softwareName: "",
 		icon: nil,
@@ -13,7 +14,7 @@ final class AddLicenseViewModel: ObservableObject {
 		inTrash: false
 	)
 	@Published var tabSelection = TabSelection.installed
-	@Published var installedApps = [InstalledApp]()
+	@Published var installedApps = [AppInfo]()
 	@Published var selectedApp = UUID()
 }
 
@@ -78,7 +79,7 @@ struct AddLicenseView: View {
 		.frame(width: 400)
 		.padding()
 		.onAppear {
-			let apps = getUserApps()
+			let apps = viewModel.appScanner.userApps()
 			if apps.isEmpty {
 				viewModel.tabSelection = .custom
 			} else {
@@ -100,12 +101,9 @@ struct AddLicenseView: View {
 				}
 			}
 		}
-		do {
-			try databaseManager.dbService.addLicense(data: viewModel.newItem)
-			databaseManager.fetchData()
-		} catch {
-			logger.error("Failed to create license!")
-		}
+
+		databaseManager.dbService.addLicense(data: viewModel.newItem)
+		databaseManager.fetchData()
 
 		appState.selectedLicense = [newID]
 		appState.showNewAppSheet.toggle()

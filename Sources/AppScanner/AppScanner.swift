@@ -5,7 +5,7 @@ public final class AppScanner: AppScanning {
 	private let fileManager: FileManager
 	private let apps: [AppInfo]
 
-	init() {
+	public init() {
 		applicationsURL = URL(fileURLWithPath: "/Applications")
 		fileManager = FileManager.default
 

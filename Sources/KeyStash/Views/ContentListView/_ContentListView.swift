@@ -5,11 +5,11 @@ struct ContentListView: View {
 	@EnvironmentObject private var appState: AppState
 	@EnvironmentObject private var settingsState: SettingsState
 
-	@State private var confirmDelete: Bool = false
-	@State private var searchString: String = ""
+	@State private var confirmDelete = false
+	@State private var searchString = ""
 
 	private var filterItems: [License] {
-		var filteredItems: [License] = []
+		var filteredItems = [License]()
 		let today = Date()
 
 		switch appState.sidebarSelection {
@@ -39,30 +39,38 @@ struct ContentListView: View {
 		.onAppear(perform: databaseManager.fetchData)
 		.navigationTitle(LocalizedStringKey(snakeToTitleCase(appState.sidebarSelection.rawValue)))
 		.navigationSubtitle(getSubtitle())
-		.confirmationDialog("Are you sure you want to delete all items the trash? This action cannot be undone.", isPresented: $appState.confirmDeleteAll, actions: {
-			Button("Empty Trash", role: .destructive) {
-				databaseManager.dbService.emptyTrash()
-				databaseManager.fetchData()
-				appState.confirmDeleteAll.toggle()
-			}
-			Button("Cancel", role: .cancel) {
-				appState.confirmDeleteAll.toggle()
-			}
-		})
-		.confirmationDialog("Are you sure you want delete this license? This action cannot be undone.", isPresented: $appState.confirmDeleteOne, actions: {
-			Button("Delete License", role: .destructive) {
-				if let licenseToDelete = appState.licenseToDelete {
-					try! databaseManager.dbService.deleteLicense(license: licenseToDelete)
-					appState.licenseToDelete = nil
+		.confirmationDialog(
+			"Are you sure you want to delete all items the trash? This action cannot be undone.",
+			isPresented: $appState.confirmDeleteAll,
+			actions: {
+				Button("Empty Trash", role: .destructive) {
+					databaseManager.dbService.emptyTrash()
 					databaseManager.fetchData()
-					appState.confirmDeleteOne.toggle()
+					appState.confirmDeleteAll.toggle()
+				}
+				Button("Cancel", role: .cancel) {
+					appState.confirmDeleteAll.toggle()
 				}
 			}
-			Button("Cancel", role: .cancel) {
-				appState.confirmDeleteOne.toggle()
-				appState.licenseToDelete = nil
+		)
+		.confirmationDialog(
+			"Are you sure you want delete this license? This action cannot be undone.",
+			isPresented: $appState.confirmDeleteOne,
+			actions: {
+				Button("Delete License", role: .destructive) {
+					if let licenseToDelete = appState.licenseToDelete {
+						databaseManager.dbService.deleteLicense(license: licenseToDelete)
+						appState.licenseToDelete = nil
+						databaseManager.fetchData()
+						appState.confirmDeleteOne.toggle()
+					}
+				}
+				Button("Cancel", role: .cancel) {
+					appState.confirmDeleteOne.toggle()
+					appState.licenseToDelete = nil
+				}
 			}
-		})
+		)
 		.sheet(isPresented: $appState.showNewAppSheet, content: {
 			AddLicenseView()
 		})

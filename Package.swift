@@ -1,4 +1,4 @@
-// swift-tools-version: 6.2
+// swift-tools-version: 6.0
 
 import PackageDescription
 
@@ -18,14 +18,14 @@ let package = Package(
 			name: "KeyStash",
 			dependencies: [
 				"AppScanner",
-				.product(name: "GetApps", package: "swift-get-apps"),
 				.product(name: "GRDB", package: "grdb.swift"),
 				.product(name: "NetworkImage", package: "networkimage"),
 				.product(name: "MarkdownUI", package: "swift-markdown-ui"),
 			],
 			resources: [
 				.process("Assets/no_icon.png"),
-				.process("AppIcon.png"),
+				.process("Assets/AppIcon.png"),
+				.process("Localizable.xcstrings"),
 			]
 		),
 	]

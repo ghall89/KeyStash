@@ -130,13 +130,9 @@ final class LicenseCSVService {
 					importedLicense.icon = importedAppIconData
 				}
 
-				do {
-					try dbService.addLicense(data: importedLicense)
+				dbService.addLicense(data: importedLicense)
 
-					refetch()
-				} catch {
-					logger.error("ERROR: \(error)")
-				}
+				refetch()
 			}
 		}
 	}
@@ -178,7 +174,8 @@ final class LicenseCSVService {
 	}
 
 	private func getImportedIcon(_ appName: String) -> Data? {
-		let apps = getUserApps()
+		let appScanner = AppScanner()
+		let apps = appScanner.userApps()
 
 		return apps.first(where: { $0.name == appName })?.icon.flatMap { getNSImageAsData(image: $0) }
 	}

@@ -129,27 +129,23 @@ struct EditLicenseView: View {
 	}
 
 	private func saveFormState() {
-		do {
-			var updatedLicense = license
-			updatedLicense.icon = formState.icon != nil ? formState.icon : license.icon
-			updatedLicense.softwareName = formState.softwareName
-			updatedLicense.version = formState.version
-			updatedLicense.downloadURLString = formState.urlString
-			updatedLicense.registeredToName = formState.registeredToName
-			updatedLicense.registeredToEmail = formState.registeredToEmail
-			updatedLicense.licenseKey = formState.licenseKey
-			updatedLicense.purchaseDt = formState.purchaseDt
-			if formState.addExpiration {
-				updatedLicense.expirationDt = formState.expirationDt
-			} else {
-				updatedLicense.expirationDt = nil
-			}
-			updatedLicense.notes = formState.notes
-			try databaseManager.dbService.updateLicense(data: updatedLicense)
-			databaseManager.fetchData()
-		} catch {
-			logger.error("ERROR: \(error)")
+		var updatedLicense = license
+		updatedLicense.icon = formState.icon != nil ? formState.icon : license.icon
+		updatedLicense.softwareName = formState.softwareName
+		updatedLicense.version = formState.version
+		updatedLicense.downloadURLString = formState.urlString
+		updatedLicense.registeredToName = formState.registeredToName
+		updatedLicense.registeredToEmail = formState.registeredToEmail
+		updatedLicense.licenseKey = formState.licenseKey
+		updatedLicense.purchaseDt = formState.purchaseDt
+		if formState.addExpiration {
+			updatedLicense.expirationDt = formState.expirationDt
+		} else {
+			updatedLicense.expirationDt = nil
 		}
+		updatedLicense.notes = formState.notes
+		databaseManager.dbService.updateLicense(data: updatedLicense)
+		databaseManager.fetchData()
 	}
 
 //	private func handleAttachment() {

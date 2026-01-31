@@ -1,13 +1,13 @@
 import SwiftUI
 
 struct SearchTextFieldStyle: TextFieldStyle {
+	@Binding var text: String
+	@Binding var bindingFocus: Bool
+
 	@Environment(\.controlActiveState) private var controlActiveState
 	@FocusState private var textFieldFocused: Bool
 	@State private var clearButtonScale: CGFloat = Constants.outScale
-	@State private var windowIsActive: Bool = true
-
-	@Binding var text: String
-	@Binding var bindingFocus: Bool
+	@State private var windowIsActive = true
 
 	func _body(configuration: TextField<Self._Label>) -> some View {
 		HStack {
@@ -42,9 +42,7 @@ struct SearchTextFieldStyle: TextFieldStyle {
 		}
 		.onKeyPress(.escape) {
 			if textFieldFocused {
-				DispatchQueue.main.async {
-					clearText()
-				}
+				clearText()
 
 				return .handled
 			}
@@ -75,17 +73,15 @@ struct SearchTextFieldStyle: TextFieldStyle {
 			bindingFocus = textFieldFocused
 		}
 		.onChange(of: controlActiveState) {
-			DispatchQueue.main.async {
-				switch controlActiveState {
-					case .active:
-						windowIsActive = true
-					case .key:
-						windowIsActive = true
-					case .inactive:
-						windowIsActive = false
-					default:
-						logger.error("Unable to get window state")
-				}
+			switch controlActiveState {
+				case .active:
+					windowIsActive = true
+				case .key:
+					windowIsActive = true
+				case .inactive:
+					windowIsActive = false
+				default:
+					logger.error("Unable to get window state")
 			}
 		}
 	}
