@@ -1,5 +1,7 @@
 import AppScanner
 import Foundation
+import KeyStashModels
+import KeyStashState
 
 final class LicenseCSVService {
 	private enum CSVFields: String, CaseIterable {

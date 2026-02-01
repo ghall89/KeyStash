@@ -1,4 +1,7 @@
 import AppKit
+import KeyStashDB
+import KeyStashModels
+import KeyStashState
 import SwiftUI
 
 struct SidebarView: View {
@@ -8,19 +11,19 @@ struct SidebarView: View {
 
 	let buttons: [SidebarButtonProps] = [
 		SidebarButtonProps(
-			key: SidebarSelection.all,
+			key: SideBarSelection.all,
 			icon: "key.2.on.ring.fill",
-			color: .blue
+			color: Color.blue
 		),
 		SidebarButtonProps(
-			key: SidebarSelection.expired,
+			key: SideBarSelection.expired,
 			icon: "exclamationmark",
-			color: .red
+			color: Color.red
 		),
 		SidebarButtonProps(
-			key: SidebarSelection.deleted,
+			key: SideBarSelection.deleted,
 			icon: "trash.fill",
-			color: .orange
+			color: Color.orange
 		),
 	]
 
@@ -40,7 +43,7 @@ struct SidebarView: View {
 }
 
 struct SidebarButtonProps: Hashable {
-	var key: SidebarSelection
+	var key: SideBarSelection
 	var icon: String
 	var color: Color
 }

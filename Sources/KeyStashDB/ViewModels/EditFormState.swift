@@ -1,6 +1,6 @@
 import Foundation
 
-final class EditFormState: ObservableObject {
+public final class EditFormState: ObservableObject {
 	@Published var icon: Data? = nil
 	@Published var softwareName = ""
 	@Published var version = ""
@@ -12,4 +12,6 @@ final class EditFormState: ObservableObject {
 	@Published var addExpiration = false
 	@Published var expirationDt: Date? = nil
 	@Published var notes = ""
+
+	public init() {}
 }

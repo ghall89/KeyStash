@@ -1,4 +1,6 @@
 import AppScanner
+import KeyStashModels
+import KeyStashState
 import SwiftUI
 
 final class AddLicenseViewModel: ObservableObject {

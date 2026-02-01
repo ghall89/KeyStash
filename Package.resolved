@@ -1,5 +1,5 @@
 {
-  "originHash" : "0634e17af215d4aa024910e6a65fbf08bd1ce5af5adadb3407325235944dc7cd",
+  "originHash" : "ec6c51f19fcb0827dee831527668e1919fd6a18a396eb734f64f9e1f61a06974",
   "pins" : [
     {
       "identity" : "grdb.swift",
@@ -15,8 +15,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/gonzalezreal/NetworkImage.git",
       "state" : {
-        "branch" : "main",
-        "revision" : "2849f5323265386e200484b0d0f896e73c3411b9"
+        "revision" : "2849f5323265386e200484b0d0f896e73c3411b9",
+        "version" : "6.0.1"
       }
     },
     {

@@ -1,5 +1,6 @@
 import Foundation
 import GRDB
+import KeyStashState
 
 func migrations(_ dbQueue: DatabaseQueue) throws {
 	var migrator = DatabaseMigrator()

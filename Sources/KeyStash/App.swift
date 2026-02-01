@@ -1,11 +1,10 @@
 import Combine
-import OSLog
+import KeyStashDB
+import KeyStashState
 import SwiftUI
 
-let logger = Logger(subsystem: "com.ghalldev.KeyStash", category: "keystash-logging")
-
 @main
-struct ValetApp: App {
+struct KeyStashApp: App {
 	@StateObject private var databaseManager = DatabaseManager()
 	@State private var appState = AppState()
 	@StateObject private var editFormState = EditFormState()

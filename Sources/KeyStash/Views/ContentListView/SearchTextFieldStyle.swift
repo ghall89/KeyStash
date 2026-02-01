@@ -1,3 +1,4 @@
+import KeyStashState
 import SwiftUI
 
 struct SearchTextFieldStyle: TextFieldStyle {

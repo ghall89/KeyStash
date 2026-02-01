@@ -1,4 +1,5 @@
 import Foundation
+import KeyStashModels
 
 public final class AppScanner: AppScanning {
 	private let applicationsURL: URL

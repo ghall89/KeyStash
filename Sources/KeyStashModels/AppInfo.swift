@@ -13,6 +13,11 @@ public struct AppInfo: Identifiable, Hashable {
 	public var icon: NSImage? {
 		getAppIcon(identifier: bundleID)
 	}
+
+	public init(location: URL, bundleID: String) {
+		self.location = location
+		self.bundleID = bundleID
+	}
 }
 
 private func getAppIcon(identifier: String) -> NSImage? {

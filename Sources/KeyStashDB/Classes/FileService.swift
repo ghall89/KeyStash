@@ -1,4 +1,5 @@
 import AppKit
+import KeyStashState
 import UniformTypeIdentifiers
 
 final class FileService {

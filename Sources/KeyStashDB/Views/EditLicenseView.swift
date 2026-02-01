@@ -1,9 +1,9 @@
+import KeyStashModels
 import SwiftUI
 
 struct EditLicenseView: View {
 	@EnvironmentObject var databaseManager: DatabaseManager
 	@EnvironmentObject var formState: EditFormState
-	@EnvironmentObject var appState: AppState
 
 	@Binding var isPresented: Bool
 
@@ -59,42 +59,7 @@ struct EditLicenseView: View {
 					)
 				}
 			}
-//			Section {
-//				if let attachment = license.attachmentPath {
-//					HStack {
-//						Button("Remove Attachment", systemImage: "xmark.circle.fill") {
-//							showDeleteAlert.toggle()
-//						}
-//						.buttonStyle(.plain)
-//						.labelStyle(.iconOnly)
-//
-//						VStack(alignment: .leading) {
-//							Text(attachment.lastPathComponent)
-//								.fontDesign(.monospaced)
-//						}
-//					}
-//					.confirmationDialog(
-//						"Are you sure you want to remove this attachment? The file will be moved to your computer's Trash.",
-//						isPresented: $showDeleteAlert,
-//						actions: {
-//							Button(action: {
-//								showDeleteAlert.toggle()
-//							}, label: {
-//								Text("Cancel")
-//							})
-//							.keyboardShortcut(.defaultAction)
-//							Button("Delete") {
-//								removeAttachment()
-//								showDeleteAlert.toggle()
-//							}
-//						}
-//					)
-//				} else {
-//					Button("Add Attachment", systemImage: "paperclip") {
-//						handleAttachment()
-//					}
-//				}
-//			}
+
 			Section("Notes") {
 				TextEditor(text: $formState.notes)
 			}
@@ -147,26 +112,4 @@ struct EditLicenseView: View {
 		databaseManager.dbService.updateLicense(data: updatedLicense)
 		databaseManager.fetchData()
 	}
-
-//	private func handleAttachment() {
-//		if let fileFromDisk = getAttachment() {
-//			do {
-//				var updatedLicense = license
-//				updatedLicense.attachmentPath = fileFromDisk
-//				try addAttachmentToLicense(databaseManager.dbQueue, data: updatedLicense, attachment: fileFromDisk)
-//				databaseManager.fetchData()
-//			} catch {
-//				logger.error("ERROR: \(error)")
-//			}
-//		}
-//	}
-//
-//	private func removeAttachment() {
-//		do {
-//			try deleteAttachment(databaseManager.dbQueue, license: license)
-//			databaseManager.fetchData()
-//		} catch {
-//			logger.error("ERROR: \(error)")
-//		}
-//	}
 }

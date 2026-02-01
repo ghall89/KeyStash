@@ -1,3 +1,4 @@
+import KeyStashDB
 import SwiftUI
 
 struct ContentListItem: View {

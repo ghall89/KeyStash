@@ -1,3 +1,6 @@
+import KeyStashDB
+import KeyStashModels
+import KeyStashState
 import SwiftUI
 
 struct MenuBar: Commands {
@@ -23,15 +26,15 @@ struct MenuBar: Commands {
 			.keyboardShortcut(KeyboardShortcut(KeyEquivalent("N")))
 		}
 		CommandGroup(replacing: .sidebar, addition: {
-			Button(SidebarSelection.all.rawValue, systemImage: "key.2.on.ring.fill") {
+			Button(SideBarSelection.all.rawValue, systemImage: "key.2.on.ring.fill") {
 				appState.sidebarSelection = .all
 			}
 			.keyboardShortcut("1", modifiers: .command)
-			Button(SidebarSelection.expired.rawValue, systemImage: "exclamationmark") {
+			Button(SideBarSelection.expired.rawValue, systemImage: "exclamationmark") {
 				appState.sidebarSelection = .expired
 			}
 			.keyboardShortcut("2", modifiers: .command)
-			Button(SidebarSelection.deleted.rawValue, systemImage: "trash.fill") {
+			Button(SideBarSelection.deleted.rawValue, systemImage: "trash.fill") {
 				appState.sidebarSelection = .deleted
 			}
 			.keyboardShortcut("3", modifiers: .command)

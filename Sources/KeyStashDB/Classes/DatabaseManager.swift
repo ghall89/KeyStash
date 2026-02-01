@@ -1,12 +1,17 @@
 import Foundation
 import GRDB
+import KeyStashModels
+import KeyStashState
 
-final class DatabaseManager: ObservableObject {
+public final class DatabaseManager: ObservableObject {
+	@Published public var licenses = [License]()
+
 	@Published var dbService = DatabaseService()
-	@Published var licenses = [License]()
+
+	public init() {}
 
 	/// fetch current license data
-	func fetchData() {
+	public func fetchData() {
 		do {
 			try dbService.dbQueue!.read { db in
 				self.licenses = try License.fetchAll(db)
@@ -16,7 +21,7 @@ final class DatabaseManager: ObservableObject {
 		}
 	}
 
-	func getCount(_ key: SidebarSelection) -> Int {
+	public func getCount(_ key: SideBarSelection) -> Int {
 		let today = Date()
 
 		switch key {

@@ -1,7 +1,9 @@
 import Foundation
 import GRDB
+import KeyStashModels
+import KeyStashState
 
-final class DatabaseService {
+public final class DatabaseService {
 	var fileService: FileService
 	var debugEnv: Bool
 	var dbQueue: DatabaseQueue?
