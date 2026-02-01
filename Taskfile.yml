@@ -4,7 +4,7 @@ vars:
   APP_NAME: "KeyStash"
   APP_PATH: ".build/bundler/{{.APP_NAME}}.app"
   DMG_PATH: "dist/{{.APP_NAME}}.dmg"
-  ENTITLEMENTS: "./entitlements.plist"
+  ENTITLEMENTS: "./Entitlements.plist"
 
 dotenv:
   - .env
