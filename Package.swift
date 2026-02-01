@@ -4,6 +4,7 @@ import PackageDescription
 
 let package = Package(
 	name: "KeyStash",
+	defaultLocalization: "en",
 	platforms: [.macOS(.v15)],
 	dependencies: [
 		.package(url: "https://github.com/groue/GRDB.swift.git", branch: "master"),
@@ -23,8 +24,7 @@ let package = Package(
 				.product(name: "MarkdownUI", package: "swift-markdown-ui"),
 			],
 			resources: [
-				.process("Assets/no_icon.png"),
-				.process("Assets/AppIcon.png"),
+				.process("Assets"),
 				.process("Localizable.xcstrings"),
 			]
 		),

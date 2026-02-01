@@ -1,9 +1,9 @@
 [apps.KeyStash]
 product = "KeyStash"
-bundle_identifier = "com.yourname.KeyStash"
+bundle_identifier = "com.ghalldev.KeyStash"
 version = "0.7.0"
 minimum_macos_version = "15"
 category = "public.app-category.utility"
-icon = "./Sources/KeyStash/Assets/AppIcon.png"
+icon = "./Sources/KeyStash/AppIcon.png"
 
 [apps.KeyStash.extra_plist_entries]

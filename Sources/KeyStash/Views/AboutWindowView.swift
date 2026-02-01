@@ -1,13 +1,23 @@
 import SwiftUI
 
 struct AboutWindowView: View {
+	@Environment(\.dismiss) private var dismiss
+
 	var body: some View {
 		VStack {
 			HStack {
 				VStack {
-					Image("AboutIcon")
-						.resizable()
-						.frame(width: 80, height: 80)
+					if let appIcon = NSImage(named: "AppIcon") {
+						Image(nsImage: appIcon)
+							.resizable()
+							.frame(width: 80, height: 80)
+							.cornerRadius(20)
+					} else {
+						Image(systemName: "app.dashed")
+							.resizable()
+							.frame(width: 80, height: 80)
+							.foregroundColor(.gray)
+					}
 					Text(Bundle.main.infoDictionary?["CFBundleName"] as? String ?? "")
 					Text(Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "")
 					HStack(spacing: 10) {
@@ -18,6 +28,16 @@ struct AboutWindowView: View {
 					}
 				}
 			}
+
+			// Hidden button hack to close About window
+			// when ESC is pressed
+			Button("Dismiss") {
+				dismiss()
+			}
+			.keyboardShortcut(.escape, modifiers: [])
+			.hidden()
+			.frame(width: 0, height: 0)
+			.padding(0)
 		}
 		.padding()
 		.frame(width: 300)
@@ -28,8 +48,4 @@ struct AboutWindowView: View {
 			NSWorkspace.shared.open(url)
 		}
 	}
-}
-
-#Preview {
-	AboutWindowView()
 }
