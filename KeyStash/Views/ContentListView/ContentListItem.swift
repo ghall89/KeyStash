@@ -87,9 +87,9 @@ struct ContentListItem: View {
 	
 	private func setTrashState(inTrash: Bool) {
 		if appState.selectedLicense.contains(targetItemId!) {
-			databaseManager.dbService.moveToFromTrashById(appState.selectedLicense, inTrash: inTrash)
+			databaseManager.moveToFromTrashById(appState.selectedLicense, inTrash: inTrash)
 		} else {
-			databaseManager.dbService.moveToFromTrashById([item.id], inTrash: inTrash)
+			databaseManager.moveToFromTrashById([item.id], inTrash: inTrash)
 		}
 		
 		databaseManager.fetchData()

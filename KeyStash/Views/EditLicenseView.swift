@@ -145,7 +145,7 @@ struct EditLicenseView: View {
 				updatedLicense.expirationDt = nil
 			}
 			updatedLicense.notes = formState.notes
-			try databaseManager.dbService.updateLicense(data: updatedLicense)
+			try databaseManager.updateLicense(data: updatedLicense)
 			databaseManager.fetchData()
 		} catch {
 			logger.error("ERROR: \(error)")

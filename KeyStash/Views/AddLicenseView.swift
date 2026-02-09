@@ -92,7 +92,7 @@ struct AddLicenseView: View {
 			}
 		}
 		do {
-			try databaseManager.dbService.addLicense(data: viewModel.newItem)
+			try databaseManager.addLicense(data: viewModel.newItem)
 			databaseManager.fetchData()
 		} catch {
 			logger.error("Failed to create license!")

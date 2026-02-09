@@ -1,5 +1,6 @@
 import Combine
 import OSLog
+import SQLiteData
 import SwiftUI
 
 let logger = Logger(subsystem: "com.ghalldev.KeyStash", category: "keystash-logging")
@@ -10,6 +11,12 @@ struct ValetApp: App {
 	@State private var appState = AppState()
 	@StateObject private var editFormState = EditFormState()
 	@StateObject private var settingsState = SettingsState()
+
+	init() {
+		prepareDependencies {
+			$0.defaultDatabase = try! appDatabase(path: appDatabasePath())
+		}
+	}
 
 	var body: some Scene {
 		WindowGroup {
