@@ -1,18 +1,66 @@
 import Foundation
-import GRDB
+import SQLiteData
 
 final class DatabaseManager: ObservableObject {
-	@Published var dbService = DatabaseService()
 	@Published var licenses: [License] = []
+	@Dependency(\.defaultDatabase) private var database
 
 	// fetch current license data
 	func fetchData() {
 		do {
-			try dbService.dbQueue!.read { db in
+			try database.read { db in
 				self.licenses = try License.fetchAll(db)
 			}
 		} catch {
 			logger.error("ERROR: \(error)")
+		}
+	}
+
+	func addLicense(data: License) throws {
+		dbWrite { db in
+			try License.insert { data }
+				.execute(db)
+		}
+	}
+
+	func deleteLicense(license: License) throws {
+		dbWrite { db in
+			try License.delete(license)
+				.execute(db)
+		}
+	}
+
+	func updateLicense(data: License) throws {
+		dbWrite { db in
+			var updatedLicense = data
+			updatedLicense.updatedDate = Date()
+			updatedLicense.trashDate = data.inTrash ? Date() : nil
+
+			try License.update(updatedLicense)
+				.execute(db)
+		}
+	}
+
+	func moveToFromTrashById(_ ids: Set<String>, inTrash: Bool) {
+		guard !ids.isEmpty else { return }
+
+		dbWrite { db in
+			let now = Date()
+			try License.update {
+				$0.inTrash = inTrash
+				$0.trashDate = inTrash ? now : nil
+				$0.updatedDate = now
+			}
+			.where { $0.id.in(ids) }
+			.execute(db)
+		}
+	}
+
+	func emptyTrash() {
+		dbWrite { db in
+			try License.delete()
+				.where(\.inTrash)
+				.execute(db)
 		}
 	}
 
@@ -26,6 +74,16 @@ final class DatabaseManager: ObservableObject {
 				return licenses.filter { $0.inTrash == false && $0.expirationDt ?? today < today }.count
 			case .deleted:
 				return licenses.filter { $0.inTrash == true }.count
+		}
+	}
+
+	private func dbWrite(_ function: (_ db: Database) throws -> Void) {
+		do {
+			try database.write { db in
+				try function(db)
+			}
+		} catch {
+			logger.error("Database write failed: \(error)")
 		}
 	}
 }

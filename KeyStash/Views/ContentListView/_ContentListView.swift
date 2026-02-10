@@ -41,7 +41,7 @@ struct ContentListView: View {
 		.navigationSubtitle(getSubtitle())
 		.confirmationDialog("Are you sure you want to delete all items the trash? This action cannot be undone.", isPresented: $appState.confirmDeleteAll, actions: {
 			Button("Empty Trash", role: .destructive) {
-				databaseManager.dbService.emptyTrash()
+				databaseManager.emptyTrash()
 				databaseManager.fetchData()
 				appState.confirmDeleteAll.toggle()
 			}
@@ -52,7 +52,7 @@ struct ContentListView: View {
 		.confirmationDialog("Are you sure you want delete this license? This action cannot be undone.", isPresented: $appState.confirmDeleteOne, actions: {
 			Button("Delete License", role: .destructive) {
 				if let licenseToDelete = appState.licenseToDelete {
-					try! databaseManager.dbService.deleteLicense(license: licenseToDelete)
+					try! databaseManager.deleteLicense(license: licenseToDelete)
 					appState.licenseToDelete = nil
 					databaseManager.fetchData()
 					appState.confirmDeleteOne.toggle()

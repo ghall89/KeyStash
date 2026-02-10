@@ -1,9 +1,11 @@
 import Foundation
 import GetApps
+import SQLiteData
 
 final class LicenseCSVService {
 	let fileService: FileService
 	let formatter: DateFormatter
+	@Dependency(\.defaultDatabase) private var database
 	
 	init() {
 		fileService = .init()
@@ -27,7 +29,7 @@ final class LicenseCSVService {
 		}
 	}
 	
-	@MainActor func importCSV(_ dbService: DatabaseService, refetch: () -> Void) {
+	@MainActor func importCSV(refetch: () -> Void) {
 
 		
 		if let fileString = fileService.chooseFilePath(
@@ -71,8 +73,11 @@ final class LicenseCSVService {
 				}
 				
 				do {
-					try dbService.addLicense(data: importedLicense)
-					
+					try database.write { db in
+						try License.insert { importedLicense }
+							.execute(db)
+					}
+
 					refetch()
 				} catch {
 					logger.error("ERROR: \(error)")
