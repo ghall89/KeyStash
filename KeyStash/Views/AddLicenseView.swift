@@ -1,22 +1,52 @@
+import AppKit
+import ApplicationInspector
+import Combine
+import Dependencies
 import SwiftUI
-import GetApps
 
 final class AddLicenseViewModel: ObservableObject {
 	@Published var newItem: License = .init(softwareName: "", icon: nil, licenseKey: "", registeredToName: "", registeredToEmail: "", downloadUrlString: "", notes: "", inTrash: false)
 	@Published var tabSelection: TabSelection = .installed
-	@Published var installedApps: [InstalledApp] = []
 	@Published var selectedApp: UUID = .init()
+}
+
+@MainActor
+final class ApplicationScannerObserver: ObservableObject {
+	@Published private(set) var scanner: ApplicationScanner?
+	private var cancellable: AnyCancellable?
+	@Dependency(\.applicationScanner) private var applicationScanner
+
+	var applications: [Application] {
+		scanner?.applications ?? []
+	}
+
+	func loadIfNeeded() async {
+		guard scanner == nil else {
+			return
+		}
+
+		do {
+			let scanner = try await applicationScanner()
+			self.scanner = scanner
+			cancellable = scanner.objectWillChange.sink { [weak self] _ in
+				self?.objectWillChange.send()
+			}
+		} catch {
+			logger.error("Failed to scan installed apps: \(error)")
+		}
+	}
 }
 
 struct AddLicenseView: View {
 	@EnvironmentObject private var databaseManager: DatabaseManager
 	@EnvironmentObject private var appState: AppState
 	@EnvironmentObject private var settingsState: SettingsState
+	@StateObject private var scannerObserver = ApplicationScannerObserver()
 	@StateObject private var viewModel = AddLicenseViewModel()
 
 	var body: some View {
 		VStack(spacing: 10) {
-			if !viewModel.installedApps.isEmpty {
+			if !scannerObserver.applications.isEmpty {
 				Picker("", selection: $viewModel.tabSelection) {
 					Text("Choose Installed").tag(TabSelection.installed)
 					Text("Add Manually").tag(TabSelection.custom)
@@ -27,7 +57,7 @@ struct AddLicenseView: View {
 			switch viewModel.tabSelection {
 				case .installed:
 					Picker("Select App: ", selection: $viewModel.selectedApp, content: {
-						ForEach(viewModel.installedApps) { app in
+						ForEach(scannerObserver.applications) { app in
 							Text(app.name)
 								.tag(app.id)
 						}
@@ -68,14 +98,8 @@ struct AddLicenseView: View {
 		}
 		.frame(width: 400)
 		.padding()
-		.onAppear {
-			let apps = getUserApps()
-			if apps.isEmpty {
-				viewModel.tabSelection = .custom
-			} else {
-				viewModel.installedApps = apps
-				viewModel.selectedApp = apps[0].id
-			}
+		.task {
+			await loadInstalledApps()
 		}
 	}
 
@@ -83,11 +107,11 @@ struct AddLicenseView: View {
 		let newId = viewModel.newItem.id
 		withAnimation {
 			if viewModel.tabSelection == .installed {
-				if let appFromList = viewModel.installedApps.first(where: { $0.id == viewModel.selectedApp }) {
+				if let appFromList = scannerObserver.applications.first(where: { $0.id == viewModel.selectedApp }) {
 					viewModel.newItem.softwareName = appFromList.name
 					viewModel.newItem.registeredToName = settingsState.defaultName
 					viewModel.newItem.registeredToEmail = settingsState.defaultEmail
-					viewModel.newItem.icon = getNSImageAsData(image: ((appFromList.icon) ?? NSImage(named: "no_icon"))!)
+					viewModel.newItem.icon = appFromList.iconData ?? getNSImageAsData(image: NSImage(named: "no_icon") ?? .init())
 				}
 			}
 		}
@@ -100,6 +124,17 @@ struct AddLicenseView: View {
 
 		appState.selectedLicense = [newId]
 		appState.showNewAppSheet.toggle()
+	}
+
+	@MainActor
+	private func loadInstalledApps() async {
+		await scannerObserver.loadIfNeeded()
+		let apps = scannerObserver.applications
+		if apps.isEmpty {
+			viewModel.tabSelection = .custom
+		} else if !apps.contains(where: { $0.id == viewModel.selectedApp }) {
+			viewModel.selectedApp = apps[0].id
+		}
 	}
 }
 

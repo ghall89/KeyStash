@@ -30,7 +30,9 @@ struct AppSettingsView: View {
 						"Restore from CSV",
 						systemImage: "arrow.up.circle",
 						action: {
-							csv.importCSV(refetch: databaseManager.fetchData)
+							Task {
+								await csv.importCSV(refetch: databaseManager.fetchData)
+							}
 						}
 					)
 					.frame(maxWidth: .infinity)

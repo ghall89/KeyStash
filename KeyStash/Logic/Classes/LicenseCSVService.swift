@@ -1,11 +1,12 @@
 import Foundation
-import GetApps
 import SQLiteData
+import Dependencies
 
 final class LicenseCSVService {
 	let fileService: FileService
 	let formatter: DateFormatter
 	@Dependency(\.defaultDatabase) private var database
+	@Dependency(\.applicationScanner) private var applicationScanner
 	
 	init() {
 		fileService = .init()
@@ -29,7 +30,7 @@ final class LicenseCSVService {
 		}
 	}
 	
-	@MainActor func importCSV(refetch: () -> Void) {
+	@MainActor func importCSV(refetch: () -> Void) async {
 
 		
 		if let fileString = fileService.chooseFilePath(
@@ -68,12 +69,12 @@ final class LicenseCSVService {
 				importedLicense.licenseKey = fields[7]
 				importedLicense.notes = fields[8]
 				
-				if let importedAppIconData = getImportedIcon(importedLicense.softwareName) {
+				if let importedAppIconData = try? await getImportedIcon(importedLicense.softwareName) {
 					importedLicense.icon = importedAppIconData
 				}
 				
 				do {
-					try database.write { db in
+					try await database.write { db in
 						try License.insert { importedLicense }
 							.execute(db)
 					}
@@ -122,10 +123,9 @@ final class LicenseCSVService {
 		return csvString
 	}
 	
-	private func getImportedIcon(_ appName: String) -> Data? {
-		let apps = getUserApps()
-		
-		return apps.first(where: { $0.name == appName })?.icon.flatMap { getNSImageAsData(image: $0) }
+	private func getImportedIcon(_ appName: String) async throws -> Data? {
+		let appScanner = try await applicationScanner()
+		return appScanner.getIconByApplicationName(appName)
 	}
 	
 	private enum CSVFields: String, CaseIterable {

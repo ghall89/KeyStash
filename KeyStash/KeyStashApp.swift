@@ -2,6 +2,7 @@ import Combine
 import OSLog
 import SQLiteData
 import SwiftUI
+import Dependencies
 
 let logger = Logger(subsystem: "com.ghalldev.KeyStash", category: "keystash-logging")
 
@@ -14,7 +15,7 @@ struct ValetApp: App {
 
 	init() {
 		prepareDependencies {
-			$0.defaultDatabase = try! appDatabase(path: appDatabasePath())
+			$0.defaultDatabase = appDatabase(path: appDatabasePath())
 		}
 	}
 
@@ -26,6 +27,10 @@ struct ValetApp: App {
 				.environmentObject(editFormState)
 				.environmentObject(settingsState)
 				.onAppear {
+					Task {
+						@Dependency(\.applicationScanner) var applicationScanner
+						_ = try? await applicationScanner()
+					}
 					NSWindow.allowsAutomaticWindowTabbing = false
 				}
 				.frame(minHeight: 260)
@@ -37,6 +42,7 @@ struct ValetApp: App {
 				licenses: databaseManager.licenses
 			)
 		}
+		
 
 		Window("About KeyStash", id: "about") {
 			AboutWindowView()

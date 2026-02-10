@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		D304F4852F3A8F0900647FDD /* SQLiteData in Frameworks */ = {isa = PBXBuildFile; productRef = D304F4842F3A8F0900647FDD /* SQLiteData */; };
-		D34B191B2CC6937C0057BB81 /* GetApps in Frameworks */ = {isa = PBXBuildFile; productRef = D34B191A2CC6937C0057BB81 /* GetApps */; };
+		D304F48A2F3A978500647FDD /* ApplicationInspector in Frameworks */ = {isa = PBXBuildFile; productRef = D304F4892F3A978500647FDD /* ApplicationInspector */; };
 		D3B08F832AB6A5FD004715F5 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = D3B08F822AB6A5FD004715F5 /* MarkdownUI */; };
 /* End PBXBuildFile section */
 
@@ -30,9 +30,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D304F48A2F3A978500647FDD /* ApplicationInspector in Frameworks */,
 				D304F4852F3A8F0900647FDD /* SQLiteData in Frameworks */,
 				D3B08F832AB6A5FD004715F5 /* MarkdownUI in Frameworks */,
-				D34B191B2CC6937C0057BB81 /* GetApps in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -81,8 +81,8 @@
 			name = KeyStash;
 			packageProductDependencies = (
 				D3B08F822AB6A5FD004715F5 /* MarkdownUI */,
-				D34B191A2CC6937C0057BB81 /* GetApps */,
 				D304F4842F3A8F0900647FDD /* SQLiteData */,
+				D304F4892F3A978500647FDD /* ApplicationInspector */,
 			);
 			productName = Valet;
 			productReference = D39942AC2AB5095A00B2DC39 /* KeyStash.app */;
@@ -116,8 +116,8 @@
 			mainGroup = D39942A32AB5095A00B2DC39;
 			packageReferences = (
 				D3B08F812AB6A5FD004715F5 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
-				D34B19192CC6937C0057BB81 /* XCRemoteSwiftPackageReference "swift-get-apps" */,
 				D304F4832F3A8F0900647FDD /* XCRemoteSwiftPackageReference "sqlite-data" */,
+				D304F4882F3A978500647FDD /* XCRemoteSwiftPackageReference "ApplicationInspector" */,
 			);
 			productRefGroup = D39942AD2AB5095A00B2DC39 /* Products */;
 			projectDirPath = "";
@@ -378,12 +378,12 @@
 				minimumVersion = 1.5.1;
 			};
 		};
-		D34B19192CC6937C0057BB81 /* XCRemoteSwiftPackageReference "swift-get-apps" */ = {
+		D304F4882F3A978500647FDD /* XCRemoteSwiftPackageReference "ApplicationInspector" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ghall89/swift-get-apps.git";
+			repositoryURL = "https://github.com/buresdv/ApplicationInspector#";
 			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 0.1.0;
+				branch = main;
+				kind = branch;
 			};
 		};
 		D3B08F812AB6A5FD004715F5 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
@@ -402,10 +402,10 @@
 			package = D304F4832F3A8F0900647FDD /* XCRemoteSwiftPackageReference "sqlite-data" */;
 			productName = SQLiteData;
 		};
-		D34B191A2CC6937C0057BB81 /* GetApps */ = {
+		D304F4892F3A978500647FDD /* ApplicationInspector */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D34B19192CC6937C0057BB81 /* XCRemoteSwiftPackageReference "swift-get-apps" */;
-			productName = GetApps;
+			package = D304F4882F3A978500647FDD /* XCRemoteSwiftPackageReference "ApplicationInspector" */;
+			productName = ApplicationInspector;
 		};
 		D3B08F822AB6A5FD004715F5 /* MarkdownUI */ = {
 			isa = XCSwiftPackageProductDependency;
