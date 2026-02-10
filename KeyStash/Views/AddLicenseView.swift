@@ -40,7 +40,6 @@ final class ApplicationScannerObserver: ObservableObject {
 struct AddLicenseView: View {
 	@EnvironmentObject private var databaseManager: DatabaseManager
 	@EnvironmentObject private var appState: AppState
-	@EnvironmentObject private var settingsState: SettingsState
 	@StateObject private var scannerObserver = ApplicationScannerObserver()
 	@StateObject private var viewModel = AddLicenseViewModel()
 
@@ -109,8 +108,8 @@ struct AddLicenseView: View {
 			if viewModel.tabSelection == .installed {
 				if let appFromList = scannerObserver.applications.first(where: { $0.id == viewModel.selectedApp }) {
 					viewModel.newItem.softwareName = appFromList.name
-					viewModel.newItem.registeredToName = settingsState.defaultName
-					viewModel.newItem.registeredToEmail = settingsState.defaultEmail
+					viewModel.newItem.registeredToName = appState.defaultName
+					viewModel.newItem.registeredToEmail = appState.defaultEmail
 					viewModel.newItem.icon = appFromList.iconData ?? getNSImageAsData(image: NSImage(named: "no_icon") ?? .init())
 				}
 			}

@@ -11,7 +11,6 @@ struct ValetApp: App {
 	@StateObject private var databaseManager = DatabaseManager()
 	@State private var appState = AppState()
 	@StateObject private var editFormState = EditFormState()
-	@StateObject private var settingsState = SettingsState()
 
 	init() {
 		prepareDependencies {
@@ -25,7 +24,6 @@ struct ValetApp: App {
 				.environmentObject(databaseManager)
 				.environmentObject(appState)
 				.environmentObject(editFormState)
-				.environmentObject(settingsState)
 				.onAppear {
 					Task {
 						@Dependency(\.applicationScanner) var applicationScanner
@@ -58,7 +56,7 @@ struct ValetApp: App {
 		Settings {
 			AppSettingsView(databaseManager: databaseManager, licenses: databaseManager.licenses)
 				.frame(width: 400)
-				.environmentObject(settingsState)
+				.environmentObject(appState)
 		}
 	}
 }

@@ -3,6 +3,14 @@ import SwiftUI
 
 // determines various global UI states
 final class AppState: ObservableObject {
+	@AppStorage("defaultName") var defaultName: String = ""
+	@AppStorage("defaultEmail") var defaultEmail: String = ""
+	@AppStorage("requireUserAuth") var requireUserAuth: Bool = false
+	//	@AppStorage("requireAuthAfter") var requireAuthAfter: MinutesUntilLocked = .fiveMinutes
+	
+	@AppStorage("selectedSort") var selectedSort: SortOptions = .byName
+	@AppStorage("selectedSortOrder") var selectedSortOrder: OrderOptions = .asc
+	
 	// display modal sheets
 	@Published var showNewAppSheet: Bool = false
 	@Published var showEditAppSheet: Bool = false

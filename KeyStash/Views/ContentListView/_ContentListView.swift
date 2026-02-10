@@ -3,7 +3,6 @@ import SwiftUI
 struct ContentListView: View {
 	@EnvironmentObject private var databaseManager: DatabaseManager
 	@EnvironmentObject private var appState: AppState
-	@EnvironmentObject private var settingsState: SettingsState
 
 	@State private var confirmDelete: Bool = false
 	@State private var searchString: String = ""
@@ -24,7 +23,7 @@ struct ContentListView: View {
 
 		return filteredItems
 			.filter { !searchString.isEmpty ? $0.softwareName.lowercased().contains(searchString.lowercased()) : true }
-			.sorted(by: sortBy(sort: settingsState.selectedSort, order: settingsState.selectedSortOrder))
+			.sorted(by: sortBy(sort: appState.selectedSort, order: appState.selectedSortOrder))
 	}
 
 	var body: some View {

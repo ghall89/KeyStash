@@ -2,7 +2,7 @@ import LocalAuthentication
 import SwiftUI
 
 struct AppSettingsView: View {
-	@EnvironmentObject private var settingsState: SettingsState
+	@EnvironmentObject private var appState: AppState
 	let databaseManager: DatabaseManager
 
 	private let csv = LicenseCSVService()
@@ -12,8 +12,8 @@ struct AppSettingsView: View {
 		Form {
 			Section("Default Info") {
 				Text("These will be applied to the 'Registered To' and 'Email' fields for any new licenses you add.")
-				TextField("Name", text: $settingsState.defaultName)
-				TextField("Email", text: $settingsState.defaultEmail)
+				TextField("Name", text: $appState.defaultName)
+				TextField("Email", text: $appState.defaultEmail)
 			}
 
 			Section {
