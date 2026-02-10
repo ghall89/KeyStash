@@ -3,7 +3,14 @@ import SQLiteData
 
 func appDatabasePath() -> String {
 	let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-	return directory.appendingPathComponent("db.sqlite").absoluteString
+
+	var dbName: String = "db.sqlite"
+	
+	#if DEBUG
+	dbName = "db-debug.sqlite"
+	#endif
+
+	return directory.appendingPathComponent(dbName).absoluteString
 }
 
 func appDatabase(path: String? = nil) -> any DatabaseWriter {
@@ -24,7 +31,11 @@ func appDatabase(path: String? = nil) -> any DatabaseWriter {
 	print("open '\(database.path)'")
 
 	var migrator: DatabaseMigrator = .init()
-
+	
+	#if DEBUG
+	migrator.eraseDatabaseOnSchemaChange = true
+	#endif
+	
 	migrator.registerMigration("v1") { db in
 		try #sql("""
 			CREATE TABLE "license" (

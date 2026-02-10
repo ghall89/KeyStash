@@ -1,26 +1,29 @@
 import SwiftUI
 
 struct SortMenu: View {
-	@EnvironmentObject private var settingsState: SettingsState
+	@AppStorage("selectedSort") var selectedSort: SortOptions = .byName
+	@AppStorage("selectedSortOrder") var selectedSortOrder: OrderOptions = .asc
 
 	var body: some View {
 		Menu(content: {
-			Picker("Sort By", selection: $settingsState.selectedSort, content: {
+			Picker("Sort By", selection: $selectedSort, content: {
 				ForEach(SortOptions.allCases, id: \.self) { sortOption in
 					Label(sortOption.localizedString(), systemImage: sortOption.icon())
 						.tag(sortOption)
 				}
 			})
 			.pickerStyle(.inline)
-			Picker("Sort Order", selection: $settingsState.selectedSortOrder, content: {
+			.labelsHidden()
+			Picker("Sort Order", selection: $selectedSortOrder, content: {
 				ForEach(OrderOptions.allCases, id: \.self) { orderOption in
 					Label(orderOption.localizedString(), systemImage: orderOption.icon())
 						.tag(orderOption)
 				}
 			})
 			.pickerStyle(.inline)
+			.labelsHidden()
 		}, label: {
-			Image(systemName: "arrow.up.arrow.down")
+			Label("Sort By", systemImage: "arrow.up.arrow.down")
 		})
 	}
 }
