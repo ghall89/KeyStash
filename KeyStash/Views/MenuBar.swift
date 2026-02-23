@@ -34,6 +34,18 @@ struct MenuBar: Commands {
 			}
 			.keyboardShortcut("3", modifiers: .command)
 			Divider()
+			SortMenu()
+			Divider()
+			Button("Toggle Sidebar", systemImage: "sidebar.left") {
+				withAnimation {
+					if appState.splitViewVisibility == .all {
+						appState.splitViewVisibility = .doubleColumn
+					} else {
+						appState.splitViewVisibility = .all
+					}
+				}
+			}
+			.keyboardShortcut("S", modifiers: [.control, .command])
 		})
 		CommandGroup(replacing: .help, addition: {
 			Link(destination: URL(string: "https://github.com/ghall89/KeyStash/issues")!, label: {

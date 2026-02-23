@@ -89,9 +89,6 @@
         }
       }
     },
-    "Are you sure you want delete this license? This action cannot be undone." : {
-
-    },
     "Are you sure you want to delete all items the trash? This action cannot be undone." : {
 
     },
@@ -99,6 +96,9 @@
 
     },
     "Are you sure you want to delete this license?" : {
+
+    },
+    "Are you sure you want to delete this license? This action cannot be undone." : {
 
     },
     "Are you sure you want to empty the trash? Any files you have attached will also be deleted." : {
@@ -322,6 +322,9 @@
         }
       }
     },
+    "Loading..." : {
+
+    },
     "Move to Trash" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -344,6 +347,9 @@
       }
     },
     "New License" : {
+
+    },
+    "No installed apps found" : {
 
     },
     "Notes" : {
@@ -555,6 +561,9 @@
       }
     },
     "This license will be moved to Recently Deleted." : {
+
+    },
+    "Toggle Sidebar" : {
 
     },
     "Trash" : {
