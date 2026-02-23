@@ -322,6 +322,9 @@
         }
       }
     },
+    "Loading..." : {
+
+    },
     "Move to Trash" : {
       "extractionState" : "stale",
       "localizations" : {
@@ -344,6 +347,9 @@
       }
     },
     "New License" : {
+
+    },
+    "No installed apps found" : {
 
     },
     "Notes" : {

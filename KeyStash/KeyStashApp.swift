@@ -24,11 +24,10 @@ struct ValetApp: App {
 				.environmentObject(databaseManager)
 				.environmentObject(appState)
 				.environmentObject(editFormState)
+				.task {
+					await appState.ensureAppScannerLoaded()
+				}
 				.onAppear {
-					Task {
-						@Dependency(\.applicationScanner) var applicationScanner
-						_ = try? await applicationScanner()
-					}
 					NSWindow.allowsAutomaticWindowTabbing = false
 				}
 				.frame(minHeight: 260)

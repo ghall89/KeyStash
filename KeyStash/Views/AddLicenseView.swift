@@ -1,51 +1,21 @@
 import AppKit
 import ApplicationInspector
-import Combine
-import Dependencies
 import SwiftUI
 
 final class AddLicenseViewModel: ObservableObject {
 	@Published var newItem: License = .init(softwareName: "", icon: nil, licenseKey: "", registeredToName: "", registeredToEmail: "", downloadUrlString: "", notes: "", inTrash: false)
 	@Published var tabSelection: TabSelection = .installed
-	@Published var selectedApp: UUID = .init()
-}
-
-@MainActor
-final class ApplicationScannerObserver: ObservableObject {
-	@Published private(set) var scanner: ApplicationScanner?
-	private var cancellable: AnyCancellable?
-	@Dependency(\.applicationScanner) private var applicationScanner
-
-	var applications: [Application] {
-		scanner?.applications ?? []
-	}
-
-	func loadIfNeeded() async {
-		guard scanner == nil else {
-			return
-		}
-
-		do {
-			let scanner = try await applicationScanner()
-			self.scanner = scanner
-			cancellable = scanner.objectWillChange.sink { [weak self] _ in
-				self?.objectWillChange.send()
-			}
-		} catch {
-			logger.error("Failed to scan installed apps: \(error)")
-		}
-	}
+	@Published var selectedApp: UUID?
 }
 
 struct AddLicenseView: View {
 	@EnvironmentObject private var databaseManager: DatabaseManager
 	@EnvironmentObject private var appState: AppState
-	@StateObject private var scannerObserver = ApplicationScannerObserver()
 	@StateObject private var viewModel = AddLicenseViewModel()
 
 	var body: some View {
 		VStack(spacing: 10) {
-			if !scannerObserver.applications.isEmpty {
+			if !appState.appList.isEmpty {
 				Picker("", selection: $viewModel.tabSelection) {
 					Text("Choose Installed").tag(TabSelection.installed)
 					Text("Add Manually").tag(TabSelection.custom)
@@ -56,11 +26,17 @@ struct AddLicenseView: View {
 			switch viewModel.tabSelection {
 				case .installed:
 					Picker("Select App: ", selection: $viewModel.selectedApp, content: {
-						ForEach(scannerObserver.applications) { app in
-							Text(app.name)
-								.tag(app.id)
+						if appState.appList.isEmpty {
+							Text(appState.isLoadingInstalledApps ? "Loading..." : "No installed apps found")
+								.tag(Optional<UUID>.none)
+						} else {
+							ForEach(appState.appList) { app in
+								Text(app.name)
+									.tag(Optional(app.id))
+							}
 						}
 					})
+					.disabled(appState.appList.isEmpty)
 				case .custom:
 					HStack {
 						VStack {
@@ -91,7 +67,10 @@ struct AddLicenseView: View {
 					}
 				})
 				.keyboardShortcut(.defaultAction)
-				.disabled(viewModel.tabSelection == .custom && viewModel.newItem.softwareName.isEmpty)
+				.disabled(
+					(viewModel.tabSelection == .custom && viewModel.newItem.softwareName.isEmpty) ||
+					(viewModel.tabSelection == .installed && viewModel.selectedApp == nil)
+				)
 			}
 			.padding(.top)
 		}
@@ -100,13 +79,19 @@ struct AddLicenseView: View {
 		.task {
 			await loadInstalledApps()
 		}
+		.onChange(of: appState.appList) { _, apps in
+			updateSelection(using: apps)
+		}
 	}
 
 	private func addItem() {
 		let newId = viewModel.newItem.id
 		withAnimation {
 			if viewModel.tabSelection == .installed {
-				if let appFromList = scannerObserver.applications.first(where: { $0.id == viewModel.selectedApp }) {
+				if
+					let selectedApp = viewModel.selectedApp,
+					let appFromList = appState.appList.first(where: { $0.id == selectedApp })
+				{
 					viewModel.newItem.softwareName = appFromList.name
 					viewModel.newItem.registeredToName = appState.defaultName
 					viewModel.newItem.registeredToEmail = appState.defaultEmail
@@ -127,11 +112,18 @@ struct AddLicenseView: View {
 
 	@MainActor
 	private func loadInstalledApps() async {
-		await scannerObserver.loadIfNeeded()
-		let apps = scannerObserver.applications
+		await appState.ensureAppScannerLoaded()
+		let apps = appState.appList
+		updateSelection(using: apps)
+	}
+
+	private func updateSelection(using apps: [Application]) {
 		if apps.isEmpty {
 			viewModel.tabSelection = .custom
-		} else if !apps.contains(where: { $0.id == viewModel.selectedApp }) {
+			viewModel.selectedApp = nil
+		} else if let selectedApp = viewModel.selectedApp, apps.contains(where: { $0.id == selectedApp }) {
+			return
+		} else {
 			viewModel.selectedApp = apps[0].id
 		}
 	}

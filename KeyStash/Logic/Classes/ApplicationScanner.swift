@@ -2,24 +2,42 @@ import AppKit
 import ApplicationInspector
 import Combine
 
+@MainActor
 final class ApplicationScanner: ObservableObject {
 	@Published private(set) var applications: [Application] = []
 
-	private let appInspector: ApplicationInspector
+	private var appInspector: ApplicationInspector?
+	private var loadTask: Task<Void, Error>?
 
 	init() async throws {
-		do {
-			appInspector = try await .init(excludeSystemApps: true)
-			let apps = appInspector.installedApplications
+		try await loadInstalledAppsIfNeeded()
+	}
+
+	func loadInstalledAppsIfNeeded() async throws {
+		if appInspector != nil {
+			return
+		}
+
+		if let loadTask {
+			try await loadTask.value
+			return
+		}
+
+		let task = Task { @MainActor in
+			let inspector = try await ApplicationInspector(excludeSystemApps: true)
+			let apps = inspector.installedApplications
 				.compactMap { try? $0.get() }
 				.sorted { $0.name.lowercased() < $1.name.lowercased() }
 
-			applications = apps
-
-		} catch {
-			print("Failed to initialize AppScanner")
-			throw error
+			self.appInspector = inspector
+			self.applications = apps
 		}
+
+		loadTask = task
+		defer {
+			loadTask = nil
+		}
+		try await task.value
 	}
 
 	func getIconByApplicationName(_ appName: String) -> Data? {

@@ -123,6 +123,7 @@ final class LicenseCSVService {
 		return csvString
 	}
 	
+	@MainActor
 	private func getImportedIcon(_ appName: String) async throws -> Data? {
 		let appScanner = try await applicationScanner()
 		return appScanner.getIconByApplicationName(appName)
