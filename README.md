@@ -50,7 +50,6 @@ Alternatively, you can [manually download](https://github.com/ghall89/KeyStash/r
 ## Package Dependencies
 
 - [SQLiteData](https://github.com/pointfreeco/sqlite-data)
-- [ApplicationInspector](https://github.com/buresdv/ApplicationInspector)
 - [MarkdownUI](https://github.com/gonzalezreal/swift-markdown-ui)
 
 ## License

@@ -1,3 +1,4 @@
+import AppKit
 import Foundation
 import SQLiteData
 import Dependencies
@@ -6,7 +7,6 @@ final class LicenseCSVService {
 	let fileService: FileService
 	let formatter: DateFormatter
 	@Dependency(\.defaultDatabase) private var database
-	@Dependency(\.applicationScanner) private var applicationScanner
 	
 	init() {
 		fileService = .init()
@@ -69,7 +69,7 @@ final class LicenseCSVService {
 				importedLicense.licenseKey = fields[7]
 				importedLicense.notes = fields[8]
 				
-				if let importedAppIconData = try? await getImportedIcon(importedLicense.softwareName) {
+				if let importedAppIconData = getImportedIcon(importedLicense.softwareName) {
 					importedLicense.icon = importedAppIconData
 				}
 				
@@ -123,10 +123,16 @@ final class LicenseCSVService {
 		return csvString
 	}
 	
-	@MainActor
-	private func getImportedIcon(_ appName: String) async throws -> Data? {
-		let appScanner = try await applicationScanner()
-		return appScanner.getIconByApplicationName(appName)
+	private func getImportedIcon(_ appName: String) -> Data? {
+		let appDirs = ["/Applications", "\(NSHomeDirectory())/Applications"]
+		for dir in appDirs {
+			let appPath = "\(dir)/\(appName).app"
+			if FileManager.default.fileExists(atPath: appPath) {
+				let icon = NSWorkspace.shared.icon(forFile: appPath)
+				return getNSImageAsData(image: icon)
+			}
+		}
+		return nil
 	}
 	
 	private enum CSVFields: String, CaseIterable {

@@ -1,19 +1,16 @@
 import Foundation
 import SwiftUI
-import ApplicationInspector
 import Combine
-import Dependencies
 
 /// determines various global UI states
 @MainActor
 final class AppState: ObservableObject {
-	@Published private(set) var appList: [Application] = []
+	@Published private(set) var appList: [AppInfo] = []
 	@Published private(set) var isLoadingInstalledApps: Bool = false
 
 	private(set) var appScanner: ApplicationScanner?
 	private var scannerCancellable: AnyCancellable?
 	private var scannerSetupTask: Task<Void, Never>?
-	@Dependency(\.applicationScanner) private var applicationScanner
 	
 	@AppStorage("defaultName") var defaultName: String = ""
 	@AppStorage("defaultEmail") var defaultEmail: String = ""
@@ -69,20 +66,16 @@ final class AppState: ObservableObject {
 				return
 			}
 
-			do {
-				if self.appScanner == nil {
-					let scanner = try await self.applicationScanner()
-					self.appScanner = scanner
-					self.scannerCancellable = scanner.$applications.sink { [weak self] apps in
-						self?.appList = apps
-					}
+			if self.appScanner == nil {
+				let scanner = await ApplicationScanner()
+				self.appScanner = scanner
+				self.scannerCancellable = scanner.$applications.sink { [weak self] apps in
+					self?.appList = apps
 				}
-
-				try await self.appScanner?.loadInstalledAppsIfNeeded()
-				self.appList = self.appScanner?.applications ?? []
-			} catch {
-				logger.error("Failed to scan installed apps: \(error)")
 			}
+
+			await self.appScanner?.loadInstalledAppsIfNeeded()
+			self.appList = self.appScanner?.applications ?? []
 
 			self.isLoadingInstalledApps = false
 			self.scannerSetupTask = nil

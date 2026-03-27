@@ -1,5 +1,4 @@
 import AppKit
-import ApplicationInspector
 import SwiftUI
 
 final class AddLicenseViewModel: ObservableObject {
@@ -117,7 +116,7 @@ struct AddLicenseView: View {
 		updateSelection(using: apps)
 	}
 
-	private func updateSelection(using apps: [Application]) {
+	private func updateSelection(using apps: [AppInfo]) {
 		if apps.isEmpty {
 			viewModel.tabSelection = .custom
 			viewModel.selectedApp = nil

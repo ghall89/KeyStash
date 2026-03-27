@@ -47,9 +47,9 @@ final class DatabaseManager: ObservableObject {
 		dbWrite { db in
 			let now = Date()
 			try License.update {
-				$0.inTrash = inTrash
-				$0.trashDate = inTrash ? now : nil
-				$0.updatedDate = now
+				$0.inTrash = #bind(inTrash)
+				$0.trashDate = #bind(inTrash ? now : nil)
+				$0.updatedDate = #bind(now)
 			}
 			.where { $0.id.in(ids) }
 			.execute(db)

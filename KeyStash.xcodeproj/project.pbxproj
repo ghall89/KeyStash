@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		D304F4852F3A8F0900647FDD /* SQLiteData in Frameworks */ = {isa = PBXBuildFile; productRef = D304F4842F3A8F0900647FDD /* SQLiteData */; };
-		D304F48A2F3A978500647FDD /* ApplicationInspector in Frameworks */ = {isa = PBXBuildFile; productRef = D304F4892F3A978500647FDD /* ApplicationInspector */; };
 		D3B08F832AB6A5FD004715F5 /* MarkdownUI in Frameworks */ = {isa = PBXBuildFile; productRef = D3B08F822AB6A5FD004715F5 /* MarkdownUI */; };
 /* End PBXBuildFile section */
 
@@ -30,7 +29,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				D304F48A2F3A978500647FDD /* ApplicationInspector in Frameworks */,
 				D304F4852F3A8F0900647FDD /* SQLiteData in Frameworks */,
 				D3B08F832AB6A5FD004715F5 /* MarkdownUI in Frameworks */,
 			);
@@ -82,7 +80,6 @@
 			packageProductDependencies = (
 				D3B08F822AB6A5FD004715F5 /* MarkdownUI */,
 				D304F4842F3A8F0900647FDD /* SQLiteData */,
-				D304F4892F3A978500647FDD /* ApplicationInspector */,
 			);
 			productName = Valet;
 			productReference = D39942AC2AB5095A00B2DC39 /* KeyStash.app */;
@@ -96,7 +93,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1500;
-				LastUpgradeCheck = 1540;
+				LastUpgradeCheck = 2630;
 				TargetAttributes = {
 					D39942AB2AB5095A00B2DC39 = {
 						CreatedOnToolsVersion = 15.0;
@@ -117,7 +114,6 @@
 			packageReferences = (
 				D3B08F812AB6A5FD004715F5 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */,
 				D304F4832F3A8F0900647FDD /* XCRemoteSwiftPackageReference "sqlite-data" */,
-				D304F4882F3A978500647FDD /* XCRemoteSwiftPackageReference "ApplicationInspector" */,
 			);
 			productRefGroup = D39942AD2AB5095A00B2DC39 /* Products */;
 			projectDirPath = "";
@@ -186,6 +182,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = B3DFV278UN;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -209,6 +206,7 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -251,6 +249,7 @@
 				COPY_PHASE_STRIP = NO;
 				DEAD_CODE_STRIPPING = YES;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = B3DFV278UN;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = YES;
@@ -267,6 +266,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = macosx;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
 			};
 			name = Release;
@@ -284,10 +284,14 @@
 				CURRENT_PROJECT_VERSION = 0.6.0;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"KeyStash/Preview Content\"";
-				DEVELOPMENT_TEAM = B3DFV278UN;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_FILE_ACCESS_DOWNLOADS_FOLDER = readwrite;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_USER_SELECTED_FILES = readwrite;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "KeyStash-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = KeyStash;
@@ -322,10 +326,14 @@
 				CURRENT_PROJECT_VERSION = 0.6.0;
 				DEAD_CODE_STRIPPING = YES;
 				DEVELOPMENT_ASSET_PATHS = "\"KeyStash/Preview Content\"";
-				DEVELOPMENT_TEAM = B3DFV278UN;
+				ENABLE_APP_SANDBOX = YES;
+				ENABLE_FILE_ACCESS_DOWNLOADS_FOLDER = readwrite;
 				ENABLE_HARDENED_RUNTIME = YES;
+				ENABLE_INCOMING_NETWORK_CONNECTIONS = YES;
+				ENABLE_OUTGOING_NETWORK_CONNECTIONS = YES;
 				ENABLE_PREVIEWS = YES;
 				ENABLE_USER_SCRIPT_SANDBOXING = NO;
+				ENABLE_USER_SELECTED_FILES = readwrite;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "KeyStash-Info.plist";
 				INFOPLIST_KEY_CFBundleDisplayName = KeyStash;
@@ -378,14 +386,6 @@
 				minimumVersion = 1.5.1;
 			};
 		};
-		D304F4882F3A978500647FDD /* XCRemoteSwiftPackageReference "ApplicationInspector" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/buresdv/ApplicationInspector#";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
 		D3B08F812AB6A5FD004715F5 /* XCRemoteSwiftPackageReference "swift-markdown-ui" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/gonzalezreal/swift-markdown-ui";
@@ -401,11 +401,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = D304F4832F3A8F0900647FDD /* XCRemoteSwiftPackageReference "sqlite-data" */;
 			productName = SQLiteData;
-		};
-		D304F4892F3A978500647FDD /* ApplicationInspector */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = D304F4882F3A978500647FDD /* XCRemoteSwiftPackageReference "ApplicationInspector" */;
-			productName = ApplicationInspector;
 		};
 		D3B08F822AB6A5FD004715F5 /* MarkdownUI */ = {
 			isa = XCSwiftPackageProductDependency;
