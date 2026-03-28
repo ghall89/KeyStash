@@ -292,7 +292,6 @@
 
     },
     "iCloud" : {
-      "extractionState" : "stale",
       "localizations" : {
         "zh-Hant" : {
           "stringUnit" : {
@@ -543,6 +542,15 @@
     "Support on Ko-Fi" : {
 
     },
+    "Sync disabled" : {
+
+    },
+    "Sync with iCloud" : {
+
+    },
+    "Syncing…" : {
+
+    },
     "These %lld licenses will be moved to Recently Deleted." : {
 
     },
@@ -576,6 +584,9 @@
           }
         }
       }
+    },
+    "Up to date" : {
+
     },
     "URL" : {
       "localizations" : {
