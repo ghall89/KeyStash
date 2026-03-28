@@ -3,7 +3,14 @@ import SQLiteData
 
 func appDatabasePath() -> String {
 	let directory = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)[0]
-	return directory.appendingPathComponent("db.sqlite").absoluteString
+
+	var dbName: String = "db.sqlite"
+	
+	#if DEBUG
+	dbName = "db-debug.sqlite"
+	#endif
+
+	return directory.appendingPathComponent(dbName).absoluteString
 }
 
 func appDatabase(path: String? = nil) -> any DatabaseWriter {
@@ -24,7 +31,11 @@ func appDatabase(path: String? = nil) -> any DatabaseWriter {
 	print("open '\(database.path)'")
 
 	var migrator: DatabaseMigrator = .init()
-
+	
+	#if DEBUG
+	migrator.eraseDatabaseOnSchemaChange = true
+	#endif
+	
 	migrator.registerMigration("v1") { db in
 		try #sql("""
 			CREATE TABLE "license" (
@@ -60,6 +71,58 @@ func appDatabase(path: String? = nil) -> any DatabaseWriter {
 		try #sql("""
 			ALTER TABLE "license"
 			ADD COLUMN "version" TEXT
+			""").execute(db)
+	}
+
+	// Recreate table to remove UNIQUE constraint on attachmentPath (not supported by CloudKit)
+	// and add DEFAULT values to NOT NULL columns (required for CloudKit sync).
+	migrator.registerMigration("v4_cloudkit") { db in
+		try #sql("""
+			CREATE TABLE "license_new" (
+			  "id" TEXT NOT NULL PRIMARY KEY,
+			  "softwareName" TEXT NOT NULL DEFAULT '',
+			  "version" TEXT,
+			  "icon" BLOB,
+			  "expirationDt" DATE,
+			  "purchaseDt" DATE,
+			  "licenseKey" TEXT NOT NULL DEFAULT '',
+			  "registeredToName" TEXT NOT NULL DEFAULT '',
+			  "registeredToEmail" TEXT NOT NULL DEFAULT '',
+			  "downloadUrlString" TEXT NOT NULL DEFAULT '',
+			  "notes" TEXT NOT NULL DEFAULT '',
+			  "createdDate" DATE NOT NULL DEFAULT (strftime('%Y-%m-%d %H:%M:%f', 'now')),
+			  "updatedDate" DATE,
+			  "inTrash" BOOLEAN NOT NULL DEFAULT 0,
+			  "trashDate" DATE,
+			  "attachmentPath" TEXT
+			)
+			""").execute(db)
+		try #sql("""
+			INSERT INTO "license_new"
+			SELECT
+			  "id",
+			  COALESCE("softwareName", ''),
+			  "version",
+			  "icon",
+			  "expirationDt",
+			  "purchaseDt",
+			  COALESCE("licenseKey", ''),
+			  COALESCE("registeredToName", ''),
+			  COALESCE("registeredToEmail", ''),
+			  COALESCE("downloadUrlString", ''),
+			  COALESCE("notes", ''),
+			  COALESCE("createdDate", strftime('%Y-%m-%d %H:%M:%f', 'now')),
+			  "updatedDate",
+			  COALESCE("inTrash", 0),
+			  "trashDate",
+			  "attachmentPath"
+			FROM "license"
+			""").execute(db)
+		try #sql("""
+			DROP TABLE "license"
+			""").execute(db)
+		try #sql("""
+			ALTER TABLE "license_new" RENAME TO "license"
 			""").execute(db)
 	}
 

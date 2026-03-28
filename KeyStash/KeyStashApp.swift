@@ -1,20 +1,44 @@
+import CloudKit
 import Combine
 import OSLog
 import SQLiteData
 import SwiftUI
+import Dependencies
 
 let logger = Logger(subsystem: "com.ghalldev.KeyStash", category: "keystash-logging")
 
+class AppDelegate: NSObject, NSApplicationDelegate {
+	@Dependency(\.defaultSyncEngine) var syncEngine
+
+	func application(
+		_ application: NSApplication,
+		userDidAcceptCloudKitShareWith metadata: CKShare.Metadata
+	) {
+		Task { try await syncEngine.acceptShare(metadata: metadata) }
+	}
+}
+
 @main
 struct ValetApp: App {
+	@NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 	@StateObject private var databaseManager = DatabaseManager()
 	@State private var appState = AppState()
 	@StateObject private var editFormState = EditFormState()
-	@StateObject private var settingsState = SettingsState()
 
 	init() {
 		prepareDependencies {
-			$0.defaultDatabase = try! appDatabase(path: appDatabasePath())
+			$0.defaultDatabase = appDatabase(path: appDatabasePath())
+			#if DEBUG
+			let iCloudSyncEnabled = false
+			#else
+			let iCloudSyncEnabled = UserDefaults.standard.object(forKey: "iCloudSyncEnabled") as? Bool ?? true
+			#endif
+			$0.defaultSyncEngine = try! SyncEngine(
+				for: $0.defaultDatabase,
+				tables: License.self,
+				containerIdentifier: "iCloud.com.ghalldev.SerialBox",
+				startImmediately: iCloudSyncEnabled
+			)
 		}
 	}
 
@@ -24,7 +48,9 @@ struct ValetApp: App {
 				.environmentObject(databaseManager)
 				.environmentObject(appState)
 				.environmentObject(editFormState)
-				.environmentObject(settingsState)
+				.task {
+					await appState.ensureAppScannerLoaded()
+				}
 				.onAppear {
 					NSWindow.allowsAutomaticWindowTabbing = false
 				}
@@ -37,6 +63,7 @@ struct ValetApp: App {
 				licenses: databaseManager.licenses
 			)
 		}
+		
 
 		Window("About KeyStash", id: "about") {
 			AboutWindowView()
@@ -52,7 +79,7 @@ struct ValetApp: App {
 		Settings {
 			AppSettingsView(databaseManager: databaseManager, licenses: databaseManager.licenses)
 				.frame(width: 400)
-				.environmentObject(settingsState)
+				.environmentObject(appState)
 		}
 	}
 }

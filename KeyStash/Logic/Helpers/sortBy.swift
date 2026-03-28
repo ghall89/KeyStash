@@ -35,8 +35,8 @@ enum OrderOptions: String, CaseIterable {
 
 	func icon() -> String {
 		switch self {
-			case .asc: return "arrow.up"
-			case .desc: return "arrow.down"
+			case .asc: return "arrow.down"
+			case .desc: return "arrow.up"
 		}
 	}
 }

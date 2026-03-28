@@ -49,10 +49,8 @@ Alternatively, you can [manually download](https://github.com/ghall89/KeyStash/r
 
 ## Package Dependencies
 
-- [GRDB](https://github.com/groue/GRDB.swift)
+- [SQLiteData](https://github.com/pointfreeco/sqlite-data)
 - [MarkdownUI](https://github.com/gonzalezreal/swift-markdown-ui)
-- [AppUpdater](https://github.com/s1ntoneli/AppUpdater)
-- [swift-get-apps](https://github.com/ghall89/swift-get-apps)
 
 ## License
 
