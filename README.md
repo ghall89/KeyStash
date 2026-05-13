@@ -1,3 +1,5 @@
+_Note: This project is now hosted on Codeberg: https://codeberg.org/ghalldev/KeyStash'
+
 # KeyStash
 
 ![GitHub](https://img.shields.io/github/license/ghall89/KeyStash)
